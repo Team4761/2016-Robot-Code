@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="FRC Deployment" default="deploy" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<!-- Custom -->
+	<target name="resolve-ivy-deps" description="Fetch dependencies with Ivy">
+		<ivy:retrieve />
+	</target>
+	<target name="clean" description="Delete all binaries">
+		<delete dir="bin" />
+		<delete dir="build" />
+		<delete dir="dist" />
+	</target>
+	<target name="compile" description="Compile source code" depends="resolve-ivy-deps,athena-project-build.compile">
+	</target>
+
+	<!-- From WPILib -->
+	<property file="${user.home}/wpilib/wpilib.properties"/>
+	<property file="build.properties"/>
+	<property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
+
+	<import file="${wpilib.ant.dir}/build.xml"/>
+</project> 
