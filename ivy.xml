@@ -7,5 +7,6 @@
 -->
         <dependency org="org.robockets" name="buttonmanager" rev="0.0.2"/>
         <dependency org="org.robockets" name="distancesensorlib" rev="0.2"/>
+        <dependency org="com.kauailabs" name="nav6" rev="0.0.1"/>
     </dependencies>
 </ivy-module>
