@@ -15,11 +15,12 @@ public class Drivetrain extends Subsystem {
 
 	public Drivetrain() {
 		compassPID.disable();
+		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		compassPID.setPercentTolerance(5.0); // Set tolerance of 5%
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+
     }
     
     public void driveTank(double leftValue, double rightValue) {
