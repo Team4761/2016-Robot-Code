@@ -16,6 +16,7 @@ tmp/
 .project
 /.idea
 .classpath
+/.metadata
 
 # Toast/GradleRIO
 run/
