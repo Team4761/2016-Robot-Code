@@ -17,6 +17,8 @@ public class Drivetrain extends Subsystem {
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		compassPID.setPercentTolerance(5.0); // Set tolerance of 5%
+		
+		enableCompassPID();
 	}
 	
     public void initDefaultCommand() {

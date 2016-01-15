@@ -22,6 +22,7 @@ public class SmartDashboardCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("Gyro", RobotMap.navX.getYaw());
     	SmartDashboard.putNumber("Compass", RobotMap.navX.getCompassHeading());
     	SmartDashboard.putNumber("Compass PID Output", Robot.drivetrain.compassPID.get());
     }
