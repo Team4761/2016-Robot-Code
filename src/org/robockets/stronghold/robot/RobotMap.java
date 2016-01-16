@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 
@@ -18,8 +19,13 @@ public class RobotMap {
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
 	
+	public static Encoder encoderFR = new Encoder(1,2);
+	public static Encoder encoderFL = new Encoder(3,4);
+	public static Encoder encoderBR = new Encoder(5,6);
+	public static Encoder encoderBL = new Encoder(7,8);
 	
 	public RobotMap () {
 		navX.zeroYaw();
 	}
+	
 }

@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot.subsystems;
 
-import org.robockets.stronghold.robot.CompassPIDSource;
+import org.robockets.stronghold.robot.sensors.CompassPIDSource;
+import org.robockets.stronghold.robot.sensors.EncoderPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.drivetrain.DrivePIDOutput;
 
@@ -12,7 +13,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DrivePIDOutput());
-
+	
+	public final PIDController encoderFrontRightEncoder = new PIDController(0.1, 0, 0, new EncoderPIDSource(RobotMap.encoderFR), new DrivePIDOutput());
+	public final PIDController encoderFrontLeftEncoder = new PIDController(0.1, 0, 0, new EncoderPIDSource(RobotMap.encoderFL), new DrivePIDOutput());
+	public final PIDController encoderBackRightEncoder = new PIDController(0.1, 0, 0, new EncoderPIDSource(RobotMap.encoderBR), new DrivePIDOutput());
+	public final PIDController encoderBackLeftEncoder = new PIDController(0.1, 0, 0, new EncoderPIDSource(RobotMap.encoderBL), new DrivePIDOutput());
+	
+	
 	public Drivetrain() {
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
