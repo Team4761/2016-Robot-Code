@@ -22,4 +22,5 @@ public class RobotMap {
 	public RobotMap () {
 		navX.zeroYaw();
 	}
+	
 }

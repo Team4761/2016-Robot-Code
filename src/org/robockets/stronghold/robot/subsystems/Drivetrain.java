@@ -1,6 +1,6 @@
 package org.robockets.stronghold.robot.subsystems;
 
-import org.robockets.stronghold.robot.CompassPIDSource;
+import org.robockets.stronghold.robot.sensors.CompassPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.drivetrain.DrivePIDOutput;
 
