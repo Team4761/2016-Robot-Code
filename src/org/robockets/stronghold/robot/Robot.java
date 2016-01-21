@@ -1,5 +1,8 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.drivetrain.Joyride;
+import org.robockets.stronghold.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -15,8 +18,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-
+	public static final Drivetrain driveTrain = new Drivetrain();
     Command autonomousCommand;
+    Command joyride;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -24,6 +28,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		joyride = new Joyride();
     }
 	
 	/**
@@ -66,6 +71,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        joyride.start();
     }
 
     /**
