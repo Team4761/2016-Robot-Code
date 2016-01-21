@@ -1,5 +1,7 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.drivetrain.Drivetrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +16,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
+	public static Drivetrain drivetrain = new Drivetrain();
 	public static OI oi;
 
     Command autonomousCommand;
