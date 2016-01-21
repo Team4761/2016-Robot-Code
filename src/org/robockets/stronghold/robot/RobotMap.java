@@ -2,8 +2,10 @@ package org.robockets.stronghold.robot;
 
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Victor;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -16,4 +18,7 @@ public class RobotMap {
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
+	public static Victor testMotor1 = new Victor(7);
+	public static Victor testMotor2 = new Victor(8);
+	public static Encoder testEncoder = new Encoder(7, 8);
 }

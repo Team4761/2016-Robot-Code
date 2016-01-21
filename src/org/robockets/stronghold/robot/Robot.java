@@ -1,5 +1,10 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.drivetrain.ArcadeDriveCommand;
+import org.robockets.stronghold.robot.subsystems.Drivetrain;
+import org.robockets.stronghold.robot.test.SmartDashboardCommand;
+import org.robockets.stronghold.robot.test.TestEncoder;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -13,10 +18,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	public static final Drivetrain drivetrain = new Drivetrain();
+	public static final TestEncoder testEncoder = new TestEncoder();
+	
 	public static OI oi;
 
     Command autonomousCommand;
+    Command arcadeDriveCommand;
+    Command smartDashboardCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -24,6 +33,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		arcadeDriveCommand = new ArcadeDriveCommand();
+		smartDashboardCommand = new SmartDashboardCommand();
     }
 	
 	/**
@@ -66,6 +77,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        smartDashboardCommand.start();
     }
 
     /**

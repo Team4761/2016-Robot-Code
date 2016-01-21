@@ -1,8 +1,8 @@
-package org.robockets.stronghold.robot.drivetrain;
+package org.robockets.stronghold.robot;
 
 import edu.wpi.first.wpilibj.PIDOutput;
 
-public class DrivePIDOutput implements PIDOutput {
+public class DummyPIDOutput implements PIDOutput {
 	private double value = 0;
 	
 	@Override
