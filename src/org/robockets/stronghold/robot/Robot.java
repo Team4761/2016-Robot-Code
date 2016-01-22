@@ -29,6 +29,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		joyride = new Joyride();
+                CameraServer server = CameraServer.getInstance();
+                server.startAutomaticCapture("cam0");
     }
 	
 	/**
