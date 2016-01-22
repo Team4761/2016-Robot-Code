@@ -31,10 +31,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-		teleop = new Teleop();
-		joyride = new Joyride();
-
+      oi = new OI();
+      teleop = new Teleop();
+      joyride = new Joyride();
+      CameraServer server = CameraServer.getInstance();
+      server.startAutomaticCapture("cam0");
     }
 	
 	/**
