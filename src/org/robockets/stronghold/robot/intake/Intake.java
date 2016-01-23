@@ -13,7 +13,7 @@ public class Intake extends Subsystem {
     	
     }
     
-    public void spin(double speed){
+    public void spin(double speed) {
     	RobotMap.intakeMotor.set(speed);
     }
     
