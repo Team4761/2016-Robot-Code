@@ -29,13 +29,5 @@ public class HighGoalShooter extends Subsystem {
     public void spinShootingWheel(double speed) {
     	RobotMap.shootingWheelMotor.set(speed);
     }
-    
-    /**
-     * Spin the turn-table mechanism at a desired speed.
-     * @param speed		The speed to set the turn-table mechanism at to turn.
-     */
-    public void spinTurnTable(double speed) {
-    	RobotMap.turnTableMotor.set(speed);
-    }
 }
 
