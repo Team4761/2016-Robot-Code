@@ -12,5 +12,6 @@ public class DrivePIDOutput implements PIDOutput {
 	
 	public double getValue() {
 		return this.value;
+		
 	}
 }

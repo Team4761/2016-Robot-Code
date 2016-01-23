@@ -13,12 +13,13 @@ public class GyroPIDSource implements PIDSource {
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		return RobotMap.navX.getPIDSourceType();
+		return PIDSourceType.kDisplacement;
 	}
 
 	@Override
 	public double pidGet() {
-		return RobotMap.navX.getYaw();
+		return RobotMap.navX.getAccumulatedYaw();
+		
 	}
 
 }

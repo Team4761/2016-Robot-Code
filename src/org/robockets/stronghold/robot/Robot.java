@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot;
 
-import org.robockets.stronghold.robot.commands.SmartDashboardCommand;
+import org.robockets.stronghold.robot.commands.DriveAssisted;
+import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -19,17 +20,17 @@ public class Robot extends IterativeRobot {
 
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static OI oi;
-
+	
+	Command teleop;
 	Command autonomousCommand;
-    Command smartDashboardCommand;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	smartDashboardCommand = new SmartDashboardCommand();
 		oi = new OI();
+		teleop = new Teleop();
     }
 	
 	/**
@@ -72,7 +73,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        smartDashboardCommand.start();
+        teleop.start();
     }
 
     /**
