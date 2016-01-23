@@ -12,6 +12,5 @@ public class DummyPIDOutput implements PIDOutput {
 	
 	public double getValue() {
 		return this.value;
-		
 	}
 }
