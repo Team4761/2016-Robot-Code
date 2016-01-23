@@ -1,24 +1,34 @@
 package org.robockets.stronghold.robot.subsystems;
 
 import org.robockets.stronghold.robot.CompassPIDSource;
+import org.robockets.stronghold.robot.GyroPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.drivetrain.DrivePIDOutput;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class Drivetrain extends Subsystem {
-	public final PIDController compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DrivePIDOutput());
-
+	public final PIDController compassPID;
+	public final PIDController gyroPID;
+	
 	public Drivetrain() {
+		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DrivePIDOutput());
+		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DrivePIDOutput());
+		
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		compassPID.setPercentTolerance(5.0); // Set tolerance of 5%
 		
-		enableCompassPID();
+		gyroPID.disable();
+		gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
+		
+		
 	}
 	
     public void initDefaultCommand() {
@@ -40,7 +50,8 @@ public class Drivetrain extends Subsystem {
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue, compassPID.get());
     	} else {
-    		// TODO Implement gyro PID logic
+    		gyroPID.setPID(SmartDashboard.getNumber("p"), SmartDashboard.getNumber("i"), SmartDashboard.getNumber("d"));
+    		driveArcade(0, -gyroPID.get());
     	}
     }
     
@@ -48,7 +59,7 @@ public class Drivetrain extends Subsystem {
     	if (compassAssist) {
     		compassPID.setSetpoint(angle);
     	} else {
-    		// TODO Implement gyro PID logic
+    		gyroPID.setSetpoint(angle);
     	}
     }
     
@@ -57,11 +68,19 @@ public class Drivetrain extends Subsystem {
     }
     
     public void enableCompassPID() {
-    	// TODO Once gyro PID is implemented, first disable gyro PID
+    	gyroPID.disable();
     	
     	compassPID.enable();
     	compassPID.reset();
     	compassPID.setSetpoint(RobotMap.navX.getCompassHeading()); // Make sure setpoint starts as current position
+    }
+    
+    public void enableGyroPID(){
+    	compassPID.disable();
+    	
+    	gyroPID.enable();
+    	gyroPID.reset();
+    	gyroPID.setSetpoint(RobotMap.navX.getYaw());
     }
 }
 
