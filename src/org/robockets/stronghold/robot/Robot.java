@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot;
 
-import org.robockets.stronghold.robot.commands.DriveAssisted;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.subsystems.Drivetrain;
 

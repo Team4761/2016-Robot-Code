@@ -21,5 +21,4 @@ public class GyroPIDSource implements PIDSource {
 		return RobotMap.navX.getAccumulatedYaw();
 		
 	}
-
 }
