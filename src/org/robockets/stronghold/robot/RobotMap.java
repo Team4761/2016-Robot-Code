@@ -18,4 +18,9 @@ public class RobotMap {
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
 	public static Victor intakeMotor = new Victor(5); //TEMP
+	
+	
+	public RobotMap () {
+		navX.zeroYaw();
+	}
 }

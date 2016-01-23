@@ -1,8 +1,8 @@
 package org.robockets.stronghold.robot;
 
-import org.robockets.stronghold.robot.drivetrain.Joyride;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
+import org.robockets.stronghold.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,12 +18,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static Drivetrain drivetrain = new Drivetrain();
 	public static OI oi;
 	public static final Drivetrain driveTrain = new Drivetrain();
 	public static final Intake intake = new Intake();
-    Command autonomousCommand;
-    Command joyride;
+	
+	Command teleop;
+	Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-		joyride = new Joyride();
+		teleop = new Teleop();
     }
 	
 	/**
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        joyride.start();
+        teleop.start();
     }
 
     /**
