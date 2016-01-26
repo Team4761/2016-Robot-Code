@@ -11,12 +11,8 @@ public class AssistedTranslate extends Command {
 	private AssistedTranslateType pidType;
 	private double relativeAngle;
 
-    public AssistedTranslate() {
+    public AssistedTranslate(AssistedTranslateType pidType, double relativeAngle) {
     	requires(Robot.driveTrain);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize(AssistedTranslateType pidType, double relativeAngle) {
     	this.pidType = pidType;
     	this.relativeAngle = relativeAngle;
     	
@@ -27,6 +23,10 @@ public class AssistedTranslate extends Command {
     		Robot.driveTrain.enableGyroPID();
     		Robot.driveTrain.setAngle(relativeAngle, false);
     	}
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
