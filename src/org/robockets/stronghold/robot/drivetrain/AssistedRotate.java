@@ -7,19 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AssistedTranslate extends Command {
-	private AssistedTranslateType pidType;
-	private double relativeAngle;
+public class AssistedRotate extends Command {
+	private AssistedRotateType pidType;
 
-    public AssistedTranslate(AssistedTranslateType pidType, double relativeAngle) {
+    public AssistedRotate(AssistedRotateType pidType, double relativeAngle) {
     	requires(Robot.driveTrain);
     	this.pidType = pidType;
-    	this.relativeAngle = relativeAngle;
     	
-    	if (pidType == AssistedTranslateType.COMPASS) {
+    	if (pidType == AssistedRotateType.COMPASS) {
     		Robot.driveTrain.enableCompassPID();
     		Robot.driveTrain.setAngle(relativeAngle, true);
-    	} else if (pidType == AssistedTranslateType.GYRO) {
+    	} else { // Default to gyro
     		Robot.driveTrain.enableGyroPID();
     		Robot.driveTrain.setAngle(relativeAngle, false);
     	}
@@ -31,21 +29,19 @@ public class AssistedTranslate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (pidType == AssistedTranslateType.COMPASS) {
+    	if (pidType == AssistedRotateType.COMPASS) {
     		Robot.driveTrain.driveAssisted(0, true);
-    	} else if (pidType == AssistedTranslateType.GYRO) {
+    	} else { // Default to gyro
     		Robot.driveTrain.driveAssisted(0, false);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (pidType == AssistedTranslateType.COMPASS) {
+    	if (pidType == AssistedRotateType.COMPASS) {
     		return Robot.driveTrain.compassPID.onTarget();
-    	} else if (pidType == AssistedTranslateType.GYRO) {
+    	} else { // Default to gyro
     		return Robot.driveTrain.gyroPID.onTarget();
-    	} else { // WHAT?!
-    		return true;
     	}
     }
 
