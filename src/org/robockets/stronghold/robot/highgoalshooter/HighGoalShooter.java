@@ -79,7 +79,7 @@ public class HighGoalShooter extends Subsystem {
     	turnTablePidController.setSetpoint(RobotMap.turnTableEncoder.get()); // Make sure setpoint starts as current position
     }
     
-    public void enableHoodPID(){
+    public void enableHoodPID() {
     	hoodPidController.enable();
     	hoodPidController.reset();
     	hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
