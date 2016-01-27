@@ -13,7 +13,7 @@ public class MoveHood extends Command {
 	
 	/**
 	 * Move the hood upwards or downwards continuously.
-	 * @param rate		The speed to move at.
+	 * @param rate		The speed to move at. Negative values will go downwards.
 	 */
     public MoveHood(double rate) {
         requires(Robot.shooter);
@@ -21,7 +21,7 @@ public class MoveHood extends Command {
 
     /**
 	 * Move the hood upwards or downwards continuously. Note you have to enable the PID for this.
-	 * @param angle			The angle to move the hood by. This is added to the current angle.
+	 * @param angle			The angle to move the hood by. This is added to the current angle. Negative values will go downwards.
 	 */
     public MoveHood(float ang) {
         requires(Robot.shooter);
