@@ -7,7 +7,6 @@ import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -48,7 +47,6 @@ public class Drivetrain extends Subsystem {
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue, compassPID.get());
     	} else {
-    		gyroPID.setPID(SmartDashboard.getNumber("p"), SmartDashboard.getNumber("i"), SmartDashboard.getNumber("d"));
     		driveArcade(0, -gyroPID.get());
     	}
     }
