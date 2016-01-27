@@ -9,31 +9,34 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ManualTranslate extends Command {
-	
-    public ManualTranslate(Direction dir, double rate) {
-    	requires(Robot.driveTrain);
-    	direction = dir;
-    	speed = rate;
-    }
-    Direction direction;
+	Direction direction;
     double speed;
+    double time;
+    
+    public ManualTranslate(Direction direction, double speed, double time) {
+    	requires(Robot.driveTrain);
+    	this.direction = direction;
+    	this.speed = speed;
+    	this.time = time;
+    }
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (direction == Direction.BACKWARD) {
-    		speed *= -1;
+    	setTimeout(time);
     	}
-    	Robot.driveTrain.driveArcade(speed, 0);
-    	//doesn't need to be called every 20ms 
-    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (direction == Direction.BACKWARD) {
+    		speed *= -1;
+    	}
+    	
+    	Robot.driveTrain.driveArcade(speed, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

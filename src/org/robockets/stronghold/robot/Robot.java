@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.commands.DS;
 import org.robockets.stronghold.robot.drivetrain.Joyride;
 import org.robockets.stronghold.robot.subsystems.Drivetrain;
 
@@ -21,14 +22,16 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain driveTrain = new Drivetrain();
     Command autonomousCommand;
     Command joyride;
+    Command ds;
 
     /**
-     * This function is run when the robot is first started up and should be
+     * This function is run when the robot is first star	ted up and should be
      * used for any initialization code.
      */
     public void robotInit() {
 		oi = new OI();
 		joyride = new Joyride();
+		ds = new DS();
     }
 	
 	/**
@@ -72,6 +75,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         joyride.start();
+        ds.start();
     }
 
     /**
