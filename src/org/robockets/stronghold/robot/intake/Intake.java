@@ -19,7 +19,7 @@ public class Intake extends Subsystem {
 		encoderPID.disable();
 		encoderPID.setSetpoint(0);
 		encoderPID.setPercentTolerance(0.05);
-		encoderPID.setContinuous(false);
+		encoderPID.setContinuous(true);
 	}
 	
     public void initDefaultCommand() {
