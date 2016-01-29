@@ -4,6 +4,7 @@ import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Teleop;
+import org.robockets.stronghold.robot.commands.UpdateDashboard;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -61,6 +62,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {        
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        (new UpdateDashboard()).start();
     }
 
     /**
@@ -77,6 +79,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleop.start();
+        (new UpdateDashboard()).start();
     }
 
     /**
