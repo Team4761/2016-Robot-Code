@@ -5,14 +5,31 @@ import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * A Command to spin the intake motor forward or backward
+ * 
+ * @author Jake Backer
+ * @version v.1.sleepy.0.0.phantom.1454028607.7
+ * 
  */
 public class ManualSpinIntake extends Command {
 	
-	boolean spinForward = true; //TEMP
+	/**
+	 * Object for the Direction enum
+	 * */
 	public Direction direction;
+	
+	/**
+	 * Used to set timeout
+	 * */
 	int time;
 	
+	
+	/**
+	 * Initalizes some variables
+	 * 
+	 * @param direction  Used to initalize Direction enum
+	 * @param time  Takes input for time
+	 * */
     public ManualSpinIntake(Direction direction, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -44,6 +61,7 @@ public class ManualSpinIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.stop();
     }
 
     // Called when another command which requires one or more of the same
