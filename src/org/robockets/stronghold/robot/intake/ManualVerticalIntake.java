@@ -43,9 +43,9 @@ public class ManualVerticalIntake extends Command {
     protected void execute() {
     	if (direction == Direction.UP) {
     		Robot.intake.moveUp();
-    	} else if(direction == Direction.DOWN){
+    	} else if (direction == Direction.DOWN){
     		Robot.intake.moveDown();
-    	} else if(direction == Direction.DOWN){
+    	} else if (direction == Direction.DOWN){
     		Robot.intake.move(speed);
     	} else {
     		Robot.intake.stopVertical();
