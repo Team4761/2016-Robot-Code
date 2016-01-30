@@ -21,8 +21,6 @@ public class ManualVerticalIntake extends Command {
 	 * @param time  Takes input for time
 	 * */
     public ManualVerticalIntake(Direction direction, int time) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.intake);
     	this.direction = direction;
     	this.time = time;
@@ -35,7 +33,7 @@ public class ManualVerticalIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(direction == Direction.UP) {
+    	if (direction == Direction.UP) {
     		Robot.intake.moveUp();
     	} else if(direction == Direction.DOWN){
     		Robot.intake.moveDown();
