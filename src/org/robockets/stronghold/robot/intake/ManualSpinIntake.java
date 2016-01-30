@@ -34,9 +34,9 @@ public class ManualSpinIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(direction == Direction.FORWARD) {
+    	if (direction == Direction.FORWARD) {
     		Robot.intake.spinIn();
-    	} else if(direction == Direction.BACKWARD){
+    	} else if (direction == Direction.BACKWARD){
     		Robot.intake.spinOut();
     	} else {
     		Robot.intake.stopIntake();
