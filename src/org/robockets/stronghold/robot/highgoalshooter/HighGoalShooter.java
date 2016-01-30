@@ -54,7 +54,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void spinTurnTableAssisted() {
-    	RobotMap.turnTableMotor.set(hoodPidController.get());
+    	RobotMap.turnTableMotor.set(turnTablePidController.get());
     }
     
     public void setTurnTableAngle(double angle) {
