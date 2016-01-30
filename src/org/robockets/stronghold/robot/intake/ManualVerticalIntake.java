@@ -44,7 +44,10 @@ public class ManualVerticalIntake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(isTimedOut()){
+    		return true;
+    	}
+    	return false;
     }
 
     // Called once after isFinished returns true
@@ -55,5 +58,6 @@ public class ManualVerticalIntake extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
