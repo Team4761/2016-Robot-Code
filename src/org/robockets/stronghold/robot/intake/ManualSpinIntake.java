@@ -9,16 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualSpinIntake extends Command {
 	
-	/**
-	 * Object for the Direction enum
-	 * */
-	public Direction direction;
+	public Direction direction; //Object for the Direction enum
 	
-	/**
-	 * Used to set timeout
-	 * */
-	int time;
-	
+	int time; //Used to set timeout
 	
 	/**
 	 * Initalizes some variables
