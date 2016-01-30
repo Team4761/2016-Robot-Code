@@ -6,10 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * A Command to spin the intake motor forward or backward
- * 
- * @author Jake Backer
- * @version v.1.sleepy.0.0.phantom.1454028607.7
- * 
  */
 public class ManualSpinIntake extends Command {
 	
@@ -50,7 +46,7 @@ public class ManualSpinIntake extends Command {
     	} else if(direction == Direction.BACKWARD){
     		Robot.intake.spinOut();
     	} else {
-    		Robot.intake.stop();
+    		Robot.intake.stopIntake();
     	}
     }
 
@@ -61,7 +57,7 @@ public class ManualSpinIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stop();
+    	Robot.intake.stopIntake();
     }
 
     // Called when another command which requires one or more of the same
