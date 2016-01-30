@@ -38,6 +38,14 @@ public class Intake extends Subsystem {
     	RobotMap.intakeMotor.set(-0.5);
     }
     
+    public void moveUp() {
+    	RobotMap.intakeVerticalMotor.set(0.5);
+    }
+    
+    public void moveDown() {
+    	RobotMap.intakeVerticalMotor.set(-0.5);
+    }
+    
     public void spinAssisted() {
     	encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
     	
@@ -54,8 +62,12 @@ public class Intake extends Subsystem {
     	encoderPID.setSetpoint(RobotMap.intakeEncoder.get());
     }
     
-    public void stop() {
+    public void stopIntake() {
     	RobotMap.intakeMotor.set(0);
+    }
+    
+    public void stopVertical() {
+    	RobotMap.intakeVerticalMotor.set(0);
     }
 }
 
