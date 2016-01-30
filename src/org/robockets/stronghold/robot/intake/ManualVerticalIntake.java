@@ -47,6 +47,7 @@ public class ManualVerticalIntake extends Command {
     	if (isTimedOut()) {
     		return true;
     	}
+    	
     	return false;
     }
 
