@@ -13,6 +13,7 @@ public class ManualVerticalIntake extends Command {
 	
 	int time; //Used to set timeout
 	
+	int speed; //Used to set speed manually
 	
 	/**
 	 * Initalizes some variables
@@ -23,6 +24,13 @@ public class ManualVerticalIntake extends Command {
     public ManualVerticalIntake(Direction direction, int time) {
     	requires(Robot.intake);
     	this.direction = direction;
+    	this.time = time;
+    }
+    
+    public ManualVerticalIntake(int speed, int time) {
+    	requires(Robot.intake);
+    	this.speed = speed;
+    	this.direction = Direction.MANUAL;
     	this.time = time;
     }
 
@@ -37,6 +45,8 @@ public class ManualVerticalIntake extends Command {
     		Robot.intake.moveUp();
     	} else if(direction == Direction.DOWN){
     		Robot.intake.moveDown();
+    	} else if(direction == Direction.DOWN){
+    		Robot.intake.move(speed);
     	} else {
     		Robot.intake.stopVertical();
     	}
