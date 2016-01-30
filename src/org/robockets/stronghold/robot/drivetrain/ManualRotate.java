@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * A command to manually rotate the robot with an Enum and other parameters.
  * @author Brian Shin
- * @version v.1.disgruntled.0.1.crunch.1454030395.7
+ * @version v.1.veryannoyed.0.1.crunch.1454030395.7
  */
 public class ManualRotate extends Command {
 	Rotation rotation;
