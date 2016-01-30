@@ -7,5 +7,6 @@ public enum Direction {
 	RIGHT,
 	UP,
 	DOWN,
+	MANUAL,
 	STOP;
 }

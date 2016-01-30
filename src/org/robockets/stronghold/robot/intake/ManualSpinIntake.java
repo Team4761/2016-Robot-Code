@@ -13,17 +13,24 @@ public class ManualSpinIntake extends Command {
 	
 	int time; //Used to set timeout
 	
+	int speed; //Used to set speed manually
+	
 	/**
 	 * Initalizes some variables
 	 * 
 	 * @param direction  Used to initalize Direction enum
 	 * @param time  Takes input for time
 	 * */
-    public ManualSpinIntake(Direction direction, int time) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public ManualSpinIntake(Direction directionEnum, int time) {
     	requires(Robot.intake);
-    	this.direction = direction;
+    	this.direction = directionEnum;
+    	this.time = time;
+    }
+    
+    public ManualSpinIntake(int speed, int time) {
+    	requires(Robot.intake);
+    	this.speed = speed;
+    	this.direction = Direction.MANUAL;
     	this.time = time;
     }
 
@@ -38,6 +45,8 @@ public class ManualSpinIntake extends Command {
     		Robot.intake.spinIn();
     	} else if (direction == Direction.BACKWARD){
     		Robot.intake.spinOut();
+    	} else if (direction == Direction.MANUAL) {
+    		Robot.intake.spin(speed);
     	} else {
     		Robot.intake.stopIntake();
     	}

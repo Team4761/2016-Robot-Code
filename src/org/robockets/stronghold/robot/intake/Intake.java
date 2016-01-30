@@ -38,12 +38,20 @@ public class Intake extends Subsystem {
     	RobotMap.intakeMotor.set(-0.5);
     }
     
+    public void spin(int speed) {
+    	RobotMap.intakeMotor.set(speed);
+    }
+    
     public void moveUp() {
     	RobotMap.intakeVerticalMotor.set(0.5);
     }
     
     public void moveDown() {
     	RobotMap.intakeVerticalMotor.set(-0.5);
+    }
+    
+    public void move(int speed) {
+    	RobotMap.intakeVerticalMotor.set(speed);
     }
     
     public void spinAssisted() {
