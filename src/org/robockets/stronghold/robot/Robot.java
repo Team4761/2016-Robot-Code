@@ -3,7 +3,8 @@ package org.robockets.stronghold.robot;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Teleop;
-
+import org.robockets.stronghold.robot.commands.DS;
+import org.robockets.stronghold.robot.drivetrain.Joyride;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,14 +25,16 @@ public class Robot extends IterativeRobot {
 	
 	Command teleop;
 	Command autonomousCommand;
+    Command joyride;
 
     /**
-     * This function is run when the robot is first started up and should be
+     * This function is run when the robot is first star	ted up and should be
      * used for any initialization code.
      */
     public void robotInit() {
 		oi = new OI();
 		teleop = new Teleop();
+		joyride = new Joyride();
     }
 	
 	/**
@@ -74,7 +77,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        teleop.start();
+        joyride.start();
     }
 
     /**
