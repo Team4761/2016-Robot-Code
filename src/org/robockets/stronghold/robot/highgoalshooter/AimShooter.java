@@ -21,6 +21,7 @@ public class AimShooter extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("Vision/report"); //TODO: Name this stuff.
+    	setTimeout(10); // Should not take longer than 10 seconds.
     }
 
     protected void execute() {
@@ -38,7 +39,9 @@ public class AimShooter extends Command {
     }
 
     protected boolean isFinished() {
-    	return false;
+    	return Robot.shooter.hoodPidController.onTarget()
+    			&& Robot.shooter.hoodPidController.onTarget()
+    			|| isTimedOut();
     }
 
     protected void end() {
