@@ -10,6 +10,6 @@ public class FreeFire extends CommandGroup {
     public  FreeFire() {
     	addSequential(new AimShooter());
     	addSequential(new FireShooter());
-    	//TODO: Rev down shooter.
+    	addSequential(new RevDownShooter());
     }
 }
