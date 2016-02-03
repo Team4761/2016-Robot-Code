@@ -28,7 +28,7 @@ public class FireShooter extends Command {
     	Robot.shooter.spinJeffRollers(0);
     }
 
-    void interrupted() {
+    protected void interrupted() {
     	end();
     }
 }
