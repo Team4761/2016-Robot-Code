@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.CompassPIDSource;
 import org.robockets.stronghold.robot.DummyPIDOutput;
+import org.robockets.stronghold.robot.EncoderPIDSource;
 import org.robockets.stronghold.robot.GyroPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 
@@ -14,10 +15,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID;
 	public final PIDController gyroPID;
+	public final PIDController encoderPID;
 	
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
+		encoderPID = new PIDController(0, 0, 0, new EncoderPIDSource(), new DummyPIDOutput());
 		
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -26,6 +29,10 @@ public class Drivetrain extends Subsystem {
 		gyroPID.disable();
 		gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
+		
+		encoderPID.disable();
+		encoderPID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		encoderPID.setPercentTolerance(5.0); // Set tolerance of 5%
 	}
 	
     public void initDefaultCommand() {
@@ -77,6 +84,12 @@ public class Drivetrain extends Subsystem {
     	gyroPID.enable();
     	gyroPID.reset();
     	gyroPID.setSetpoint(RobotMap.navX.getYaw());
+    }
+    
+    public void enableEncoderPID() {
+    	encoderPID.enable();
+    	encoderPID.reset();
+    	encoderPID.setSetpoint(RobotMap.driveEncoder.get());
     }
 }
 

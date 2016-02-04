@@ -28,6 +28,7 @@ public class RobotMap {
 	public static Encoder turnTableEncoder = new Encoder(5, 6);
 	public static Victor hoodMotor = new Victor(10); // TEMP
 	public static Encoder hoodEncoder = new Encoder(7, 8);
+	public static Encoder driveEncoder = new Encoder(9, 10);
 	
 	public RobotMap () {
 		navX.zeroYaw();
