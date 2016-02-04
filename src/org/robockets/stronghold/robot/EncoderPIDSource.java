@@ -3,7 +3,7 @@ package org.robockets.stronghold.robot;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.PIDSource;
 
-public class EncoderPIDSource implements PIDSource{
+public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
