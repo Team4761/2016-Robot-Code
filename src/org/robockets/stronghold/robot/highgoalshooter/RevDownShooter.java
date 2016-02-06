@@ -16,14 +16,14 @@ public class RevDownShooter extends Command {
     }
 
     protected void execute() {
+    	Robot.shooter.setShootingWheelSpeed(0);
     }
 
     protected boolean isFinished() {
-        return true;
+        return Robot.shooter.shootingWheelOnTarget();
     }
 
     protected void end() {
-    	Robot.shooter.spinShootingWheel(0);
     }
 
     protected void interrupted() {

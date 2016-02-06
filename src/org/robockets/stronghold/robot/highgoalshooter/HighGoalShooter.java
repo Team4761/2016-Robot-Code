@@ -74,6 +74,9 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.shootingWheelMotor.set(speed);
     }
     
+    public boolean shootingWheelOnTarget(){
+    	return RobotMap.shootingWheelMotor.getError() < 5; //TODO: Set a good error bit here.
+    }
     
     public void enableTurnTablePID() {
     	turnTablePidController.enable();

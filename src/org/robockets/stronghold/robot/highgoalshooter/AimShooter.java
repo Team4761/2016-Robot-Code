@@ -33,7 +33,7 @@ public class AimShooter extends Command {
     	double shaftRPM = velocity * 60/(Math.PI * wheelDiameter/12);
     	
     	Robot.shooter.setHoodAngle(angle);
-    	Robot.shooter.spinShootingWheel(shaftRPM);
+    	Robot.shooter.setShootingWheelSpeed(shaftRPM);
     	
     	Robot.shooter.spinTurnTableAssisted();
     }
@@ -41,7 +41,7 @@ public class AimShooter extends Command {
     protected boolean isFinished() {
     	return Robot.shooter.hoodPidController.onTarget()
     			&& Robot.shooter.hoodPidController.onTarget()
-    			&& Robot.shooter.shootingWheelPidController.onTarget()
+    			&& Robot.shooter.shootingWheelOnTarget()
     			|| isTimedOut();
     }
 
