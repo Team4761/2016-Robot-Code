@@ -17,15 +17,18 @@ public class Limbo extends Command {
     protected void initialize() {
     	setTimeout(5);
     	Robot.shooter.setHoodAngle(-90);
+    	Robot.intake.setIntakeAngle(0);
     }
 
     protected void execute() {
     	Robot.shooter.spinHoodAssisted();
-    	Robot.intake.spinOut(); // Spin out or in, idk which one is more compact.
+    	Robot.intake.spinAssisted();
     }
 
     protected boolean isFinished() {
-        return Robot.shooter.hoodPidController.onTarget() || isTimedOut();
+        return Robot.shooter.hoodPidController.onTarget() 
+        		&& Robot.intake.intakePidController.onTarget()
+        		|| isTimedOut();
     }
 
     protected void end() {
