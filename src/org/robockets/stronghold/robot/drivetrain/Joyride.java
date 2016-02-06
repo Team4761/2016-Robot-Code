@@ -23,23 +23,7 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// 2 is lefttrigger and 3 is right while 1 is updown stick thing
-    	stick = OI.joystick.getRawAxis(1);
-    	leftTrigger = OI.joystick.getRawAxis(2);
-    	rightTrigger = OI.joystick.getRawAxis(3);
-    	
-    	System.out.println(stick);
-    	
-    	if (leftTrigger > 0.1 && rightTrigger > 0.1) {
-    		Robot.driveTrain.driveArcade(stick, 0);
-    	} else if (rightTrigger > 0.1) {
-    		Robot.driveTrain.driveArcade(stick, -rightTrigger);
-    	} else if (leftTrigger > 0.1) {
-    		Robot.driveTrain.driveArcade(stick, leftTrigger);
-    	} else {
-    		Robot.driveTrain.driveArcade(stick, 0);
-    	}
-    	
+    	Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     }
 
     // Make this return true when this Command no longer needs to run execute()
