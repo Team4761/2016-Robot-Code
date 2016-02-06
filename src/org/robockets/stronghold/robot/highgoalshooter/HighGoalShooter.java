@@ -1,7 +1,6 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
-import org.robockets.stronghold.robot.RateEncoderPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
