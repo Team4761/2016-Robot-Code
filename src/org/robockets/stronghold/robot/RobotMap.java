@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot;
 
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
+import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -23,8 +24,9 @@ public class RobotMap {
 	public static Encoder intakeMotorEncoder = new Encoder(1,2);
 	public static Victor jeffRoller1 = new Victor(6); // TEMP
 	public static Victor jeffRoller2 = new Victor(7); // TEMP
-	public static Victor shootingWheelMotor = new Victor(8);
-	public static Encoder shootingWheelEncoder = new Encoder(9,10);
+	//public static Victor shootingWheelMotor = new Victor(8);
+	//public static Encoder shootingWheelEncoder = new Encoder(9,10);
+	public static CANJaguar shootingWheelMotor = new CANJaguar(1); //TODO: Figure out the id of the motor over CAN.
 	public static Victor turnTableMotor = new Victor(9); // TEMP
 	public static Encoder turnTableEncoder = new Encoder(5,6);
 	public static Victor hoodMotor = new Victor(10); // TEMP
@@ -32,5 +34,6 @@ public class RobotMap {
 	
 	public RobotMap () {
 		navX.zeroYaw();
+		shootingWheelMotor.setSpeedMode(CANJaguar.kQuadEncoder, 10, 1d, 1d, 0d); //TODO: Adjust all these numbers.
 	}
 }
