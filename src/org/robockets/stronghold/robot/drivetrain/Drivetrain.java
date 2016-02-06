@@ -50,12 +50,16 @@ public class Drivetrain extends Subsystem {
     /*
      * Drive with PID. First must enable the correct PID
      */
-    public void driveAssisted(double moveValue, double angle, boolean compassAssist) {
+    public void driveAssisted(double moveValue, boolean compassAssist) {
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue, compassPID.get());
     	} else {
-    		driveArcade(0, -gyroPID.get());
+    		driveArcade(moveValue, -gyroPID.get());
     	}
+    }
+    
+    public void driveAssisted(boolean compassAssist) {
+    	driveAssisted(encoderPID.get(), compassAssist);
     }
     
     public void setAngle(double angle, boolean compassAssist) {
