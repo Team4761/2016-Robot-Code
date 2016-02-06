@@ -47,8 +47,10 @@ public class Drivetrain extends Subsystem {
     	RobotMap.robotDrive.arcadeDrive(moveValue, rotateValue);
     }
     
-    /*
-     * Drive with PID. First must enable the correct PID
+    /**
+     * Move the robot with rotation pid
+     * @param moveValue the amount to constantly move the robot by
+     * @param compassAssist whether the robot should use compass pid or gyro pid
      */
     public void driveAssisted(double moveValue, boolean compassAssist) {
     	if (compassAssist) { // Use compass for PID
@@ -58,6 +60,10 @@ public class Drivetrain extends Subsystem {
     	}
     }
     
+    /**
+     * Move the robot with both rotation and encoder pid
+     * @param compassAssist whether the robot should use compass pid or gyro pid
+     */
     public void driveAssisted(boolean compassAssist) {
     	driveAssisted(encoderPID.get(), compassAssist);
     }
