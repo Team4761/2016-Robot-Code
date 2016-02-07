@@ -16,5 +16,6 @@ public class OI {
 	
 	public OI(){
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(), true));
+		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 5), true));
 	}
 }
