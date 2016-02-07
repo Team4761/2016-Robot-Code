@@ -33,6 +33,13 @@ public class ManualSpinIntake extends Command {
     	this.direction = Direction.MANUAL;
     	this.time = time;
     }
+    
+    public ManualSpinIntake(){
+    	requires(Robot.intake);
+    	this.speed = 0.5;
+    	this.direction = Direction.MANUAL;
+    	this.time = 5;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
