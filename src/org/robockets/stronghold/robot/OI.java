@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot;
 
-import org.robockets.buttonmanager.Button;
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.buttonmanager.buttons.ActionButton;
 import org.robockets.stronghold.robot.intake.ManualSpinIntake;
