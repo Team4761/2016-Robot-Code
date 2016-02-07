@@ -13,7 +13,7 @@ public class ManualSpinIntake extends Command {
 	
 	int time; //Used to set timeout
 	
-	int speed; //Used to set speed manually
+	double speed; //Used to set speed manually
 	
 	/**
 	 * Initalizes some variables
@@ -27,7 +27,7 @@ public class ManualSpinIntake extends Command {
     	this.time = time;
     }
     
-    public ManualSpinIntake(int speed, int time) {
+    public ManualSpinIntake(double speed, int time) {
     	requires(Robot.intake);
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
