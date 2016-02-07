@@ -76,6 +76,10 @@ public class Drivetrain extends Subsystem {
     	}
     }
     
+    public void setDistance(double distance) {
+    	encoderPID.setSetpoint(distance);
+    }
+    
     public void stop() {
     	driveTank(0, 0);
     }
