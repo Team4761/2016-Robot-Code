@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -18,22 +19,26 @@ public class RobotMap {
 	private static SerialPort navXSerialPort = new SerialPort(57600, SerialPort.Port.kMXP);
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
-	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
-	public static Victor intakeRollerMotor = new Victor(5); //TEMP
-	public static Victor intakeMotor = new Victor(11);
-	public static Encoder intakeMotorEncoder = new Encoder(1,2);
-	public static Victor jeffRoller1 = new Victor(6); // TEMP
-	public static Victor jeffRoller2 = new Victor(7); // TEMP
-	//public static Victor shootingWheelMotor = new Victor(8);
-	//public static Encoder shootingWheelEncoder = new Encoder(9,10);
-	public static CANJaguar shootingWheelMotor = new CANJaguar(1); //TODO: Figure out the id of the motor over CAN.
-	public static Victor turnTableMotor = new Victor(9); // TEMP
-	public static Encoder turnTableEncoder = new Encoder(5,6);
-	public static Victor hoodMotor = new Victor(10); // TEMP
-	public static Encoder hoodEncoder = new Encoder(7,8);
+	public static RobotDrive robotDrive = new RobotDrive(0, 1);
+	public static Victor intakeRollerMotor = new Victor(2); //TEMP
+	public static Encoder intakeMotorEncoder = new Encoder(3, 4);
+	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
+	public static Victor jeffRoller1 = new Victor(4); // TEMP
+	public static Victor jeffRoller2 = new Victor(5); // TEMP
+	public static Victor turnTableMotor = new Victor(7); // TEMP
+	public static Encoder turnTableEncoder = new Encoder(5, 6);
+	public static Victor hoodMotor = new Victor(8); // TEMP
+	public static Encoder hoodEncoder = new Encoder(7, 8);
+	public static Encoder driveEncoder = new Encoder(9, 10);
+	public static CANTalon shootingWheelMotor = new CANTalon(0); //TODO: Figure out the id of the motor over CAN.
+
 	
 	public RobotMap () {
 		navX.zeroYaw();
-		shootingWheelMotor.setSpeedMode(CANJaguar.kQuadEncoder, 10, 1d, 1d, 0d); //TODO: Adjust all these numbers.
+		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		shootingWheelMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
+		shootingWheelMotor.setPID(0.1, 0, 0);
+		shootingWheelMotor.enableControl();
+		shootingWheelMotor.enable();
 	}
 }

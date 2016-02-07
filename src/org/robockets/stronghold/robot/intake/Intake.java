@@ -18,7 +18,7 @@ public class Intake extends Subsystem {
 	 } 
     
 	public void spin(double speed){
-		RobotMap.intakeMotor.set(speed);
+		RobotMap.intakeVerticalMotor.set(speed);
 	} 
 	
 	public void setIntakeAngle(double angle){
@@ -32,7 +32,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void spinAssisted(){
-		RobotMap.intakeMotor.set(intakePidController.get());
+		RobotMap.intakeVerticalMotor.set(intakePidController.get());
 	}
 	 
     public void spinRoller(double speed) {
