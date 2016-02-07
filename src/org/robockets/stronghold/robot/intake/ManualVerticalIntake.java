@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.intake;
 
+import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -45,7 +46,7 @@ public class ManualVerticalIntake extends Command {
     		Robot.intake.moveUp();
     	} else if (direction == Direction.DOWN){
     		Robot.intake.moveDown();
-    	} else if (direction == Direction.DOWN){
+    	} else if (direction == Direction.MANUAL){
     		Robot.intake.move(speed);
     	} else {
     		Robot.intake.stopVertical();
@@ -54,7 +55,11 @@ public class ManualVerticalIntake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut();
+    	if (time == 0) {
+    		return false;
+    	} else {
+    		return isTimedOut();
+    	}
     }
 
     // Called once after isFinished returns true

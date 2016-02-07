@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Teleop;
@@ -75,6 +76,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	ButtonManager.start();
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
