@@ -17,7 +17,7 @@ public class EnableHoodPID extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.hoodPidController.disable();
+    	Robot.shooter.hoodPidController.enable();
     }
 
     protected boolean isFinished() {

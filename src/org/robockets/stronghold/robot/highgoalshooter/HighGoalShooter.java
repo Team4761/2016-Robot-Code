@@ -69,7 +69,7 @@ public class HighGoalShooter extends Subsystem {
      * Roll the shooting wheel to fire the cannonball at a desired speed.
      * @param speed 	The speed to set the shooting mechanism at.
      */
-    public void setShootingWheelSpeed(double speed){
+    public void setShootingWheelSpeed(double speed) {
     	RobotMap.shootingWheelMotor.set(speed);
     }
     

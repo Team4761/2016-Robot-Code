@@ -13,25 +13,25 @@ public class Intake extends Subsystem {
 
 	public final PIDController intakePidController;
 	
-	 public Intake(){
+	 public Intake() {
 		 intakePidController = new PIDController(1, 1, 0, RobotMap.intakeMotorEncoder, new DummyPIDOutput());
 	 } 
     
-	public void spin(double speed){
+	public void spin(double speed) {
 		RobotMap.intakeVerticalMotor.set(speed);
 	} 
 	
-	public void setIntakeAngle(double angle){
+	public void setIntakeAngle(double angle) {
 		intakePidController.setSetpoint(angle);
 	}
 	
-	public void enableIntakePid(){
+	public void enableIntakePid() {
 		intakePidController.enable();
 		intakePidController.reset();
 		intakePidController.setSetpoint(RobotMap.intakeMotorEncoder.getDistance());
 	}
 	
-	public void spinAssisted(){
+	public void spinAssisted() {
 		RobotMap.intakeVerticalMotor.set(intakePidController.get());
 	}
 	 

@@ -17,6 +17,7 @@ public class MoveHood extends Command {
 	 */
     public MoveHood(double rate) {
         requires(Robot.shooter);
+        speed = rate;
     }
 
     /**
