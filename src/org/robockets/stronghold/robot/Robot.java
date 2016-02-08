@@ -23,7 +23,6 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain driveTrain = new Drivetrain();
 	public static final Intake intake = new Intake();
 	
-	public static Command manualSpinIntake; //TEMP?
 	Command teleop;
 	Command autonomousCommand;
     Command joyride;
@@ -35,9 +34,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		teleop = new Teleop();
-		joyride = new Joyride();
-		manualSpinIntake = new ManualSpinIntake();
-		
+		joyride = new Joyride();		
 
     }
 	
