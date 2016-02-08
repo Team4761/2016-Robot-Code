@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
+import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.commands.UpdateDashboard;
 
@@ -26,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static final HighGoalShooter shooter = new HighGoalShooter();
 	
 	Command teleop;
-	Command autonomousCommand;
+	Command autonomousCommand = new Autonomous();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -62,7 +63,6 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {        
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
-        (new UpdateDashboard()).start();
     }
 
     /**
