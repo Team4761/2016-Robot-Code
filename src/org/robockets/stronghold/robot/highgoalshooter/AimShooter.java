@@ -28,9 +28,11 @@ public class AimShooter extends Command {
     	//TODO: Horizontally align.
     	double distanceToTarget = table.getNumber("distance", 10);
     	
-    	double angle = Math.atan(2*(floorToTargetHeight - (robotShooterToTargetHeight/12)/distanceToTarget) * 180/Math.PI);
-    	double velocity = Math.sqrt((4*Math.pow(floorToTargetHeight-robotShooterToTargetHeight/12,2)+Math.pow(distanceToTarget, 2))*gravAcc/(2*(floorToTargetHeight-robotShooterToTargetHeight/12)));
-    	double shaftRPM = velocity * 60/(Math.PI * wheelDiameter/12);
+    	double angle = Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12) / distanceToTarget) * 180 / Math.PI);
+    	
+    	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
+    	
+    	double shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
