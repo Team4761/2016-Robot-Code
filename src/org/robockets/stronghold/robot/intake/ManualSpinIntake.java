@@ -34,7 +34,7 @@ public class ManualSpinIntake extends Command {
     	this.time = time;
     }
     
-    public ManualSpinIntake(){
+    public ManualSpinIntake() {
     	requires(Robot.intake);
     	this.speed = 0.5;
     	this.direction = Direction.MANUAL;
