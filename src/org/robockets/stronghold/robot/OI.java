@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	public static Joystick joystick = new Joystick(0);
 	
-	public OI(){
+	public OI() {
 		ButtonManager.addJoystick(joystick);
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(), true));
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0), true));
