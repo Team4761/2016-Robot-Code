@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		teleop = new Teleop();
-		joyride = new Joyride();		
+		joyride = new Joyride();
 
     }
 	
