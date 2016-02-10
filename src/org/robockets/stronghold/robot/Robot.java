@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.intake.Intake;
+import org.robockets.stronghold.robot.intake.ManualSpinIntake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.drivetrain.Joyride;

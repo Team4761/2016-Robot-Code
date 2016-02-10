@@ -14,7 +14,7 @@ public class ManualSpinIntake extends Command {
 	
 	int time; //Used to set timeout
 	
-	int speed; //Used to set speed manually
+	double speed; //Used to set speed manually
 	
 	/**
 	 * Initalizes some variables
@@ -28,11 +28,18 @@ public class ManualSpinIntake extends Command {
     	this.time = time;
     }
     
-    public ManualSpinIntake(int speed, int time) {
+    public ManualSpinIntake(double speed, int time) {
     	requires(Robot.intake);
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
     	this.time = time;
+    }
+    
+    public ManualSpinIntake() {
+    	requires(Robot.intake);
+    	this.speed = 0.5;
+    	this.direction = Direction.MANUAL;
+    	this.time = 0;
     }
 
     // Called just before this Command runs the first time
@@ -55,7 +62,11 @@ public class ManualSpinIntake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut();
+    	if (time == 0) {
+    		return false;
+    	} else {
+    		return isTimedOut();
+    	}
     }
 
     // Called once after isFinished returns true
