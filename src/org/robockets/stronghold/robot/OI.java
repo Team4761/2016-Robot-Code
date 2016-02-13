@@ -1,6 +1,9 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -8,6 +11,10 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public static Joystick joystick = new Joystick(0);
+	
+	public OI() {
+		SmartDashboard.putData(new MoveHood(-45));
+	}
 }
 
 	

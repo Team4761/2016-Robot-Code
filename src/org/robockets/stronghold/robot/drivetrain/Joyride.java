@@ -28,7 +28,6 @@ public class Joyride extends Command {
     	leftTrigger = OI.joystick.getRawAxis(2);
     	rightTrigger = OI.joystick.getRawAxis(3);
     	
-    	System.out.println(stick);
     	
     	if (leftTrigger > 0.1 && rightTrigger > 0.1) {
     		Robot.driveTrain.driveArcade(stick, 0);
