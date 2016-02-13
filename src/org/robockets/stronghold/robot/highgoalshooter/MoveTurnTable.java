@@ -2,14 +2,24 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Move the turntable left or right.
  */
 public class MoveTurnTable extends Command {
 
-	Double angle; // Note that this is intentionally not the primitive angle so it can be compared to null.
-	Double speed;
+	Double angle = null; // Note that this is intentionally not the primitive angle so it can be compared to null.
+	Double speed = null;
+	
+	/**
+	 * Move turntable with Smart Dashboard input.
+	 */
+	public MoveTurnTable(){
+		requires(Robot.shooter);
+		SmartDashboard.putNumber("Turn Table Angle Add", SmartDashboard.getNumber("Turn Table Angle", 573.500));
+		angle = SmartDashboard.getNumber("Turn Table Angle Add");
+	}
 	
 	/**
 	 * Move the hood upwards or downwards continuously.
@@ -17,8 +27,9 @@ public class MoveTurnTable extends Command {
 	 */
     public MoveTurnTable(double rate) {
         requires(Robot.shooter);
+        speed = rate;
     }
-
+    
     /**
 	 * Move the hood upwards or downwards continuously. Note you have to enable the PID for this.
 	 * @param angle			The angle to move the hood by. This is added to the current angle.
@@ -27,6 +38,7 @@ public class MoveTurnTable extends Command {
         requires(Robot.shooter);
         
         angle = Robot.shooter.turnTablePidController.getSetpoint() + ang;
+        SmartDashboard.putNumber("Turn Table Angle Add", angle);
     }
     
     // Called just before this Command runs the first time
@@ -34,14 +46,15 @@ public class MoveTurnTable extends Command {
     	if (angle != null){
     		Robot.shooter.turnTablePidController.setSetpoint(angle);
     	}
-    	
-    	setTimeout(5);
+    	setTimeout(10);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (angle == null) Robot.shooter.spinTurnTable(speed);
     	else {
+    		angle = SmartDashboard.getNumber("Turn Table Angle Add");
+    		Robot.shooter.turnTablePidController.setSetpoint(angle);
     		Robot.shooter.spinTurnTableAssisted();
     	}
     }
