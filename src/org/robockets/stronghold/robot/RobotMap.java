@@ -25,7 +25,7 @@ public class RobotMap {
 	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
 	public static Victor jeffRoller1 = new Victor(4); // TEMP
 	public static Victor jeffRoller2 = new Victor(5); // TEMP
-	public static Victor turnTableMotor = new Victor(7); // TEMP
+	public static Victor turnTableMotor = new Victor(9); // TEMP
 	public static Encoder turnTableEncoder = new Encoder(5, 6);
 	public static Victor hoodMotor = new Victor(8); // TEMP
 	public static Encoder hoodEncoder = new Encoder(7, 8);
@@ -35,6 +35,7 @@ public class RobotMap {
 	
 	public RobotMap () {
 		navX.zeroYaw();
+		turnTableEncoder.reset();
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		shootingWheelMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 		shootingWheelMotor.setPID(0.1, 0, 0);
