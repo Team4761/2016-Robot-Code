@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * The subsystem having to do with inputting cannonballs from the floor.
  */
 public class Intake extends Subsystem {
 	
@@ -26,21 +26,18 @@ public class Intake extends Subsystem {
     	
     }
     
-    public void spin(double speed) {
-    	RobotMap.intakeMotor.set(speed);
+	public void spin(double speed) {
+		RobotMap.intakeVerticalMotor.set(speed);
+	}
+	 
+    public void spinRoller(double speed) {
+    	RobotMap.intakeRollerMotor.set(speed);
     }
     
-    public void spinIn() {
-    	RobotMap.intakeMotor.set(0.5);
+    public void spinRollersIn() {
+    	RobotMap.intakeRollerMotor.set(0.5);
     }
     
-    public void spinOut() {
-    	RobotMap.intakeMotor.set(-0.5);
-    }
-    
-    public void spin(int speed) {
-    	RobotMap.intakeMotor.set(speed);
-    }
     
     public void moveUp() {
     	RobotMap.intakeVerticalMotor.set(0.5);

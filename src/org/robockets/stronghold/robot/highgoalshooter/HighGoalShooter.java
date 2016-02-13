@@ -41,20 +41,12 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.jeffRoller2.set(speed);
     }
     
-    /**
-     * Roll the shooting wheel to fire the cannonball at a desired speed.
-     * @param speed 	The speed to set the shooting mechanism at.
-     */
-    public void spinShootingWheel(double speed) {
-    	RobotMap.shootingWheelMotor.set(speed);
-    }
-    
     public void spinTurnTable(double speed) {
     	RobotMap.turnTableMotor.set(speed);
     }
     
     public void spinTurnTableAssisted() {
-    	RobotMap.turnTableMotor.set(hoodPidController.get());
+    	RobotMap.turnTableMotor.set(turnTablePidController.get());
     }
     
     public void setTurnTableAngle(double angle) {
@@ -72,6 +64,18 @@ public class HighGoalShooter extends Subsystem {
     public void setHoodAngle(double angle) {
     	hoodPidController.setSetpoint(angle);
     }
+
+    /**
+     * Roll the shooting wheel to fire the cannonball at a desired speed.
+     * @param speed 	The speed to set the shooting mechanism at.
+     */
+    public void setShootingWheelSpeed(double speed) {
+    	RobotMap.shootingWheelMotor.set(speed);
+    }
+    
+    public boolean shootingWheelOnTarget(){
+    	return RobotMap.shootingWheelMotor.getError() < 5; //TODO: Set a good error bit here.
+    }
     
     public void enableTurnTablePID() {
     	turnTablePidController.enable();
@@ -83,6 +87,10 @@ public class HighGoalShooter extends Subsystem {
     	hoodPidController.enable();
     	hoodPidController.reset();
     	hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
+    }
+    
+    public void enableShootingWheelPID() {
+    	RobotMap.shootingWheelMotor.enableControl();
     }
 }
 
