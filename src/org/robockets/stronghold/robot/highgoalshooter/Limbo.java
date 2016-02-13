@@ -27,7 +27,7 @@ public class Limbo extends Command {
 
     protected boolean isFinished() {
         return Robot.shooter.hoodPidController.onTarget() 
-        		&& Robot.intake.intakePidController.onTarget()
+        		&& Robot.intake.encoderPID.onTarget()
         		|| isTimedOut();
     }
 
