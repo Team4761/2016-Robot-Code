@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.CompassPIDSource;
 import org.robockets.stronghold.robot.DummyPIDOutput;
-import org.robockets.stronghold.robot.EncoderPIDSource;
 import org.robockets.stronghold.robot.GyroPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 
