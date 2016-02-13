@@ -14,7 +14,7 @@ public class AimShooter extends Command {
 	double floorToTargetHeight = 8;
 	double robotShooterToTargetHeight = 16;
 	double wheelDiameter = 6;
-	double velocity;
+	double shaftRPM;
 	
     public AimShooter() {
     	requires(Robot.shooter);
@@ -31,9 +31,9 @@ public class AimShooter extends Command {
     	
     	double angle = Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12) / distanceToTarget) * 180 / Math.PI);
     	
-    	velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
+    	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
     	
-    	double shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
+    	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
@@ -44,7 +44,7 @@ public class AimShooter extends Command {
     protected boolean isFinished() {
     	return Robot.shooter.hoodPidController.onTarget()
     			&& Robot.shooter.hoodPidController.onTarget()
-    			&& Robot.shooter.shootingWheelOnTarget(velocity)
+    			&& Robot.shooter.shootingWheelOnTarget(shaftRPM)
     			|| isTimedOut();
     }
 
