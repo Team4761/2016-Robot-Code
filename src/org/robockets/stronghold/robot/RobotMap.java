@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot;
 
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
-import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -25,21 +24,18 @@ public class RobotMap {
 	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
 	public static Victor jeffRoller1 = new Victor(4); // TEMP
 	public static Victor jeffRoller2 = new Victor(5); // TEMP
-	public static Victor turnTableMotor = new Victor(9); // TEMP
+	public static Victor turnTableMotor = new Victor(7); // TEMP
 	public static Encoder turnTableEncoder = new Encoder(5, 6);
 	public static Victor hoodMotor = new Victor(8); // TEMP
-	public static Encoder hoodEncoder = new Encoder(7, 8);
+	public static Encoder hoodEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder = new Encoder(9, 10);
-	public static CANTalon shootingWheelMotor = new CANTalon(0); //TODO: Figure out the id of the motor over CAN.
+	public static CANTalon shootingWheelMotor = new CANTalon(2);
 
 	
 	public RobotMap () {
 		navX.zeroYaw();
-		turnTableEncoder.reset();
-		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		shootingWheelMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
-		shootingWheelMotor.setPID(0.1, 0, 0);
-		shootingWheelMotor.enableControl();
-		shootingWheelMotor.enable();
+		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+		shootingWheelMotor.configEncoderCodesPerRev(1);
+		turnTableEncoder.setDistancePerPulse(1/(7*71*180/40/360));
 	}
 }
