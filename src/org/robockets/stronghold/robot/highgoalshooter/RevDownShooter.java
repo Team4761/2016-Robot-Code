@@ -20,7 +20,7 @@ public class RevDownShooter extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.shooter.shootingWheelOnTarget();
+        return Robot.shooter.shootingWheelOnTarget(0);
     }
 
     protected void end() {

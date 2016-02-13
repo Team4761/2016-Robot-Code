@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot;
 
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
-import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -31,13 +30,12 @@ public class RobotMap {
 	public static Victor hoodMotor = new Victor(8); // TEMP
 	public static Encoder hoodEncoder = new Encoder(7, 8);
 	public static Encoder driveEncoder = new Encoder(9, 10);
-	public static CANTalon shootingWheelMotor = new CANTalon(0); //TODO: Figure out the id of the motor over CAN.
+	public static CANTalon shootingWheelMotor = new CANTalon(2);
+
+	
 	public RobotMap () {
 		navX.zeroYaw();
-		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		shootingWheelMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
-		shootingWheelMotor.setPID(0.1, 0, 0);
-		shootingWheelMotor.enableControl();
-		shootingWheelMotor.enable();
+		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+		shootingWheelMotor.configEncoderCodesPerRev(1);
 	}
 }

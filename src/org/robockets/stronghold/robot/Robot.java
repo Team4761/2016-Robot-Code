@@ -89,6 +89,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         joyride.start();
         //(new UpdateDashboard()).start();
+        teleop.start();
     }
 
     /**
