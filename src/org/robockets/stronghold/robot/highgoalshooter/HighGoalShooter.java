@@ -70,11 +70,21 @@ public class HighGoalShooter extends Subsystem {
      * @param speed 	The speed to set the shooting mechanism at.
      */
     public void setShootingWheelSpeed(double speed) {
-    	RobotMap.shootingWheelMotor.set(speed);
+    	double correctedSpeed = -1 * Math.abs(speed); // Only negative numbers
+    	double voltage = -0.00050523 * correctedSpeed + 0.01511; // Regression I did on desmos
+    	if (Math.abs(voltage) < 1) { // Don't try to go over max speeds
+        	RobotMap.shootingWheelMotor.set(voltage);
+    	} else {
+    		System.out.println("Invalid shooting wheel speed!");
+    	}
     }
     
-    public boolean shootingWheelOnTarget(){
-    	return RobotMap.shootingWheelMotor.getError() < 5; //TODO: Set a good error bit here.
+    public void setShootingWheelVoltage(double voltage) {
+    	RobotMap.shootingWheelMotor.set(voltage);
+    }
+    
+    public boolean shootingWheelOnTarget(double target) {
+    	return Math.abs(Math.abs(target) - Math.abs(RobotMap.shootingWheelMotor.getEncVelocity() / 1024.0 * 60.0)) < 50; //TODO: Test error
     }
     
     public void enableTurnTablePID() {

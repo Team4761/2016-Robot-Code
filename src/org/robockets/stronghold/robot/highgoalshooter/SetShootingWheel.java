@@ -26,12 +26,13 @@ public class SetShootingWheel extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.shooter.shootingWheelOnTarget();
+    	return Robot.shooter.shootingWheelOnTarget(speed);
     }
 
     protected void end() {
     }
 
     protected void interrupted() {
+    	end();
     }
 }
