@@ -34,18 +34,16 @@ public class MoveHood extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (angle != null) {
-    		Robot.shooter.setHoodAngle(angle);
-    		Robot.shooter.hoodPidController.enable();
-    	} else if (time != null) {
+    	if (time != null) {
     		setTimeout(time);
+    		Robot.shooter.hoodPidController.disable();
     	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (angle != null) {
-    		Robot.shooter.spinHoodAssisted();
+    		Robot.shooter.setHoodAngle(angle);
     	} else {
     		Robot.shooter.spinHood(speed);
     	}
@@ -53,15 +51,17 @@ public class MoveHood extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (angle != null) return Robot.shooter.hoodAngleOnTarget();
+        if (angle != null) return true;
         if (time != 0) return isTimedOut();
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.spinHood(0);
-    	Robot.shooter.hoodPidController.disable();
+    	if (time != null) {
+    		Robot.shooter.spinHood(0);
+    		Robot.shooter.hoodPidController.enable();
+    	}
     }
 
     // Called when another command which requires one or more of the same

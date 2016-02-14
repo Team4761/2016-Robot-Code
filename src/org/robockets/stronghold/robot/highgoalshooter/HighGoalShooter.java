@@ -20,7 +20,7 @@ public class HighGoalShooter extends Subsystem {
 	
 	public HighGoalShooter() {
 		turnTablePidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
-		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
+		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
@@ -36,6 +36,7 @@ public class HighGoalShooter extends Subsystem {
 		shootingWheelPidController.setSetpoint(0);
 		shootingWheelPidController.setContinuous(true);
 		
+		hoodPidController.enable();
     	shootingWheelPidController.enable();
 	}
 	
@@ -67,10 +68,6 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.hoodMotor.set(speed);
     }
     
-    public void spinHoodAssisted() {
-    	RobotMap.hoodMotor.set(hoodPidController.get());
-    }
-    
     public void setHoodAngle(double angle) {
     	hoodPidController.setSetpoint(angle * COUNTS_PER_DEGREE_HOOD);
     }
@@ -99,16 +96,6 @@ public class HighGoalShooter extends Subsystem {
     	turnTablePidController.enable();
     	turnTablePidController.reset();
     	turnTablePidController.setSetpoint(RobotMap.turnTableEncoder.get()); // Make sure setpoint starts as current position
-    }
-    
-    public void enableHoodPID() {
-    	hoodPidController.enable();
-    	hoodPidController.reset();
-    	hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
-    }
-    
-    public void enableShootingWheelPID() {
-    	RobotMap.shootingWheelMotor.enableControl();
     }
 }
 
