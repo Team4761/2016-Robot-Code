@@ -19,7 +19,7 @@ public class RobotMap {
 	private static SerialPort navXSerialPort = new SerialPort(57600, SerialPort.Port.kMXP);
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
-	public static RobotDrive robotDrive = new RobotDrive(0, 1);
+	public static RobotDrive robotDrive = new RobotDrive(18, 19);
 	public static Encoder intakeEncoder = new Encoder(3, 4);
 	public static Victor intakeRollerMotor = new Victor(6);
 	public static Victor intakeVerticalMotor = new Victor(2); //TEMP
