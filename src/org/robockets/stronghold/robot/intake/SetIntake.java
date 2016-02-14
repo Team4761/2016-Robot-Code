@@ -30,7 +30,7 @@ public class SetIntake extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.intake.intakePidController.onTarget() || isTimedOut();
+        return Robot.intake.encoderPID.onTarget() || isTimedOut();
     }
 
     protected void end() {
