@@ -2,32 +2,40 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.RobotMap;
+import org.robockets.stronghold.robot.TalonPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
  */
 public class HighGoalShooter extends Subsystem {
-	public final double COUNTS_PER_DEGREE_HOOD = 7.75;
-	public final double ERROR = 20;
+	public final double COUNTS_PER_DEGREE_HOOD = 7.3111;
+	public final double ERROR = 5;
 	
 	public final PIDController turnTablePidController;
 	public final PIDController hoodPidController;
+	public final PIDController shootingWheelPidController;
 	
 	public HighGoalShooter() {
 		turnTablePidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
 		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
+		shootingWheelPidController = new PIDController(0.00005, 0, 0.0025, new TalonPIDSource(), new DummyPIDOutput());
 		
 		turnTablePidController.disable();
 		hoodPidController.disable();
+		shootingWheelPidController.disable();
 		
 		turnTablePidController.setSetpoint(0);
 		turnTablePidController.setContinuous(true);
 		
 		hoodPidController.setSetpoint(0);
 		hoodPidController.setContinuous(true);
+		
+		shootingWheelPidController.setSetpoint(0);
+		shootingWheelPidController.setContinuous(true);
 	}
 	
     public void initDefaultCommand() {
@@ -75,13 +83,7 @@ public class HighGoalShooter extends Subsystem {
      * @param speed 	The rpm to set the shooting mechanism at.
      */
     public void setShootingWheelSpeed(double speed) {
-    	double correctedSpeed = -1 * Math.abs(speed); // Only negative numbers
-    	double voltage = -0.00050523 * correctedSpeed + 0.01511; // Regression I did on desmos
-    	if (Math.abs(voltage) < 1) { // Don't try to go over max speeds
-        	RobotMap.shootingWheelMotor.set(voltage);
-    	} else {
-    		System.out.println("Invalid shooting wheel speed!");
-    	}
+    	RobotMap.shootingWheelMotor.set(shootingWheelPidController.get());
     }
     
     public void setShootingWheelVoltage(double voltage) {

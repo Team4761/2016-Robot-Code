@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -37,5 +38,6 @@ public class RobotMap {
 		navX.zeroYaw();
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);
+		shootingWheelMotor.changeControlMode(TalonControlMode.PercentVbus);		
 	}
 }
