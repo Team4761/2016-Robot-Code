@@ -3,12 +3,10 @@ package org.robockets.stronghold.robot;
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
-import org.robockets.stronghold.robot.intake.ManualSpinIntake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.drivetrain.Joyride;
-import org.robockets.stronghold.robot.commands.UpdateDashboard;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
