@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Set the shooting wheel at a desired speed.
  */
-public class SetShootingWheel extends Command {
+public class MoveShootingWheel extends Command {
 
 	double speed;
 	
-    public SetShootingWheel(double speed) {
+    public MoveShootingWheel(double speed) {
     	requires(Robot.shooter);
     	this.speed = speed;
     }
@@ -26,7 +26,7 @@ public class SetShootingWheel extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.shooter.shootingWheelOnTarget(speed);
+    	return true;
     }
 
     protected void end() {
