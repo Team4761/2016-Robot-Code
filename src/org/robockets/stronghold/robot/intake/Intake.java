@@ -39,7 +39,7 @@ public class Intake extends Subsystem {
     }
     
     public void spinRollersOut() {
-    	RobotMap.intakeRollerMotor.set(0.5);
+    	RobotMap.intakeRollerMotor.set(-0.5);
     }
     
     
