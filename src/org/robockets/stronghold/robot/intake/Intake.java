@@ -20,6 +20,9 @@ public class Intake extends Subsystem {
 		encoderPID.setSetpoint(0);
 		encoderPID.setPercentTolerance(0.05);
 		encoderPID.setContinuous(true);
+		SmartDashboard.putNumber("Intake P", encoderPID.getP());
+		SmartDashboard.putNumber("Intake I", encoderPID.getI());
+		SmartDashboard.putNumber("Intake D", encoderPID.getD());
 	}
 	
     public void initDefaultCommand() {
@@ -27,7 +30,7 @@ public class Intake extends Subsystem {
     }
     
 	public void spin(double speed) {
-		RobotMap.intakeVerticalMotor.set(speed);
+		RobotMap.intakeMotor.set(speed);
 	}
 	 
     public void spinRoller(double speed) {
@@ -40,19 +43,19 @@ public class Intake extends Subsystem {
     
     
     public void moveUp() {
-    	RobotMap.intakeVerticalMotor.set(0.5);
+    	RobotMap.intakeMotor.set(0.5);
     }
     
     public void moveDown() {
-    	RobotMap.intakeVerticalMotor.set(-0.5);
+    	RobotMap.intakeMotor.set(-0.5);
     }
     
     public void move(int speed) {
-    	RobotMap.intakeVerticalMotor.set(speed);
+    	RobotMap.intakeMotor.set(speed);
     }
     
     public void spinAssisted() {
-    	encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
+    	encoderPID.setPID(SmartDashboard.getNumber("Intake P"), SmartDashboard.getNumber("Intake I"), SmartDashboard.getNumber("Intake D"));
     	
     	RobotMap.intakeMotor.set(encoderPID.get());
     }
@@ -72,7 +75,7 @@ public class Intake extends Subsystem {
     }
     
     public void stopVertical() {
-    	RobotMap.intakeVerticalMotor.set(0);
+    	RobotMap.intakeMotor.set(0);
     }
 }
 
