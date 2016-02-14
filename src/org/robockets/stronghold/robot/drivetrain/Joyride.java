@@ -23,18 +23,26 @@ public class Joyride extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	SmartDashboard.putBoolean("Start GyroPID", false);
+    	SmartDashboard.putBoolean("Reset Gyro", false);
     	SmartDashboard.putNumber("Gyro P", Robot.driveTrain.gyroPID.getP());
     	SmartDashboard.putNumber("Gyro I", Robot.driveTrain.gyroPID.getI());
     	SmartDashboard.putNumber("Gyro D", Robot.driveTrain.gyroPID.getD());
     	SmartDashboard.putNumber("Gyro Setpoint", Robot.driveTrain.gyroPID.getSetpoint());
-    	Robot.driveTrain.setAngle(90, false);
+    	Robot.driveTrain.gyroPID.setSetpoint(SmartDashboard.getNumber("Gyro Setpoint"));
+    	Robot.driveTrain.setAngle(0, false);
     	gyroPIDDisable = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveTrain.gyroPID.setPID(SmartDashboard.getNumber("Gyro P"),SmartDashboard.getNumber("Gyro I"),SmartDashboard.getNumber("Gyro D"));
-    	Robot.driveTrain.gyroPID.setSetpoint(SmartDashboard.getNumber("Gyro Setpoint"));
+    	if(SmartDashboard.getBoolean("Reset Gyro")){
+    		SmartDashboard.putBoolean("Reset Gyro", false);
+    		RobotMap.navX.zeroYaw();
+    		System.out.println("Zero Yaw");
+    	} 
+    	
+    	SmartDashboard.putNumber("Gyro Angle Acc", RobotMap.navX.getAccumulatedYaw());
     	SmartDashboard.putNumber("Gyro Angle", RobotMap.navX.getYaw());
     	System.out.println(RobotMap.navX.getYaw());
     	if (SmartDashboard.getBoolean("Start GyroPID")) {
