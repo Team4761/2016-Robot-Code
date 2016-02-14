@@ -6,7 +6,6 @@ import org.robockets.stronghold.robot.TalonPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
@@ -22,7 +21,7 @@ public class HighGoalShooter extends Subsystem {
 	public HighGoalShooter() {
 		turnTablePidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
 		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
-		shootingWheelPidController = new PIDController(0.00005, 0, 0.0025, new TalonPIDSource(), new DummyPIDOutput());
+		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
 		hoodPidController.disable();
@@ -36,6 +35,8 @@ public class HighGoalShooter extends Subsystem {
 		
 		shootingWheelPidController.setSetpoint(0);
 		shootingWheelPidController.setContinuous(true);
+		
+    	shootingWheelPidController.enable();
 	}
 	
     public void initDefaultCommand() {
@@ -83,7 +84,7 @@ public class HighGoalShooter extends Subsystem {
      * @param speed 	The rpm to set the shooting mechanism at.
      */
     public void setShootingWheelSpeed(double speed) {
-    	RobotMap.shootingWheelMotor.set(shootingWheelPidController.get());
+    	shootingWheelPidController.setSetpoint(speed);
     }
     
     public void setShootingWheelVoltage(double voltage) {
