@@ -4,6 +4,7 @@ import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A Command to spin the intake motor forward or backward
@@ -14,7 +15,9 @@ public class ManualVerticalIntake extends Command {
 	
 	int time; //Used to set timeout
 	
-	int speed; //Used to set speed manually
+	double speed; //Used to set speed manually
+	
+	boolean encoderPID = false;
 	
 	/**
 	 * Initalizes some variables
@@ -28,11 +31,22 @@ public class ManualVerticalIntake extends Command {
     	this.time = time;
     }
     
-    public ManualVerticalIntake(int speed, int time) {
+    public ManualVerticalIntake(double speed, int time) {
     	requires(Robot.intake);
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
     	this.time = time;
+    }
+    
+    public ManualVerticalIntake() {
+    	requires(Robot.intake);
+    	this.speed = 0.5;
+    	this.direction = Direction.MANUAL;
+    	this.time = 0;
+    	SmartDashboard.putNumber("Intake P", Robot.intake.encoderPID.getP());
+    	SmartDashboard.putNumber("Intake I", Robot.intake.encoderPID.getI());
+    	SmartDashboard.putNumber("Intake D", Robot.intake.encoderPID.getD());
+    	SmartDashboard.putNumber("Intake Start", 0);
     }
 
     // Called just before this Command runs the first time
@@ -42,6 +56,19 @@ public class ManualVerticalIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.intake.encoderPID.setPID(SmartDashboard.getNumber("Intake P"), SmartDashboard.getNumber("Intake I"), SmartDashboard.getNumber("Intake D"));
+    	
+    	if (SmartDashboard.getNumber("Intake Start") == 1) {
+    		Robot.intake.encoderPID.enable();
+    		encoderPID = true;
+    	} else {
+    		if (encoderPID) {
+    			encoderPID = false;
+    			Robot.intake.encoderPID.disable();
+    		}
+    		
+    	}
+    	
     	if (direction == Direction.UP) {
     		Robot.intake.moveUp();
     	} else if (direction == Direction.DOWN){

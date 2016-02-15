@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Intake extends Subsystem {
 	
 
-	public final PIDController encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoder, new DummyPIDOutput());
+	public final PIDController encoderPID;
 	
 	public Intake() {
+		encoderPID  = new PIDController(0.0, 0.0, 0, RobotMap.intakeEncoder, new DummyPIDOutput());
+		
 		encoderPID.disable();
 		encoderPID.setSetpoint(0);
 		encoderPID.setPercentTolerance(0.05);
