@@ -21,13 +21,11 @@ public class SetTurnTable extends Command {
     }
     
     protected void initialize() {
-    	Robot.shooter.enableTurnTablePID();
     	Robot.shooter.setTurnTableAngle(angle);
     	setTimeout(20);
     }
 
     protected void execute() {
-    	Robot.shooter.spinTurnTableAssisted();
     }
 
     protected boolean isFinished() {
@@ -35,7 +33,6 @@ public class SetTurnTable extends Command {
     }
 
     protected void end() {
-    	Robot.shooter.turnTablePidController.disable();
     	Robot.shooter.spinTurnTable(0);
     }
 
