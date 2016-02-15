@@ -17,8 +17,7 @@ public class HighGoalShooter extends Subsystem {
 	public final EncoderPIDSource turnTableSource;
 	
 	public HighGoalShooter() {
-		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579);
-		turnTableSource.setPIDSourceType(PIDSourceType.kDisplacement);
+		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, new DummyPIDOutput());
 		hoodPidController = new PIDController(1, 1, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
 		
