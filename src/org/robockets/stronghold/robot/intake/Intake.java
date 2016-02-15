@@ -53,11 +53,11 @@ public class Intake extends Subsystem {
     	RobotMap.intakeVerticalMotor.set(-0.5);
     }
     
-    public void move(int speed) {
+    public void move(double speed) {
     	RobotMap.intakeVerticalMotor.set(speed);
     }
     
-    public void spinAssisted() {
+    public void moveAssisted() {
     	encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
     	
     	RobotMap.intakeMotor.set(encoderPID.get());

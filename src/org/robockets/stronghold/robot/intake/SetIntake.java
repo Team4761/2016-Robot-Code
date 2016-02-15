@@ -26,7 +26,7 @@ public class SetIntake extends Command {
     }
 
     protected void execute() {
-    	Robot.intake.spinAssisted();
+    	Robot.intake.moveAssisted();
     }
 
     protected boolean isFinished() {

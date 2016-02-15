@@ -56,7 +56,7 @@ public class ManualVerticalIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.encoderPID.setPID(SmartDashboard.getNumber("Intake P"), SmartDashboard.getNumber("Intake I"), SmartDashboard.getNumber("Intake D"));
+    	//Robot.intake.encoderPID.setPID(SmartDashboard.getNumber("Intake P"), SmartDashboard.getNumber("Intake I"), SmartDashboard.getNumber("Intake D"));
     	
     	if (SmartDashboard.getNumber("Intake Start") == 1) {
     		Robot.intake.encoderPID.enable();
