@@ -9,17 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class MoveTurnTable extends Command {
 
-	Double angle = null; // Note that this is intentionally not the primitive angle so it can be compared to null.
 	Double speed = null;
-	
-	/**
-	 * Move turntable with Smart Dashboard input.
-	 */
-	public MoveTurnTable(){
-		requires(Robot.shooter);
-		SmartDashboard.putNumber("Turn table angle add", SmartDashboard.getNumber("Turn table angle add", 0));
-		angle = SmartDashboard.getNumber("Turn table angle add");
-	}
 	
 	/**
 	 * Move the hood upwards or downwards continuously.
@@ -30,39 +20,19 @@ public class MoveTurnTable extends Command {
         speed = rate;
     }
     
-    /**
-	 * Move the hood upwards or downwards continuously. Note you have to enable the PID for this.
-	 * @param angle			The angle to move the hood by. This is added to the current angle.
-	 */
-    public MoveTurnTable(float ang) {
-        requires(Robot.shooter);
-        
-        angle = Robot.shooter.turnTablePidController.getSetpoint() + ang;
-        SmartDashboard.putNumber("Turn Table Angle Add", angle);
-    }
-    
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (angle != null){
-    		Robot.shooter.turnTablePidController.setSetpoint(angle);
-    	}
     	setTimeout(10);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (angle == null) Robot.shooter.spinTurnTable(speed);
-    	else {
-    		angle = SmartDashboard.getNumber("Turn Table Angle Add");
-    		Robot.shooter.turnTablePidController.setSetpoint(angle);
-    		Robot.shooter.spinTurnTableAssisted();
-    	}
+    	Robot.shooter.spinTurnTable(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (angle != null) return Robot.shooter.turnTablePidController.onTarget();
-        return false || isTimedOut();
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
