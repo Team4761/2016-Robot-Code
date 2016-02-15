@@ -11,9 +11,10 @@ public class EncoderPIDSource implements PIDSource {
 	double factor;
 	PIDSourceType sourceType;
 	
-	public EncoderPIDSource(Encoder jack, double factor){
+	public EncoderPIDSource(Encoder jack, double factor, PIDSourceType type){
 		encoder = jack;
 		this.factor = factor;
+		sourceType = type;
 	}
 	
 	@Override
@@ -29,7 +30,7 @@ public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return encoder.getDistance()*factor;
+		return encoder.getDistance() * factor;
 	}
 
 }
