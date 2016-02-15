@@ -3,25 +3,27 @@ package org.robockets.stronghold.robot.highgoalshooter;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Set the exact position of the hood part of the high goal shooter subsystem.
  */
 public class SetTurnTable extends Command {
 
-	float angle;
+	double angle;
 	
 	/**
-	 * Set the angle of the hood part of the highgoal shooter.
+	 * Set the angle of the turn table part of the highgoal shooter.
 	 * @param angle		The angle to set the hood at.
 	 */
-    public SetTurnTable(float angle) {
+    public SetTurnTable(double angle) {
     	requires(Robot.shooter);
     }
-
+    
     protected void initialize() {
-    	Robot.shooter.turnTablePidController.setSetpoint(angle);
-    	setTimeout(5);
+    	Robot.shooter.enableTurnTablePID();
+    	Robot.shooter.setTurnTableAngle(angle);
+    	setTimeout(20);
     }
 
     protected void execute() {
@@ -33,8 +35,11 @@ public class SetTurnTable extends Command {
     }
 
     protected void end() {
+    	Robot.shooter.turnTablePidController.disable();
+    	Robot.shooter.spinTurnTable(0);
     }
 
     protected void interrupted() {
+    	end();
     }
 }

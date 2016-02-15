@@ -17,8 +17,8 @@ public class MoveTurnTable extends Command {
 	 */
 	public MoveTurnTable(){
 		requires(Robot.shooter);
-		SmartDashboard.putNumber("Turn Table Angle Add", SmartDashboard.getNumber("Turn Table Angle", 573.500));
-		angle = SmartDashboard.getNumber("Turn Table Angle Add");
+		SmartDashboard.putNumber("Turn table angle add", SmartDashboard.getNumber("Turn table angle add", 0));
+		angle = SmartDashboard.getNumber("Turn table angle add");
 	}
 	
 	/**
