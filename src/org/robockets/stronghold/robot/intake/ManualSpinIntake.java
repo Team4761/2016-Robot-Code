@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ManualSpinIntake extends Command {
 	
 	public Direction direction; //Object for the Direction enum
+	public IntakeSide intakeSide;
 	
 	int time; //Used to set timeout
 	
@@ -21,23 +22,38 @@ public class ManualSpinIntake extends Command {
 	 * @param direction  Used to initalize Direction enum
 	 * @param time  Takes input for time
 	 * */
-    public ManualSpinIntake(Direction directionEnum, int time) {
-    	requires(Robot.intake);
+    public ManualSpinIntake(Direction directionEnum, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
     	this.direction = directionEnum;
+    	this.intakeSide = intakeSide;
     	this.time = time;
     }
     
-    public ManualSpinIntake(double speed, int time) {
-    	requires(Robot.intake);
+    public ManualSpinIntake(double speed, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
+    	this.intakeSide = intakeSide;
     	this.time = time;
     }
     
-    public ManualSpinIntake() {
-    	requires(Robot.intake);
+    public ManualSpinIntake(IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
     	this.speed = 0.5;
     	this.direction = Direction.MANUAL;
+    	this.intakeSide = intakeSide;
     	this.time = 0;
     }
 
@@ -48,14 +64,26 @@ public class ManualSpinIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (direction == Direction.FORWARD) {
-    		Robot.intake.spinIn();
-    	} else if (direction == Direction.BACKWARD){
-    		Robot.intake.spinOut();
-    	} else if (direction == Direction.MANUAL) {
-    		Robot.intake.spin(speed);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		if (direction == Direction.FORWARD) {
+    			Robot.intakeFront.spinIn();
+    		} else if (direction == Direction.BACKWARD){
+    			Robot.intakeFront.spinOut();
+    		} else if (direction == Direction.MANUAL) {
+    			Robot.intakeFront.spin(speed);
+    		} else {
+    			Robot.intakeFront.stopIntake();
+    		}
     	} else {
-    		Robot.intake.stopIntake();
+    		if (direction == Direction.FORWARD) {
+        		Robot.intakeBack.spinIn();
+        	} else if (direction == Direction.BACKWARD){
+        		Robot.intakeBack.spinOut();
+        	} else if (direction == Direction.MANUAL) {
+        		Robot.intakeBack.spin(speed);
+        	} else {
+        		Robot.intakeBack.stopIntake();
+        	}
     	}
     }
 
@@ -70,7 +98,11 @@ public class ManualSpinIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stopIntake();
+    	if (intakeSide == IntakeSide.FRONT) {
+    		Robot.intakeFront.stopIntake();
+    	} else {
+    		Robot.intakeBack.stopIntake();
+    	}
     }
 
     // Called when another command which requires one or more of the same
