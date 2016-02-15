@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot.highgoalshooter;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Move the hood upwards or downwards.
@@ -43,7 +44,7 @@ public class MoveHood extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (angle != null) {
-    		Robot.shooter.setHoodAngle(angle);
+    		Robot.shooter.setHoodAngle(SmartDashboard.getNumber("New Hood Angle"));
     	} else {
     		Robot.shooter.spinHood(speed);
     	}
