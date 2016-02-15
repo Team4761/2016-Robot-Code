@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
+import org.robockets.stronghold.robot.HoodPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.TalonPIDSource;
 
@@ -11,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
  */
 public class HighGoalShooter extends Subsystem {
-	public final double COUNTS_PER_DEGREE_HOOD = 7.3111;
 	public final double ERROR = 5;
 	
 	public final PIDController turnTablePidController;
@@ -20,7 +20,7 @@ public class HighGoalShooter extends Subsystem {
 	
 	public HighGoalShooter() {
 		turnTablePidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
-		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, RobotMap.hoodMotor);
+		hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
@@ -69,7 +69,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setHoodAngle(double angle) {
-    	hoodPidController.setSetpoint(angle * COUNTS_PER_DEGREE_HOOD);
+    	hoodPidController.setSetpoint(angle);
     }
     
     public boolean hoodAngleOnTarget() {
@@ -96,6 +96,12 @@ public class HighGoalShooter extends Subsystem {
     	turnTablePidController.enable();
     	turnTablePidController.reset();
     	turnTablePidController.setSetpoint(RobotMap.turnTableEncoder.get()); // Make sure setpoint starts as current position
+    }
+    
+    public void enableHoodPID() {
+		hoodPidController.enable();
+		hoodPidController.reset();
+		hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
     }
 }
 
