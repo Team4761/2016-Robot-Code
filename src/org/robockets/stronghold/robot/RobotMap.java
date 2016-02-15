@@ -20,12 +20,12 @@ public class RobotMap {
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static RobotDrive robotDrive = new RobotDrive(0, 1);
 	public static Victor intakeRollerMotor = new Victor(2); //TEMP
-	public static Encoder intakeMotorEncoder = new Encoder(3, 4);
+	public static Encoder intakeMotorEncoder = new Encoder(5, 6);
 	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
 	public static Victor jeffRoller1 = new Victor(4); // TEMP
 	public static Victor jeffRoller2 = new Victor(5); // TEMP
-	public static Victor turnTableMotor = new Victor(7); // TEMP
-	public static Encoder turnTableEncoder = new Encoder(5, 6);
+	public static Victor turnTableMotor = new Victor(9); // TEMP
+	public static Encoder turnTableEncoder = new Encoder(3, 4);
 	public static Victor hoodMotor = new Victor(8); // TEMP
 	public static Encoder hoodEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder = new Encoder(9, 10);
@@ -36,6 +36,8 @@ public class RobotMap {
 		navX.zeroYaw();
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);
-		turnTableEncoder.setDistancePerPulse(1/(7*71*180/40/360));
+		//turnTableEncoder.setDistancePerPulse(360/7/71/180*40);
+//71*(180/40)*7=cpr of turntable
+		// 1/((71*(180/40)*7)/360)
 	}
 }
