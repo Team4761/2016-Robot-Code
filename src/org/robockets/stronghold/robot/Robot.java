@@ -1,7 +1,7 @@
 package org.robockets.stronghold.robot;
 
 import org.robockets.stronghold.robot.intake.Intake;
-import org.robockets.stronghold.robot.intake.ManualSpinIntake;
+import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.drivetrain.Joyride;
@@ -21,7 +21,8 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static final Drivetrain driveTrain = new Drivetrain();
-	public static final Intake intake = new Intake();
+	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
+	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
 	
 	Command teleop;
 	Command autonomousCommand;

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ManualVerticalIntake extends Command {
 	
 	public Direction direction; //Object for the Direction enum
+	public IntakeSide intakeSide;
 	
 	int time; //Used to set timeout
 	
@@ -21,16 +22,26 @@ public class ManualVerticalIntake extends Command {
 	 * @param direction  Used to initalize Direction enum
 	 * @param time  Takes input for time
 	 * */
-    public ManualVerticalIntake(Direction direction, int time) {
-    	requires(Robot.intake);
+    public ManualVerticalIntake(Direction direction, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
     	this.direction = direction;
+    	this.intakeSide = intakeSide;
     	this.time = time;
     }
     
-    public ManualVerticalIntake(int speed, int time) {
-    	requires(Robot.intake);
+    public ManualVerticalIntake(int speed, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
+    	this.intakeSide = intakeSide;
     	this.time = time;
     }
 
@@ -41,14 +52,26 @@ public class ManualVerticalIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (direction == Direction.UP) {
-    		Robot.intake.moveUp();
-    	} else if (direction == Direction.DOWN){
-    		Robot.intake.moveDown();
-    	} else if (direction == Direction.DOWN){
-    		Robot.intake.move(speed);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		if (direction == Direction.UP) {
+    			Robot.intakeFront.moveUp();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeFront.moveDown();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeFront.move(speed);
+    		} else {
+    			Robot.intakeFront.stopVertical();
+    		}
     	} else {
-    		Robot.intake.stopVertical();
+    		if (direction == Direction.UP) {
+    			Robot.intakeBack.moveUp();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeBack.moveDown();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeBack.move(speed);
+    		} else {
+    			Robot.intakeBack.stopVertical();
+    		}
     	}
     }
 
@@ -59,7 +82,11 @@ public class ManualVerticalIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stopVertical();
+    	if (intakeSide == IntakeSide.FRONT) {
+    		Robot.intakeFront.stopVertical();
+    	} else {
+    		Robot.intakeBack.stopVertical();
+    	}
     }
 
     // Called when another command which requires one or more of the same

@@ -18,9 +18,11 @@ public class RobotMap {
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
-	public static Victor intakeMotor = new Victor(5); //TEMP
+	public static Victor intakeMotorFront = new Victor(5); //TEMP
+	public static Victor intakeMotorBack = new Victor(13); //TEMP
 	public static Encoder intakeEncoder = new Encoder(3, 4);
-	public static Victor intakeVerticalMotor = new Victor(11); //TEMP
+	public static Victor intakeVerticalMotorFront = new Victor(11); //TEMP
+	public static Victor intakeVerticalMotorBack = new Victor(12); //TEMP
 	public static Victor jeffRoller1 = new Victor(6); // TEMP
 	public static Victor jeffRoller2 = new Victor(7); // TEMP
 	public static Victor shootingWheelMotor = new Victor(8);
