@@ -20,7 +20,8 @@ public class RobotMap {
 	public static RobotDrive robotDrive = new RobotDrive(1, 2, 3, 4);
 	public static Victor intakeMotorFront = new Victor(5); //TEMP
 	public static Victor intakeMotorBack = new Victor(13); //TEMP
-	public static Encoder intakeEncoder = new Encoder(3, 4);
+	public static Encoder intakeEncoderFront = new Encoder(3, 4);
+	public static Encoder intakeEncoderBack = new Encoder(7, 8);
 	public static Victor intakeVerticalMotorFront = new Victor(11); //TEMP
 	public static Victor intakeVerticalMotorBack = new Victor(12); //TEMP
 	public static Victor jeffRoller1 = new Victor(6); // TEMP

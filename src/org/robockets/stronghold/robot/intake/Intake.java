@@ -14,14 +14,21 @@ public class Intake extends Subsystem {
 	
 	IntakeSide intakeSide;
 	
-	public final PIDController encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoder, new DummyPIDOutput());
+	
+	public final PIDController encoderPIDFront = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderFront, new DummyPIDOutput());
+	public final PIDController encoderPIDBack = new PIDController(0, 0, 0, RobotMap.intakeEncoderBack, new DummyPIDOutput());
 	
 	public Intake(IntakeSide intakeSide) {
 		this.intakeSide = intakeSide;
-		encoderPID.disable();
-		encoderPID.setSetpoint(0);
-		encoderPID.setPercentTolerance(0.05);
-		encoderPID.setContinuous(true);
+		encoderPIDFront.disable();
+		encoderPIDFront.setSetpoint(0);
+		encoderPIDFront.setPercentTolerance(0.05);
+		encoderPIDFront.setContinuous(true);
+		
+		encoderPIDBack.disable();
+		encoderPIDBack.setSetpoint(0);
+		encoderPIDBack.setPercentTolerance(0.05);
+		encoderPIDBack.setContinuous(true);
 	}
 	
     public void initDefaultCommand() {
@@ -77,22 +84,34 @@ public class Intake extends Subsystem {
     }
     
     public void spinAssisted() {
-    	encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
+    	encoderPIDFront.setPID(SmartDashboard.getNumber("P Front"), SmartDashboard.getNumber("I Front"), SmartDashboard.getNumber("D Front"));
+    	encoderPIDBack.setPID(SmartDashboard.getNumber("P Back"), SmartDashboard.getNumber("I Back"), SmartDashboard.getNumber("D Back"));
+    	
     	if (intakeSide == IntakeSide.FRONT) {
-    		RobotMap.intakeMotorFront.set(encoderPID.get());
+    		RobotMap.intakeMotorFront.set(encoderPIDFront.get());
     	} else {
-    		RobotMap.intakeMotorBack.set(encoderPID.get());
+    		RobotMap.intakeMotorBack.set(encoderPIDBack.get());
     	}
     }
     
     public void setIntakeAngle(double angle) {
-    	 encoderPID.setSetpoint(angle);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		encoderPIDFront.setSetpoint(angle);
+    	} else {
+    		encoderPIDBack.setSetpoint(angle);
+    	}
     }
     
     public void enablePID() {
-    	encoderPID.enable();
-    	encoderPID.reset();
-    	encoderPID.setSetpoint(RobotMap.intakeEncoder.get());
+    	if (intakeSide == IntakeSide.FRONT) {
+    		encoderPIDFront.enable();
+    		encoderPIDFront.reset();
+    		encoderPIDFront.setSetpoint(RobotMap.intakeEncoderFront.get());
+    	} else {
+    		encoderPIDBack.enable();
+    		encoderPIDBack.reset();
+    		encoderPIDBack.setSetpoint(RobotMap.intakeEncoderFront.get());
+    	}
     }
     
     public void stopIntake() {
