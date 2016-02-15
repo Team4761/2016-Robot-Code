@@ -21,7 +21,7 @@ public class HighGoalShooter extends Subsystem {
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
 		hoodPidController = new PIDController(1, 1, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
 		
-		turnTablePidController.setPercentTolerance(0.05);
+		turnTablePidController.setPercentTolerance(1d/360d);
 		turnTablePidController.setContinuous(true);
 		turnTablePidController.disable();
 		
@@ -29,7 +29,7 @@ public class HighGoalShooter extends Subsystem {
 		
 		
 		hoodPidController.setSetpoint(0);
-		hoodPidController.setPercentTolerance(1/360);
+		hoodPidController.setPercentTolerance(0.05);
 		hoodPidController.setContinuous(true);
 	}
 	
