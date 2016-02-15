@@ -21,7 +21,6 @@ public class Limbo extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.spinHoodAssisted();
     	Robot.intake.spinAssisted();
     }
 
