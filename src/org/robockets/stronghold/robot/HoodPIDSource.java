@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class HoodPIDSource implements PIDSource {
-	public final double COUNTS_PER_DEGREE_HOOD = 7.3111;
+	public static final double COUNTS_PER_DEGREE_HOOD = 7.3111;
 	
 	@Override
 	public PIDSourceType getPIDSourceType() {
@@ -13,7 +13,7 @@ public class HoodPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return RobotMap.hoodEncoder.get() * COUNTS_PER_DEGREE_HOOD;
+		return RobotMap.hoodEncoder.get() / COUNTS_PER_DEGREE_HOOD;
 	}
 
 	@Override
