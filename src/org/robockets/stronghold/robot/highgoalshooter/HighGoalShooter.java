@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.HoodPIDSource;
 import org.robockets.stronghold.robot.EncoderPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
@@ -18,13 +19,13 @@ public class HighGoalShooter extends Subsystem {
 	public final PIDController turnTablePidController;
 	public final PIDController hoodPidController;
 	public final PIDController shootingWheelPidController;
-
-	public final EncoderPIDSource turnTableSource;
 	
 	public HighGoalShooter() {
-		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / 7.3111, PIDSourceType.kDisplacement);
+		
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
-		hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor);
+		hoodPidController = new PIDController(0.02, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
