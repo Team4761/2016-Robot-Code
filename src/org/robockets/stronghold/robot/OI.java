@@ -10,7 +10,6 @@ import org.robockets.stronghold.robot.intake.ManualVerticalIntake;
 import org.robockets.stronghold.robot.intake.ManualSpinIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
