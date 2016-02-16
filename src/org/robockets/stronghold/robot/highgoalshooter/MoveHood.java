@@ -61,7 +61,7 @@ public class MoveHood extends Command {
     protected void end() {
     	if (time != null) {
     		Robot.shooter.spinHood(0);
-    		Robot.shooter.hoodPidController.enable();
+    		Robot.shooter.enableHoodPID();
     	}
     }
 

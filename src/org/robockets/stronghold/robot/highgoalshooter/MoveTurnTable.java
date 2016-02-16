@@ -1,65 +1,62 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Move the turntable left or right.
+ * Set the exact position or speed of the turn table part of the high goal shooter subsystem.
  */
 public class MoveTurnTable extends Command {
 
-	Double angle; // Note that this is intentionally not the primitive angle so it can be compared to null.
-	Double speed;
+	Double angle = null;
+	Double time = null;
+	Double speed = null;
 	
 	/**
-	 * Move the hood upwards or downwards continuously.
-	 * @param rate		The speed to move at.
+	 * Set the angle of the turn table part of the highgoal shooter.
+	 * @param angle		The angle to set the hood at.
 	 */
-    public MoveTurnTable(double rate) {
-        requires(Robot.shooter);
-    }
-
-    /**
-	 * Move the hood upwards or downwards continuously. Note you have to enable the PID for this.
-	 * @param angle			The angle to move the hood by. This is added to the current angle.
-	 */
-    public MoveTurnTable(float ang) {
-        requires(Robot.shooter);
-        
-        angle = Robot.shooter.turnTablePidController.getSetpoint() + ang;
+    public MoveTurnTable(double angle) {
+    	requires(Robot.shooter);
+    	this.angle = angle;
     }
     
-    // Called just before this Command runs the first time
+    /**
+     * Set the speed of the turn table part of the highgoal shooter for a specified time.
+     * @param rate		The speed to set the turn table at.
+     * @param time		The time to spin the motor for. Set at 0 for continuos.
+     */
+    public MoveTurnTable(double rate, double time) {
+    	requires(Robot.shooter);
+    	speed = rate;
+    	if (time != 0) { this.time = time; }
+    }
+    
     protected void initialize() {
-    	if (angle != null){
-    		Robot.shooter.turnTablePidController.setSetpoint(angle);
+    	if (angle != null) { Robot.shooter.setTurnTableAngle(angle); }
+    	if (time != null) { setTimeout(time); }
+    	if (speed != null) {
+    		Robot.shooter.disableTurnTablePID();
+    		Robot.shooter.spinTurnTable(speed);
     	}
-    	
-    	setTimeout(5);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (angle == null) Robot.shooter.spinTurnTable(speed);
-    	else {
-    		Robot.shooter.spinTurnTableAssisted();
-    	}
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (angle != null) return Robot.shooter.turnTablePidController.onTarget();
-        return false || isTimedOut();
+        if (angle != null) { return Robot.shooter.turnTablePidController.onTarget(); }
+        if (time != null) { return isTimedOut(); }
+        return false;
+        
     }
-
-    // Called once after isFinished returns true
     protected void end() {
     	Robot.shooter.spinTurnTable(0);
+    	if(speed!=null) { System.out.println("Test"); Robot.shooter.enableTurnTablePID(); }
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.spinTurnTable(0);
+    	end();
     }
 }

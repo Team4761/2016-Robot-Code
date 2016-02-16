@@ -6,7 +6,6 @@ import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
-import org.robockets.stronghold.robot.drivetrain.Joyride;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,7 +28,6 @@ public class Robot extends IterativeRobot {
 	public static final HighGoalShooter shooter = new HighGoalShooter();
 	
 	Command teleop;
-    Command joyride;
 	Command autonomousCommand = new Autonomous();
 
     /**
@@ -39,7 +37,6 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
       oi = new OI();
       teleop = new Teleop();
-      joyride = new Joyride();
       CameraServer server = CameraServer.getInstance();
       server.startAutomaticCapture("cam0");
     }
@@ -85,7 +82,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        joyride.start();
         //(new UpdateDashboard()).start();
         teleop.start();
     }

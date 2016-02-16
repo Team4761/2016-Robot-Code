@@ -25,6 +25,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(0, XboxOne.Y.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0), true));
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(), true));
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
 		
 		SmartDashboard.putData("Set Hood", new MoveHood(0));
 		SmartDashboard.putData("Zero Hood", new ZeroHood());

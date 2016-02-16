@@ -1,28 +1,26 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ZeroHood extends Command {
+public class Reset extends Command {
 
-    public ZeroHood() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	Encoder encoder;
+	
+    public Reset(Encoder encoder) {
+        this.encoder = encoder;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.hoodEncoder.reset();
-    	Robot.shooter.hoodPidController.setSetpoint(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	encoder.reset();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -37,14 +37,12 @@ public class AimShooter extends Command {
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
-    	
-    	Robot.shooter.spinTurnTableAssisted();
     }
 
     protected boolean isFinished() {
     	return Robot.shooter.hoodPidController.onTarget()
-    			&& Robot.shooter.hoodPidController.onTarget()
     			&& Robot.shooter.shootingWheelOnTarget(shaftRPM)
+    			&& Robot.shooter.turnTablePidController.onTarget()
     			|| isTimedOut();
     }
 
