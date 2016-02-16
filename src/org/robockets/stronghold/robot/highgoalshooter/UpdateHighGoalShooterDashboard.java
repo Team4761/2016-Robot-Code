@@ -1,5 +1,10 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.EncoderPIDSource;
+import org.robockets.stronghold.robot.Robot;
+import org.robockets.stronghold.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,7 +20,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void execute() {
-    	SmartDashboard.putData("Move Hood", new MoveHood(10));
+    	SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
     }
 
     protected boolean isFinished() {
