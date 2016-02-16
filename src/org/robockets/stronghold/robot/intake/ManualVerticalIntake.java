@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ManualVerticalIntake extends Command {
 	
 	public Direction direction; //Object for the Direction enum
+	public IntakeSide intakeSide;
 	
 	int time; //Used to set timeout
 	
@@ -25,27 +26,46 @@ public class ManualVerticalIntake extends Command {
 	 * @param direction  Used to initalize Direction enum
 	 * @param time  Takes input for time
 	 * */
-    public ManualVerticalIntake(Direction direction, int time) {
-    	requires(Robot.intake);
+    public ManualVerticalIntake(Direction direction, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
+    	this.intakeSide = intakeSide;
     	this.direction = direction;
     	this.time = time;
     }
     
-    public ManualVerticalIntake(double speed, int time) {
-    	requires(Robot.intake);
+    public ManualVerticalIntake(double speed, int time, IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    	} else {
+    		requires(Robot.intakeBack);
+    	}
+    	this.intakeSide = intakeSide;
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
     	this.time = time;
     }
     
-    public ManualVerticalIntake() {
-    	requires(Robot.intake);
+    public ManualVerticalIntake(IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		requires(Robot.intakeFront);
+    		SmartDashboard.putNumber("Intake P", Robot.intakeFront.encoderPID.getP());
+        	SmartDashboard.putNumber("Intake I", Robot.intakeFront.encoderPID.getI());
+        	SmartDashboard.putNumber("Intake D", Robot.intakeFront.encoderPID.getD());
+    	} else {
+    		requires(Robot.intakeBack);
+    		SmartDashboard.putNumber("Intake P", Robot.intakeBack.encoderPID.getP());
+        	SmartDashboard.putNumber("Intake I", Robot.intakeBack.encoderPID.getI());
+        	SmartDashboard.putNumber("Intake D", Robot.intakeBack.encoderPID.getD());
+    	}
+    	this.intakeSide = intakeSide;
     	this.speed = 0.5;
     	this.direction = Direction.MANUAL;
     	this.time = 0;
-    	SmartDashboard.putNumber("Intake P", Robot.intake.encoderPID.getP());
-    	SmartDashboard.putNumber("Intake I", Robot.intake.encoderPID.getI());
-    	SmartDashboard.putNumber("Intake D", Robot.intake.encoderPID.getD());
+    	
     	SmartDashboard.putNumber("Intake Start", 0);
     }
 
@@ -59,24 +79,44 @@ public class ManualVerticalIntake extends Command {
     	//Robot.intake.encoderPID.setPID(SmartDashboard.getNumber("Intake P"), SmartDashboard.getNumber("Intake I"), SmartDashboard.getNumber("Intake D"));
     	
     	if (SmartDashboard.getNumber("Intake Start") == 1) {
-    		Robot.intake.encoderPID.enable();
+    		if (intakeSide == IntakeSide.FRONT) {
+    			Robot.intakeFront.encoderPID.enable();
+    		} else {
+    			Robot.intakeBack.encoderPID.enable();
+    		}
     		encoderPID = true;
     	} else {
     		if (encoderPID) {
     			encoderPID = false;
-    			Robot.intake.encoderPID.disable();
+    			if (intakeSide == IntakeSide.FRONT) {
+    				Robot.intakeFront.encoderPID.disable();
+    			} else {
+    				Robot.intakeBack.encoderPID.disable();
+    			}
     		}
     		
     	}
     	
-    	if (direction == Direction.UP) {
-    		Robot.intake.moveUp();
-    	} else if (direction == Direction.DOWN){
-    		Robot.intake.moveDown();
-    	} else if (direction == Direction.MANUAL){
-    		Robot.intake.move(speed);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		if (direction == Direction.UP) {
+    			Robot.intakeFront.moveUp();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeFront.moveDown();
+    		} else if (direction == Direction.MANUAL){
+    			Robot.intakeFront.move(speed);
+    		} else {
+    			Robot.intakeFront.stopVertical();
+    		}
     	} else {
-    		Robot.intake.stopVertical();
+    		if (direction == Direction.UP) {
+    			Robot.intakeBack.moveUp();
+    		} else if (direction == Direction.DOWN){
+    			Robot.intakeBack.moveDown();
+    		} else if (direction == Direction.MANUAL){
+    			Robot.intakeBack.move(speed);
+    		} else {
+    			Robot.intakeBack.stopVertical();
+    		}
     	}
     }
 
@@ -91,7 +131,11 @@ public class ManualVerticalIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stopVertical();
+    	if (intakeSide == IntakeSide.FRONT) {
+    		Robot.intakeFront.stopVertical();
+    	} else {
+    		Robot.intakeBack.stopVertical();
+    	}
     }
 
     // Called when another command which requires one or more of the same

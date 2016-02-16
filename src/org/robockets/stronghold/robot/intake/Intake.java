@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot.intake;
 
-import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -14,9 +13,14 @@ public class Intake extends Subsystem {
 	
 
 	public final PIDController encoderPID;
+	IntakeSide intakeSide;
 	
-	public Intake() {
-		encoderPID  = new PIDController(0.0, 0.0, 0, RobotMap.intakeEncoder, new DummyPIDOutput());
+	public Intake(IntakeSide intakeSide) {
+		if (intakeSide == IntakeSide.FRONT) {
+			encoderPID  = new PIDController(0.0, 0.0, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+		} else {
+			encoderPID = new PIDController(0.0, 0.0, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
+		}
 		
 		encoderPID.disable();
 		encoderPID.setSetpoint(0);
@@ -28,39 +32,68 @@ public class Intake extends Subsystem {
     	
     }
     
-	public void spin(double speed) {
-		RobotMap.intakeVerticalMotor.set(speed);
+	public void move(double speed) {
+		encoderPID.disable();
+		if (intakeSide == IntakeSide.FRONT) {
+			RobotMap.intakeVerticalMotorFront.set(speed);
+		} else {
+			RobotMap.intakeVerticalMotorBack.set(speed);
+		}
+		encoderPID.setSetpoint(encoderPID.get());
+	}
+	
+	public void move(int setpoint) {
+		encoderPID.setSetpoint((double) setpoint); //TEMP
 	}
 	 
-    public void spinRoller(double speed) {
-    	RobotMap.intakeRollerMotor.set(speed);
+    public void spinRoller(double speed, int time) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeRollerMotorFront.set(speed);
+    	} else {
+    		RobotMap.intakeRollerMotorBack.set(speed);
+    	}
     }
     
     public void spinRollersIn() {
-    	RobotMap.intakeRollerMotor.set(0.5);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeRollerMotorFront.set(0.5);
+    	} else {
+    		RobotMap.intakeRollerMotorBack.set(0.5);
+    	}
     }
     
     public void spinRollersOut() {
-    	RobotMap.intakeRollerMotor.set(-0.5);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeRollerMotorFront.set(-0.5);
+    	} else {
+    		RobotMap.intakeRollerMotorBack.set(-0.5);
+    	}
     }
     
-    
     public void moveUp() {
-    	RobotMap.intakeVerticalMotor.set(0.5);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeVerticalMotorFront.set(0.5);
+    	} else {
+    		RobotMap.intakeVerticalMotorBack.set(0.5);
+    	}
     }
     
     public void moveDown() {
-    	RobotMap.intakeVerticalMotor.set(-0.5);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeVerticalMotorFront.set(-0.5);
+    	} else {
+    		RobotMap.intakeVerticalMotorBack.set(-0.5);
+    	}
     }
     
-    public void move(double speed) {
-    	RobotMap.intakeVerticalMotor.set(speed);
-    }
     
     public void moveAssisted() {
     	encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
-    	
-    	RobotMap.intakeMotor.set(encoderPID.get());
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeVerticalMotorFront.set(encoderPID.get());
+    	} else {
+    		RobotMap.intakeVerticalMotorBack.set(encoderPID.get());
+    	}
     }
     
     public void setIntakeAngle(double angle) {
@@ -70,15 +103,27 @@ public class Intake extends Subsystem {
     public void enablePID() {
     	encoderPID.enable();
     	encoderPID.reset();
-    	encoderPID.setSetpoint(RobotMap.intakeEncoder.get());
+    	if (intakeSide == IntakeSide.FRONT) {
+    		encoderPID.setSetpoint(RobotMap.intakeEncoderFront.get());
+    	} else {
+    		encoderPID.setSetpoint(RobotMap.intakeEncoderBack.get());
+    	}
     }
     
     public void stopIntake() {
-    	RobotMap.intakeMotor.set(0);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeRollerMotorFront.set(0);
+    	} else {
+    		RobotMap.intakeRollerMotorBack.set(0);
+    	}
     }
     
     public void stopVertical() {
-    	RobotMap.intakeVerticalMotor.set(0);
+    	if (intakeSide == IntakeSide.FRONT) {
+    		RobotMap.intakeVerticalMotorFront.set(0);
+    	} else {
+    		RobotMap.intakeVerticalMotorBack.set(0);
+    	}
     }
 }
 
