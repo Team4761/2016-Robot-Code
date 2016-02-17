@@ -32,8 +32,6 @@ public class FieldConfiguration {
 
 	public static String robotPosition;
 
-	public static String returnDefense;
-
 	public static String shotHeight;
 
 	public static String shotPosition;
@@ -92,51 +90,43 @@ public class FieldConfiguration {
 
 			break;
 
-		case 6:
-
-			returnDefense = translate(theString);
-
-			break;
-
-		case 7 :
+		case 6 :
 
 			shotHeight = translate(theString);
 
 			break;
 
-		case 8: 
+		case 7: 
 
 			shotPosition = translate(theString);
 
 			break;
 
-		case 9:
+		case 8:
 
 			returnDefense1 = translate(theString);
 
 			break;
 
-		case 10:
+		case 9:
 
 			returnDefense2 = translate(theString);
 
 			break;
 
-		case 11:
+		case 10:
 
 			returnDefense3 = translate(theString);
 
 			break;
 
-		case 12:
+		case 11:
 
 			returnDefense4= translate(theString);
 
 			break;
 
-		
-
-		case 13:
+		case 12:
 
 			returnDefense5 = translate(theString);
 
