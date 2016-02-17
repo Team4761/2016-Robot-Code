@@ -29,8 +29,8 @@ public class RobotMap {
 	public static Victor turnTableMotor = new Victor(9); // TEMP
 	public static Encoder turnTableEncoder = new Encoder(3, 4);
 	public static Victor hoodMotor = new Victor(8); // TEMP
-	public static Encoder hoodEncoder = new Encoder(0, 1);
-	public static Encoder driveEncoder = new Encoder(9, 10);
+	public static Encoder hoodEncoder = new Encoder(7, 8);
+	public static Encoder driveEncoder = new Encoder(0, 1);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 
 	
@@ -39,5 +39,6 @@ public class RobotMap {
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);
 		shootingWheelMotor.changeControlMode(TalonControlMode.PercentVbus);		
+		driveEncoder.setReverseDirection(true);
 	}
 }
