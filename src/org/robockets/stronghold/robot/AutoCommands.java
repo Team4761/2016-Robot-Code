@@ -15,7 +15,7 @@ class AutoCommands
 		defenses[4] = parseDefense(FieldConfiguration.defense5);
 		robotPosition = parsePosition(FieldConfiguration.robotPosition);
 		forwardDefense = defenses[robotPosition];
-		returnDefense = parseDefense(FieldConfiguration.returnDefense);
+		returnDefense = parseDefense(getReturnDefenseString());
 	}
 	public void run()
 	{
@@ -48,6 +48,8 @@ class AutoCommands
 				return Defense.ROCK_WALL;
 			case "Rough Terrian" :
 				return Defense.ROUGH_TERRAIN;
+			case "Low Bar" :
+				return Defense.LOW_BAR;
 			case default :
 				return null;
 		}
@@ -55,6 +57,21 @@ class AutoCommands
 	public int parsePosition(String s)
 	{
 		return ((int)s.charAt(s.length()-1))-0x30;	// because it really doesn't need a switch statement...
+	}
+	public String getReturnDefenseString()
+	{
+		String ret;
+		if ((ret=FieldConfiguration.returnDefense1)!=null)
+			return ret;
+		if ((ret=FieldConfiguration.returnDefense2)!=null)
+			return ret;
+		if ((ret=FieldConfiguration.returnDefense3)!=null)
+			return ret;
+		if ((ret=FieldConfiguration.returnDefense4)!=null)
+			return ret;
+		if ((ret=FieldConfiguration.returnDefense5)!=null)
+			return ret;
+		return "Low Bar";	// This should not be the default...
 	}
 	
 }
