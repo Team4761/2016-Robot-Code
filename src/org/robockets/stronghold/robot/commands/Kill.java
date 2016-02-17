@@ -11,7 +11,7 @@ public class Kill extends Command {
 
     public Kill() {
         requires(Robot.driveTrain);
-        requires(Robot.intake);
+        requires(Robot.intakeFront);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +21,8 @@ public class Kill extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveTrain.stop();
-    	Robot.intake.stopIntake();
-    	Robot.intake.stopVertical();
+    	Robot.intakeFront.stopIntake();
+    	Robot.intakeFront.stopVertical();
     }
 
     // Make this return true when this Command no longer needs to run execute()

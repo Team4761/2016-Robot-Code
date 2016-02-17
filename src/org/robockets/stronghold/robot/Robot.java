@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
 	
 	Command teleop;
     Command joyride;
+    Command verticalIntake;
 	Command autonomousCommand = new Autonomous();
 
     /**
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
       oi = new OI();
       teleop = new Teleop();
       joyride = new Joyride();
+      verticalIntake = new ManualVerticalIntake(IntakeSide.FRONT);
       CameraServer server = CameraServer.getInstance();
       server.startAutomaticCapture("cam0");
     }
@@ -89,6 +91,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         joyride.start();
+        verticalIntake.start();
         //(new UpdateDashboard()).start();
         teleop.start();
     }

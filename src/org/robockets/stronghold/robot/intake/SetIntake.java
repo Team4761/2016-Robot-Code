@@ -16,21 +16,21 @@ public class SetIntake extends Command {
 	 * @param angle		The angle at which the intake will move to.
 	 */
     public SetIntake(double angle) {
-    	requires(Robot.intake);
+    	requires(Robot.intakeFront);
     	this.angle = angle;
     }
 
     protected void initialize() {
-    	Robot.intake.setIntakeAngle(angle);
+    	Robot.intakeFront.setIntakeAngle(angle);
     	setTimeout(10);
     }
 
     protected void execute() {
-    	Robot.intake.moveAssisted();
+    	Robot.intakeFront.moveAssisted();
     }
 
     protected boolean isFinished() {
-        return Robot.intake.encoderPID.onTarget() || isTimedOut();
+        return Robot.intakeFront.encoderPID.onTarget() || isTimedOut();
     }
 
     protected void end() {

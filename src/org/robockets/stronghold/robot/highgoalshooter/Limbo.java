@@ -11,23 +11,23 @@ public class Limbo extends Command {
 
     public Limbo() {
     	requires(Robot.shooter);
-    	requires(Robot.intake);
+    	requires(Robot.intakeFront);
     }
 
     protected void initialize() {
     	setTimeout(5);
     	Robot.shooter.setHoodAngle(-90);
-    	Robot.intake.setIntakeAngle(0);
+    	Robot.intakeFront.setIntakeAngle(0);
     }
 
     protected void execute() {
     	Robot.shooter.spinHoodAssisted();
-    	Robot.intake.moveAssisted();
+    	Robot.intakeFront.moveAssisted();
     }
 
     protected boolean isFinished() {
         return Robot.shooter.hoodPidController.onTarget() 
-        		&& Robot.intake.encoderPID.onTarget()
+        		&& Robot.intakeFront.encoderPID.onTarget()
         		|| isTimedOut();
     }
 

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
@@ -19,11 +20,12 @@ public class RobotMap {
 	private static SerialPort navXSerialPort = new SerialPort(57600, SerialPort.Port.kMXP);
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
-	public static RobotDrive robotDrive = new RobotDrive(0, 1);
+	//public static RobotDrive robotDrive = new RobotDrive(0, 1);
+	public static RobotDrive robotDrive = new RobotDrive(18, 19);
 	public static Encoder intakeEncoderFront = new Encoder(3, 4);
 	public static Encoder intakeEncoderBack = new Encoder(11, 12);
 	public static Victor intakeRollerMotorFront = new Victor(6);
-	public static Victor intakeRollerMotorBack = new Victor(8);
+	public static Victor intakeRollerMotorBack = new Victor(3);
 	public static Victor intakeVerticalMotorFront = new Victor(2); //TEMP
 	public static Victor intakeVerticalMotorBack = new Victor(9); //TEMP
 	public static Victor jeffRoller1 = new Victor(4); // TEMP
@@ -37,6 +39,7 @@ public class RobotMap {
 
 	
 	public RobotMap () {
+		//SmartDashboard.putData("Enable Intake PID", );
 		navX.zeroYaw();
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);

@@ -23,20 +23,20 @@ public class ManualSpinIntake extends Command {
 	 * @param time  Takes input for time
 	 * */
     public ManualSpinIntake(Direction directionEnum, int time) {
-    	requires(Robot.intake);
+    	requires(Robot.intakeFront);
     	this.direction = directionEnum;
     	this.time = time;
     }
     
     public ManualSpinIntake(double speed, int time) {
-    	requires(Robot.intake);
+    	requires(Robot.intakeFront);
     	this.speed = speed;
     	this.direction = Direction.MANUAL;
     	this.time = time;
     }
     
     public ManualSpinIntake() {
-    	requires(Robot.intake);
+    	requires(Robot.intakeFront);
     	this.speed = 0.5;
     	this.direction = Direction.MANUAL;
     	this.time = 0;
@@ -50,13 +50,13 @@ public class ManualSpinIntake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (direction == Direction.FORWARD) {
-    		Robot.intake.spinRollersIn();
+    		Robot.intakeFront.spinRollersIn();
     	} else if (direction == Direction.BACKWARD){
-    		Robot.intake.spinRollersOut();
+    		Robot.intakeFront.spinRollersOut();
     	} else if (direction == Direction.MANUAL) {
-    		Robot.intake.spin(speed);
+    		Robot.intakeFront.spinRoller(speed, 0);
     	} else {
-    		Robot.intake.stopIntake();
+    		Robot.intakeFront.stopIntake();
     	}
     }
 
@@ -71,7 +71,7 @@ public class ManualSpinIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stopIntake();
+    	Robot.intakeFront.stopIntake();
     }
 
     // Called when another command which requires one or more of the same
