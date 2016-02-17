@@ -230,6 +230,12 @@ public class FieldConfiguration {
 
 		}
 
+		else if (theString == "lb"){
+
+			theNewString = "Low Bar";
+
+		}
+
 		else if (theString == "hi"){
 
 			theNewString = "High Shot";
