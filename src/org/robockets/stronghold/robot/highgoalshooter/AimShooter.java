@@ -41,7 +41,7 @@ public class AimShooter extends Command {
 
     protected boolean isFinished() {
     	return Robot.shooter.hoodPidController.onTarget()
-    			&& Robot.shooter.shootingWheelOnTarget(shaftRPM)
+    			&& Robot.shooter.shootingWheelOnTarget()
     			&& Robot.shooter.turnTablePidController.onTarget()
     			|| isTimedOut();
     }

@@ -51,7 +51,7 @@ public class MoveHood extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (angle != null) return true;
+        if (angle != null) return Robot.shooter.hoodOnTarget();
         if (time != 0) return isTimedOut();
         return false;
     }
