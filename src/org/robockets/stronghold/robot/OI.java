@@ -5,6 +5,7 @@ import org.robockets.buttonmanager.buttons.ActionButton;
 import org.robockets.buttonmanager.joysticks.XboxOne;
 import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.intake.ManualVerticalIntake;
+import org.robockets.stronghold.robot.intake.TurnRelative;
 import org.robockets.stronghold.robot.intake.ManualSpinIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,6 +25,9 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(1, XboxOne.A.getButtonNumber(), new TurnRelative(90), false));
+		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new TurnRelative(180), false));
+		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new TurnRelative(270), false));
 	}
 }
 
