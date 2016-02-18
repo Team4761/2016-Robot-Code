@@ -36,6 +36,7 @@ public class Joyride extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveTrain.gyroPID.setPID(SmartDashboard.getNumber("Gyro P"),SmartDashboard.getNumber("Gyro I"),SmartDashboard.getNumber("Gyro D"));
+    	Robot.driveTrain.gyroPID.setSetpoint(SmartDashboard.getNumber("Gyro Setpoint"));
     	if(SmartDashboard.getBoolean("Reset Gyro")){
     		SmartDashboard.putBoolean("Reset Gyro", false);
     		RobotMap.navX.zeroYaw();
@@ -48,7 +49,12 @@ public class Joyride extends Command {
     	if (SmartDashboard.getBoolean("Start GyroPID")) {
     		Robot.driveTrain.gyroPID.enable();
     		Robot.driveTrain.driveAssisted(false);
+    		gyroPIDDisable = true;
     	} else {
+    		if (gyroPIDDisable) {
+    			Robot.driveTrain.gyroPID.disable();
+    			gyroPIDDisable = false;
+    		}
     		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     	}
     	
