@@ -52,18 +52,6 @@ public class ManualSpinIntake extends Command {
 		this.time = time;
 	}
 
-	public ManualSpinIntake(IntakeSide intakeSide) {
-		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
-		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
-		}
-		this.speed = 0.5;
-		this.direction = Direction.MANUAL;
-		this.time = 0;
-	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {

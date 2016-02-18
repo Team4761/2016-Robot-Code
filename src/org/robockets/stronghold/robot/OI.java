@@ -32,7 +32,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new IntakesUp(), false));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.Y.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(0.5, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0, IntakeSide.FRONT), true));
 	}
 }
