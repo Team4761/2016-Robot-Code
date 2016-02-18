@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID;
 	public final PIDController gyroPID;
+	public final PIDController encoderPID;
 	
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
+		encoderPID = new PIDController(0.1, 0, 0, RobotMap.driveEncoder, new DummyPIDOutput());
 		
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -26,6 +28,10 @@ public class Drivetrain extends Subsystem {
 		gyroPID.disable();
 		gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
+		
+		encoderPID.disable();
+		encoderPID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		encoderPID.setPercentTolerance(5.0); // Set tolerance of 5%
 	}
 	
     public void initDefaultCommand() {
@@ -40,15 +46,25 @@ public class Drivetrain extends Subsystem {
     	RobotMap.robotDrive.arcadeDrive(moveValue, rotateValue);
     }
     
-    /*
-     * Drive with PID. First must enable the correct PID
+    /**
+     * Move the robot with rotation pid
+     * @param moveValue the amount to constantly move the robot by
+     * @param compassAssist whether the robot should use compass pid or gyro pid
      */
-    public void driveAssisted(double moveValue, double angle, boolean compassAssist) {
+    public void driveAssisted(double moveValue, boolean compassAssist) {
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue, compassPID.get());
     	} else {
-    		driveArcade(0, -gyroPID.get());
+    		driveArcade(moveValue, -gyroPID.get());
     	}
+    }
+    
+    /**
+     * Move the robot with both rotation and encoder pid
+     * @param compassAssist whether the robot should use compass pid or gyro pid
+     */
+    public void driveAssisted(boolean compassAssist) {
+    	driveAssisted(encoderPID.get(), compassAssist);
     }
     
     public void setAngle(double angle, boolean compassAssist) {
@@ -57,6 +73,10 @@ public class Drivetrain extends Subsystem {
     	} else {
     		gyroPID.setSetpoint(angle);
     	}
+    }
+    
+    public void setDistance(double distance) {
+    	encoderPID.setSetpoint(distance);
     }
     
     public void stop() {
@@ -77,6 +97,12 @@ public class Drivetrain extends Subsystem {
     	gyroPID.enable();
     	gyroPID.reset();
     	gyroPID.setSetpoint(RobotMap.navX.getYaw());
+    }
+    
+    public void enableEncoderPID() {
+    	encoderPID.enable();
+    	encoderPID.reset();
+    	encoderPID.setSetpoint(RobotMap.driveEncoder.get());
     }
 }
 

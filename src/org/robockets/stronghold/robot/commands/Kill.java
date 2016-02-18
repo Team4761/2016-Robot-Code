@@ -1,6 +1,5 @@
-package org.robockets.stronghold.robot.drivetrain;
+package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.OI;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,13 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Joyride extends Command {
-	double stick;
-	double leftTrigger;
-	double rightTrigger;
-	
-    public Joyride() {
+public class Kill extends Command {
+
+    public Kill() {
         requires(Robot.driveTrain);
+        requires(Robot.intakeFront);
+        requires(Robot.intakeBack);
     }
 
     // Called just before this Command runs the first time
@@ -23,22 +21,25 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
+    	Robot.driveTrain.stop();
+    	Robot.intakeFront.stopIntake();
+    	Robot.intakeFront.stopVertical();
+    	Robot.intakeBack.stopIntake();
+    	Robot.intakeBack.stopVertical();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+        end();
     }
 }

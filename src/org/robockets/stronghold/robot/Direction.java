@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.intake;
+package org.robockets.stronghold.robot;
 
 public enum Direction {
 	FORWARD,
@@ -8,5 +8,6 @@ public enum Direction {
 	UP,
 	DOWN,
 	MANUAL,
+	AUTO,
 	STOP;
 }

@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.intake;
 
+import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;

@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.RobotMap;
+import org.robockets.stronghold.robot.TalonPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,23 +11,32 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
  */
 public class HighGoalShooter extends Subsystem {
+	public final double COUNTS_PER_DEGREE_HOOD = 7.3111;
+	public final double ERROR = 5;
+	
 	public final PIDController turnTablePidController;
 	public final PIDController hoodPidController;
+	public final PIDController shootingWheelPidController;
 	
 	public HighGoalShooter() {
 		turnTablePidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
-		hoodPidController = new PIDController(1, 1, 0, RobotMap.turnTableEncoder, new DummyPIDOutput());
+		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
+		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
 		hoodPidController.disable();
+		shootingWheelPidController.disable();
 		
 		turnTablePidController.setSetpoint(0);
-		turnTablePidController.setPercentTolerance(0.05);
 		turnTablePidController.setContinuous(true);
 		
 		hoodPidController.setSetpoint(0);
-		hoodPidController.setPercentTolerance(0.05);
 		hoodPidController.setContinuous(true);
+		
+		shootingWheelPidController.setSetpoint(0);
+		shootingWheelPidController.setContinuous(true);
+		
+    	shootingWheelPidController.enable();
 	}
 	
     public void initDefaultCommand() {
@@ -41,20 +51,12 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.jeffRoller2.set(speed);
     }
     
-    /**
-     * Roll the shooting wheel to fire the cannonball at a desired speed.
-     * @param speed 	The speed to set the shooting mechanism at.
-     */
-    public void spinShootingWheel(double speed) {
-    	RobotMap.shootingWheelMotor.set(speed);
-    }
-    
     public void spinTurnTable(double speed) {
     	RobotMap.turnTableMotor.set(speed);
     }
     
     public void spinTurnTableAssisted() {
-    	RobotMap.turnTableMotor.set(hoodPidController.get());
+    	RobotMap.turnTableMotor.set(turnTablePidController.get());
     }
     
     public void setTurnTableAngle(double angle) {
@@ -70,7 +72,27 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setHoodAngle(double angle) {
-    	hoodPidController.setSetpoint(angle);
+    	hoodPidController.setSetpoint(angle * COUNTS_PER_DEGREE_HOOD);
+    }
+    
+    public boolean hoodAngleOnTarget() {
+    	return hoodPidController.getSetpoint() - ERROR < RobotMap.hoodEncoder.get() && hoodPidController.getSetpoint() + ERROR > RobotMap.hoodEncoder.get();
+    }
+
+    /**
+     * Roll the shooting wheel to fire the boulder at a desired speed.
+     * @param speed 	The rpm to set the shooting mechanism at.
+     */
+    public void setShootingWheelSpeed(double speed) {
+    	shootingWheelPidController.setSetpoint(speed);
+    }
+    
+    public void setShootingWheelVoltage(double voltage) {
+    	RobotMap.shootingWheelMotor.set(voltage);
+    }
+    
+    public boolean shootingWheelOnTarget(double target) {
+    	return Math.abs(Math.abs(target) - Math.abs(RobotMap.shootingWheelMotor.getEncVelocity() / 1024.0 * 60.0)) < 50; //TODO: Test error
     }
     
     public void enableTurnTablePID() {
@@ -83,6 +105,10 @@ public class HighGoalShooter extends Subsystem {
     	hoodPidController.enable();
     	hoodPidController.reset();
     	hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
+    }
+    
+    public void enableShootingWheelPID() {
+    	RobotMap.shootingWheelMotor.enableControl();
     }
 }
 

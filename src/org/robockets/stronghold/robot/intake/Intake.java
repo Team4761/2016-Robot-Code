@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot.intake;
 
-import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -22,17 +21,12 @@ public class Intake extends Subsystem {
 		if (intakeSide == IntakeSide.FRONT) {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
 			intakeMotor = RobotMap.intakeMotorFront;
-			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderFront, new DummyPIDOutput());
+			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		} else {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorBack;
 			intakeMotor = RobotMap.intakeMotorBack;
-			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderBack, new DummyPIDOutput());
+			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
 		}
-
-		encoderPID.disable();
-		encoderPID.setSetpoint(0);
-		encoderPID.setPercentTolerance(0.05);
-		encoderPID.setContinuous(true);
 
 		encoderPID.disable();
 		encoderPID.setSetpoint(0);
@@ -68,9 +62,13 @@ public class Intake extends Subsystem {
 		intakeVerticalMotor.set(speed);
 	}
 
-	public void spinAssisted() {
+	public void move(double setpoint) {
+		encoderPID.setSetpoint(setpoint);
+	}
+	
+	public void moveAssisted() {
 		encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D")); // Still broken
-		intakeMotor.set(encoderPID.get());
+		intakeVerticalMotor.set(encoderPID.get());
 	}
 
 	public void setIntakeAngle(double angle) {

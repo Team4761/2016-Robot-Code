@@ -1,10 +1,15 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.buttonmanager.ButtonManager;
+import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
+import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.drivetrain.Joyride;
+
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -23,20 +28,23 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain driveTrain = new Drivetrain();
 	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
 	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
+	public static final HighGoalShooter shooter = new HighGoalShooter();
+
 	
 	Command teleop;
-	Command autonomousCommand;
     Command joyride;
+	Command autonomousCommand = new Autonomous();
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-		teleop = new Teleop();
-		joyride = new Joyride();
-
+      oi = new OI();
+      teleop = new Teleop();
+      joyride = new Joyride();
+      CameraServer server = CameraServer.getInstance();
+      server.startAutomaticCapture("cam0");
     }
 	
 	/**
@@ -74,12 +82,15 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	ButtonManager.start();
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         joyride.start();
+        //(new UpdateDashboard()).start();
+        teleop.start();
     }
 
     /**
