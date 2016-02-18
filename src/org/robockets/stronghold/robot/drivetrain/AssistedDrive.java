@@ -28,6 +28,9 @@ public class AssistedDrive extends Command {
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		Robot.driveTrain.enableGyroPID();
     		Robot.driveTrain.setAngle(relativeAngle, false);
+    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
+    		Robot.driveTrain.enableEncodersPID();
+    		Robot.driveTrain.setDistanceInInches(distance);
     	}
     }
     

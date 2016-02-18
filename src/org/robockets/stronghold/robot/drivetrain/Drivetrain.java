@@ -115,7 +115,7 @@ public class Drivetrain extends Subsystem {
     public void enableEncodersPID() {
     	encodersPID.enable();
     	encodersPID.reset();
-    	encodersPID.setSetpoint(0);
+    	encodersPID.setSetpoint(getEncodersOffset());
     }
     
     public void setDistanceInInches(double distance) {
