@@ -16,9 +16,11 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public static Joystick joystick = new Joystick(0);
+	public static Joystick tempJoystick = new Joystick(1);
 	
 	public OI () {
 		ButtonManager.addJoystick(joystick);
+		ButtonManager.addJoystick(tempJoystick);
 		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
