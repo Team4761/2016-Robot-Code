@@ -19,7 +19,7 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		encoderPID = new PIDController(0.1, 0, 0, RobotMap.driveEncoder, new DummyPIDOutput());
+		encoderPID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
 		
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -103,6 +103,10 @@ public class Drivetrain extends Subsystem {
     	encoderPID.enable();
     	encoderPID.reset();
     	encoderPID.setSetpoint(RobotMap.driveEncoder.get());
+    }
+    
+    public void setDistanceInInches(double distance) {
+    	encoderPID.setSetpoint(distance * 14);
     }
 }
 

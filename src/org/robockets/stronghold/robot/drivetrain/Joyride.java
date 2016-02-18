@@ -2,8 +2,10 @@ package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.OI;
 import org.robockets.stronghold.robot.Robot;
+import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,7 +14,7 @@ public class Joyride extends Command {
 	double stick;
 	double leftTrigger;
 	double rightTrigger;
-	
+
     public Joyride() {
         requires(Robot.driveTrain);
     }
@@ -23,7 +25,7 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
+    	Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     }
 
     // Make this return true when this Command no longer needs to run execute()
