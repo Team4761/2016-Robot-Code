@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
@@ -24,8 +25,6 @@ public class RobotMap {
 	public static Victor intakeRollerMotor = new Victor(2);
 	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
 	public static Victor intakeMotor = intakeVerticalMotor; // ???
-	public static Victor jeffRoller1 = new Victor(4); // TEMP
-	public static Victor jeffRoller2 = new Victor(5); // TEMP
 	public static Victor turnTableMotor = new Victor(9); // TEMP
 	//public static Encoder turnTableEncoder = new Encoder(3, 4);
 	public static Encoder turnTableEncoder = new Encoder(4, 9);
@@ -35,6 +34,7 @@ public class RobotMap {
 	public static Encoder driveEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
+	public static Servo shootingFlipper = new Servo(4);
 
 	
 	public RobotMap () {

@@ -26,7 +26,7 @@ public class HighGoalShooter extends Subsystem {
 		
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
 		//hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor); Used to be correct but for some reason it changed
-		hoodPidController = new PIDController(0.02, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
+		hoodPidController = new PIDController(0.075, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
@@ -52,13 +52,8 @@ public class HighGoalShooter extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    /**
-     * Roll the Jeff rollers (the motors that guide the ball into the firing mechanism) at a desired speed.
-     * @param speed 	The speed to set both Jeff rollers at.
-     */
-    public void spinJeffRollers(double speed) {
-    	RobotMap.jeffRoller1.set(speed);
-    	RobotMap.jeffRoller2.set(speed);
+    public void setShooterFlipper(double angle) {
+    	RobotMap.shootingFlipper.setAngle(angle);
     }
     
     public void spinTurnTable(double speed) {
