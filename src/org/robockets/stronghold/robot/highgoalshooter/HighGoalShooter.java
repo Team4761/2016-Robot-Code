@@ -82,7 +82,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public boolean hoodOnTarget() {
-    	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(RobotMap.hoodEncoder.get())) < HOOD_ERROR;
+    	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(getHoodAngle())) < HOOD_ERROR;
     }
 
     /**
