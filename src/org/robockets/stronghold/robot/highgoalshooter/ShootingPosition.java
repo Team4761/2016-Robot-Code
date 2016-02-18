@@ -21,7 +21,7 @@ public class ShootingPosition extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.shooter.hoodPidController.onTarget();
+        return Robot.shooter.hoodAngleOnTarget();
     }
 
     protected void end() {
