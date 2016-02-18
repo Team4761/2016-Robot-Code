@@ -104,5 +104,9 @@ public class Drivetrain extends Subsystem {
     	encoderPID.reset();
     	encoderPID.setSetpoint(RobotMap.driveEncoder.get());
     }
+    
+    public void setDistanceInInches(double distance) {
+    	encoderPID.setSetpoint(distance * 14);
+    }
 }
 
