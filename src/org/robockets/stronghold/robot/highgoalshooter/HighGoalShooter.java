@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
  */
 public class HighGoalShooter extends Subsystem {
-	public final double ERROR = 5;
+	public final double HOOD_ERROR = 2;
+	public final double WHEEL_ERROR = 50;
 	public final double COUNTS_PER_DEGREE_HOOD = 7.3111;
 	
 	public final PIDController turnTablePidController;
@@ -25,8 +26,7 @@ public class HighGoalShooter extends Subsystem {
 		
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
 		//hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor); Used to be correct but for some reason it changed
-		hoodPidController = new PIDController(0.02, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
-		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		hoodPidController = new PIDController(0.075, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
@@ -42,6 +42,7 @@ public class HighGoalShooter extends Subsystem {
 		
 		shootingWheelPidController.setSetpoint(0);
 		shootingWheelPidController.setContinuous(true);
+		shootingWheelPidController.setOutputRange(0, 1);
 		
 		turnTablePidController.enable();
 		hoodPidController.enable();
@@ -51,13 +52,8 @@ public class HighGoalShooter extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    /**
-     * Roll the Jeff rollers (the motors that guide the ball into the firing mechanism) at a desired speed.
-     * @param speed 	The speed to set both Jeff rollers at.
-     */
-    public void spinJeffRollers(double speed) {
-    	RobotMap.jeffRoller1.set(speed);
-    	RobotMap.jeffRoller2.set(speed);
+    public void setShooterFlipper(double angle) {
+    	RobotMap.shootingFlipper.setAngle(angle);
     }
     
     public void spinTurnTable(double speed) {
@@ -76,8 +72,12 @@ public class HighGoalShooter extends Subsystem {
     	hoodPidController.setSetpoint(angle);
     }
     
-    public boolean hoodAngleOnTarget() {
-    	return hoodPidController.getSetpoint() - ERROR < RobotMap.hoodEncoder.get() && hoodPidController.getSetpoint() + ERROR > RobotMap.hoodEncoder.get();
+    public double getHoodAngle() {
+    	return RobotMap.hoodEncoder.get() / COUNTS_PER_DEGREE_HOOD;
+    }
+    
+    public boolean hoodOnTarget() {
+    	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(getHoodAngle())) < HOOD_ERROR;
     }
 
     /**
@@ -92,8 +92,12 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.shootingWheelMotor.set(voltage);
     }
     
-    public boolean shootingWheelOnTarget(double target) {
-    	return Math.abs(Math.abs(target) - Math.abs(RobotMap.shootingWheelMotor.getEncVelocity() / 1024.0 * 60.0)) < 50; //TODO: Test error
+    public double getShootingWheelSpeed() {
+    	return RobotMap.shootingWheelMotor.getEncVelocity() / 1024.0 * 60.0;
+    }
+    
+    public boolean shootingWheelOnTarget() {
+    	return Math.abs(Math.abs(shootingWheelPidController.getSetpoint()) - Math.abs(getShootingWheelSpeed())) < WHEEL_ERROR;
     }
     
     public void enableTurnTablePID() {
