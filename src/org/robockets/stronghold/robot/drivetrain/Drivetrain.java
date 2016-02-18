@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.CompassPIDSource;
+import org.robockets.stronghold.robot.DualEncoderPIDSource;
 import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.GyroPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
@@ -14,12 +15,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID;
 	public final PIDController gyroPID;
-	public final PIDController encoderPID;
+	public final PIDController distancePID;
+	public final PIDController encodersPID;
 	
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		encoderPID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
+		distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
+		encodersPID = new PIDController(0.0019, 0.0002, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
 		
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -29,9 +32,13 @@ public class Drivetrain extends Subsystem {
 		gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
 		
-		encoderPID.disable();
-		encoderPID.setOutputRange(-1.0, 1.0); // Set turning speed range
-		encoderPID.setPercentTolerance(5.0); // Set tolerance of 5%
+		distancePID.disable();
+		distancePID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		distancePID.setPercentTolerance(5.0); // Set tolerance of 5%
+		
+		encodersPID.disable();
+		encodersPID.setOutputRange(-1.0, 1.0); // Set turning speed range
+		encodersPID.setAbsoluteTolerance(5.0); // Set tolerance of 5%
 	}
 	
     public void initDefaultCommand() {
@@ -60,11 +67,11 @@ public class Drivetrain extends Subsystem {
     }
     
     /**
-     * Move the robot with both rotation and encoder pid
+     * Move the robot with both rotation and distance pid
      * @param compassAssist whether the robot should use compass pid or gyro pid
      */
     public void driveAssisted(boolean compassAssist) {
-    	driveAssisted(encoderPID.get(), compassAssist);
+    	driveAssisted(distancePID.get(), compassAssist);
     }
     
     public void setAngle(double angle, boolean compassAssist) {
@@ -76,7 +83,7 @@ public class Drivetrain extends Subsystem {
     }
     
     public void setDistance(double distance) {
-    	encoderPID.setSetpoint(distance);
+    	distancePID.setSetpoint(distance);
     }
     
     public void stop() {
@@ -99,14 +106,20 @@ public class Drivetrain extends Subsystem {
     	gyroPID.setSetpoint(RobotMap.navX.getYaw());
     }
     
-    public void enableEncoderPID() {
-    	encoderPID.enable();
-    	encoderPID.reset();
-    	encoderPID.setSetpoint(RobotMap.driveEncoder.get());
+    public void enableDistancePID() {
+    	distancePID.enable();
+    	distancePID.reset();
+    	distancePID.setSetpoint(RobotMap.driveEncoder.get());
+    }
+    
+    public void enableEncodersPID() {
+    	encodersPID.enable();
+    	encodersPID.reset();
+    	encodersPID.setSetpoint(0);
     }
     
     public void setDistanceInInches(double distance) {
-    	encoderPID.setSetpoint(distance * 14);
+    	distancePID.setSetpoint(distance * 14);
     }
 }
 

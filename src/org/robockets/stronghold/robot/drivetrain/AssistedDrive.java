@@ -18,7 +18,7 @@ public class AssistedDrive extends Command {
         this.rotationPidType = rotationPidType;
         
         if (translatePidType == AssistedTranslateType.ENCODER) {
-        	Robot.driveTrain.enableEncoderPID();
+        	Robot.driveTrain.enableDistancePID();
         	Robot.driveTrain.setDistance(distance);
         }
         
@@ -59,7 +59,7 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		encoderOnTarget = Robot.driveTrain.encoderPID.onTarget();
+    		encoderOnTarget = Robot.driveTrain.distancePID.onTarget();
     	}
     	
     	if (rotationPidType == AssistedRotateType.COMPASS) {
