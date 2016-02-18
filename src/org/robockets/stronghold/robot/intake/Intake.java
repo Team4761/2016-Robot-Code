@@ -66,11 +66,6 @@ public class Intake extends Subsystem {
 		encoderPID.setSetpoint(setpoint);
 	}
 	
-	public void moveAssisted() {
-		encoderPID.setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D")); // Still broken
-		intakeVerticalMotor.set(encoderPID.get());
-	}
-
 	public void setIntakeAngle(double angle) {
 		encoderPID.setSetpoint(angle);
 	}
