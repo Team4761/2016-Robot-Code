@@ -4,7 +4,6 @@ import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.ManualVerticalIntake;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
