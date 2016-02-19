@@ -27,6 +27,7 @@ public class TurnRelative extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveTrain.driveAssisted(0, false);
     	if (Robot.driveTrain.gyroPID.get() == RobotMap.navX.getAccumulatedYaw() + amount) {
     		finished = true;
     	}
