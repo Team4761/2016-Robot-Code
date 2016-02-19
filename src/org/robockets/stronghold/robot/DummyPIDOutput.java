@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.pidsources;
+package org.robockets.stronghold.robot;
 
 import edu.wpi.first.wpilibj.PIDOutput;
 
