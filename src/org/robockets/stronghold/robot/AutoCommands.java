@@ -2,9 +2,10 @@ class AutoCommands
 {
 	Defense[] defenses;
 	Action action;
-	int robotPosition;
+	int robotPosition, returnPosition;
 	Defense forwardDefense;
 	Defense returnDefense;
+	Command moveCommand;
 	public void init()
 	{
 		defenses = new Defense[5];
@@ -16,11 +17,17 @@ class AutoCommands
 		robotPosition = parsePosition(FieldConfiguration.robotPosition);
 		forwardDefense = defenses[robotPosition];
 		returnDefense = parseDefense(getReturnDefenseString());
+		List defensesList = Arrays.asList(defenses);
+		returnPosition = defensesList.indexOf(returnDefense);
 	}
 	public void run()
 	{
 		runCommandUntilFinished(forwardDefense.forwardCommand);
 		runCommandUntilFinished(action.command);
+		if (action == SHOOT_FROM_CLEAT)
+			runCommandUntilFinished(new AutoMoveToPositionFromCleat(returnPosition));
+		else
+			runCommandUntilFinished(new AutoMoveToPositionFromPosition(returnPosition, robotPosition));
 		runCommandUntilFinished(returnDefense.backwardCommand);
 	}
 	public void runCommandUntilFinished(Command c)
