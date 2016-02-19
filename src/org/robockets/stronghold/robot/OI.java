@@ -1,7 +1,5 @@
 package org.robockets.stronghold.robot;
 
-import org.robockets.stronghold.robot.highgoalshooter.SetTurnTable;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
