@@ -3,9 +3,9 @@ package org.robockets.stronghold.robot;
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.buttonmanager.buttons.ActionButton;
 import org.robockets.buttonmanager.joysticks.XboxOne;
+import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.intake.ManualVerticalIntake;
-import org.robockets.stronghold.robot.intake.TurnRelative;
 import org.robockets.stronghold.robot.intake.ManualSpinIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
