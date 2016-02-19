@@ -25,7 +25,7 @@ public class RobotMap {
 	public static Victor intakeRollerMotor = new Victor(2);
 	public static Victor intakeVerticalMotor = new Victor(3); //TEMP
 	public static Victor intakeMotor = intakeVerticalMotor; // ???
-	public static Victor turnTableMotor = new Victor(9); // TEMP
+	public static Victor turnTableMotor = new Victor(5); // TEMP
 	//public static Encoder turnTableEncoder = new Encoder(3, 4);
 	public static Encoder turnTableEncoder = new Encoder(4, 9);
 	public static Victor hoodMotor = new Victor(8); // TEMP
