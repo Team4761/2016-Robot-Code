@@ -23,9 +23,9 @@ public class HighGoalShooter extends Subsystem {
 		hoodPidController = new PIDController(0.02, 0.0001, 0, RobotMap.hoodEncoder, new DummyPIDOutput());
 		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
-		turnTablePidController.disable();
-		hoodPidController.disable();
-		shootingWheelPidController.disable();
+		turnTablePidController.enable();
+		hoodPidController.enable();
+		shootingWheelPidController.enable();
 		
 		turnTablePidController.setSetpoint(0);
 		turnTablePidController.setContinuous(true);
@@ -54,21 +54,13 @@ public class HighGoalShooter extends Subsystem {
     public void spinTurnTable(double speed) {
     	RobotMap.turnTableMotor.set(speed);
     }
-    
-    public void spinTurnTableAssisted() {
-    	RobotMap.turnTableMotor.set(turnTablePidController.get());
-    }
-    
+       
     public void setTurnTableAngle(double angle) {
     	turnTablePidController.setSetpoint(angle);
     }
     
     public void spinHood(double speed) {
     	RobotMap.hoodMotor.set(speed);
-    }
-    
-    public void spinHoodAssisted() {
-    	RobotMap.hoodMotor.set(hoodPidController.get());
     }
     
     public void setHoodAngle(double angle) {
