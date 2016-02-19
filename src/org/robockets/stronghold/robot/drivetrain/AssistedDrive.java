@@ -19,7 +19,7 @@ public class AssistedDrive extends Command {
         
         if (translatePidType == AssistedTranslateType.ENCODER) {
         	Robot.driveTrain.enableDistancePID();
-        	Robot.driveTrain.setDistance(distance);
+        	Robot.driveTrain.setDistanceInInches(distance);
         }
         
         if (rotationPidType == AssistedRotateType.COMPASS) {
@@ -30,7 +30,7 @@ public class AssistedDrive extends Command {
     		Robot.driveTrain.setAngle(relativeAngle, false);
     	} else if (rotationPidType == AssistedRotateType.ENCODER) {
     		Robot.driveTrain.enableEncodersPID();
-    		Robot.driveTrain.setDistanceInInches(distance);
+    		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     	}
     }
     
@@ -45,16 +45,19 @@ public class AssistedDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	boolean compassAssist = true;
+    	boolean encooder = false;
     	if (rotationPidType == AssistedRotateType.COMPASS) {
     		compassAssist = true;
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		compassAssist = false;
+    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
+    		encooder = true;
     	}
     	
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		Robot.driveTrain.driveAssisted(compassAssist);
+    		Robot.driveTrain.driveAssisted(compassAssist, encooder);
     	} else {
-    		Robot.driveTrain.driveAssisted(0, compassAssist);
+    		Robot.driveTrain.driveAssisted(0, compassAssist, encooder);
     	}
     }
 

@@ -5,15 +5,11 @@ import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class Joyride extends Command {
-	double stick;
-	double leftTrigger;
-	double rightTrigger;
 
     public Joyride() {
         requires(Robot.driveTrain);
@@ -27,17 +23,17 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {
+    	if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		Robot.driveTrain.encodersPID.enable();
     		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -Robot.driveTrain.encodersPID.get());
     	} else if (Math.abs(OI.joystick.getRawAxis(1)) < 0.1 && Math.abs(OI.joystick.getRawAxis(4)) < 0.1) {
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		Robot.driveTrain.encodersPID.reset();
     		Robot.driveTrain.driveArcade(0, 0);
-    	} else {
-    		Robot.driveTrain.encodersPID.reset();
+    	} else {	
+    		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
-    		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));		
+    		Robot.driveTrain.encodersPID.reset();
     	} 
     }
 
