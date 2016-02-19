@@ -14,7 +14,7 @@ public class TurnRelative extends Command {
 	boolean finished;
 	
     public TurnRelative(double amount) {
-        requires(Robot.drivetrain);
+        requires(Robot.driveTrain);
         this.amount = amount;
         finished = false;
     }
