@@ -1,5 +1,7 @@
-package org.robockets.stronghold.robot;
+package org.robockets.stronghold.robot.pidsources;
 
+
+import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;

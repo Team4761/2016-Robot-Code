@@ -1,8 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
-import org.robockets.stronghold.robot.EncoderPIDSource;
 import org.robockets.stronghold.robot.RobotMap;
-import org.robockets.stronghold.robot.TalonPIDSource;
+import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
+import org.robockets.stronghold.robot.pidsources.TalonPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;

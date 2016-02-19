@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.OI;
 import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
