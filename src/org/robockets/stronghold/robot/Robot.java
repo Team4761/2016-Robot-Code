@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot;
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
+import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
@@ -24,8 +25,10 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static final Drivetrain driveTrain = new Drivetrain();
-	public static final Intake intake = new Intake();
+	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
+	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
 	public static final HighGoalShooter shooter = new HighGoalShooter();
+
 	
 	Command teleop;
 	Command autonomousCommand = new Autonomous();

@@ -11,7 +11,7 @@ public class LiftPortcullis extends CommandGroup {
     
     public  LiftPortcullis() {
     	addSequential(new Limbo());
-    	addSequential(new SetIntake(270)); // Er somethin.
-    	addSequential(new SetIntake(0));
+    	addSequential(new SetIntake(270, IntakeSide.FRONT)); // Er somethin.
+    	addSequential(new SetIntake(0, IntakeSide.FRONT));
     }
 }

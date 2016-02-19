@@ -1,9 +1,9 @@
 package org.robockets.stronghold.robot.drivetrain;
 
+import org.robockets.stronghold.robot.DummyPIDOutput;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.pidsources.CompassPIDSource;
 import org.robockets.stronghold.robot.pidsources.DualEncoderPIDSource;
-import org.robockets.stronghold.robot.pidsources.DummyPIDOutput;
 import org.robockets.stronghold.robot.pidsources.GyroPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
