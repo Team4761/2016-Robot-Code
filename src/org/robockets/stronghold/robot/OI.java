@@ -20,16 +20,30 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public static Joystick joystick = new Joystick(0);
-	public static Joystick tempJoystick = new Joystick(1);
+	public static Joystick towerJoystick1 = new Joystick(1);
+	public static Joystick towerJoystick2 = new Joystick(2);
 	
 	public OI () {
 		ButtonManager.addJoystick(joystick);
-		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
+		ButtonManager.addJoystick(towerJoystick1);
+		ButtonManager.addJoystick(towerJoystick1);
+	
+		ButtonManager.addButton(new ActionButton(1, 1, new FireShooter(), false));
+		ButtonManager.addButton(new ActionButton(1, 2, new MoveHood(-0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 3, new MoveHood(0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new MoveTurnTable(0.5, 0), true));
+		
+		ButtonManager.addButton(new ActionButton(2, 2, new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 3, new ManualVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 4, new ManualSpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 4, new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
+		
+		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(1, XboxOne.Y.getButtonNumber(), new MoveTurnTable(0.5), true));
 		ButtonManager.addButton(new ActionButton(1, 0, new MoveTurnTable(-0.5), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new FireShooter(), true));
-		ButtonManager.addJoystick(tempJoystick);
 		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
@@ -45,7 +59,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, XboxOne.A.getButtonNumber(), new TurnRelative(90), false));
 		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new TurnRelative(180), false));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new TurnRelative(270), false));
+		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new TurnRelative(270), false));*/
 	}
 }
 
