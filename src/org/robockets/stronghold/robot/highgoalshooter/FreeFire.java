@@ -9,6 +9,7 @@ public class FreeFire extends CommandGroup {
     
     public  FreeFire() {
     	addSequential(new VerticalAlign());
+    	addSequential(new HorizontalAlign(true));
     	addSequential(new FireShooter());
     	addSequential(new MoveShootingWheel(0));
     }
