@@ -24,7 +24,7 @@ public class HorizontalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
-    	if (stop){
+    	if (stop) {
     		double pixelError = table.getNumber("horiz_offset", 3);
     		double distance = table.getNumber("distance", 10);
     		double width = table.getNumber("width", 100);
@@ -38,7 +38,7 @@ public class HorizontalAlign extends Command {
     protected void execute() {
     	double pixelError = table.getNumber("horiz_offset", 3);
 		
-    	if(!stop){
+    	if(!stop) {
     		double factor = 0.5;
     		if (pixelError > 0) { factor *= -1; }
     		if (Math.abs(pixelError) >= 40) { factor *= 0.5; } 
