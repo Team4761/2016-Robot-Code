@@ -23,9 +23,9 @@ public class LowBar extends CommandGroup {
         }
         
         if (direction == Direction.FORWARD) {
-        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.GYRO, 1, 0)); // Dummy inputs for distance and relativeAngle
+        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 1, 0)); // Dummy inputs for distance and relativeAngle
         } else {
-        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.GYRO, -1, 0)); // Dummy inputs for distance and relativeAngle
+        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -1, 0)); // Dummy inputs for distance and relativeAngle
         }
     }
 }
