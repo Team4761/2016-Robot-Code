@@ -18,5 +18,6 @@ public class AutoShootLow extends CommandGroup {
     	addSequential(new MoveToMiddleGoal(defense));
         addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 24, 0));
         addSequential(new ManualSpinIntake(Direction.FORWARD, 3, IntakeSide.FRONT));
+        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -24, 0));
     }
 }
