@@ -34,7 +34,7 @@ public class RobotMap {
 	public static Encoder driveEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
-	public static Servo shootingFlipper = new Servo(6);
+	public static Servo shootingFlipper = new Servo(5);
 
 	
 	public RobotMap () {
