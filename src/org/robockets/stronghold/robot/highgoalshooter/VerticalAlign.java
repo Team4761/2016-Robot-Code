@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 /**
  * Aim the hood so that the camera aligns with the goal with fancy equations.
  */
-public class AimShooter extends Command {
+public class VerticalAlign extends Command {
 
 	NetworkTable table;
 	double gravAcc = 32;
@@ -16,7 +16,7 @@ public class AimShooter extends Command {
 	double wheelDiameter = 6;
 	double shaftRPM;
 	
-    public AimShooter() {
+    public VerticalAlign() {
     	requires(Robot.shooter);
     }
 

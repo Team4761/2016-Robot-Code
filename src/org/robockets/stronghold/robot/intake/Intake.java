@@ -1,7 +1,6 @@
 package org.robockets.stronghold.robot.intake;
 
 import org.robockets.stronghold.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
