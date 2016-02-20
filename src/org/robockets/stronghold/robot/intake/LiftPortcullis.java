@@ -9,9 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class LiftPortcullis extends CommandGroup {
     
-    public  LiftPortcullis() {
-    	addSequential(new Limbo());
-    	addSequential(new SetIntake(270, IntakeSide.FRONT)); // Er somethin.
-    	addSequential(new SetIntake(0, IntakeSide.FRONT));
+    public  LiftPortcullis(IntakeSide side) {
+    	addSequential(new SetIntake(270, side)); // Er somethin.
+    	addSequential(new SetIntake(0, side));
     }
 }
