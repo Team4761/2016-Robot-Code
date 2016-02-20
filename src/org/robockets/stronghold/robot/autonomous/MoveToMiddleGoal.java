@@ -17,6 +17,10 @@ public class MoveToMiddleGoal extends CommandGroup {
         Command turnCommand = null;
         Command translateCommand = null;
         double angle = 0;
+        
+        if (defense > 5 || defense < 1) {
+        	defense = 3; // Default to middle
+        }
 
         switch (defense) {
 	        case 1:
