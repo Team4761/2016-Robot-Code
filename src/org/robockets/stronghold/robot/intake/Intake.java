@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 
 	public final double COUNTS_PER_DEGREE = 7.3333333333;
-	Victor intakeVerticalMotor;
-	Victor intakeMotor;
-	Encoder intakeEncoder;
-
+	
 	public final PIDController encoderPID;
+	private Victor intakeVerticalMotor;
+	private Victor intakeMotor;
+	private Encoder intakeEncoder;
 
 	public Intake(IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
@@ -40,7 +40,6 @@ public class Intake extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-
 	}
 
 	public void spin(double speed) {
@@ -48,22 +47,14 @@ public class Intake extends Subsystem {
 	}
 
 	public void spinIn() {
-		intakeMotor.set(0.5);
+		intakeMotor.set(1);
 	}
 
 	public void spinOut() {
-		intakeMotor.set(-0.5);
+		intakeMotor.set(-1);
 	}
 
-	public void moveUp() {
-		intakeVerticalMotor.set(-1);
-	}
-
-	public void moveDown() {
-		intakeVerticalMotor.set(1);
-	}
-
-	public void move(int speed) {
+	public void move(double speed) {
 		intakeVerticalMotor.set(speed);
 	}
 	

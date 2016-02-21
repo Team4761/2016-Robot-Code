@@ -9,8 +9,8 @@ import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.IntakesUp;
-import org.robockets.stronghold.robot.intake.ManualVerticalIntake;
-import org.robockets.stronghold.robot.intake.ManualSpinIntake;
+import org.robockets.stronghold.robot.intake.SetVerticalIntake;
+import org.robockets.stronghold.robot.intake.SpinIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -34,10 +34,10 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 5, new MoveTurnTable(0.5, 0), true));
 		
-		ButtonManager.addButton(new ActionButton(2, 2, new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(2, 3, new ManualVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(2, 4, new ManualSpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(2, 5, new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 2, new SetVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 3, new SetVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 4, new SpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 5, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
 		
 		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));

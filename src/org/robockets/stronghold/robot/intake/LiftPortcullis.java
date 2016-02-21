@@ -1,7 +1,5 @@
 package org.robockets.stronghold.robot.intake;
 
-import org.robockets.stronghold.robot.highgoalshooter.Limbo;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -10,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LiftPortcullis extends CommandGroup {
     
     public  LiftPortcullis(IntakeSide side) {
-    	addSequential(new SetIntake(270, side)); // Er somethin.
-    	addSequential(new SetIntake(0, side));
+    	addSequential(new SetVerticalIntake(270, side)); // Er somethin.
+    	addSequential(new SetVerticalIntake(0, side));
     }
 }
