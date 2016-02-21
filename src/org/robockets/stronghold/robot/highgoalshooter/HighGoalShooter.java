@@ -65,7 +65,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void spinHood(double speed) {
-    	RobotMap.hoodMotor.set(speed);
+    	hoodPidController.setSetpoint(hoodPidController.getSetpoint() + speed);
     }
     
     public void setHoodAngle(double angle) {
