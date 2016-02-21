@@ -45,5 +45,6 @@ public class SetIntake extends Command {
     }
 
     protected void interrupted() {
+    	end();
     }
 }

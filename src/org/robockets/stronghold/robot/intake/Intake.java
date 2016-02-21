@@ -1,6 +1,8 @@
 package org.robockets.stronghold.robot.intake;
 
 import org.robockets.stronghold.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,8 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
+	public final double COUNTS_PER_DEGREE = 7.3333333333;
 	Victor intakeVerticalMotor;
 	Victor intakeMotor;
+	Encoder intakeEncoder;
 
 	public final PIDController encoderPID;
 
@@ -19,17 +23,20 @@ public class Intake extends Subsystem {
 		if (intakeSide == IntakeSide.FRONT) {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
 			intakeMotor = RobotMap.intakeMotorFront;
-			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+			intakeEncoder = RobotMap.intakeEncoderFront;
+			encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		} else {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorBack;
 			intakeMotor = RobotMap.intakeMotorBack;
-			encoderPID = new PIDController(0.1, 0.1, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
+			intakeEncoder = RobotMap.intakeEncoderBack;
+			encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
 		}
 
 		encoderPID.disable();
 		encoderPID.setSetpoint(0);
 		encoderPID.setPercentTolerance(0.05);
 		encoderPID.setContinuous(true);
+		encoderPID.enable();
 	}
 
 	public void initDefaultCommand() {
@@ -49,23 +56,27 @@ public class Intake extends Subsystem {
 	}
 
 	public void moveUp() {
-		intakeVerticalMotor.set(0.5);
+		intakeVerticalMotor.set(-1);
 	}
 
 	public void moveDown() {
-		intakeVerticalMotor.set(-0.5);
+		intakeVerticalMotor.set(1);
 	}
 
 	public void move(int speed) {
 		intakeVerticalMotor.set(speed);
 	}
-
-	public void move(double setpoint) {
-		encoderPID.setSetpoint(setpoint);
-	}
 	
 	public void setIntakeAngle(double angle) {
-		encoderPID.setSetpoint(angle);
+		encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
+	}
+	
+	public double getIntakeAngle() {
+		return intakeEncoder.get() / COUNTS_PER_DEGREE;
+	}
+	
+	public double getIntakeSetpointAngle() {
+		return encoderPID.getSetpoint() / COUNTS_PER_DEGREE;
 	}
 
 	public void enablePID() {

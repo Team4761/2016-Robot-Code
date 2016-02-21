@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.stronghold.robot.Robot;
 
 /**
- * Roll the jeff rollers to fire a cannonball.
+ * 
  */
 public class FireShooter extends Command {
 
@@ -17,15 +17,15 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(20);
+    	Robot.shooter.setShooterFlipper(90);
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+    	return isTimedOut();
     }
 
     protected void end() {
-    	Robot.shooter.setShooterFlipper(80);
+    	Robot.shooter.setShooterFlipper(20);
     }
 
     protected void interrupted() {
