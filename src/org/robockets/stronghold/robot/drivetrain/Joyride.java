@@ -24,13 +24,13 @@ public class Joyride extends Command {
     protected void execute() {
     	if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		Robot.driveTrain.encodersPID.enable();
-    		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -Robot.driveTrain.encodersPID.get());
+    		Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -Robot.driveTrain.encodersPID.get());
     	} else if (Math.abs(OI.joystick.getRawAxis(1)) < 0.1 && Math.abs(OI.joystick.getRawAxis(4)) < 0.1) {
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		Robot.driveTrain.encodersPID.reset();
     		Robot.driveTrain.driveArcade(0, 0);
     	} else {	
-    		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
+    		Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		Robot.driveTrain.encodersPID.reset();
     	} 

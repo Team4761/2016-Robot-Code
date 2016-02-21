@@ -58,9 +58,9 @@ public class ManualVerticalIntake extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (direction == Direction.UP) {
-			intake.moveUp();
+			intake.setIntakeAngle(intake.getIntakeSetpointAngle() - 1);
 		} else if (direction == Direction.DOWN) {
-			intake.moveDown();
+			intake.setIntakeAngle(intake.getIntakeSetpointAngle() + 1);
 		} else if (direction == Direction.MANUAL) {
 			intake.move(speed);
 		} else {
@@ -70,7 +70,11 @@ public class ManualVerticalIntake extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		if (time == 0) {
+			return false;
+		} else {
+			return isTimedOut();
+		}
 	}
 
 	// Called once after isFinished returns true
