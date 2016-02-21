@@ -64,6 +64,10 @@ public class HighGoalShooter extends Subsystem {
     	turnTablePidController.setSetpoint(angle);
     }
     
+    public double getTurnTableSetpoint() {
+    	return turnTablePidController.getSetpoint();
+    }
+    
     public void spinHood(double speed) {
     	RobotMap.hoodMotor.set(speed);
     }

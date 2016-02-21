@@ -36,13 +36,12 @@ public class MoveTurnTable extends Command {
     protected void initialize() {
     	if (angle != null) { Robot.shooter.setTurnTableAngle(angle); }
     	if (time != null) { setTimeout(time); }
-    	if (speed != null) {
-    		Robot.shooter.disableTurnTablePID();
-    		Robot.shooter.spinTurnTable(speed);
-    	}
     }
 
     protected void execute() {
+    	if (speed != null) {
+    		Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint() + speed);
+    	}
     }
 
     protected boolean isFinished() {
@@ -53,7 +52,7 @@ public class MoveTurnTable extends Command {
     }
     protected void end() {
     	Robot.shooter.spinTurnTable(0);
-    	if(speed!=null) { System.out.println("Test"); Robot.shooter.enableTurnTablePID(); }
+    	//if(speed != null) { Robot.shooter.enableTurnTablePID(); }
     }
 
     protected void interrupted() {
