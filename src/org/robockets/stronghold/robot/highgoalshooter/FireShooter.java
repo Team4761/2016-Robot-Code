@@ -1,6 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.robockets.stronghold.robot.Robot;
 
 /**
@@ -17,15 +19,17 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(90);
+    	Robot.shooter.setShooterFlipper(SmartDashboard.getNumber("Servo Angle"));
+    	//Robot.shooter.setShooterFlipper(-90);
     }
 
     protected boolean isFinished() {
-    	return isTimedOut();
+    	return false;
+    	//return isTimedOut();
     }
 
     protected void end() {
-    	Robot.shooter.setShooterFlipper(20);
+    	//Robot.shooter.setShooterFlipper(20);
     }
 
     protected void interrupted() {
