@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -35,7 +36,8 @@ public class RobotMap {
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 	public static Servo shootingFlipper = new Servo(5);
-
+	public static DigitalInput frontBB = new DigitalInput(12);
+	public static DigitalInput backBB = new DigitalInput(13);
 	
 	public RobotMap () {
 		navX.zeroYaw();
