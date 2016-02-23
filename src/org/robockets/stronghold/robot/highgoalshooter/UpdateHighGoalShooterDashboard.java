@@ -21,7 +21,6 @@ public class UpdateHighGoalShooterDashboard extends Command {
 
     protected void initialize() {
     	SmartDashboard.putData(new ResetIntake(IntakeSide.BACK));
-    	SmartDashboard.putData(new IntakeBall(IntakeSide.BACK));
     }
 
     protected void execute() {
