@@ -24,25 +24,24 @@ public class MoveTurnTable extends Command {
     
     /**
      * Set the speed of the turn table part of the highgoal shooter for a specified time.
-     * @param rate		The speed to set the turn table at.
-     * @param time		The time to spin the motor for. Set at 0 for continuos.
+     * @param rate		The speed to set the turn table at (degrees/second).
+     * @param time		The time to spin the motor for. Set at 0 for continuous.
      */
     public MoveTurnTable(double rate, double time) {
     	requires(Robot.shooter);
-    	speed = rate;
+    	speed = rate * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
     	if (time != 0) { this.time = time; }
     }
     
     protected void initialize() {
     	if (angle != null) { Robot.shooter.setTurnTableAngle(angle); }
     	if (time != null) { setTimeout(time); }
-    	if (speed != null) {
-    		Robot.shooter.disableTurnTablePID();
-    		Robot.shooter.spinTurnTable(speed);
-    	}
     }
 
     protected void execute() {
+    	if (speed != null) {
+    		Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint() + speed);
+    	}
     }
 
     protected boolean isFinished() {
@@ -52,8 +51,8 @@ public class MoveTurnTable extends Command {
         
     }
     protected void end() {
-    	Robot.shooter.spinTurnTable(0);
-    	if(speed!=null) { System.out.println("Test"); Robot.shooter.enableTurnTablePID(); }
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
+    	//if(speed != null) { Robot.shooter.enableTurnTablePID(); }
     }
 
     protected void interrupted() {

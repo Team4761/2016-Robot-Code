@@ -28,13 +28,13 @@ public class HorizontalAlign extends Command {
     protected void execute() {
     	double pixelError = table.getNumber("horiz_offset", 0);
     	SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.02));
-		double factor = SmartDashboard.getNumber("factorz", 0.02); // Or something.
+	double factor = SmartDashboard.getNumber("factorz", 0.02); // Or something.
     	
-		SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
-		if (table.getNumber("heartbeat", 0) == 1) {
-			Robot.shooter.setTurnTableAngle(Robot.shooter.turnTableSource.pidGet() + (factor * pixelError));
-			table.putNumber("heartbeat", 1);
-		}
+	SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
+	if (table.getNumber("heartbeat", 0) == 1) {
+		Robot.shooter.setTurnTableAngle(Robot.shooter.turnTableSource.pidGet() + (factor * pixelError));
+		table.putNumber("heartbeat", 1);
+	}
     }
 
     protected boolean isFinished() {
@@ -43,6 +43,7 @@ public class HorizontalAlign extends Command {
     }
 
     protected void end() {
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
     }
 
     protected void interrupted() {
