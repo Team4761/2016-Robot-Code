@@ -19,17 +19,15 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(SmartDashboard.getNumber("Servo Angle"));
-    	//Robot.shooter.setShooterFlipper(-90);
+    	Robot.shooter.setShooterFlipper(110);
     }
 
     protected boolean isFinished() {
-    	return false;
-    	//return isTimedOut();
+    	return isTimedOut();
     }
 
     protected void end() {
-    	//Robot.shooter.setShooterFlipper(20);
+    	Robot.shooter.setShooterFlipper(30);
     }
 
     protected void interrupted() {

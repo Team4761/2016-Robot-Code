@@ -19,7 +19,6 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void initialize() {
-    	SmartDashboard.putNumber("Servo Angle", 0);
     	SmartDashboard.putData(new ResetIntake(IntakeSide.BACK));
     }
 

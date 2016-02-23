@@ -32,8 +32,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 1, new FireShooter(), false));
 		ButtonManager.addButton(new ActionButton(1, 2, new MoveHood(-0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 3, new MoveHood(0.5, 0), true));
-		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-1, 0), true));
-		ButtonManager.addButton(new ActionButton(1, 5, new MoveTurnTable(1, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-30, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new MoveTurnTable(30, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 11, new MoveShootingWheel(1200), true));
 		ButtonManager.addButton(new ActionButton(1, 10, new MoveShootingWheel(0), true));
 		
