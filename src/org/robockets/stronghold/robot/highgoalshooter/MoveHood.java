@@ -15,11 +15,11 @@ public class MoveHood extends Command {
 	
 	/**
 	 * Move the hood upwards or downwards continuously.
-	 * @param rate		The speed to move at. Negative values will go downwards.
+	 * @param rate		The speed to move at. Negative values will go downwards. (degrees/second)
 	 */
     public MoveHood(double speed, double time) {
         requires(Robot.shooter);
-        this.speed = speed;
+        this.speed = speed * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
         this.time = time;
     }
 
@@ -36,7 +36,6 @@ public class MoveHood extends Command {
     protected void initialize() {
     	if (time != null) {
     		setTimeout(time);
-    		Robot.shooter.hoodPidController.disable();
     	}
     }
 
@@ -45,7 +44,7 @@ public class MoveHood extends Command {
     	if (angle != null) {
     		Robot.shooter.setHoodAngle(angle);
     	} else {
-    		Robot.shooter.spinHood(speed);
+    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle() + speed);
     	}
     }
 
@@ -59,8 +58,7 @@ public class MoveHood extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	if (time != null) {
-    		Robot.shooter.spinHood(0);
-    		Robot.shooter.enableHoodPID();
+    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle()); // effectively a stop
     	}
     }
 

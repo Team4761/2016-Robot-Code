@@ -47,11 +47,11 @@ public class Intake extends Subsystem {
 	}
 
 	public void spinIn() {
-		intakeMotor.set(1);
+		intakeMotor.set(0.75);
 	}
 
 	public void spinOut() {
-		intakeMotor.set(-1);
+		intakeMotor.set(-0.75);
 	}
 
 	public void move(double speed) {
