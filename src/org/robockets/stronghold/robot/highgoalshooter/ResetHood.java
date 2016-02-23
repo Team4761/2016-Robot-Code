@@ -1,37 +1,25 @@
-package org.robockets.stronghold.robot.intake;
+package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ResetIntake extends Command {
+public class ResetHood extends Command {
 
-	Intake intake;
-	Encoder intakeEncoder;
-		
-    public ResetIntake(IntakeSide intakeSide) {
-    	if (intakeSide == IntakeSide.FRONT) {
-    		requires(Robot.intakeFront);
-    		intake = Robot.intakeFront;
-    		intakeEncoder = RobotMap.intakeEncoderFront;
-    	} else {
-    		requires(Robot.intakeBack);
-    		intake = Robot.intakeBack;
-    		intakeEncoder = RobotMap.intakeEncoderBack;
-    	}
+    public ResetHood() {
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	intakeEncoder.reset();
-    	intake.encoderPID.reset();
-    	intake.encoderPID.setSetpoint(0);
-    	intake.encoderPID.enable();
+    	RobotMap.hoodEncoder.reset();
+    	Robot.shooter.hoodPidController.reset();
+    	Robot.shooter.hoodPidController.setSetpoint(0);
+    	Robot.shooter.hoodPidController.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
