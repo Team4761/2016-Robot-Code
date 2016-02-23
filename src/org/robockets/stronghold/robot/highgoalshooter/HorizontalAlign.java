@@ -27,8 +27,8 @@ public class HorizontalAlign extends Command {
 
     protected void execute() {
     	double pixelError = table.getNumber("horiz_offset", 0);
-    	SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.02));
-	double factor = SmartDashboard.getNumber("factorz", 0.02); // Or something.
+    	SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
+	double factor = SmartDashboard.getNumber("factorz"); // Or something.
     	
 	SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
 	if (table.getNumber("heartbeat", 0) == 1) {
