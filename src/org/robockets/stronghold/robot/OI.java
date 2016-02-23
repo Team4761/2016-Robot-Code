@@ -29,7 +29,7 @@ public class OI {
 		ButtonManager.addJoystick(towerJoystick1);
 		ButtonManager.addJoystick(towerJoystick2);
 	
-		ButtonManager.addButton(new ActionButton(1, 1, new FireShooter(), true));
+		ButtonManager.addButton(new ActionButton(1, 1, new FireShooter(), false));
 		ButtonManager.addButton(new ActionButton(1, 2, new MoveHood(-0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 3, new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-1, 0), true));
