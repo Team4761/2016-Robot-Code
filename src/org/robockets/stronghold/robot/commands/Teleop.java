@@ -11,6 +11,5 @@ public class Teleop extends CommandGroup {
     
     public Teleop() {
         addParallel(new UpdateDashboard());
-    	addParallel(new Joyride());
     }
 }

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Joyride extends Command {
 
-	boolean gyroStart;
 	
     public Joyride() {
         requires(Robot.driveTrain);
@@ -26,28 +25,13 @@ public class Joyride extends Command {
     	SmartDashboard.putNumber("Gyro I", Robot.driveTrain.gyroPID.getI());
     	SmartDashboard.putNumber("Gyro D", Robot.driveTrain.gyroPID.getD());
     	SmartDashboard.putNumber("Gyro Setpoint", 0);
-    	SmartDashboard.putBoolean("Gyro Start", false);
-    	gyroStart = false;
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Gyro Angle Graph", RobotMap.navX.getYaw());
-    	SmartDashboard.putNumber("Gyro Angle", RobotMap.navX.getYaw());
-    	Robot.driveTrain.gyroPID.setPID(SmartDashboard.getNumber("Gyro P"), SmartDashboard.getNumber("Gyro I"), SmartDashboard.getNumber("Gyro D"));
-    	Robot.driveTrain.gyroPID.setSetpoint(SmartDashboard.getNumber("Gyro Setpoint"));
-    	SmartDashboard.putNumber("Gyro PID", Robot.driveTrain.gyroPID.get());
     	
-    	if (SmartDashboard.getBoolean("Gyro Start")) {
-    		Robot.driveTrain.gyroPID.enable();
-    		Robot.driveTrain.driveAssisted(false, false);
-    	} else {
-    		if (gyroStart) {
-    			gyroStart = false;
-    			Robot.driveTrain.gyroPID.disable();
-    		}
-    		
-    	}
+    		Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), OI.joystick.getRawAxis(4));
     	
     	/*if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		Robot.driveTrain.encodersPID.enable();
@@ -60,7 +44,7 @@ public class Joyride extends Command {
     		Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -OI.joystick.getRawAxis(4));
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		Robot.driveTrain.encodersPID.reset();
-    	} */
+    	}*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

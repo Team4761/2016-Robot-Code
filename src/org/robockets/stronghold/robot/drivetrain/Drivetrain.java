@@ -20,7 +20,7 @@ public class Drivetrain extends Subsystem {
 	
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
-		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
+		gyroPID = new PIDController(0.02, 0.0, 0.04, new GyroPIDSource(), new DummyPIDOutput());
 		distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
 		encodersPID = new PIDController(0.0019, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
 		
