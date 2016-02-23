@@ -1,25 +1,28 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot;
 
-import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
-
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ResetTurntable extends Command {
+public class ResetPID extends Command {
+
+	Encoder encoder;
+	PIDController pidController;
 	
-    public ResetTurntable() {
-    	requires(Robot.shooter);
+    public ResetPID(Encoder encoder, PIDController pidController) {
+    	this.encoder = encoder;
+    	this.pidController = pidController;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.turnTableEncoder.reset();
-    	Robot.shooter.turnTablePidController.reset();
-    	Robot.shooter.turnTablePidController.setSetpoint(0);
-    	Robot.shooter.turnTablePidController.enable();
+    	encoder.reset();
+    	pidController.reset();
+    	pidController.setSetpoint(0);
+    	pidController.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -14,7 +14,7 @@ public class CheckIntakeBreakBeam extends Command {
 	Intake intake;
 	DigitalInput breakBeam;
 	
-	boolean ballIn = false;
+	boolean ballIn;
 	
     public CheckIntakeBreakBeam(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {

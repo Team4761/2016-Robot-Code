@@ -1,9 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.ResetPID;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.ResetIntake;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -19,9 +18,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void initialize() {
-    	SmartDashboard.putData(new ResetIntake(IntakeSide.BACK));
-    	SmartDashboard.putData(new ResetTurntable());
-    	SmartDashboard.putData(new ResetHood());
+    	SmartDashboard.putData("Reset Intake Back", new ResetPID(RobotMap.intakeEncoderBack, Robot.intakeBack.encoderPID));
+    	SmartDashboard.putData("Reset Turntable", new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController));
+    	SmartDashboard.putData("Reset Hood", new ResetPID(RobotMap.hoodEncoder, Robot.shooter.hoodPidController));
     }
 
     protected void execute() {
