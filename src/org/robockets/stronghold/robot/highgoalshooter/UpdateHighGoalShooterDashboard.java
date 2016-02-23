@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
+import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.ResetIntake;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
@@ -20,9 +21,11 @@ public class UpdateHighGoalShooterDashboard extends Command {
 
     protected void initialize() {
     	SmartDashboard.putData(new ResetIntake(IntakeSide.BACK));
+    	SmartDashboard.putData(new IntakeBall(IntakeSide.BACK));
     }
 
     protected void execute() {
+    	SmartDashboard.putBoolean("Breakbeam", RobotMap.backBB.get());
     	SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
     	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
