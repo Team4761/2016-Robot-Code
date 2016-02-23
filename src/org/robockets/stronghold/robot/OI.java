@@ -38,6 +38,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 3, new SetVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 4, new SpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 5, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 6, new IntakesUp(), false));
 		
 		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
@@ -52,7 +53,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, XboxOne.RIGHT_BUMPER.getButtonNumber(), new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(1, XboxOne.A.getButtonNumber(), new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new ManualSpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new IntakesUp(), false));
+		
 		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.Y.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(0.5, 0, IntakeSide.FRONT), true));
