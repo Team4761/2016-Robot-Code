@@ -45,7 +45,7 @@ public class VerticalAlign extends Command {
     protected boolean isFinished() {
     	return Robot.shooter.hoodOnTarget()
     			&& Robot.shooter.shootingWheelOnTarget()
-    			&& Robot.shooter.turnTablePidController.onTarget()
+    			&& Robot.shooter.turnTableOnTarget()
     			|| isTimedOut();
     }
 

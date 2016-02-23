@@ -59,7 +59,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	turnTablePidController.setSetpoint(angle);
+    	turnTablePidController.setSetpoint(angle % 360); // It will not spin more than 360 degrees.
     }
     
     public double getTurnTableSetpoint() {
@@ -78,6 +78,10 @@ public class HighGoalShooter extends Subsystem {
     	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(getHoodAngle())) < HOOD_ERROR;
     }
 
+    public boolean turnTableOnTarget(){
+    	return turnTablePidController.onTarget();
+    }
+    
     /**
      * Roll the shooting wheel to fire the boulder at a desired speed.
      * @param speed 	The rpm to set the shooting mechanism at.

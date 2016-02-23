@@ -45,7 +45,7 @@ public class MoveTurnTable extends Command {
     }
 
     protected boolean isFinished() {
-        if (angle != null) { return Robot.shooter.turnTablePidController.onTarget(); }
+        if (angle != null) { return Robot.shooter.turnTableOnTarget(); }
         if (time != null) { return isTimedOut(); }
         return false;
         

@@ -25,20 +25,31 @@ public class HorizontalAlign extends Command {
     	table = NetworkTable.getTable("vision");
     }
 
+    boolean holdUp = false;
+    
     protected void execute() {
     	double pixelError = table.getNumber("horiz_offset", 0);
-    	SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
-	double factor = SmartDashboard.getNumber("factorz"); // Or something.
+    	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
+    	//resolution: 1024 px wide
+    	//fov:
+    	double factor = 90/1024;
     	
-	SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
-	if (table.getNumber("heartbeat", 0) == 1) {
-		Robot.shooter.setTurnTableAngle(Robot.shooter.turnTableSource.pidGet() + (factor * pixelError));
-		table.putNumber("heartbeat", 1);
-	}
+    	if (holdUp){
+    		if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
+    	} else {
+    		if (table.getNumber("heartbeat", 0) == 1) {
+    			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
+    			if (output % 360 != output) {
+    				holdUp = true; // We need to spin back around to not twist the wires.
+    			}
+    			Robot.shooter.setTurnTableAngle(output);
+    			table.putNumber("heartbeat", 1);
+    		}
+    	}
     }
-
+    
     protected boolean isFinished() {
-    	if (continuous) return Robot.shooter.turnTablePidController.onTarget();
+    	if (continuous) return Robot.shooter.turnTableOnTarget();
     	return false;
     }
 
