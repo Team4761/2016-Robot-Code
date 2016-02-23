@@ -31,9 +31,9 @@ public class HorizontalAlign extends Command {
 		double factor = SmartDashboard.getNumber("factorz", 0.02); // Or something.
     	
 		SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
-		if (table.getBoolean("heartbeat", false)) {
+		if (table.getNumber("heartbeat", 0) == 1) {
 			Robot.shooter.setTurnTableAngle(Robot.shooter.turnTableSource.pidGet() + (factor * pixelError));
-			table.putBoolean("heartbeat", false);
+			table.putNumber("heartbeat", 1);
 		}
     }
 
