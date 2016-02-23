@@ -24,12 +24,12 @@ public class MoveTurnTable extends Command {
     
     /**
      * Set the speed of the turn table part of the highgoal shooter for a specified time.
-     * @param rate		The speed to set the turn table at.
-     * @param time		The time to spin the motor for. Set at 0 for continuos.
+     * @param rate		The speed to set the turn table at (degrees/second).
+     * @param time		The time to spin the motor for. Set at 0 for continuous.
      */
     public MoveTurnTable(double rate, double time) {
     	requires(Robot.shooter);
-    	speed = rate * 0.02;
+    	speed = rate * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
     	if (time != 0) { this.time = time; }
     }
     

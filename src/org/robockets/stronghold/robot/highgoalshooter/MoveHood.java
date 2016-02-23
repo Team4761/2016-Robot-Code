@@ -15,11 +15,11 @@ public class MoveHood extends Command {
 	
 	/**
 	 * Move the hood upwards or downwards continuously.
-	 * @param rate		The speed to move at. Negative values will go downwards.
+	 * @param rate		The speed to move at. Negative values will go downwards. (degrees/second)
 	 */
     public MoveHood(double speed, double time) {
         requires(Robot.shooter);
-        this.speed = speed * 0.02;
+        this.speed = speed * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
         this.time = time;
     }
 
