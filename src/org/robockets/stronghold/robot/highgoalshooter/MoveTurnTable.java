@@ -29,7 +29,7 @@ public class MoveTurnTable extends Command {
      */
     public MoveTurnTable(double rate, double time) {
     	requires(Robot.shooter);
-    	speed = rate;
+    	speed = rate * 0.02;
     	if (time != 0) { this.time = time; }
     }
     
@@ -51,7 +51,7 @@ public class MoveTurnTable extends Command {
         
     }
     protected void end() {
-    	Robot.shooter.spinTurnTable(0);
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
     	//if(speed != null) { Robot.shooter.enableTurnTablePID(); }
     }
 

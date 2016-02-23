@@ -41,7 +41,7 @@ public class HorizontalAlign extends Command {
     		double factor = 0.5;
     		if (pixelError > 0) { factor *= -1; }
     		if (Math.abs(pixelError) >= 40) { factor *= 0.5; } 
-    		Robot.shooter.spinTurnTable(factor);
+    		// Robot.shooter.spinTurnTable(factor); old mold anyway
     	}
     }
 
@@ -51,7 +51,7 @@ public class HorizontalAlign extends Command {
     }
 
     protected void end() {
-    	Robot.shooter.spinTurnTable(0);
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
     	Robot.shooter.enableTurnTablePID();
     }
 
