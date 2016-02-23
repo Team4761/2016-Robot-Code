@@ -8,6 +8,7 @@ import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveShootingWheel;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
+import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.IntakesUp;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
@@ -41,6 +42,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 3, new SetVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 4, new SpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 5, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 11, new IntakeBall(IntakeSide.BACK), true));
 		
 		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
