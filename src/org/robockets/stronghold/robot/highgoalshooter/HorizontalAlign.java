@@ -1,58 +1,45 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Align the robot horizontally with the target.
  */
 public class HorizontalAlign extends Command {
 
 	NetworkTable table;
-	boolean stop;
+	boolean continuous;
 	
-    public HorizontalAlign(boolean stop) {
+	/**
+	 * * @param continuos		If it should stop when on target.
+	 */
+    public HorizontalAlign(boolean continuous) {
     	requires(Robot.shooter);
-    	this.stop = stop;
-    	if (stop){
-    		requires(Robot.driveTrain); // Make the drive train stop for a bit here.
-    	}
+    	this.continuous = continuous;
     }
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
-    	if (stop) {
-    		double pixelError = table.getNumber("horiz_offset", 3);
-    		double distance = table.getNumber("distance", 10);
-    		double width = table.getNumber("width", 100);
-    		double actualWidthin = 20;
-    		Robot.shooter.setTurnTableAngle(Robot.shooter.turnTablePidController.getSetpoint() * Math.asin(pixelError * (actualWidthin / width) / distance));
-    	} else {
-    		Robot.shooter.disableTurnTablePID();
-    	}
     }
 
     protected void execute() {
-    	double pixelError = table.getNumber("horiz_offset", 3);
-		
-    	if(!stop) {
-    		double factor = 0.5;
-    		if (pixelError > 0) { factor *= -1; }
-    		if (Math.abs(pixelError) >= 40) { factor *= 0.5; } 
-    		Robot.shooter.spinTurnTable(factor);
-    	}
+    	double pixelError = table.getNumber("horiz_offset", 10);
+    	SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.02));
+		double factor = SmartDashboard.getNumber("factorz", 0.02); // Or something.
+    	
+		SmartDashboard.putNumber("Setpoint delta", factor * pixelError);
+		Robot.shooter.setTurnTableAngle(Robot.shooter.turnTableSource.pidGet() + (factor * pixelError));
     }
 
     protected boolean isFinished() {
-    	if (!stop) { return Math.abs(table.getNumber("horiz_offset", 21)) < 20; }
-    	return Robot.shooter.turnTablePidController.onTarget();
+    	if (continuous) return Robot.shooter.turnTablePidController.onTarget();
+    	return false;
     }
 
     protected void end() {
-    	Robot.shooter.spinTurnTable(0);
-    	Robot.shooter.enableTurnTablePID();
     }
 
     protected void interrupted() {
