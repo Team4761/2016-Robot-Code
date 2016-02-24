@@ -12,11 +12,17 @@ public class TurnRelative extends Command {
 
 	double amount;
 	boolean finished;
+	double speed;
 	
-    public TurnRelative(double amount) {
+    public TurnRelative(double amount, double speed) {
         requires(Robot.driveTrain);
         this.amount = amount;
         finished = false;
+        this.speed = speed;
+    }
+    
+    public TurnRelative(double amount) {
+        this(amount, 1.0);
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +33,7 @@ public class TurnRelative extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveAssisted(false, false);
+    	Robot.driveTrain.driveAssisted(false, false, speed);
     	if (Robot.driveTrain.gyroPID.get() == RobotMap.navX.getAccumulatedYaw() + amount) {
     		finished = true;
     	}
