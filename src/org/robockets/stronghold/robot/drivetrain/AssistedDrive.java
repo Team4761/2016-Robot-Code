@@ -10,8 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AssistedDrive extends Command {
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
-
-    public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
+	double speed;
+	
+	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
+		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0); // Got to go fast!
+	}
+	
+    public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double speed) {
         requires(Robot.driveTrain);
         
         this.translatePidType = translatePidType;
@@ -32,6 +37,8 @@ public class AssistedDrive extends Command {
     		Robot.driveTrain.enableEncodersPID();
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     	}
+        
+        this.speed = speed;
     }
     
     public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
@@ -55,9 +62,9 @@ public class AssistedDrive extends Command {
     	}
     	
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		Robot.driveTrain.driveAssisted(compassAssist, encooder);
+    		Robot.driveTrain.driveAssisted(compassAssist, encooder, speed);
     	} else {
-    		Robot.driveTrain.driveAssisted(0, compassAssist, encooder);
+    		Robot.driveTrain.driveAssisted(0, compassAssist, encooder, speed);
     	}
     }
 

@@ -18,7 +18,7 @@ public class TurnRelative extends Command {
         this.amount = amount;
         finished = false;
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.gyroPID.setSetpoint(RobotMap.navX.getAccumulatedYaw() + amount);
@@ -27,7 +27,7 @@ public class TurnRelative extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveAssisted(false, false);
+    	Robot.driveTrain.driveAssisted(false, false, 1.0);
     	if (Robot.driveTrain.gyroPID.get() == RobotMap.navX.getAccumulatedYaw() + amount) {
     		finished = true;
     	}
