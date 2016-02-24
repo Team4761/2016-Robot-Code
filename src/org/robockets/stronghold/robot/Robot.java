@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.OI;
-import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
@@ -15,7 +14,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -58,7 +56,6 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-    	SmartDashboard.putBoolean("Rear Break Beam", RobotMap.backBB.get());
 	}
 
 	/**
@@ -98,6 +95,11 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        shooter.setHoodAngle(shooter.getHoodAngle());
+        shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed());
+        shooter.setTurnTableAngle(shooter.getTurnTableAngle());
+        intakeBack.setIntakeAngle(intakeBack.getIntakeAngle());
+        intakeFront.setIntakeAngle(intakeFront.getIntakeAngle());
     }
     
     /**
