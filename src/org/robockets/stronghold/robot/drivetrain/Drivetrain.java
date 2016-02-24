@@ -64,7 +64,7 @@ public class Drivetrain extends Subsystem {
     	} else if (!compassAssist && !encoder){
     		driveArcade(moveValue, -gyroPID.get());
     	} else {
-    		driveArcade(moveValue * 0.65, -encodersPID.get());
+    		driveArcade(moveValue, -encodersPID.get());
     	}
     }
     
