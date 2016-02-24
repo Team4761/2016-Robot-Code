@@ -59,7 +59,13 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	turnTablePidController.setSetpoint(angle % 360); // It will not spin more than 360 degrees.
+    	if (angle > 270) {
+    		turnTablePidController.setSetpoint(angle % 270 + 90);
+    	} else if (angle < 270) {
+    		turnTablePidController.setSetpoint(angle % -270 - 90);
+    	} else {
+    		turnTablePidController.setSetpoint(angle);
+    	}
     }
     
     public double getTurnTableSetpoint() {

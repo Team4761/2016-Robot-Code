@@ -32,14 +32,14 @@ public class HorizontalAlign extends Command {
     	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
     	//resolution: 1024 px wide
     	//fov:
-    	double factor = 90/1024;
+    	double factor = 55.3/1024;
     	
     	if (holdUp){
     		if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
     	} else {
     		if (table.getNumber("heartbeat", 0) == 1) {
     			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
-    			if (output % 360 != output) {
+    			if (Math.abs(output) > 270) {
     				holdUp = true; // We need to spin back around to not twist the wires.
     			}
     			Robot.shooter.setTurnTableAngle(output);
