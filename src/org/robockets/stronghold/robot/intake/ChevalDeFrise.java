@@ -6,24 +6,25 @@ import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
 public class ChevalDeFrise extends CommandGroup {
-	
-	double encooder; // Dummy variable for now until a method is made for receiving encoder output
-	// Assuming position fully down is 0 and fully up is 90.
-    public ChevalDeFrise(IntakeSide intakeSide) { 	
-    	Robot.driveTrain.gyroPID.setSetpoint(0); // 0 for now -Jake B. 2016
-    	if (encooder > 80) { // Temporary way to check if arm is up
-    		addSequential(new SetVerticalIntake(0, intakeSide));
-    	} else if (encooder < 80) { // Temporary way to check if arm is down
-    		addSequential(new SetVerticalIntake(90, intakeSide));
-    		addSequential(new SetVerticalIntake(0, intakeSide));
+	Intake intake;
+	// Assuming position fully down is 0 and fully up is -90.
+    public ChevalDeFrise(IntakeSide intakeSide) {
+    	if (intakeSide == IntakeSide.FRONT) {
+    		intake = Robot.intakeFront;
+    	} else {
+    		intake = Robot.intakeBack;
     	}
     	
-        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.GYRO, 1, 0)); // Dummy inputs for distance and relativeAngle
-    	addParallel(new SetVerticalIntake(90, intakeSide)); // Slowly lift arm as robot moves across
+    	addSequential(new SetVerticalIntake(20, intakeSide));
+        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 7.5, 0)); // Dummy inputs for distance and relativeAngle
+        addSequential(new WaitCommand(1));
+        addParallel(new SetVerticalIntake(-70, intakeSide)); // Slowly lift arm as robot moves across
+        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 7.5, 0)); // Dummy inputs for distance and relativeAngle
     }
 }

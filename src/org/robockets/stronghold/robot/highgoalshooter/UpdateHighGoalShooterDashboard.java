@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot.highgoalshooter;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.intake.IntakeBall;
+import org.robockets.stronghold.robot.intake.ChevalDeFrise;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.ResetIntake;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
@@ -21,6 +22,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
 
     protected void initialize() {
     	SmartDashboard.putData(new ResetIntake(IntakeSide.BACK));
+    	SmartDashboard.putData("Shovel some fries", new ChevalDeFrise(IntakeSide.BACK));
     }
 
     protected void execute() {
