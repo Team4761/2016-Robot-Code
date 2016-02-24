@@ -64,7 +64,7 @@ public class Drivetrain extends Subsystem {
     	} else if (!compassAssist && !encoder){
     		driveArcade(moveValue, -gyroPID.get());
     	} else {
-    		driveArcade(moveValue, -encodersPID.get());
+    		driveArcade(moveValue * 0.65, -encodersPID.get());
     	}
     }
     
@@ -109,9 +109,9 @@ public class Drivetrain extends Subsystem {
     }
     
     public void enableDistancePID() {
-    	distancePID.enable();
     	distancePID.reset();
     	distancePID.setSetpoint(RobotMap.driveEncoder.get());
+    	distancePID.enable();
     }
     
     public void enableEncodersPID() {

@@ -44,7 +44,7 @@ public class MoveHood extends Command {
     	if (angle != null) {
     		Robot.shooter.setHoodAngle(angle);
     	} else {
-    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle() + speed);
+    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodSetpoint() + speed);
     	}
     }
 

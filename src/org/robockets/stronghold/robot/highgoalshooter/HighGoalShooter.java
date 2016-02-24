@@ -69,6 +69,10 @@ public class HighGoalShooter extends Subsystem {
     	hoodPidController.setSetpoint(angle);
     }
     
+    public double getHoodSetpoint() {
+    	return hoodPidController.getSetpoint();
+    }
+    
     public double getHoodAngle() {
     	return RobotMap.hoodEncoder.get() / COUNTS_PER_DEGREE_HOOD;
     }
