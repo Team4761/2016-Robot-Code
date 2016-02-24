@@ -12,7 +12,7 @@ public class AssistedDrive extends Command {
 	private AssistedRotateType rotationPidType;
 	double speed;
 	
-	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle){
+	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
 		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0); // Got to go fast!
 	}
 	
