@@ -51,7 +51,7 @@ public class AssistedDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean compassAssist = true;
+    	boolean compassAssist = false;
     	boolean encooder = false;
     	if (rotationPidType == AssistedRotateType.COMPASS) {
     		compassAssist = true;
@@ -60,7 +60,6 @@ public class AssistedDrive extends Command {
     	} else if (rotationPidType == AssistedRotateType.ENCODER) {
     		encooder = true;
     	}
-    	
     	if (translatePidType == AssistedTranslateType.ENCODER) {
     		Robot.driveTrain.driveAssisted(compassAssist, encooder, speed);
     	} else {

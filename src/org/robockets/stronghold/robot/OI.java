@@ -31,8 +31,8 @@ public class OI {
 		ButtonManager.addJoystick(towerJoystick2);
 	
 		ButtonManager.addButton(new ActionButton(1, 1, new FireShooter(), false));
-		ButtonManager.addButton(new ActionButton(1, 2, new MoveHood(-0.5, 0), true));
-		ButtonManager.addButton(new ActionButton(1, 3, new MoveHood(0.5, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 2, new MoveHood(-15, 0), true));
+		ButtonManager.addButton(new ActionButton(1, 3, new MoveHood(15, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new MoveTurnTable(-30, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 5, new MoveTurnTable(30, 0), true));
 		ButtonManager.addButton(new ActionButton(1, 11, new MoveShootingWheel(1200), true));
@@ -42,7 +42,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 3, new SetVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 4, new SpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
 		ButtonManager.addButton(new ActionButton(2, 5, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(2, 11, new IntakeBall(IntakeSide.BACK), true));
+		ButtonManager.addButton(new ActionButton(2, 11, new IntakeBall(IntakeSide.BACK), false));
 		
 		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
 		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));

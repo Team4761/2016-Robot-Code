@@ -71,7 +71,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean intakeOnTarget() {
-		return Math.abs(encoderPID.getSetpoint() - intakeEncoder.get()) > 2;
+		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 3;
 	}
 
 	public void enablePID() {

@@ -110,9 +110,9 @@ public class Drivetrain extends Subsystem {
     }
     
     public void enableDistancePID() {
-    	distancePID.enable();
     	distancePID.reset();
     	distancePID.setSetpoint(RobotMap.driveEncoder.get());
+    	distancePID.enable();
     }
     
     public void enableEncodersPID() {
