@@ -85,8 +85,25 @@ public class Drivetrain extends Subsystem {
     	}
     }
     
+    /**
+     * Set the offset for a particular angle.
+     * @param angle Actual degrees.
+     */
+    public void setOffsetAngle(double angle) {
+    	//2.464 degrees per 1 inch of arclength
+    	encodersPID.setSetpoint(encodersPID.getSetpoint() + ((14 / 2.464) * angle));
+    }
+    
     public void setDistance(double distance) {
     	distancePID.setSetpoint(distance);
+    }
+    
+    public void setDistanceInInches(double distance) {
+    	distancePID.setSetpoint(distance * 14);
+    }
+    
+    public double getEncodersOffset() {
+    	return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
     }
     
     public void stop() {
@@ -119,14 +136,6 @@ public class Drivetrain extends Subsystem {
     	encodersPID.enable();
     	encodersPID.reset();
     	encodersPID.setSetpoint(getEncodersOffset());
-    }
-    
-    public void setDistanceInInches(double distance) {
-    	distancePID.setSetpoint(distance * 14);
-    }
-    
-    public double getEncodersOffset() {
-    	return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
     }
 }
 
