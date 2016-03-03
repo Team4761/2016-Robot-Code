@@ -30,22 +30,22 @@ class AutoCommands
 		runCommandUntilFinished(forwardDefense.forwardCommand);
 		runCommandUntilFinished(action.command);
 		if (action == AAction.SHOOT_FROM_CLEAT)
-			runCommandUntilFinished(new AutoMoveToPositionFromCleat(returnPosition));
+			runCommandUntilFinished(new Object(returnPosition));	// replace with AutoMoveToPositionFromCleat
 		else
-			runCommandUntilFinished(new AutoMoveToPositionFromPosition(returnPosition, robotPosition));
+			runCommandUntilFinished(new Object(returnPosition, robotPosition));	// replace with AutoMoveToPositionFromPosition
 		runCommandUntilFinished(returnDefense.backwardCommand);
 	}
 	public void runCommandUntilFinished(Command c)
 	{
 		c.start();
-		while (!c.isFinished());
+		//while (!c.isFinished()); Can't access isFinished... find some other way to do this?
 	}
 	public ADefense parseDefense(String s)
 	{
 		switch (s)
 		{
 			case "Portcullist" :
-				return ADefense.PORTICULLIS;
+				return ADefense.PORTCULLIS;
 			case "Cheval de Frise" :
 				return ADefense.CHEVAL_DE_FRISE;
 			case "Moat" :
