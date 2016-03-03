@@ -30,9 +30,9 @@ class AutoCommands
 		runCommandUntilFinished(forwardDefense.forwardCommand);
 		runCommandUntilFinished(action.command);
 		if (action == AAction.SHOOT_FROM_CLEAT)
-			runCommandUntilFinished(new Object(/*returnPosition*/));	// replace with AutoMoveToPositionFromCleat
+			runCommandUntilFinished((Command)new Object(/*returnPosition*/));	// replace with AutoMoveToPositionFromCleat
 		else
-			runCommandUntilFinished(new Object(/*returnPosition, robotPosition*/));	// replace with AutoMoveToPositionFromPosition
+			runCommandUntilFinished((Command)new Object(/*returnPosition, robotPosition*/));	// replace with AutoMoveToPositionFromPosition
 		runCommandUntilFinished(returnDefense.backwardCommand);
 	}
 	public void runCommandUntilFinished(Command c)
