@@ -1,16 +1,16 @@
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.stronghold.robot.FieldConfiguration;
 import org.robockets.stronghold.robot.AAction;
-import org.robockets.stronghold.robot.Defense;
+import org.robockets.stronghold.robot.ADefense;
 import java.util.*;
 import java.awt.*;
 class AutoCommands
 {
-	Defense[] defenses;
-	Action action;
+	ADefense[] defenses;
+	AAction action;
 	int robotPosition, returnPosition;
-	Defense forwardDefense;
-	Defense returnDefense;
+	ADefense forwardDefense;
+	ADefense returnDefense;
 	Command moveCommand;
 	public void init()
 	{
@@ -46,23 +46,23 @@ class AutoCommands
 		switch (s)
 		{
 			case "Portcullist" :
-				return Defense.PORTICULLIS;
+				return ADefense.PORTICULLIS;
 			case "Cheval de Frise" :
-				return Defense.CHEVAL_DE_FRISE;
+				return ADefense.CHEVAL_DE_FRISE;
 			case "Moat" :
-				return Defense.MOAT;
+				return ADefense.MOAT;
 			case "Ramparts" :
-				return Defense.RAMPARTS;
+				return ADefense.RAMPARTS;
 			case "DrawBridge" :
-				return Defense.DRAWBRIDGE;
+				return ADefense.DRAWBRIDGE;
 			case "Sally Port" :
-				return Defense.SALLY_PORT;
+				return ADefense.SALLY_PORT;
 			case "Rock Wall" :
-				return Defense.ROCK_WALL;
+				return ADefense.ROCK_WALL;
 			case "Rough Terrian" :
-				return Defense.ROUGH_TERRAIN;
+				return ADefense.ROUGH_TERRAIN;
 			case "Low Bar" :
-				return Defense.LOW_BAR;
+				return ADefense.LOW_BAR;
 			default :
 				return null;
 		}
