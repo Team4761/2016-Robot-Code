@@ -23,7 +23,8 @@ public enum ADefense
 	
 	Command getCommandInstanceByName(String str)
 	{
-		return (Command)Class.forName("org.robockets.stronghold.robot.commands." + str).getConstructor(null).newInstance(new Object[0]);
+		try{return (Command)Class.forName("org.robockets.stronghold.robot.commands." + str).getConstructor(null).newInstance(new Object[0]);}catch(Exception e){}
+		return null;
 	}
 }
 
