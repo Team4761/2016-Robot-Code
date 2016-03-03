@@ -14,7 +14,7 @@ class AutoCommands
 	Command moveCommand;
 	public void init()
 	{
-		defenses = new Defense[5];
+		defenses = new ADefense[5];
 		defenses[0] = parseDefense(FieldConfiguration.defense1);
 		defenses[1] = parseDefense(FieldConfiguration.defense2);
 		defenses[2] = parseDefense(FieldConfiguration.defense3);
