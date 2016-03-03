@@ -37,7 +37,7 @@ class AutoCommands
 	}
 	public Defense parseDefense(String s)
 	{
-		switch (String s)
+		switch (s)
 		{
 			case "Portcullist" :
 				return Defense.PORTICULLIS;
@@ -57,7 +57,7 @@ class AutoCommands
 				return Defense.ROUGH_TERRAIN;
 			case "Low Bar" :
 				return Defense.LOW_BAR;
-			case default :
+			default :
 				return null;
 		}
 	}
