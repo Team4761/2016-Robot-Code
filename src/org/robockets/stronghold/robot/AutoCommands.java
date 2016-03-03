@@ -1,5 +1,9 @@
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.stronghold.robot.FieldConfiguration;
+import org.robockets.stronghold.robot.Action;
+import org.robockets.stronghold.robot.Defense;
+import java.util.*;
+import java.awt.*;
 class AutoCommands
 {
 	Defense[] defenses;
@@ -26,7 +30,7 @@ class AutoCommands
 	{
 		runCommandUntilFinished(forwardDefense.forwardCommand);
 		runCommandUntilFinished(action.command);
-		if (action == SHOOT_FROM_CLEAT)
+		if (action == Action.SHOOT_FROM_CLEAT)
 			runCommandUntilFinished(new AutoMoveToPositionFromCleat(returnPosition));
 		else
 			runCommandUntilFinished(new AutoMoveToPositionFromPosition(returnPosition, robotPosition));
