@@ -13,7 +13,7 @@ public enum ADefense
 	ROUGH_TERRAIN ("AutoRoughTerrainForward", "AutoRoughTerrainBackward"),
 	LOW_BAR	("AutoLowBarForward", "AutoLowBarBackward");
 	
-	final Command forwardCommand, backwardCommand;
+	public final Command forwardCommand, backwardCommand;
 	
 	ADefense (String forwardCommandClassName, String backwardCommandClassName)
 	{
