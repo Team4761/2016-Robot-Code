@@ -1,4 +1,5 @@
 import edu.wpi.first.wpilibj.command.Command;
+import org.robockets.stronghold.robot.FieldConfiguration;
 class AutoCommands
 {
 	Defense[] defenses;
