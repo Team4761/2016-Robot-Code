@@ -1,5 +1,5 @@
 import edu.wpi.first.wpilibj.command.Command;
-enum Action
+enum AAction
 {
 	
 	SHOOT_HIGH ("AutoShootHighCommand"),
@@ -9,7 +9,7 @@ enum Action
 	
 	final Command command;
 	
-	Action (String commandClassName)
+	AAction (String commandClassName)
 	{
 		if (commandClassName != null)
 			command = getCommandInstanceByName(commandClassName);
