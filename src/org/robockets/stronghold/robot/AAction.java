@@ -8,12 +8,14 @@ public enum AAction
 	SHOOT_LOW ("AutoShootLowCommand"),
 	DO_NOTHING (null);
 	
-	final Command command;
+	public final Command command;
 	
 	AAction (String commandClassName)
 	{
 		if (commandClassName != null)
 			command = getCommandInstanceByName(commandClassName);
+		else
+			command = null;
 	}
 	
 	Command getCommandInstanceByName(String str)
