@@ -38,7 +38,7 @@ public class VerticalAlign extends Command {
     
     	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
-    	Robot.shooter.setHoodAngle(angle);
+    	//Robot.shooter.setHoodAngle(angle);
     	//Robot.shooter.setShootingWheelSpeed(shaftRPM);
     }
 
