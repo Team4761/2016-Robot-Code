@@ -1,3 +1,4 @@
+import edu.wpi.first.wpilibj.command.Command;
 class AutoCommands
 {
 	Defense[] defenses;
