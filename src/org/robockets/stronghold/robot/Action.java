@@ -12,7 +12,7 @@ enum Action
 	Action (String commandClassName)
 	{
 		if (commandClassName != null)
-			command = getCommandInstanceByName(str);
+			command = getCommandInstanceByName(commandClassName);
 	}
 	
 	Command getCommandInstanceByName(String str)
