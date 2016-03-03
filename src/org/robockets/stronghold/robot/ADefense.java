@@ -1,5 +1,5 @@
 import edu.wpi.first.wpilibj.command.Command;
-enum Defense
+public enum ADefense
 {
 	
 	PORTCULLIS ("AutoPortcullisForward", "AutoPortcullisBackward"),
@@ -14,7 +14,7 @@ enum Defense
 	
 	final Command forwardCommand, backwardCommand;
 	
-	Defense (String forwardCommandClassName, String backwardCommandClassName)
+	ADefense (String forwardCommandClassName, String backwardCommandClassName)
 	{
 		forwardCommand = getCommandInstanceByName(forwardCommandClassName);
 		backwardCommand = getCommandInstanceByName(backwardCommandClassName);
