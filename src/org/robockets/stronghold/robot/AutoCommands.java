@@ -3,7 +3,6 @@ import org.robockets.stronghold.robot.FieldConfiguration;
 import org.robockets.stronghold.robot.AAction;
 import org.robockets.stronghold.robot.ADefense;
 import java.util.*;
-import java.awt.*;
 class AutoCommands
 {
 	ADefense[] defenses;
