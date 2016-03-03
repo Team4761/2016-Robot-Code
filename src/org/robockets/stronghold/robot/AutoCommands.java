@@ -41,7 +41,7 @@ class AutoCommands
 		c.start();
 		while (!c.isFinished());
 	}
-	public Defense parseDefense(String s)
+	public ADefense parseDefense(String s)
 	{
 		switch (s)
 		{
