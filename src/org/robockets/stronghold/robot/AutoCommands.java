@@ -1,8 +1,11 @@
+package org.robockets.stronghold.robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.stronghold.robot.FieldConfiguration;
 import org.robockets.stronghold.robot.AAction;
 import org.robockets.stronghold.robot.ADefense;
 import java.util.*;
+
 class AutoCommands
 {
 	ADefense[] defenses;
