@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
 	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
 	public static final HighGoalShooter shooter = new HighGoalShooter();
+	public static final AutoCommands autoCommand = new AutoCommands();
 
 	
 	Command teleop;
@@ -43,8 +44,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
       oi = new OI();
       teleop = new Teleop();
-      CameraServer server = CameraServer.getInstance();
-      server.startAutomaticCapture("cam0");
+      FieldConfiguration.loadAll();
+    //  CameraServer server = CameraServer.getInstance();
+    //  server.startAutomaticCapture("cam0");
     }
 	
 	/**
@@ -71,7 +73,8 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {        
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        //if (autonomousCommand != null) autonomousCommand.start();
+        autoCommand.run();
     }
 
     /**
