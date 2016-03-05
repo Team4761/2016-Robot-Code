@@ -70,10 +70,6 @@ public class HighGoalShooter extends Subsystem {
     	turnTablePidController.setSetpoint(angle);
     }
     
-    public double getTurnTableAngle() {
-    	return RobotMap.turnTableEncoder.get() * 0.16096579;
-    }
-    
     public double getTurnTableSetpoint() {
     	return turnTablePidController.getSetpoint();
     }
