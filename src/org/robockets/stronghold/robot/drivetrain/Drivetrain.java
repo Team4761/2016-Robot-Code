@@ -108,6 +108,10 @@ public class Drivetrain extends Subsystem {
     	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
     }
     
+    public boolean encodersOnTarget() {
+    	return Math.abs(encodersPID.getSetpoint() - getEncodersOffset()) < 20;
+    }
+    
     public void stop() {
     	driveTank(0, 0);
     }
