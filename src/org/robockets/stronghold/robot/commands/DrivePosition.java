@@ -7,7 +7,7 @@ import org.robockets.stronghold.robot.intake.IntakesUp;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Moves the robot into the position for driving around, shooting, and intaking ball
  */
 public class DrivePosition extends CommandGroup {
     
