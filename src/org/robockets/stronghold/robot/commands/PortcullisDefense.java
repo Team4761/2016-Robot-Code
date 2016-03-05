@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.autonomous;
+package org.robockets.stronghold.robot.commands;
 
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;

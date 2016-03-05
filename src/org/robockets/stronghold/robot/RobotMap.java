@@ -23,8 +23,8 @@ public class RobotMap {
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
 	public static Victor intakeMotorFront = new Victor(3);
 	public static Victor intakeMotorBack = new Victor(1);
-	public static Encoder intakeEncoderFront = new Encoder(11, 12);
-	public static Encoder intakeEncoderBack = new Encoder(4, 5);
+	public static Encoder intakeEncoderBack = new Encoder(11, 12);
+	public static Encoder intakeEncoderFront = new Encoder(4, 5);
 	public static RobotDrive robotDrive = new RobotDrive(18, 19);
 	public static Encoder turnTableEncoder = new Encoder(8, 9);
 	public static Victor intakeVerticalMotorFront = new Victor(2);
@@ -36,8 +36,8 @@ public class RobotMap {
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 	public static Servo shootingFlipper = new Servo(5);
-	public static DigitalInput frontBB = new DigitalInput(13);
-	public static DigitalInput backBB = new DigitalInput(10);
+	public static DigitalInput frontBB = new DigitalInput(10);
+	public static DigitalInput backBB = new DigitalInput(13);
 	
 	public RobotMap () {
 		navX.zeroYaw();

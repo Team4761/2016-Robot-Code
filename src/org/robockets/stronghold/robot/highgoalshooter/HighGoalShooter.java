@@ -7,6 +7,7 @@ import org.robockets.stronghold.robot.pidsources.TalonPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
@@ -21,7 +22,7 @@ public class HighGoalShooter extends Subsystem {
 	public final PIDController shootingWheelPidController;
 	
 	public HighGoalShooter() {
-		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, -0.16096579, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
@@ -57,7 +58,16 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.shootingFlipper.setAngle(angle);
     }
     
+    public boolean turnTableOnTarget() {
+    	return Math.abs(getTurnTableSetpoint() - getTurnTableAngle()) < 2;
+    }
+    
+    public double getTurnTableAngle() {
+    	return RobotMap.turnTableEncoder.get() * -0.16096579;
+    }
+    
     public void setTurnTableAngle(double angle) {
+    	SmartDashboard.putNumber("TurnTable", angle);
     	turnTablePidController.setSetpoint(angle);
     }
     

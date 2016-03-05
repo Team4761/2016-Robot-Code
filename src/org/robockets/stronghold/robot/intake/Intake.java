@@ -24,7 +24,8 @@ public class Intake extends Subsystem {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
 			intakeMotor = RobotMap.intakeMotorFront;
 			intakeEncoder = RobotMap.intakeEncoderFront;
-			encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+			//encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+			encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		} else {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorBack;
 			intakeMotor = RobotMap.intakeMotorBack;

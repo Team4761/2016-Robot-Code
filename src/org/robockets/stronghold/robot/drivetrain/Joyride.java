@@ -25,6 +25,7 @@ public class Joyride extends Command {
     	if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		Robot.driveTrain.encodersPID.enable();
     		Robot.driveTrain.driveArcade(-OI.joystick.getRawAxis(1), -Robot.driveTrain.encodersPID.get());
+
     	} else if (Math.abs(OI.joystick.getRawAxis(1)) < 0.1 && Math.abs(OI.joystick.getRawAxis(4)) < 0.1) {
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		Robot.driveTrain.encodersPID.reset();
