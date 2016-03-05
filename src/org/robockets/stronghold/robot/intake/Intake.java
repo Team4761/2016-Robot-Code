@@ -69,6 +69,10 @@ public class Intake extends Subsystem {
 	public double getIntakeSetpointAngle() {
 		return encoderPID.getSetpoint() / COUNTS_PER_DEGREE;
 	}
+	
+	public boolean intakeOnTarget() {
+		return Math.abs(encoderPID.getSetpoint() - intakeEncoder.get()) > 2;
+	}
 
 	public void enablePID() {
 		encoderPID.enable();

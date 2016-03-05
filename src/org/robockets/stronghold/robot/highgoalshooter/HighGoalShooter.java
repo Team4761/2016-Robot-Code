@@ -56,6 +56,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setShooterFlipper(double angle) {
+    	//RobotMap.shootingFlipper.set(speed);
     	RobotMap.shootingFlipper.setAngle(angle);
     }
     

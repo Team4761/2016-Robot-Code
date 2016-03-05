@@ -1,9 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.ResetPID;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.ResetIntake;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -25,9 +24,13 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Spin Turn Table Right", new MoveTurnTable(30, 0));
     	SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putData("Zero hood", new MoveHood(0));
+    	SmartDashboard.putData("Reset Intake Back", new ResetPID(RobotMap.intakeEncoderBack, Robot.intakeBack.encoderPID));
+    	SmartDashboard.putData("Reset Turntable", new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController));
+    	SmartDashboard.putData("Reset Hood", new ResetPID(RobotMap.hoodEncoder, Robot.shooter.hoodPidController));
     }
 
     protected void execute() {
+    	SmartDashboard.putBoolean("Breakbeam", RobotMap.backBB.get());
     	SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
     	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());

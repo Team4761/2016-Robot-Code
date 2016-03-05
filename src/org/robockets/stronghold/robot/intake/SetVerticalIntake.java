@@ -47,6 +47,7 @@ public class SetVerticalIntake extends Command {
 		
 		this.speed = speed;
 		this.direction = Direction.MANUAL;
+		
 		this.time = time;
 	}
 	
@@ -68,7 +69,7 @@ public class SetVerticalIntake extends Command {
 		if (time != null) {
 			setTimeout(time);
 		} else {
-			setTimeout(10); // Set backup timeout
+			setTimeout(7); // Set backup timeout
 		}
 	}
 
@@ -87,10 +88,10 @@ public class SetVerticalIntake extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (time == 0) {
+		if (time != null && time == 0) {
 			return false;
 		} else if (time == null) {
-			return intake.encoderPID.onTarget() || isTimedOut();
+			return intake.intakeOnTarget() || isTimedOut();
 		} else {
 			return isTimedOut();
 		}

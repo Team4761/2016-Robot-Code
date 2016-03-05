@@ -14,6 +14,8 @@ public class CheckIntakeBreakBeam extends Command {
 	Intake intake;
 	DigitalInput breakBeam;
 	
+	boolean ballIn;
+	
     public CheckIntakeBreakBeam(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {
 			requires(Robot.intakeFront);
@@ -28,20 +30,22 @@ public class CheckIntakeBreakBeam extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	ballIn = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	intake.spinIn();
+    	if (!breakBeam.get()) {
+    		intake.spinIn();
+    	} else {
+    		ballIn = true;
+    		setTimeout(0.75);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (breakBeam.get()) { // True is broken
-        	return true;
-        } else {
-        	return false;
-        }
+    	return ballIn && isTimedOut();
     }
 
     // Called once after isFinished returns true

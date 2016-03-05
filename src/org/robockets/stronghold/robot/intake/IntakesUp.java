@@ -1,7 +1,6 @@
 package org.robockets.stronghold.robot.intake;
 
 import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,26 +8,22 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class IntakesUp extends Command {
-	
-	boolean end;
-	
+		
     public IntakesUp() {
-    	end = false;
+    	requires(Robot.intakeFront);
+    	requires(Robot.intakeBack);
     }
 
     protected void initialize() {
-    	Robot.intakeFront.setIntakeAngle(90); //TEMP
-    	Robot.intakeBack.setIntakeAngle(90); //TEMP
+    	Robot.intakeFront.setIntakeAngle(90);
+    	Robot.intakeBack.setIntakeAngle(90);
     }
 
     protected void execute() {
-    	if (RobotMap.intakeEncoderFront.get() == Robot.intakeFront.encoderPID.getSetpoint() && RobotMap.intakeEncoderBack.get() == Robot.intakeBack.encoderPID.getSetpoint()) {
-    		end = true;
-    	}
     }
 
     protected boolean isFinished() {
-    	return end;
+    	return Robot.intakeBack.intakeOnTarget() && Robot.intakeFront.intakeOnTarget();
     }
 
     protected void end() {

@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.commands;
+package org.robockets.stronghold.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
