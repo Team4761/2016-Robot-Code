@@ -56,11 +56,11 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-        shooter.setHoodAngle(shooter.getHoodAngle());
-        shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed());
-        shooter.setTurnTableAngle(shooter.getTurnTableAngle());
-        intakeBack.setIntakeAngle(intakeBack.getIntakeAngle());
-        intakeFront.setIntakeAngle(intakeFront.getIntakeAngle());
+	    shooter.setHoodAngle(shooter.getHoodAngle());
+	    shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed());
+	    shooter.setTurnTableAngle(shooter.getTurnTableAngle());
+	    intakeBack.setIntakeAngle(intakeBack.getIntakeAngle());
+	    intakeFront.setIntakeAngle(intakeFront.getIntakeAngle());
 	}
 
 	/**
