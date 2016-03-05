@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Autonomous extends CommandGroup {
     
     public  Autonomous() {
-    	System.out.println("test");
     	addParallel(new UpdateDashboard());
     	addParallel(new LowBar(Direction.FORWARD));
     }
