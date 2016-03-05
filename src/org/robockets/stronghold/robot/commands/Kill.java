@@ -13,6 +13,7 @@ public class Kill extends Command {
         requires(Robot.driveTrain);
         requires(Robot.intakeFront);
         requires(Robot.intakeBack);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
@@ -22,10 +23,17 @@ public class Kill extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveTrain.stop();
+    	
     	Robot.intakeFront.stopIntake();
     	Robot.intakeFront.stopVertical();
     	Robot.intakeBack.stopIntake();
     	Robot.intakeBack.stopVertical();
+    	Robot.intakeBack.setIntakeAngle(Robot.intakeBack.getIntakeAngle());
+    	Robot.intakeFront.setIntakeAngle(Robot.intakeFront.getIntakeAngle());
+    	
+    	Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle());
+    	Robot.shooter.setShootingWheelSpeed(Robot.shooter.getShootingWheelSpeed());
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()
