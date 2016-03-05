@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Aim the shooter towards the cleat
  */
 public class AimCleatShot extends CommandGroup {
     
