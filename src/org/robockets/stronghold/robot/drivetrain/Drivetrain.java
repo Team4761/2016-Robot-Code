@@ -21,9 +21,10 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
+		//distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
+		distancePID = new PIDController(0.005, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
 		encodersPID = new PIDController(0.0019, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
-		
+
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
 		compassPID.setPercentTolerance(5.0); // Set tolerance of 5%
@@ -103,7 +104,8 @@ public class Drivetrain extends Subsystem {
     }
     
     public double getEncodersOffset() {
-    	return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
+    	//return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
+    	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
     }
     
     public void stop() {

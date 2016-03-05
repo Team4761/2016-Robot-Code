@@ -19,17 +19,18 @@ public class TurnRelative extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.encodersPID.enable();
+    	Robot.driveTrain.setOffsetAngle(amount);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.setOffsetAngle(amount);
     	Robot.driveTrain.driveAssisted(false, true, 0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.driveTrain.encodersPID.onTarget();  
+    	return false;
+    	//return Robot.driveTrain.encodersPID.onTarget();  
     }
 
     // Called once after isFinished returns true
