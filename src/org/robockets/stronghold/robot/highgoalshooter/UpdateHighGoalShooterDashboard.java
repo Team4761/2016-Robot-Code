@@ -36,6 +36,13 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Give Ball To Shooter", new GiveBallToShooter(IntakeSide.FRONT));
     	SmartDashboard.putData("Limbo", new Limbo());
     	SmartDashboard.putData("Drive Position", new DrivePosition());
+    	
+    	SmartDashboard.putData("Set TurnTable", new MoveTurnTable(0));
+    	SmartDashboard.putData("Set Hood", new MoveHood(0));
+    	SmartDashboard.putData("Set Spin Wheels", new MoveShootingWheel(0));
+    	SmartDashboard.putNumber("New TurnTable Angle", 0);
+    	SmartDashboard.putNumber("New Hood Angle", 0);
+    	SmartDashboard.putNumber("New Spin Wheels RPM", 0);
     }
 
     protected void execute() {

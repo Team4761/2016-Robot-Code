@@ -66,8 +66,8 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	SmartDashboard.putNumber("TurnTable", angle);
-    	turnTablePidController.setSetpoint(angle);
+    	//turnTablePidController.setSetpoint(angle);
+    	turnTablePidController.setSetpoint(SmartDashboard.getNumber("New TurnTable Angle"));
     }
     
     public double getTurnTableSetpoint() {
@@ -75,7 +75,8 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setHoodAngle(double angle) {
-    	hoodPidController.setSetpoint(angle);
+    	//hoodPidController.setSetpoint(angle);
+    	hoodPidController.setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
     }
     
     public double getHoodSetpoint() {
@@ -95,7 +96,8 @@ public class HighGoalShooter extends Subsystem {
      * @param speed 	The rpm to set the shooting mechanism at.
      */
     public void setShootingWheelSpeed(double speed) {
-    	shootingWheelPidController.setSetpoint(speed);
+    	//shootingWheelPidController.setSetpoint(speed);
+    	shootingWheelPidController.setSetpoint(SmartDashboard.getNumber("New Spin Wheels RPM"));
     }
     
     public void setShootingWheelVoltage(double voltage) {
