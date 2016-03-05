@@ -23,6 +23,7 @@ public class HorizontalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
+    	table.putNumber("heartbeat", 1);
     }
 
     boolean holdUp = false;
@@ -32,7 +33,7 @@ public class HorizontalAlign extends Command {
     	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
     	//resolution: 1024 px wide
     	//fov:
-    	double factor = 55.3/1024;
+    	double factor = 0.0305;
     	
     	if (holdUp){
     		if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
@@ -49,12 +50,12 @@ public class HorizontalAlign extends Command {
     }
     
     protected boolean isFinished() {
-    	if (continuous) return Robot.shooter.turnTableOnTarget();
+    	if (continuous == false) return Robot.shooter.turnTableOnTarget();
     	return false;
     }
 
     protected void end() {
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
+    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint()); // Stopping it.
     }
 
     protected void interrupted() {

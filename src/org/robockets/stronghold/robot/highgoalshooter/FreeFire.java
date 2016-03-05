@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FreeFire extends CommandGroup {
     
     public  FreeFire() {
-    	addSequential(new VerticalAlign());
-    	addSequential(new HorizontalAlign(true));
+    	addSequential(new HorizontalAlign(false));
+    	addSequential(new VerticalAlign(false));
     	addSequential(new FireShooter());
     	addSequential(new MoveShootingWheel(0));
     }

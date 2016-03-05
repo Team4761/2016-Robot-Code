@@ -19,10 +19,12 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void initialize() {
-    	SmartDashboard.putData("Horizontal Align", new HorizontalAlign(false));
-    	SmartDashboard.putData("Vertical Align", new VerticalAlign());
+    	SmartDashboard.putData("Horizontal Align", new HorizontalAlign(true));
+    	SmartDashboard.putData("Vertical Align", new VerticalAlign(true));
     	SmartDashboard.putData("Spin Turn Table Left", new MoveTurnTable(-30, 0));
     	SmartDashboard.putData("Spin Turn Table Right", new MoveTurnTable(30, 0));
+    	SmartDashboard.putData("Free fire", new FreeFire());
+    	SmartDashboard.putData("Zero hood", new MoveHood(0));
     }
 
     protected void execute() {

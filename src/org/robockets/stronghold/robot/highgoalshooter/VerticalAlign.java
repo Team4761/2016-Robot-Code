@@ -17,36 +17,41 @@ public class VerticalAlign extends Command {
 	double wheelDiameter = 6;
 	double shaftRPM;
 	
-    public VerticalAlign() {
+	boolean continuous;
+	
+    public VerticalAlign(boolean continuos) {
     	requires(Robot.shooter);
+    	this.continuous = continuous;
     }
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
-    	setTimeout(10); // Should not take longer than 10 seconds.
+    	if(!continuous) { setTimeout(10); } // Should not take longer than 10 seconds.
     }
 
     protected void execute() {
     	//TODO: Horizontally align.
-    	double distanceToTarget = table.getNumber("distance_guess", 10);
+    	double distanceToTarget = table.getNumber("distance_guess", 6);
     	SmartDashboard.putNumber("distance", distanceToTarget);
     	
-    	double angle = Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12) / distanceToTarget) * 180 / Math.PI);
+    	double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
     	SmartDashboard.putNumber("angle", angle);
     	
     	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
     
     	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
-    	//Robot.shooter.setHoodAngle(angle);
-    	//Robot.shooter.setShootingWheelSpeed(shaftRPM);
+    	Robot.shooter.setHoodAngle(angle);
+    	Robot.shooter.setShootingWheelSpeed(shaftRPM);
     }
 
     protected boolean isFinished() {
-    	return Robot.shooter.hoodOnTarget()
-    			&& Robot.shooter.shootingWheelOnTarget()
-    			&& Robot.shooter.turnTableOnTarget()
-    			|| isTimedOut();
+    	if(continuous == false){
+    		return Robot.shooter.hoodOnTarget()
+    				&& Robot.shooter.shootingWheelOnTarget()
+    				&& Robot.shooter.turnTableOnTarget()
+    				|| isTimedOut();
+    	} else { return false; }
     }
 
     protected void end() {

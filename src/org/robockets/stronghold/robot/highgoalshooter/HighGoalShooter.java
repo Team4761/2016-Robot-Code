@@ -23,6 +23,7 @@ public class HighGoalShooter extends Subsystem {
 	public final EncoderPIDSource turnTableSource;
 	
 	public HighGoalShooter() {
+		// ! Note the rate should be negative if on the practice robot!
 		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
@@ -60,12 +61,13 @@ public class HighGoalShooter extends Subsystem {
     
     public void setTurnTableAngle(double angle) {
     	if (angle > 270) {
-    		turnTablePidController.setSetpoint(angle % 270 + 90);
+    		System.out.println(angle % 270 + 90);
     	} else if (angle < 270) {
-    		turnTablePidController.setSetpoint(angle % -270 - 90);
+    		System.out.println(angle % -270 - 90);
     	} else {
-    		turnTablePidController.setSetpoint(angle);
+    		System.out.println(angle);
     	}
+    	turnTablePidController.setSetpoint(angle);
     }
     
     public double getTurnTableSetpoint() {
@@ -85,7 +87,7 @@ public class HighGoalShooter extends Subsystem {
     }
 
     public boolean turnTableOnTarget(){
-    	return turnTablePidController.onTarget();
+    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 2;
     }
     
     /**
