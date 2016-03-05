@@ -14,7 +14,7 @@ public class HorizontalAlign extends Command {
 	boolean continuous;
 	
 	/**
-	 * * @param continuos		If it should stop when on target.
+	 * * @param continuous		If it should stop when on target.
 	 */
     public HorizontalAlign(boolean continuous) {
     	requires(Robot.shooter);
