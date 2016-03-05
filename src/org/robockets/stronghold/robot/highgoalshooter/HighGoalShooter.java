@@ -54,7 +54,6 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setShooterFlipper(double angle) {
-    	//RobotMap.shootingFlipper.set(speed);
     	RobotMap.shootingFlipper.setAngle(angle);
     }
     
@@ -69,6 +68,10 @@ public class HighGoalShooter extends Subsystem {
     public void setTurnTableAngle(double angle) {
     	SmartDashboard.putNumber("TurnTable", angle);
     	turnTablePidController.setSetpoint(angle);
+    }
+    
+    public double getTurnTableAngle() {
+    	return RobotMap.turnTableEncoder.get() * 0.16096579;
     }
     
     public double getTurnTableSetpoint() {
