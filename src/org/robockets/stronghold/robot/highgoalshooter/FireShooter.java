@@ -1,7 +1,6 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.robockets.stronghold.robot.Robot;
 

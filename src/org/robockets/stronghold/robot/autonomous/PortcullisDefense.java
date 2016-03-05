@@ -3,7 +3,7 @@ package org.robockets.stronghold.robot.autonomous;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
-import org.robockets.stronghold.robot.highgoalshooter.Limbo;
+import org.robockets.stronghold.robot.commands.Limbo;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.LiftPortcullis;
 

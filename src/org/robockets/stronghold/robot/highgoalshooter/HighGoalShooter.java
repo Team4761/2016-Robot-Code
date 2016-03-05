@@ -7,6 +7,7 @@ import org.robockets.stronghold.robot.pidsources.TalonPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.
@@ -56,12 +57,17 @@ public class HighGoalShooter extends Subsystem {
     	RobotMap.shootingFlipper.setAngle(angle);
     }
     
-    public void setTurnTableAngle(double angle) {
-    	turnTablePidController.setSetpoint(angle);
+    public boolean turnTableOnTarget() {
+    	return Math.abs(getTurnTableSetpoint() - getTurnTableAngle()) < 2;
     }
     
     public double getTurnTableAngle() {
     	return RobotMap.turnTableEncoder.get() * 0.16096579;
+    }
+    
+    public void setTurnTableAngle(double angle) {
+    	SmartDashboard.putNumber("TurnTable", angle);
+    	turnTablePidController.setSetpoint(angle);
     }
     
     public double getTurnTableSetpoint() {
