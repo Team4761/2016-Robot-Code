@@ -16,7 +16,7 @@ public class CheckIntakeBreakBeam extends Command {
 	
 	boolean ballIn;
 	boolean intaking = false;
-	boolean lowGoal;
+	boolean lowGoal = false;
 	
 	/**
 	 * 
@@ -36,6 +36,7 @@ public class CheckIntakeBreakBeam extends Command {
 		}
     	
     	if (intaking) { this.intaking = true; }
+    	if (lowGoal) { this.lowGoal = true; }
     }
 
     // Called just before this Command runs the first time
