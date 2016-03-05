@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.Robot;
+import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,41 +11,40 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnRelative extends Command {
 
 	double amount;
+	boolean finished;
 	
     public TurnRelative(double amount) {
         requires(Robot.driveTrain);
         this.amount = amount;
+        finished = false;
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.encodersPID.enable();
-    	Robot.driveTrain.setOffsetAngle(amount);
+    	Robot.driveTrain.gyroPID.setSetpoint(RobotMap.navX.getAccumulatedYaw() + amount);
+    	Robot.driveTrain.gyroPID.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Encoders Setpoint: " + Robot.driveTrain.encodersPID.getSetpoint());
-    	System.out.println("Encoders Offset: " + Robot.driveTrain.getEncodersOffset());
-    	
-
-    	Robot.driveTrain.driveAssisted(false, true, 0.5);
+    	Robot.driveTrain.driveAssisted(false, false, 1.0);
+    	if (Robot.driveTrain.gyroPID.get() == RobotMap.navX.getAccumulatedYaw() + amount) {
+    		finished = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
-    	//return Robot.driveTrain.encodersPID.onTarget();  
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.encodersPID.disable();
+    	Robot.driveTrain.gyroPID.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
