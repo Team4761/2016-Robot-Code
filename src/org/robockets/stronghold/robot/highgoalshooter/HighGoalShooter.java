@@ -28,7 +28,7 @@ public class HighGoalShooter extends Subsystem {
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
 		//hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor); Used to be correct but for some reason it changed
 		hoodPidController = new PIDController(0.075, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
-		shootingWheelPidController = new PIDController(0.0001, 0, 0.0005, new TalonPIDSource(), RobotMap.shootingWheelMotor);
+		shootingWheelPidController = new PIDController(0.0001, 0.00001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		
 		turnTablePidController.disable();
 		hoodPidController.disable();
@@ -66,8 +66,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	SmartDashboard.putNumber("TurnTable", angle);
-    	turnTablePidController.setSetpoint(angle);
+		turnTablePidController.setSetpoint(angle);
     }
     
     public double getTurnTableSetpoint() {
