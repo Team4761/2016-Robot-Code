@@ -15,8 +15,8 @@ public class IntakesUp extends Command {
     }
 
     protected void initialize() {
-    	Robot.intakeFront.setIntakeAngle(0);
-    	Robot.intakeBack.setIntakeAngle(0);
+    	Robot.intakeFront.setIntakeAngle(90);
+    	Robot.intakeBack.setIntakeAngle(90);
     }
 
     protected void execute() {

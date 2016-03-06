@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot.drivetrain;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -11,6 +12,8 @@ public class AssistedDrive extends Command {
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
 	double speed;
+	double distance;
+	double relativeAngle;
 	
 	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
 		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0); // Got to go fast!
@@ -21,8 +24,19 @@ public class AssistedDrive extends Command {
         
         this.translatePidType = translatePidType;
         this.rotationPidType = rotationPidType;
+        this.distance = distance;
+        this.relativeAngle = relativeAngle;
         
-        if (translatePidType == AssistedTranslateType.ENCODER) {
+        this.speed = speed;
+    }
+    
+    public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
+    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	if (translatePidType == AssistedTranslateType.ENCODER) {
         	Robot.driveTrain.enableDistancePID();
         	Robot.driveTrain.setDistanceInInches(distance);
         }
@@ -37,20 +51,10 @@ public class AssistedDrive extends Command {
     		Robot.driveTrain.enableEncodersPID();
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     	}
-        
-        this.speed = speed;
-    }
-    
-    public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
-    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() {	
     	boolean compassAssist = false;
     	boolean encooder = false;
     	if (rotationPidType == AssistedRotateType.COMPASS) {
@@ -71,14 +75,18 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		encoderOnTarget = Robot.driveTrain.distancePID.onTarget();
+    		encoderOnTarget = Robot.driveTrain.distanceOnTarget();
     	}
     	
     	if (rotationPidType == AssistedRotateType.COMPASS) {
     		return Robot.driveTrain.compassPID.onTarget() && encoderOnTarget;
-    	} else { // Default to gyro
+    	} else if (rotationPidType == AssistedRotateType.GYRO){ // Default to gyro
     		return Robot.driveTrain.gyroPID.onTarget() && encoderOnTarget;
+    	} else {
+    		return encoderOnTarget;
     	}
+    	
+    	
     }
 
     // Called once after isFinished returns true
