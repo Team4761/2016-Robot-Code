@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.OI;
+import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +34,7 @@ public class Robot extends IterativeRobot {
 
 	
 	Command teleop;
-	Command autonomousCommand = new Autonomous();
+	Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
       oi = new OI();
       teleop = new Teleop();
+      autonomousCommand = new Autonomous();
       CameraServer server = CameraServer.getInstance();
       server.startAutomaticCapture("cam0");
     }
@@ -56,11 +59,6 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-	    shooter.setHoodAngle(shooter.getHoodAngle());
-	    shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed());
-	    shooter.setTurnTableAngle(shooter.getTurnTableAngle());
-	    intakeBack.setIntakeAngle(intakeBack.getIntakeAngle());
-	    intakeFront.setIntakeAngle(intakeFront.getIntakeAngle());
 	}
 
 	/**
@@ -73,8 +71,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {        
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	autonomousCommand.start();
     }
 
     /**

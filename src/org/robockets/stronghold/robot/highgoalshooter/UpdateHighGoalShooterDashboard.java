@@ -29,7 +29,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Reset Intake Back", new ResetPID(RobotMap.intakeEncoderBack, Robot.intakeBack.encoderPID));
     	SmartDashboard.putData("Reset Turntable", new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController));
     	SmartDashboard.putData("Reset Hood", new ResetPID(RobotMap.hoodEncoder, Robot.shooter.hoodPidController));
-    	SmartDashboard.putData("Shovel some fries", new ChevalDeFrise(IntakeSide.FRONT));
+    	//SmartDashboard.putData("Shovel some fries", new ChevalDeFrise(IntakeSide.FRONT));
     	SmartDashboard.putData("Set Encoders Angle 90", new TurnRelative(90));
     	SmartDashboard.putData("Set Encoders Angle 0", new TurnRelative(0));
     	SmartDashboard.putData("Intake 'Boulder'", new IntakeBall(IntakeSide.FRONT));

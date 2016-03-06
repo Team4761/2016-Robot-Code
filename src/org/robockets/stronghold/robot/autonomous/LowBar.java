@@ -16,10 +16,10 @@ public class LowBar extends CommandGroup {
     public LowBar(Direction direction) {
     	addSequential(new Limbo());
         
-        if (direction == Direction.FORWARD) {
+        //if (direction == Direction.FORWARD) {
         	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
-        } else {
-        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
-        }
+        //} else {
+        //	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
+        //}
     }
 }
