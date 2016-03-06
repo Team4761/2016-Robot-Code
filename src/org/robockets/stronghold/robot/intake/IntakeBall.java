@@ -19,9 +19,9 @@ public class IntakeBall extends CommandGroup {
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
     	addSequential(new MoveHood(0));
         //addSequential(new SetVerticalIntake(5, intakeSide)); // Ideal position for ball intake
-        addSequential(new SetVerticalIntake(55, intakeSide)); // Ideal position for ball intake
+        addSequential(new SetVerticalIntake(80, intakeSide)); // Ideal position for ball intake
         addSequential(new CheckIntakeBreakBeam(intakeSide)); // Spins until break break sensor is broken
         //addSequential(new SetVerticalIntake(90, intakeSide)); // Up
-        addSequential(new SetVerticalIntake(0, intakeSide)); // Up
+        addSequential(new SetVerticalIntake(20, intakeSide)); // Up
     }
 }
