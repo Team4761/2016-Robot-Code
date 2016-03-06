@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -60,7 +61,8 @@ public class Intake extends Subsystem {
 	}
 	
 	public void setIntakeAngle(double angle) {
-		encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
+		//encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
+		encoderPID.setSetpoint(SmartDashboard.getNumber("New Intake Vertical Angle") * COUNTS_PER_DEGREE);
 	}
 	
 	public double getIntakeAngle() {

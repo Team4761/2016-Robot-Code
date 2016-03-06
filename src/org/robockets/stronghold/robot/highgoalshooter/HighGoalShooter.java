@@ -53,8 +53,8 @@ public class HighGoalShooter extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public void setShooterFlipper(double angle) {
-    	RobotMap.shootingFlipper.setAngle(angle);
+    public void setShooterFlipper(double speed) {
+    	RobotMap.shootingFlipper.set(speed);
     }
     
     public boolean turnTableOnTarget() {
@@ -67,7 +67,7 @@ public class HighGoalShooter extends Subsystem {
     
     public void setTurnTableAngle(double angle) {
     	//turnTablePidController.setSetpoint(angle);
-    	turnTablePidController.setSetpoint(SmartDashboard.getNumber("New TurnTable Angle"));
+    	turnTablePidController.setSetpoint(SmartDashboard.getNumber("New TurnTable Angle", 0));
     }
     
     public double getTurnTableSetpoint() {
@@ -76,7 +76,7 @@ public class HighGoalShooter extends Subsystem {
     
     public void setHoodAngle(double angle) {
     	//hoodPidController.setSetpoint(angle);
-    	hoodPidController.setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
+    	hoodPidController.setSetpoint(SmartDashboard.getNumber("New Hood Angle", 0));
     }
     
     public double getHoodSetpoint() {
@@ -97,7 +97,11 @@ public class HighGoalShooter extends Subsystem {
      */
     public void setShootingWheelSpeed(double speed) {
     	//shootingWheelPidController.setSetpoint(speed);
-    	shootingWheelPidController.setSetpoint(SmartDashboard.getNumber("New Spin Wheels RPM"));
+    	if (speed != 0) {
+    		shootingWheelPidController.setSetpoint(SmartDashboard.getNumber("New Spin Wheels RPM", 0));
+    	} else {
+    		shootingWheelPidController.setSetpoint(speed);
+    	}
     }
     
     public void setShootingWheelVoltage(double voltage) {

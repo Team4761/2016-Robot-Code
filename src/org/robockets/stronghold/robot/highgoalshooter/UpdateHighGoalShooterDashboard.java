@@ -7,6 +7,7 @@ import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Limbo;
 import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
+import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.ChevalDeFrise;
 import org.robockets.stronghold.robot.intake.IntakeSide;
@@ -23,6 +24,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class UpdateHighGoalShooterDashboard extends Command {
 
     public UpdateHighGoalShooterDashboard() {
+    	SmartDashboard.putNumber("New TurnTable Angle", 0);
+    	SmartDashboard.putNumber("New Hood Angle", 0);
+    	SmartDashboard.putNumber("New Spin Wheels RPM", 0);
+    	SmartDashboard.putNumber("New Intake Vertical Angle", 0);
     }
 
     protected void initialize() {
@@ -36,13 +41,13 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Give Ball To Shooter", new GiveBallToShooter(IntakeSide.FRONT));
     	SmartDashboard.putData("Limbo", new Limbo());
     	SmartDashboard.putData("Drive Position", new DrivePosition());
+    	SmartDashboard.putData("Fire Shooter", new FireShooter());
     	
     	SmartDashboard.putData("Set TurnTable", new MoveTurnTable(0));
     	SmartDashboard.putData("Set Hood", new MoveHood(0));
-    	SmartDashboard.putData("Set Spin Wheels", new MoveShootingWheel(0));
-    	SmartDashboard.putNumber("New TurnTable Angle", 0);
-    	SmartDashboard.putNumber("New Hood Angle", 0);
-    	SmartDashboard.putNumber("New Spin Wheels RPM", 0);
+    	SmartDashboard.putData("Set Spin Wheels", new MoveShootingWheel(90));
+    	SmartDashboard.putData("Stop Spin Wheels", new MoveShootingWheel(0));
+    	SmartDashboard.putData("Set Vertical Intake", new SetVerticalIntake(0, IntakeSide.FRONT));
     }
 
     protected void execute() {

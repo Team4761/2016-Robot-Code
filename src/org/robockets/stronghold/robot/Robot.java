@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,17 +33,21 @@ public class Robot extends IterativeRobot {
 
 	
 	Command teleop;
-	Command autonomousCommand = new Autonomous();
+	Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-      oi = new OI();
-      teleop = new Teleop();
-      CameraServer server = CameraServer.getInstance();
-      server.startAutomaticCapture("cam0");
+        NetworkTable.globalDeleteAll();
+    	
+	    oi = new OI();
+	    teleop = new Teleop();
+	    autonomousCommand = new Autonomous();
+	    CameraServer server = CameraServer.getInstance();
+	    server.startAutomaticCapture("cam0");
+      
     }
 	
 	/**
@@ -50,7 +55,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
      */
-    public void disabledInit(){
+    public void disabledInit() {
 
     }
 	
