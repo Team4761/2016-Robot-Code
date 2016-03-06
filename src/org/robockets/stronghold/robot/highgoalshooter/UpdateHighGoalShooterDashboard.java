@@ -5,6 +5,7 @@ import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Limbo;
+import org.robockets.stronghold.robot.commands.LowGoal;
 import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
 import org.robockets.stronghold.robot.intake.IntakeBall;
@@ -36,6 +37,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Give Ball To Shooter", new GiveBallToShooter(IntakeSide.FRONT));
     	SmartDashboard.putData("Limbo", new Limbo());
     	SmartDashboard.putData("Drive Position", new DrivePosition());
+    	SmartDashboard.putData("LowGoal", new LowGoal(IntakeSide.FRONT));
     }
 
     protected void execute() {
