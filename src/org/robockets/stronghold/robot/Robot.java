@@ -45,9 +45,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
       oi = new OI();
       teleop = new Teleop();
-      FieldConfiguration.loadAll();
-    //  CameraServer server = CameraServer.getInstance();
-    //  server.startAutomaticCapture("cam0");
+      CameraServer server = CameraServer.getInstance();
+      server.startAutomaticCapture("cam0");
     }
 	
 	/**
@@ -56,7 +55,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+		FieldConfiguration.loadAll();	// DO NOT KEEP THIS HERE OR THE ROBOT WILL BE UNABLE TO RECOVER FROM A CRASH WITHOUT RE-SENDING ALL THE AUTO DATA!!!
     }
 	
 	public void disabledPeriodic() {
