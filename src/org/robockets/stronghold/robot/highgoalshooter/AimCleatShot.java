@@ -20,9 +20,9 @@ public class AimCleatShot extends CommandGroup {
         	case RIGHT:
         		turntableCommand = new MoveTurnTable(90);
         		break;
-        	/*case CENTER:
+        	case CENTER:
         		turntableCommand = new MoveTurnTable(0);
-        		break; */
+        		break;
         	default:
         		// Oh no!
         		break;

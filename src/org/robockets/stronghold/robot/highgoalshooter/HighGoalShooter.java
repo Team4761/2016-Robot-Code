@@ -22,7 +22,7 @@ public class HighGoalShooter extends Subsystem {
 	public final PIDController shootingWheelPidController;
 	
 	public HighGoalShooter() {
-		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, -0.16096579, PIDSourceType.kDisplacement);
+		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
 		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
@@ -54,7 +54,6 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setShooterFlipper(double angle) {
-    	//RobotMap.shootingFlipper.set(speed);
     	RobotMap.shootingFlipper.setAngle(angle);
     }
     
@@ -63,7 +62,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public double getTurnTableAngle() {
-    	return RobotMap.turnTableEncoder.get() * -0.16096579;
+    	return RobotMap.turnTableEncoder.get() * 0.16096579;
     }
     
     public void setTurnTableAngle(double angle) {
