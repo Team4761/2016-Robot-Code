@@ -13,7 +13,7 @@ public class VerticalAlign extends Command {
 	NetworkTable table;
 	double gravAcc = 32;
 	double floorToTargetHeight = 8;
-	double robotShooterToTargetHeight = 16;
+	double robotShooterToTargetHeight = 12;
 	double wheelDiameter = 6;
 	double shaftRPM;
 	
@@ -32,7 +32,6 @@ public class VerticalAlign extends Command {
     protected void execute() {
     	//TODO: Horizontally align.
     	double distanceToTarget = table.getNumber("distance_guess", 6);
-    	SmartDashboard.putNumber("distance", distanceToTarget);
     	
     	double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
     	SmartDashboard.putNumber("angle", angle);
@@ -40,6 +39,9 @@ public class VerticalAlign extends Command {
     	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
     
     	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
+    	shaftRPM += (18.929 * distanceToTarget) + 92.5;
+    	
+    	SmartDashboard.putNumber("shaftRPM", shaftRPM);
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
