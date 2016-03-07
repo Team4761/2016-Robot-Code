@@ -72,7 +72,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean intakeOnTarget() {
-		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 5;
+		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 3;
 	}
 
 	public void enablePID() {
