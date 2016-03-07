@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class ChevalDeFrise extends CommandGroup {
 	Intake intake;
-	// Assuming position fully down is 0 and fully up is -90.
+
     public ChevalDeFrise(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {
     		intake = Robot.intakeFront;
@@ -21,10 +21,10 @@ public class ChevalDeFrise extends CommandGroup {
     		intake = Robot.intakeBack;
     	}
     	
-    	addSequential(new SetVerticalIntake(20, intakeSide));
-        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 7.5, 0)); // Dummy inputs for distance and relativeAngle
+    	addSequential(new SetVerticalIntake(80, intakeSide));
+        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 15, 0, 0.7)); // Dummy inputs for distance and relativeAngle
         addSequential(new WaitCommand(1));
-        addParallel(new SetVerticalIntake(-70, intakeSide)); // Slowly lift arm as robot moves across
-        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 7.5, 0)); // Dummy inputs for distance and relativeAngle
+        addParallel(new SetVerticalIntake(20, intakeSide)); // Slowly lift arm as robot moves across
+        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 25, 0.5)); // Dummy inputs for distance and relativeAngle
     }
 }
