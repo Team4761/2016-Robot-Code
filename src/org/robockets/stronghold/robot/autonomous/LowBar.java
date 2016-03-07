@@ -21,5 +21,6 @@ public class LowBar extends CommandGroup {
         } else {
         	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
         }
+        
     }
 }
