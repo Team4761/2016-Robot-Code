@@ -2,7 +2,6 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.OI;
-import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
@@ -15,8 +14,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.robockets.stronghold.robot.AutoCommands;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
 	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
 	public static final HighGoalShooter shooter = new HighGoalShooter();
-	public static final AutoCommands autoCommand = new AutoCommands();
+	//public static final AutoCommands autoCommand = new AutoCommands();
 
 	
 	Command teleop;
@@ -47,6 +45,7 @@ public class Robot extends IterativeRobot {
       teleop = new Teleop();
       CameraServer server = CameraServer.getInstance();
       server.startAutomaticCapture("cam0");
+      NetworkTable.globalDeleteAll(); 
     }
 	
 	/**
@@ -55,11 +54,16 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-		FieldConfiguration.loadAll();	// DO NOT KEEP THIS HERE OR THE ROBOT WILL BE UNABLE TO RECOVER FROM A CRASH WITHOUT RE-SENDING ALL THE AUTO DATA!!!
+	//	FieldConfiguration.loadAll();	// DO NOT KEEP THIS HERE OR THE ROBOT WILL BE UNABLE TO RECOVER FROM A CRASH WITHOUT RE-SENDING ALL THE AUTO DATA!!!
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		shooter.setHoodAngle(shooter.getHoodAngle()); 
+		shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed()); 
+		shooter.setTurnTableAngle(shooter.getTurnTableAngle()); 
+		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
+		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
 	}
 
 	/**
@@ -73,8 +77,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {        
     	// schedule the autonomous command (example)
-        //if (autonomousCommand != null) autonomousCommand.start();
-        autoCommand.run();
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
