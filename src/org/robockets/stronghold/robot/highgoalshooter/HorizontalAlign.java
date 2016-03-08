@@ -12,6 +12,7 @@ public class HorizontalAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
+	boolean onTargetForReal = false;
 	
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -24,6 +25,7 @@ public class HorizontalAlign extends Command {
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
     	table.putNumber("heartbeat", 1);
+    	onTargetForReal = false;
     }
 
     boolean holdUp = false;
@@ -35,27 +37,37 @@ public class HorizontalAlign extends Command {
     	//fov:
     	double factor = 0.0305;
     	
-    	if (holdUp){
-    		if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
-    	} else {
-    		if (table.getNumber("heartbeat", 0) == 1) {
+    	//if (holdUp){
+    		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
+    	//} else {
+    		//if (table.getNumber("heartbeat", 0) == 1) {
     			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
-    			if (Math.abs(output) > 270) {
-    				holdUp = true; // We need to spin back around to not twist the wires.
-    			}
+    			//if (Math.abs(output) > 270) {
+    			//	holdUp = true; // We need to spin back around to not twist the wires.
+    			//}
     			Robot.shooter.setTurnTableAngle(output);
-    			table.putNumber("heartbeat", 1);
+    			//table.putNumber("heartbeat", 1);
+    		//}
+    	//}
+    			
+    	if (Robot.shooter.turnTableOnTarget()) {
+    		if (!onTargetForReal) {
+    			setTimeout(1);
     		}
+    		
+    		onTargetForReal = true;
+    	} else {
+    		onTargetForReal = false;
     	}
     }
     
     protected boolean isFinished() {
-    	if (continuous == false) return Robot.shooter.turnTableOnTarget();
+    	if (continuous == false) return Robot.shooter.turnTableOnTarget() && isTimedOut() && onTargetForReal;
     	return false;
     }
 
     protected void end() {
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint()); // Stopping it.
+    	//Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint()); // Stopping it.
     }
 
     protected void interrupted() {

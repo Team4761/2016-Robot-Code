@@ -31,7 +31,9 @@ public class VerticalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
-    	if(!continuous) { setTimeout(10); } // Should not take longer than 10 seconds.
+    	//if(!continuous) { setTimeout(10); } // Should not take longer than 10 seconds.
+    	hitSpeedTarget = false;
+    	release = false;
     }
 
     protected void execute() {
@@ -47,30 +49,32 @@ public class VerticalAlign extends Command {
     	shaftRPM += (18.929 * distanceToTarget) + 92.5;
     	
     	SmartDashboard.putNumber("shaftRPM", shaftRPM);
+    	SmartDashboard.putNumber("distance", distanceToTarget);
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
     	
-    	if(Robot.shooter.turnTableOnTarget()){
-    		if(hitSpeedTarget){
-    			release = true;
+    	if (Robot.shooter.shootingWheelOnTarget()) {
+    		if (!hitSpeedTarget) {
+    			setTimeout(3);
     		}
+    		
     		hitSpeedTarget = true;
+    	} else {
+    		hitSpeedTarget = false;
     	}
     }
 
     protected boolean isFinished() {
-    	if(continuous == false){
+    	//if(continuous == false){
     		return Robot.shooter.hoodOnTarget()
     				&& Robot.shooter.shootingWheelOnTarget()
     				&& Robot.shooter.turnTableOnTarget()
-    				|| isTimedOut();
-    	} else { return false; }
+    				&& isTimedOut() && hitSpeedTarget;
+    	//} else { return false; }
     }
 
     protected void end() {
-    	hitSpeedTarget = false;
-    	release = false;
     }
 
     protected void interrupted() {

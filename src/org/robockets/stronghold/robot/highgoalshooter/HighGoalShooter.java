@@ -88,7 +88,7 @@ public class HighGoalShooter extends Subsystem {
     }
 
     public boolean turnTableOnTarget(){
-    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 2;
+    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 0.5;
     }
     
     /**

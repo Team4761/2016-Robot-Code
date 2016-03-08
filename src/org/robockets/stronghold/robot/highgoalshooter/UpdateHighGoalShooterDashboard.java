@@ -7,6 +7,7 @@ import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -14,6 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class UpdateHighGoalShooterDashboard extends Command {
 
+	NetworkTable table;
+	
     public UpdateHighGoalShooterDashboard() {
     }
 
@@ -41,6 +44,10 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
     	SmartDashboard.putNumber("Back Intake angle", RobotMap.intakeEncoderBack.get() / Robot.intakeBack.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
+    	
+    	table = NetworkTable.getTable("vision");
+    	
+    	SmartDashboard.putNumber("Lock", table.getNumber("can_see_target", 0));
     }
 
     protected boolean isFinished() {
