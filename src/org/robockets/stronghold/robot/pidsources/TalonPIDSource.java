@@ -5,7 +5,7 @@ import org.robockets.stronghold.robot.RobotMap;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class TalonPIDSource implements PIDSource {
+/*public class TalonPIDSource implements PIDSource {
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
@@ -23,3 +23,4 @@ public class TalonPIDSource implements PIDSource {
 	}
 
 }
+*/
