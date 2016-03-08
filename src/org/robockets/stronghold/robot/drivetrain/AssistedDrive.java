@@ -3,7 +3,6 @@ package org.robockets.stronghold.robot.drivetrain;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
