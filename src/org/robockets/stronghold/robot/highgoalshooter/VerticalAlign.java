@@ -19,38 +19,46 @@ public class VerticalAlign extends Command {
 	
 	boolean continuous;
 	
-    public VerticalAlign(boolean continuos) {
+    public VerticalAlign(boolean continuous) {
     	requires(Robot.shooter);
     	this.continuous = continuous;
     }
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
-    	if(!continuous) { setTimeout(10); } // Should not take longer than 10 seconds.
     }
 
     protected void execute() {
     	//TODO: Horizontally align.
-    	double distanceToTarget = table.getNumber("distance_guess", 6);
-    	SmartDashboard.putNumber("distance", distanceToTarget);
+    	if(table.getNumber("heartbeat", 0) == 1){
+    		double distanceToTarget = table.getNumber("distance_guess", 6);
+    		SmartDashboard.putNumber("distance", distanceToTarget);
     	
-    	double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
-    	SmartDashboard.putNumber("angle", angle);
+    		double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
+    		SmartDashboard.putNumber("angle", angle);
     	
-    	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
+    		double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
     
-    	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
+    		shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
-    	Robot.shooter.setHoodAngle(angle);
-    	Robot.shooter.setShootingWheelSpeed(shaftRPM);
+    		Robot.shooter.setHoodAngle(angle);
+    		Robot.shooter.setShootingWheelSpeed(shaftRPM);
+    	
+    		if (Robot.shooter.shootingWheelOnTarget()) {
+    			setTimeout(1/3); // See that it is a stable speed for 1/3 seconds or so.
+    		}
+    	}
     }
 
     protected boolean isFinished() {
-    	if(continuous == false){
-    		return Robot.shooter.hoodOnTarget()
+    	if(continuous == false) {
+    		if(table.getNumber("heartbeat", 0) == 1){
+    			return Robot.shooter.hoodOnTarget()
     				&& Robot.shooter.shootingWheelOnTarget()
-    				&& Robot.shooter.turnTableOnTarget()
-    				|| isTimedOut();
+    				&& isTimedOut();
+    		}
+    		table.putNumber("heartbeat", 0);
+    		return false;
     	} else { return false; }
     }
 
