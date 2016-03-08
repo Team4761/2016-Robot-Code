@@ -14,9 +14,18 @@ public class CheckIntakeBreakBeam extends Command {
 	Intake intake;
 	DigitalInput breakBeam;
 	
-	boolean ballIn;
+	boolean spinIn = false;
+	boolean haveBall = false;
+	double time;
 	
-    public CheckIntakeBreakBeam(IntakeSide intakeSide) {
+	/**
+	 * 
+	 * @param intakeSide The intake that you wish to manipulate.
+	 * @param intaking Do you want to use the break beam to aid in intaking(true) or spitting out(false)?
+	 * @param haveBall Are you shooting for lowgoal?
+	 * @param time Time command will run. 0 to disable this.
+	 */
+    public CheckIntakeBreakBeam(IntakeSide intakeSide, boolean spinIn, boolean haveBall, double time) {
     	if (intakeSide == IntakeSide.FRONT) {
 			requires(Robot.intakeFront);
 			intake = Robot.intakeFront;
@@ -26,26 +35,33 @@ public class CheckIntakeBreakBeam extends Command {
 			intake = Robot.intakeBack;
 			breakBeam = RobotMap.backBB;
 		}
+    	
+    	this.spinIn = spinIn;
+    	this.haveBall = haveBall;
+    	this.time = time;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	ballIn = false;
+    	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!breakBeam.get()) {
+    	if (spinIn) {
     		intake.spinIn();
     	} else {
-    		ballIn = true;
-    		setTimeout(0.75);
+    		intake.spinOut();
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return ballIn && isTimedOut();
+    	if (haveBall) {
+    		return !breakBeam.get() && isTimedOut();
+    	} else {
+    		return breakBeam.get() && isTimedOut();
+    	}
     }
 
     // Called once after isFinished returns true

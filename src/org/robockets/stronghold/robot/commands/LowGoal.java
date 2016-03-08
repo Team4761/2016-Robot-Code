@@ -13,6 +13,6 @@ public class LowGoal extends CommandGroup {
     
     public  LowGoal(IntakeSide intakeSide) {
         addSequential(new SetVerticalIntake(80, intakeSide));
-        addSequential(new CheckIntakeBreakBeam(intakeSide, false, true));
+        addSequential(new CheckIntakeBreakBeam(intakeSide, false, true, 5));
     }
 }
