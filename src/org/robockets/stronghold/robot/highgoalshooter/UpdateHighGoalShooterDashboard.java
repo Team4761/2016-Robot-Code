@@ -27,6 +27,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Reset Intake Back", new ResetPID(RobotMap.intakeEncoderBack, Robot.intakeBack.encoderPID));
     	SmartDashboard.putData("Reset Turntable", new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController));
     	SmartDashboard.putData("Reset Hood", new ResetPID(RobotMap.hoodEncoder, Robot.shooter.hoodPidController));
+    	SmartDashboard.putData("Fire Shooter", new FireShooter());
+    	SmartDashboard.putData("Move Hood 0", new MoveHood(0));
+    	SmartDashboard.putData("Stop Wheels", new MoveShootingWheel(0));
     }
 
     protected void execute() {
