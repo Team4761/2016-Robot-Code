@@ -1,6 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
+
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,6 +20,9 @@ public class VerticalAlign extends Command {
 	double shaftRPM;
 	
 	boolean continuous;
+	
+	boolean hitSpeedTarget = false;
+	boolean release = false;
 	
     public VerticalAlign(boolean continuos) {
     	requires(Robot.shooter);
@@ -45,6 +50,13 @@ public class VerticalAlign extends Command {
     	
     	Robot.shooter.setHoodAngle(angle);
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
+    	
+    	if(Robot.shooter.turnTableOnTarget()){
+    		if(hitSpeedTarget){
+    			release = true;
+    		}
+    		hitSpeedTarget = true;
+    	}
     }
 
     protected boolean isFinished() {
@@ -57,6 +69,8 @@ public class VerticalAlign extends Command {
     }
 
     protected void end() {
+    	hitSpeedTarget = false;
+    	release = false;
     }
 
     protected void interrupted() {
