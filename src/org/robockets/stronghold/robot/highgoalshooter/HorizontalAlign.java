@@ -50,7 +50,7 @@ public class HorizontalAlign extends Command {
     		//}
     	//}
     			
-    	if (Robot.shooter.turnTableOnTarget()) {
+    	if (!continuous && Robot.shooter.turnTableOnTarget()) {
     		if (!onTargetForReal) {
     			setTimeout(1);
     		}
@@ -67,7 +67,6 @@ public class HorizontalAlign extends Command {
     }
 
     protected void end() {
-    	//Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint()); // Stopping it.
     }
 
     protected void interrupted() {
