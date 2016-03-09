@@ -66,7 +66,7 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-		turnTablePidController.setSetpoint(angle);
+    	turnTablePidController.setSetpoint(angle);
     }
     
     public double getTurnTableSetpoint() {
