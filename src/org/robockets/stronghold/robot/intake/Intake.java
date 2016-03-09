@@ -61,8 +61,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void setIntakeAngle(double angle) {
-		//encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
-		encoderPID.setSetpoint(SmartDashboard.getNumber("New Intake Vertical Angle") * COUNTS_PER_DEGREE);
+		encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
 	}
 	
 	public double getIntakeAngle() {
