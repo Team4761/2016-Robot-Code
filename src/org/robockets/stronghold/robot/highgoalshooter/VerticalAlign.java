@@ -1,6 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
+
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,6 +20,8 @@ public class VerticalAlign extends Command {
 	
 	boolean continuous;
 	
+	boolean hitSpeedTarget = false;
+	
     public VerticalAlign(boolean continuous) {
     	requires(Robot.shooter);
     	this.continuous = continuous;
@@ -25,6 +29,7 @@ public class VerticalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
+    	hitSpeedTarget = false;
     }
 
     protected void execute() {
@@ -39,26 +44,14 @@ public class VerticalAlign extends Command {
     		double shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     		shaftRPM += (18.929 * distanceToTarget) + 92.5;
     	
-    		SmartDashboard.putNumber("shaftRPM", shaftRPM);
+    	SmartDashboard.putNumber("distance", distanceToTarget);
     	
-    		Robot.shooter.setHoodAngle(angle);
-    		Robot.shooter.setShootingWheelSpeed(shaftRPM);
-    	
-    		if (Robot.shooter.shootingWheelOnTarget()) {
-    			setTimeout(1/3); // See that it is a stable speed for 1/3 seconds or so.
-    		}
-    	}
+    	Robot.shooter.setHoodAngle(angle);
     }
 
     protected boolean isFinished() {
     	if(continuous == false) {
-    		if(table.getNumber("heartbeat", 0) == 1){
-    			return Robot.shooter.hoodOnTarget()
-    				&& Robot.shooter.shootingWheelOnTarget()
-    				&& isTimedOut();
-    		}
-    		table.putNumber("heartbeat", 0);
-    		return false;
+    		return Robot.shooter.turnTableOnTarget();
     	} else { return false; }
     }
 

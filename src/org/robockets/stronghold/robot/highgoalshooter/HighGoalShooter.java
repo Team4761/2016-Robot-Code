@@ -24,7 +24,7 @@ public class HighGoalShooter extends Subsystem {
 	
 	public HighGoalShooter() {
 		// ! Note the rate should be negative if on the practice robot!
-		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, -0.16096579, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
 		turnTablePidController = new PIDController(0.06, 0.0005, 0, turnTableSource, RobotMap.turnTableMotor);
@@ -88,7 +88,7 @@ public class HighGoalShooter extends Subsystem {
     }
 
     public boolean turnTableOnTarget(){
-    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 2;
+    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 0.5;
     }
     
     /**

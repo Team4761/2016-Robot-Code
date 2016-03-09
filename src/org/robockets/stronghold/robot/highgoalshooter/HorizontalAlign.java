@@ -12,6 +12,7 @@ public class HorizontalAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
+	boolean onTargetForReal = false;
 	
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -23,6 +24,8 @@ public class HorizontalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
+    	table.putNumber("heartbeat", 1);
+    	onTargetForReal = false;
     }
 
     protected void execute() {
@@ -31,21 +34,37 @@ public class HorizontalAlign extends Command {
     	//resolution: 1024 px wide
     	//fov:
     	double factor = 0.0305;
-
-    	if (table.getNumber("heartbeat", 0) == 1) {
-    		double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
-    		Robot.shooter.setTurnTableAngle(output);
+    	
+    	//if (holdUp){
+    		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
+    	//} else {
+    		//if (table.getNumber("heartbeat", 0) == 1) {
+    			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
+    			//if (Math.abs(output) > 270) {
+    			//	holdUp = true; // We need to spin back around to not twist the wires.
+    			//}
+    			Robot.shooter.setTurnTableAngle(output);
+    			//table.putNumber("heartbeat", 1);
+    		//}
+    	//}
+    			
+    	if (!continuous && Robot.shooter.turnTableOnTarget()) {
+    		if (!onTargetForReal) {
+    			setTimeout(1);
+    		}
+    		
+    		onTargetForReal = true;
+    	} else {
+    		onTargetForReal = false;
     	}
    }
     
     protected boolean isFinished() {
-    	if (continuous == false && table.getNumber("heartbeat", 0) == 1) return Robot.shooter.turnTableOnTarget();
-    	table.putNumber("heartbeat", 0); // Assuming this is called right after execute.
+    	if (continuous == false) return Robot.shooter.turnTableOnTarget() && isTimedOut() && onTargetForReal;
     	return false;
     }
 
     protected void end() {
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint()); // Stopping it.
     }
 
     protected void interrupted() {
