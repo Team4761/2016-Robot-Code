@@ -18,7 +18,7 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(110);
+    	Robot.shooter.setShooterFlipper(0.3);
     }
 
     protected boolean isFinished() {
@@ -26,7 +26,7 @@ public class FireShooter extends Command {
     }
 
     protected void end() {
-    	Robot.shooter.setShooterFlipper(30);
+    	Robot.shooter.setShooterFlipper(1);
     }
 
     protected void interrupted() {

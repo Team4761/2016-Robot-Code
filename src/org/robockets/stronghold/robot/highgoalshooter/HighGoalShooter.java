@@ -53,8 +53,8 @@ public class HighGoalShooter extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public void setShooterFlipper(double angle) {
-    	RobotMap.shootingFlipper.setAngle(angle);
+    public void setShooterFlipper(double speed) {
+    	RobotMap.shootingFlipper.set(speed);
     }
     
     public boolean turnTableOnTarget() {

@@ -34,18 +34,21 @@ public class Robot extends IterativeRobot {
 
 	
 	Command teleop;
-	Command autonomousCommand = new Autonomous();
+	Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-      oi = new OI();
-      teleop = new Teleop();
-      CameraServer server = CameraServer.getInstance();
-      server.startAutomaticCapture("cam0");
-      NetworkTable.globalDeleteAll(); 
+        NetworkTable.globalDeleteAll();
+    	
+	    oi = new OI();
+	    teleop = new Teleop();
+	    autonomousCommand = new Autonomous();
+	    CameraServer server = CameraServer.getInstance();
+	    server.startAutomaticCapture("cam0");
+      
     }
 	
 	/**
@@ -53,8 +56,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
      */
-    public void disabledInit(){
-	//	FieldConfiguration.loadAll();	// DO NOT KEEP THIS HERE OR THE ROBOT WILL BE UNABLE TO RECOVER FROM A CRASH WITHOUT RE-SENDING ALL THE AUTO DATA!!!
+    public void disabledInit() {
     }
 	
 	public void disabledPeriodic() {
