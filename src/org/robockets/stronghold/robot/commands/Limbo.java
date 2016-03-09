@@ -14,8 +14,8 @@ public class Limbo extends CommandGroup {
     
     public  Limbo() {
         addSequential(new MoveHood(-75));
-        addParallel(new SetVerticalIntake(80, IntakeSide.FRONT));
-        //addParallel(new SetVerticalIntake(80, IntakeSide.BACK));
+        addParallel(new SetVerticalIntake(65, IntakeSide.FRONT));
+        addParallel(new SetVerticalIntake(65, IntakeSide.BACK));
         addSequential(new MoveTurnTable(0));
     }
 }
