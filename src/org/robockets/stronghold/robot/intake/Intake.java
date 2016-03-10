@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -72,7 +73,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean intakeOnTarget() {
-		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 3;
+		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 5;
 	}
 
 	public void enablePID() {

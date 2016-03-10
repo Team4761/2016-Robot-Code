@@ -1,13 +1,17 @@
 package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.pidsources.CompassPIDSource;
 import org.robockets.stronghold.robot.pidsources.DualEncoderPIDSource;
+import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 import org.robockets.stronghold.robot.pidsources.GyroPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -19,11 +23,14 @@ public class Drivetrain extends Subsystem {
 	public final PIDController encodersPID;
 	
 	public Drivetrain() {
+		EncoderPIDSource distanceSource = new EncoderPIDSource(RobotMap.driveEncoder, -1, PIDSourceType.kDisplacement);
+		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
 		//distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
-		distancePID = new PIDController(0.005, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
-		encodersPID = new PIDController(0.0019, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
+		distancePID = new PIDController(0.0018, 0.000024, 0.0005, distanceSource, new DummyPIDOutput());
+		//encodersPID = new PIDController(0.0019, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
+		encodersPID = new PIDController(0.0019, 0.001, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -133,8 +140,8 @@ public class Drivetrain extends Subsystem {
     }
     
     public void enableDistancePID() {
-    	distancePID.reset();
-    	distancePID.setSetpoint(RobotMap.driveEncoder.get());
+    	//distancePID.reset();
+    	//distancePID.setSetpoint(RobotMap.driveEncoder.get());
     	distancePID.enable();
     }
     

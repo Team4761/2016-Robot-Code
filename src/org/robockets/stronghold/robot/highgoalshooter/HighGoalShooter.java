@@ -21,11 +21,14 @@ public class HighGoalShooter extends Subsystem {
 	public final PIDController hoodPidController;
 	public final PIDController shootingWheelPidController;
 	
+	public final EncoderPIDSource turnTableSource;
+	
 	public HighGoalShooter() {
-		EncoderPIDSource turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		// ! Note the rate should be negative if on the practice robot!
+		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, -0.16096579, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
-		turnTablePidController = new PIDController(0.06, 0, 0, turnTableSource, RobotMap.turnTableMotor);
+		turnTablePidController = new PIDController(0.06, 0.0005, 0, turnTableSource, RobotMap.turnTableMotor);
 		//hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor); Used to be correct but for some reason it changed
 		hoodPidController = new PIDController(0.075, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0.00001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
@@ -53,12 +56,8 @@ public class HighGoalShooter extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public void setShooterFlipper(double angle) {
-    	RobotMap.shootingFlipper.setAngle(angle);
-    }
-    
-    public boolean turnTableOnTarget() {
-    	return Math.abs(getTurnTableSetpoint() - getTurnTableAngle()) < 2;
+    public void setShooterFlipper(double speed) {
+    	RobotMap.shootingFlipper.set(speed);
     }
     
     public double getTurnTableAngle() {
@@ -66,7 +65,14 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-		turnTablePidController.setSetpoint(angle);
+    	if (angle > 270) {
+    		System.out.println(angle % 270 + 90);
+    	} else if (angle < 270) {
+    		System.out.println(angle % -270 - 90);
+    	} else {
+    		System.out.println(angle);
+    	}
+    	turnTablePidController.setSetpoint(angle);
     }
     
     public double getTurnTableSetpoint() {
@@ -89,6 +95,10 @@ public class HighGoalShooter extends Subsystem {
     	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(getHoodAngle())) < HOOD_ERROR;
     }
 
+    public boolean turnTableOnTarget(){
+    	return Math.abs(turnTablePidController.getSetpoint() - turnTableSource.pidGet()) < 0.5;
+    }
+    
     /**
      * Roll the shooting wheel to fire the boulder at a desired speed.
      * @param speed 	The rpm to set the shooting mechanism at.

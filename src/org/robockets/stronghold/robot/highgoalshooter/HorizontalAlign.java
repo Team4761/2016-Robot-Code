@@ -1,58 +1,70 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Align the robot horizontally with the target.
  */
 public class HorizontalAlign extends Command {
 
 	NetworkTable table;
-	boolean stop;
+	boolean continuous;
+	boolean onTargetForReal = false;
 	
-    public HorizontalAlign(boolean stop) {
+	/**
+	 * * @param continuous		If it should stop when on target.
+	 */
+    public HorizontalAlign(boolean continuous) {
     	requires(Robot.shooter);
-    	this.stop = stop;
-    	if (stop){
-    		requires(Robot.driveTrain); // Make the drive train stop for a bit here.
-    	}
+    	this.continuous = continuous;
     }
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision");
-    	if (stop) {
-    		double pixelError = table.getNumber("horiz_offset", 3);
-    		double distance = table.getNumber("distance", 10);
-    		double width = table.getNumber("width", 100);
-    		double actualWidthin = 20;
-    		Robot.shooter.setTurnTableAngle(Robot.shooter.turnTablePidController.getSetpoint() * Math.asin(pixelError * (actualWidthin / width) / distance));
-    	} else {
-    		Robot.shooter.disableTurnTablePID();
-    	}
+    	table.putNumber("heartbeat", 1);
+    	onTargetForReal = false;
     }
 
     protected void execute() {
-    	double pixelError = table.getNumber("horiz_offset", 3);
-		
-    	if(!stop) {
-    		double factor = 0.5;
-    		if (pixelError > 0) { factor *= -1; }
-    		if (Math.abs(pixelError) >= 40) { factor *= 0.5; } 
-    		// Robot.shooter.spinTurnTable(factor); old mold anyway
+    	double pixelError = table.getNumber("horiz_offset", 0);
+    	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
+    	//resolution: 1024 px wide
+    	//fov:
+    	double factor = 0.0305;
+    	
+    	//if (holdUp){
+    		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
+    	//} else {
+    		//if (table.getNumber("heartbeat", 0) == 1) {
+    			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
+    			//if (Math.abs(output) > 270) {
+    			//	holdUp = true; // We need to spin back around to not twist the wires.
+    			//}
+    			Robot.shooter.setTurnTableAngle(output);
+    			//table.putNumber("heartbeat", 1);
+    		//}
+    	//}
+    			
+    	if (!continuous && Robot.shooter.turnTableOnTarget()) {
+    		if (!onTargetForReal) {
+    			setTimeout(1);
+    		}
+    		
+    		onTargetForReal = true;
+    	} else {
+    		onTargetForReal = false;
     	}
-    }
-
+   }
+    
     protected boolean isFinished() {
-    	if (!stop) { return Math.abs(table.getNumber("horiz_offset", 21)) < 20; }
-    	return Robot.shooter.turnTablePidController.onTarget();
+    	if (continuous == false) return Robot.shooter.turnTableOnTarget() && isTimedOut() && onTargetForReal;
+    	return false;
     }
 
     protected void end() {
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
-    	Robot.shooter.enableTurnTablePID();
     }
 
     protected void interrupted() {
