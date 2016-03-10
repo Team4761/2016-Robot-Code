@@ -17,9 +17,10 @@ public class LowBar extends CommandGroup {
     	addSequential(new Limbo());
         
         if (direction == Direction.FORWARD) {
-        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
+        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 120, 0, 0.5)); // Stop right after the low bar
+        	addSequential(new MoveToWall());
         } else {
-        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -138, 0, 0.5)); // Dummy inputs for distance and relativeAngle
+        	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -120, 0, 0.5));
         }
     }
 }
