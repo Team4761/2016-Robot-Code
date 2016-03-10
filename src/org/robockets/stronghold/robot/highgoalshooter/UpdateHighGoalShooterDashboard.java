@@ -7,11 +7,9 @@ import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Limbo;
 import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
-import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.ChevalDeFrise;
 import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
