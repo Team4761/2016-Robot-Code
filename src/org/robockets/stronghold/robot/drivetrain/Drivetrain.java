@@ -1,7 +1,6 @@
 package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
-import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.pidsources.CompassPIDSource;
 import org.robockets.stronghold.robot.pidsources.DualEncoderPIDSource;
@@ -11,7 +10,6 @@ import org.robockets.stronghold.robot.pidsources.GyroPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *

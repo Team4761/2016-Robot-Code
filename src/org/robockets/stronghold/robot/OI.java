@@ -2,15 +2,12 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.buttonmanager.buttons.ActionButton;
-import org.robockets.buttonmanager.joysticks.XboxOne;
 import org.robockets.stronghold.robot.highgoalshooter.FireShooter;
-import org.robockets.stronghold.robot.drivetrain.TurnRelative;
 import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveShootingWheel;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
 import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.IntakesUp;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
 
