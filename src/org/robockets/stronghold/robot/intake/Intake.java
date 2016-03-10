@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Intake subsystem
  */
 public class Intake extends Subsystem {
 
+	/**
+	 * Used for encoder PID
+	 */
 	public final double COUNTS_PER_DEGREE = 7.3333333333;
 	
 	public final PIDController encoderPID;
@@ -19,6 +22,10 @@ public class Intake extends Subsystem {
 	private Victor intakeMotor;
 	private Encoder intakeEncoder;
 
+	/**
+	 * Initialize intake motors and such 
+	 * @param intakeSide The front or back of the robot
+	 */
 	public Intake(IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
@@ -43,48 +50,87 @@ public class Intake extends Subsystem {
 	public void initDefaultCommand() {
 	}
 
+	/**
+	 * Start the intake motor
+	 * @param speed The speed of the motor
+	 */
 	public void spin(double speed) {
 		intakeMotor.set(speed);
 	}
 
+	/**
+	 * Spin the intake inwards
+	 */
 	public void spinIn() {
 		intakeMotor.set(0.75);
 	}
-
+	
+	/**
+	 * Spin the intake outwards
+	 */
 	public void spinOut() {
 		intakeMotor.set(-0.75);
 	}
 
+	/**
+	 * Move the intake arm up or down
+	 * @param speed The speed of the motor
+	 */
 	public void move(double speed) {
 		intakeVerticalMotor.set(speed);
 	}
 	
+	/**
+	 * Use encoder PID to set the intake arm to a location
+	 * @param angle The setpoint for PID
+	 */
 	public void setIntakeAngle(double angle) {
 		encoderPID.setSetpoint(angle * COUNTS_PER_DEGREE);
 	}
 	
+	/**
+	 * Get the intake arm's angle
+	 * @return The current location
+	 */
 	public double getIntakeAngle() {
 		return intakeEncoder.get() / COUNTS_PER_DEGREE;
 	}
 	
+	/**
+	 * Get the intake arm's setpoint
+	 * @return The current setpoint
+	 */
 	public double getIntakeSetpointAngle() {
 		return encoderPID.getSetpoint() / COUNTS_PER_DEGREE;
 	}
 	
+	/**
+	 * Check if the intake is on the setpoint
+	 * @return Boolean if intake is on setpoint
+	 */
 	public boolean intakeOnTarget() {
 		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 5;
 	}
 
+	/**
+	 * Enable PID
+	 */
 	public void enablePID() {
 		encoderPID.enable();
 		encoderPID.reset();
 		encoderPID.setSetpoint(encoderPID.getSetpoint());
 	}
 
+	/**
+	 * Stop the intake
+	 */
 	public void stopIntake() {
 		intakeMotor.set(0);
 	}
 
+	/**
+	 * Stop the intake arm
+	 */
 	public void stopVertical() {
 		intakeVerticalMotor.set(0);
 	}
