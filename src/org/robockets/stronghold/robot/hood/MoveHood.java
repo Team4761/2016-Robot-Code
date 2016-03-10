@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.hood;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -18,7 +18,7 @@ public class MoveHood extends Command {
 	 * @param rate		The speed to move at. Negative values will go downwards. (degrees/second)
 	 */
     public MoveHood(double speed, double time) {
-        requires(Robot.shooter);
+        requires(Robot.hood);
         this.speed = speed * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
         this.time = time;
     }
@@ -28,7 +28,7 @@ public class MoveHood extends Command {
 	 * @param angle			The angle to move the hood to
 	 */
     public MoveHood(double angle) {
-        requires(Robot.shooter);
+        requires(Robot.hood);
         this.angle = angle;
     }
     
@@ -42,15 +42,15 @@ public class MoveHood extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (angle != null) {
-    		Robot.shooter.setHoodAngle(angle);
+    		Robot.hood.setAngle(angle);
     	} else {
-    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodSetpoint() + speed);
+    		Robot.hood.setAngle(Robot.hood.getSetpoint() + speed);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (angle != null) return Robot.shooter.hoodOnTarget();
+        if (angle != null) return Robot.hood.onTarget();
         if (time != 0) return isTimedOut();
         return false;
     }
@@ -58,7 +58,7 @@ public class MoveHood extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	if (time != null) {
-    		Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle()); // effectively a stop
+    		Robot.hood.setAngle(Robot.hood.getAngle()); // effectively a stop
     	}
     }
 

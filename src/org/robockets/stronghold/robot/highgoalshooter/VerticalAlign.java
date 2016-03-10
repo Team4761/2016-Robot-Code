@@ -23,7 +23,8 @@ public class VerticalAlign extends Command {
 	boolean hitSpeedTarget = false;
 	
     public VerticalAlign(boolean continuous) {
-    	requires(Robot.shooter);
+    	requires(Robot.hood);
+    	requires(Robot.shootingWheel);
     	this.continuous = continuous;
     }
 
@@ -46,12 +47,13 @@ public class VerticalAlign extends Command {
     	
     	SmartDashboard.putNumber("distance", distanceToTarget);
     	
-    	Robot.shooter.setHoodAngle(angle);
+    	Robot.hood.setAngle(angle);
+    	Robot.shootingWheel.setSpeed(shaftRPM);
     }
 
     protected boolean isFinished() {
     	if(continuous == false) {
-    		return Robot.shooter.turnTableOnTarget();
+    		return Robot.turntable.onTarget();
     	} else { return false; }
     }
 

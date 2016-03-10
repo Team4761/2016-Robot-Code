@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.flipper;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,7 +10,7 @@ import org.robockets.stronghold.robot.Robot;
 public class FireShooter extends Command {
 
     public FireShooter() {
-        requires(Robot.shooter);
+        requires(Robot.flipper);
     }
 
     protected void initialize() {
@@ -18,7 +18,7 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(0.3);
+    	Robot.flipper.setAngle(0.3);
     }
 
     protected boolean isFinished() {
@@ -26,7 +26,7 @@ public class FireShooter extends Command {
     }
 
     protected void end() {
-    	Robot.shooter.setShooterFlipper(1);
+    	Robot.flipper.setAngle(1);
     }
 
     protected void interrupted() {

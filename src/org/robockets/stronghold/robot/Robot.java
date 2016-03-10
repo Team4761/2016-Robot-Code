@@ -2,9 +2,12 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.stronghold.robot.OI;
-import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
+import org.robockets.stronghold.robot.flipper.Flipper;
+import org.robockets.stronghold.robot.hood.Hood;
 import org.robockets.stronghold.robot.intake.Intake;
 import org.robockets.stronghold.robot.intake.IntakeSide;
+import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
+import org.robockets.stronghold.robot.turntable.Turntable;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
@@ -29,9 +32,12 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain driveTrain = new Drivetrain();
 	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
 	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
-	public static final HighGoalShooter shooter = new HighGoalShooter();
+	//public static final HighGoalShooter shooter = new HighGoalShooter();
 	//public static final AutoCommands autoCommand = new AutoCommands();
-
+	public static final Flipper flipper = new Flipper();
+	public static final Hood hood = new Hood();
+	public static final Turntable turntable = new Turntable();
+	public static final SpinningWheel shootingWheel = new SpinningWheel();
 	
 	Command teleop;
 	Command autonomousCommand;
@@ -61,9 +67,9 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		shooter.setHoodAngle(shooter.getHoodAngle()); 
-		shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed()); 
-		shooter.setTurnTableAngle(shooter.getTurnTableAngle()); 
+		hood.setAngle(hood.getAngle()); 
+		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
+		turntable.setAngle(turntable.getAngle()); 
 		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
 		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
 	}

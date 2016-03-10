@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.turntable;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -18,7 +18,7 @@ public class MoveTurnTable extends Command {
 	 * @param angle		The angle to set the hood at.
 	 */
     public MoveTurnTable(double angle) {
-    	requires(Robot.shooter);
+    	requires(Robot.turntable);
     	this.angle = angle;
     }
     
@@ -28,30 +28,30 @@ public class MoveTurnTable extends Command {
      * @param time		The time to spin the motor for. Set at 0 for continuous.
      */
     public MoveTurnTable(double rate, double time) {
-    	requires(Robot.shooter);
+    	requires(Robot.turntable);
     	speed = rate * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
     	if (time != 0) { this.time = time; }
     }
     
     protected void initialize() {
-    	if (angle != null) { Robot.shooter.setTurnTableAngle(angle); }
+    	if (angle != null) { Robot.turntable.setAngle(angle); }
     	if (time != null) { setTimeout(time); }
     }
 
     protected void execute() {
     	if (speed != null) {
-    		Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint() + speed);
+    		Robot.turntable.setAngle(Robot.turntable.getSetpoint() + speed);
     	}
     }
 
     protected boolean isFinished() {
-        if (angle != null) { return Robot.shooter.turnTableOnTarget(); }
+        if (angle != null) { return Robot.turntable.onTarget(); }
         if (time != null) { return isTimedOut(); }
         return false;
         
     }
     protected void end() {
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableSetpoint());
+    	Robot.turntable.setAngle(Robot.turntable.getSetpoint());
     	//if(speed != null) { Robot.shooter.enableTurnTablePID(); }
     }
 

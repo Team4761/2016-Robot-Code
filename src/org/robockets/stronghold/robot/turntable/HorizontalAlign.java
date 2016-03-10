@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.turntable;
 
 import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,7 +18,7 @@ public class HorizontalAlign extends Command {
 	 * * @param continuous		If it should stop when on target.
 	 */
     public HorizontalAlign(boolean continuous) {
-    	requires(Robot.shooter);
+    	requires(Robot.turntable);
     	this.continuous = continuous;
     }
 
@@ -39,16 +39,16 @@ public class HorizontalAlign extends Command {
     		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
     	//} else {
     		//if (table.getNumber("heartbeat", 0) == 1) {
-    			double output = Robot.shooter.turnTableSource.pidGet() + (factor * pixelError);
+    			double output = Robot.turntable.getAngle() + (factor * pixelError);
     			//if (Math.abs(output) > 270) {
     			//	holdUp = true; // We need to spin back around to not twist the wires.
     			//}
-    			Robot.shooter.setTurnTableAngle(output);
+    			Robot.turntable.setAngle(output);
     			//table.putNumber("heartbeat", 1);
     		//}
     	//}
     			
-    	if (!continuous && Robot.shooter.turnTableOnTarget()) {
+    	if (!continuous && Robot.turntable.onTarget()) {
     		if (!onTargetForReal) {
     			setTimeout(1);
     		}
@@ -60,7 +60,7 @@ public class HorizontalAlign extends Command {
    }
     
     protected boolean isFinished() {
-    	if (continuous == false) return Robot.shooter.turnTableOnTarget() && isTimedOut() && onTargetForReal;
+    	if (continuous == false) return Robot.turntable.onTarget() && isTimedOut() && onTargetForReal;
     	return false;
     }
 

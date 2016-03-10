@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.flipper;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -12,13 +12,13 @@ public class SetShooterFlipper extends Command {
 	double angle;
 
     public SetShooterFlipper(double angle) {
-    	requires(Robot.shooter);
+    	requires(Robot.flipper);
     	this.angle = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.setShooterFlipper(angle);
+    	Robot.flipper.setAngle(angle);
     }
 
     // Called repeatedly when this Command is scheduled to run

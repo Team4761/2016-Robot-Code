@@ -1,8 +1,8 @@
 package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
-import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakesUp;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

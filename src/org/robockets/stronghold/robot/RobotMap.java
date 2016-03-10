@@ -1,10 +1,13 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
+
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Servo;
@@ -27,11 +30,14 @@ public class RobotMap {
 	public static Encoder intakeEncoderFront = new Encoder(4, 5);
 	public static RobotDrive robotDrive = new RobotDrive(18, 19);
 	public static Encoder turnTableEncoder = new Encoder(8, 9);
+	public static EncoderPIDSource turntablePIDSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);;
 	public static Victor intakeVerticalMotorFront = new Victor(2);
 	public static Victor intakeVerticalMotorBack = new Victor(0);
 	public static Victor turnTableMotor = new Victor(6);
 	public static Victor hoodMotor = new Victor(7);
 	public static Encoder hoodEncoder = new Encoder(6, 7);
+	public final static double COUNTS_PER_DEGREE_HOOD = 7.3111;
+	public final static EncoderPIDSource hoodPIDSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 	public static Encoder driveEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);

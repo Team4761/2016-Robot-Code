@@ -13,7 +13,10 @@ public class Kill extends Command {
         requires(Robot.driveTrain);
         requires(Robot.intakeFront);
         requires(Robot.intakeBack);
-        requires(Robot.shooter);
+        requires(Robot.flipper);
+        requires(Robot.turntable);
+        requires(Robot.hood);
+        requires(Robot.shootingWheel);
     }
 
     // Called just before this Command runs the first time
@@ -31,9 +34,9 @@ public class Kill extends Command {
     	Robot.intakeBack.setIntakeAngle(Robot.intakeBack.getIntakeAngle());
     	Robot.intakeFront.setIntakeAngle(Robot.intakeFront.getIntakeAngle());
     	
-    	Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle());
-    	Robot.shooter.setShootingWheelSpeed(Robot.shooter.getShootingWheelSpeed());
-    	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableAngle());
+    	Robot.hood.setAngle(Robot.hood.getAngle());
+    	Robot.shootingWheel.setSpeed(Robot.shootingWheel.getSpeed());
+    	Robot.turntable.setAngle(Robot.turntable.getAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

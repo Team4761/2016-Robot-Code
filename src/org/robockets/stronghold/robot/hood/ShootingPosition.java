@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.hood;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -10,18 +10,18 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootingPosition extends Command {
 
     public ShootingPosition() {
-    	requires(Robot.shooter);
+    	requires(Robot.hood);
     }
 
     protected void initialize() {
-    	Robot.shooter.setHoodAngle(45);
+    	Robot.hood.setAngle(45);
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        return Robot.shooter.hoodOnTarget();
+        return Robot.hood.onTarget();
     }
 
     protected void end() {

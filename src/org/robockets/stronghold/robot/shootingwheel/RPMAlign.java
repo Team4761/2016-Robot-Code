@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.shootingwheel;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -22,7 +22,7 @@ public class RPMAlign extends Command {
 	boolean hitSpeedTarget = false;
 	
     public RPMAlign(boolean continuous) {
-        // No requires so RPM can be run while horizontal align
+        requires(Robot.shootingWheel);
     	this.continuous = continuous;
     }
 
@@ -42,9 +42,9 @@ public class RPMAlign extends Command {
     	shaftRPM += (18.929 * distanceToTarget) + 92.5;
     	SmartDashboard.putNumber("shaftRPM", shaftRPM);
     	
-    	Robot.shooter.setShootingWheelSpeed(shaftRPM);
+    	Robot.shootingWheel.setSpeed(shaftRPM);
     	
-    	if (continuous && Robot.shooter.shootingWheelOnTarget()) {
+    	if (continuous && Robot.shootingWheel.onTarget()) {
     		if (!hitSpeedTarget) {
     			setTimeout(3);
     		}
@@ -58,14 +58,14 @@ public class RPMAlign extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(continuous == false) {
-    		return Robot.shooter.shootingWheelOnTarget()
+    		return Robot.shootingWheel.onTarget()
     				&& isTimedOut() && hitSpeedTarget;
     	} else { return false; }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShootingWheelSpeed(0);
+    	Robot.shootingWheel.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
