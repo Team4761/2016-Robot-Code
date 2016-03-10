@@ -5,7 +5,7 @@ import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Set both intakes up
  */
 public class IntakesUp extends Command {
 		
