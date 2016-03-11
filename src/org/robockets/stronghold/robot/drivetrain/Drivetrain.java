@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Drivetrain substystem.
  */
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID;
@@ -117,6 +117,11 @@ public class Drivetrain extends Subsystem {
     	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
     }
     
+    /**
+     * Used for seeing if encoders are on target, for rotation.
+     * Instead of using pidcontroller.ontarget, use this as the one stated is buggy.
+     * @return Compares the setpoint and offset with error margin of 20.
+     */
     public boolean encodersOnTarget() {
     	return Math.abs(encodersPID.getSetpoint() - getEncodersOffset()) < 20;
     }
