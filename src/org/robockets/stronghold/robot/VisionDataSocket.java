@@ -54,6 +54,12 @@ public class VisionDataSocket extends Thread {
 			data.put("lock", "cc3300");
 		}
 		
+		if (Math.abs(table.getNumber("horiz_offset", 0)) > 10) {
+			data.put("horiz_offset", "00cc00");
+		} else {
+			data.put("horiz_offset", "cc3300");
+		}
+		
 		return data;
 	}
 	
