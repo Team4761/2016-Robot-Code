@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Spin the ball out until there is no ball anymore
  */
 public class SpitOutBallUntilBreakBeamLost extends Command {
 
