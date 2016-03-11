@@ -11,6 +11,9 @@ public class TurnRelative extends Command {
 
 	double amount;
 	
+	/**
+	 * @param amount Amount is in degrees.
+	 */
     public TurnRelative(double amount) {
         requires(Robot.driveTrain);
         this.amount = amount;
