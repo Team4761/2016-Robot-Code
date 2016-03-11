@@ -19,7 +19,7 @@ public class AssistedDrive extends Command {
 	}
 	
 	/**
-	 * Reccomended constructor.
+	 * Reccommended constructor.
 	 * @param translatePidType Choose from a few Enums on how you want to move. Theres ENCODER which uses encoders to track distance and NONE.
 	 * @param rotationPidType More Enums to choose from which controls how one will turn, including: GYRO-using gyroscope, COMPASS-nonexistant but uses compass, and ENCODER which uses encoders to keep straight.
 	 * @param distance This is in inches and how far you would like to go.
