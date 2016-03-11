@@ -50,21 +50,21 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void execute() {
-    	SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.encodersPID.getSetpoint());
-    	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
-    	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
-    	SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
+    	//SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.encodersPID.getSetpoint());
+    	//SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
+    	//SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
+    	//SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
     	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
-    	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
-    	SmartDashboard.putNumber("Drive encoder 1", RobotMap.driveEncoder.get());
-    	SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
+    	//SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
+    	//SmartDashboard.putNumber("Drive encoder 1", RobotMap.driveEncoder.get());
+    	//SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
-    	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
+    	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw()); 
     	
-    	table = NetworkTable.getTable("vision");
+    	//table = NetworkTable.getTable("vision");
     	
-    	SmartDashboard.putNumber("Lock", table.getNumber("can_see_target", 0));
+    	//SmartDashboard.putNumber("Lock", table.getNumber("can_see_target", 0));
     }
 
     protected boolean isFinished() {
