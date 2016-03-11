@@ -108,6 +108,10 @@ public class Drivetrain extends Subsystem {
     	distancePID.setSetpoint(distance * 14);
     }
     
+    /**
+     * Use this method to calculate offset.
+     * @return Returns the difference between the encoders.
+     */
     public double getEncodersOffset() {
     	//return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
     	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);

@@ -5,7 +5,7 @@ import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * AssistedDrive is a command for PID driving.
  */
 public class AssistedDrive extends Command {
 	private AssistedTranslateType translatePidType;
@@ -18,6 +18,14 @@ public class AssistedDrive extends Command {
 		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0); // Got to go fast!
 	}
 	
+	/**
+	 * Reccomended constructor.
+	 * @param translatePidType Choose from a few Enums on how you want to move. Theres ENCODER which uses encoders to track distance and NONE.
+	 * @param rotationPidType More Enums to choose from which controls how one will turn, including: GYRO-using gyroscope, COMPASS-nonexistant but uses compass, and ENCODER which uses encoders to keep straight.
+	 * @param distance This is in inches and how far you would like to go.
+	 * @param relativeAngle Angle.
+	 * @param speed The scalar for the speed, i.e. 0.5 for half speed. Don't use 1 unless necessary.
+	 */
     public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double speed) {
         requires(Robot.driveTrain);
         
