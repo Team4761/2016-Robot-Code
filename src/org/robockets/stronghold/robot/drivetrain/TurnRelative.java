@@ -5,7 +5,7 @@ import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns relative to the angle the robot is currently at. Repeating the command will add to the setpoint.
  */
 public class TurnRelative extends Command {
 
