@@ -6,7 +6,7 @@ import org.robockets.stronghold.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Command used for joystick control. Currently uses PID to keep straight while driving.
+ * Command used for joystick control. Currently uses PID to keep straight while driving. 
  */
 public class Joyride extends Command {
 
