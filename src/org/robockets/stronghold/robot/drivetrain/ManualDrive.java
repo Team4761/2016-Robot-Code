@@ -7,7 +7,7 @@ import org.robockets.stronghold.robot.Rotation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command for direct manual driving. No PID. No nonsense.
  */
 public class ManualDrive extends Command {
 	Rotation rotation;
