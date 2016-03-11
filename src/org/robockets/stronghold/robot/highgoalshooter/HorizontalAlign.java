@@ -18,7 +18,7 @@ public class HorizontalAlign extends Command {
 	 * * @param continuous		If it should stop when on target.
 	 */
     public HorizontalAlign(boolean continuous) {
-    	requires(Robot.shooter);
+    	//requires(Robot.shooter);
     	this.continuous = continuous;
     }
 
@@ -33,7 +33,8 @@ public class HorizontalAlign extends Command {
     	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
     	//resolution: 1024 px wide
     	//fov:
-    	double factor = 0.0305;
+    	//double factor = 0.0305;
+    	double factor = 0.05;
     	
     	//if (holdUp){
     		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }

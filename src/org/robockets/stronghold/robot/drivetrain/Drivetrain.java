@@ -70,7 +70,7 @@ public class Drivetrain extends Subsystem {
     public void driveAssisted(double moveValue, boolean compassAssist, boolean encoder, double scalar) {
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue * scalar, compassPID.get());
-    	} else if (!compassAssist && !encoder){
+    	} else if (!compassAssist && !encoder) {
     		driveArcade(moveValue * scalar, -gyroPID.get());
     	} else {
     		driveArcade(moveValue * scalar, -encodersPID.get());
@@ -131,7 +131,7 @@ public class Drivetrain extends Subsystem {
     	compassPID.setSetpoint(RobotMap.navX.getCompassHeading()); // Make sure setpoint starts as current position
     }
     
-    public void enableGyroPID(){
+    public void enableGyroPID() {
     	compassPID.disable();
     	
     	gyroPID.enable();

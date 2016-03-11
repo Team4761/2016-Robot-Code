@@ -55,7 +55,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.encodersPID.getSetpoint());
     	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
     	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
-    	SmartDashboard.putNumber("Turn table encoder", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
+    	SmartDashboard.putNumber("Turn table angle", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
+    	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
     	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
     	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());

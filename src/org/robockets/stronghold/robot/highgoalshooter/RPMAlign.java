@@ -44,14 +44,16 @@ public class RPMAlign extends Command {
     	
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
     	
-    	if (continuous && Robot.shooter.shootingWheelOnTarget()) {
-    		if (!hitSpeedTarget) {
-    			setTimeout(3);
-    		}
-    		
-    		hitSpeedTarget = true;
-    	} else {
-    		hitSpeedTarget = false;
+    	if (continuous) {
+	    	if (Robot.shooter.shootingWheelOnTarget()) {
+	    		if (!hitSpeedTarget) {
+	    			setTimeout(3);
+	    		}
+	    		
+	    		hitSpeedTarget = true;
+	    	} else {
+	    		hitSpeedTarget = false;
+	    	}
     	}
     }
 

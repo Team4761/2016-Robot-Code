@@ -4,6 +4,7 @@ import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A Command to spin the intake motor forward or backward
@@ -69,7 +70,7 @@ public class SetVerticalIntake extends Command {
 		if (time != null) {
 			setTimeout(time);
 		} else {
-			setTimeout(7); // Set backup timeout
+			setTimeout(3); // Set backup timeout
 		}
 	}
 

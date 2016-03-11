@@ -5,6 +5,7 @@ import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -55,7 +56,7 @@ public class CheckIntakeBreakBeam extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+    protected boolean isFinished() {    	
     	if (haveBall) {
     		return !breakBeam.get() && isTimedOut();
     	} else {

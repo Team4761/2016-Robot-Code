@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
 	    
-	    visionDataSocket.start(); // Start the vision data
+	    //visionDataSocket.start(); // Start the vision data
     }
 	
 	/**
@@ -71,6 +71,19 @@ public class Robot extends IterativeRobot {
 		shooter.setTurnTableAngle(shooter.getTurnTableAngle()); 
 		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
 		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
+		
+		SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.encodersPID.getSetpoint());
+    	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
+    	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
+    	SmartDashboard.putNumber("Turn table angle", new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement).pidGet());
+    	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
+    	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
+    	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
+    	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
+    	SmartDashboard.putNumber("Drive encoder 1", RobotMap.driveEncoder.get());
+    	SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
+    	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
+    	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
 	}
 
 	/**

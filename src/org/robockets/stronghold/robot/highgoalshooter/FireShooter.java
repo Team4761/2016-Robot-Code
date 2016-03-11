@@ -10,7 +10,7 @@ import org.robockets.stronghold.robot.Robot;
 public class FireShooter extends Command {
 
     public FireShooter() {
-        requires(Robot.shooter);
+        //requires(Robot.shooter);
     }
 
     protected void initialize() {
@@ -18,7 +18,7 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.shooter.setShooterFlipper(0.3);
+    	Robot.shooter.setShooterFlipper(0.5);
     }
 
     protected boolean isFinished() {

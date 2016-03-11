@@ -23,7 +23,7 @@ public class VerticalAlign extends Command {
 	boolean hitSpeedTarget = false;
 	
     public VerticalAlign(boolean continuous) {
-    	requires(Robot.shooter);
+    	//requires(Robot.shooter);
     	this.continuous = continuous;
     }
 
@@ -51,7 +51,7 @@ public class VerticalAlign extends Command {
 
     protected boolean isFinished() {
     	if(continuous == false) {
-    		return Robot.shooter.turnTableOnTarget();
+    		return Robot.shooter.hoodOnTarget();
     	} else { return false; }
     }
 
