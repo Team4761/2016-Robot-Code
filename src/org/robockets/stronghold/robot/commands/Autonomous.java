@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Autonomous extends CommandGroup {
     
     public  Autonomous() {
-    	addParallel(new SetShooterFlipper(0.8));
-    	addParallel(new UpdateDashboard());
-    	addParallel(new AutoFrise(IntakeSide.FRONT));
+    	addSequential(new SetShooterFlipper(1));
+    	//addParallel(new UpdateDashboard());
+    	addSequential(new AutoFrise(IntakeSide.FRONT));
     	//addParallel(new LowBar(Direction.FORWARD));
     }
 }

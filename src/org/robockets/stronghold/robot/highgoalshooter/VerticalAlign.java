@@ -19,7 +19,7 @@ public class VerticalAlign extends Command {
 	double wheelDiameter = 6;
 	
 	boolean continuous;
-	Double distance;
+	Double distance = null;
 	
 	boolean hitSpeedTarget = false;
 	
@@ -42,19 +42,20 @@ public class VerticalAlign extends Command {
     protected void execute() {
     	double distanceToTarget;
     	//if(table.getNumber("heartbeat", 0) == 1){
-    		if (distance == null) {
-    			distanceToTarget = table.getNumber("distance_guess", 6);
-    		} else {
+    		//if (distance == null) {
+    		//	distanceToTarget = table.getNumber("distance_guess", 6);
+    		//} else {
     			distanceToTarget = distance;
-    		}
+    		//}
+    		
     		SmartDashboard.putNumber("distance", distanceToTarget);
 
     		double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
     		SmartDashboard.putNumber("angle", angle);
     	
-    		double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
-    		double shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
-    		shaftRPM += (18.929 * distanceToTarget) + 92.5;
+    		//double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
+    		//double shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
+    		//shaftRPM += (18.929 * distanceToTarget) + 92.5;
     	
     	SmartDashboard.putNumber("distance", distanceToTarget);
     	

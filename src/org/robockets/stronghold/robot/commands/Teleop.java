@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Teleop extends CommandGroup {
     
     public Teleop() {
-        addParallel(new SetShooterFlipper(0.8));
-    	addParallel(new UpdateDashboard());
-    	addParallel(new Joyride());
+    	addSequential(new SetShooterFlipper(1));
+    	//addParallel(new UpdateDashboard());
+    	addSequential(new Joyride());
     }
 }
