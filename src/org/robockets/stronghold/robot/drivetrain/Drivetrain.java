@@ -111,8 +111,8 @@ public class Drivetrain extends Subsystem {
     }
     
     public double getEncodersOffset() {
-    	//return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
-    	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
+    	return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
+    	//return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
     }
     
     public boolean encodersOnTarget() {

@@ -19,12 +19,19 @@ public class VerticalAlign extends Command {
 	double wheelDiameter = 6;
 	
 	boolean continuous;
+	Double distance;
 	
 	boolean hitSpeedTarget = false;
 	
     public VerticalAlign(boolean continuous) {
     	//requires(Robot.shooter);
     	this.continuous = continuous;
+    }
+    
+    public VerticalAlign(boolean continuous, double distance) {
+    	//requires(Robot.shooter);
+    	this.continuous = continuous;
+    	this.distance = distance;
     }
 
     protected void initialize() {
@@ -33,8 +40,13 @@ public class VerticalAlign extends Command {
     }
 
     protected void execute() {
+    	double distanceToTarget;
     	//if(table.getNumber("heartbeat", 0) == 1){
-    		double distanceToTarget = table.getNumber("distance_guess", 6);
+    		if (distance == null) {
+    			distanceToTarget = table.getNumber("distance_guess", 6);
+    		} else {
+    			distanceToTarget = distance;
+    		}
     		SmartDashboard.putNumber("distance", distanceToTarget);
 
     		double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);

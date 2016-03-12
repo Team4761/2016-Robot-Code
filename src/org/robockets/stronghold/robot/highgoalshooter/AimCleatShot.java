@@ -29,6 +29,5 @@ public class AimCleatShot extends CommandGroup {
     	}
     	
     	addSequential(turntableCommand);
-        addSequential(new MoveHood(-70));
     }
 }

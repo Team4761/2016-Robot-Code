@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DrivePosition extends CommandGroup {
     
     public  DrivePosition() {
-        addSequential(new MoveHood(-75));
+        addSequential(new MoveHood(-80));
         addSequential(new IntakesUp());
         addSequential(new MoveTurnTable(0));
     }

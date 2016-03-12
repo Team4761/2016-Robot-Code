@@ -22,6 +22,6 @@ public class GiveBallToShooter extends CommandGroup {
     	addSequential(new SetVerticalIntake(10, intakeSide));
     	addSequential(new CheckIntakeBreakBeam(intakeSide, true, true, 0));
     	addSequential(new WaitCommand(1));
-    	addSequential(new MoveHood((intakeSide == IntakeSide.FRONT) ? -75 : 75)); // Forward would be positive degrees. This command traps the ball
+    	addSequential(new MoveHood((intakeSide == IntakeSide.FRONT) ? -80 : 80)); // Forward would be positive degrees. This command traps the ball
     }
 }

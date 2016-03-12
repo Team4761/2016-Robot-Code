@@ -21,9 +21,16 @@ public class RPMAlign extends Command {
 	boolean continuous;
 	boolean hitSpeedTarget = false;
 	
+	Double distance;
+	
     public RPMAlign(boolean continuous) {
         // No requires so RPM can be run while horizontal align
     	this.continuous = continuous;
+    }
+    
+    public RPMAlign(boolean continuous, Double distance) {
+    	this.continuous = continuous;
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
@@ -34,7 +41,12 @@ public class RPMAlign extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double distanceToTarget = table.getNumber("distance_guess", 6);
+    	double distanceToTarget;
+    	if (distance == null) {
+    		distanceToTarget = table.getNumber("distance_guess", 6);
+    	} else {
+    		distanceToTarget = distance;
+    	}
     	
     	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
         
