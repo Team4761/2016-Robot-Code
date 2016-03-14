@@ -36,7 +36,6 @@ public class OI {
 		ButtonManager.addJoystick(buttonBoard1);
 		ButtonManager.addJoystick(buttonBoard2);
 		
-		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
 		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
@@ -47,6 +46,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController), true));
 		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeFront.encoderPID), true));
 		
+		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 18, new AimCleatShot(Direction.LEFT), true));
 		ButtonManager.addButton(new ActionButton(2, 17, new AimCleatShot(Direction.CENTER), true));
 		ButtonManager.addButton(new ActionButton(2, 16, new AimCleatShot(Direction.RIGHT), true));
@@ -62,28 +62,6 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 11, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 9, new SpinIntake(Direction.FORWARD, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 8, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.FRONT), true));
-		
-		/*ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new MoveHood(0.5, 0), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new MoveHood(-0.5, 0), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.Y.getButtonNumber(), new MoveTurnTable(0.5), true));
-		ButtonManager.addButton(new ActionButton(1, 0, new MoveTurnTable(-0.5), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new FireShooter(), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.LEFT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.RIGHT_BUMPER.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.B.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.LEFT_BUMPER.getButtonNumber(), new ManualSpinIntake(Direction.FORWARD, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.RIGHT_BUMPER.getButtonNumber(), new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.A.getButtonNumber(), new ManualSpinIntake(Direction.BACKWARD, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new ManualSpinIntake(Direction.FORWARD, 0, IntakeSide.BACK), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new IntakesUp(), false));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.A.getButtonNumber(), new ManualVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, XboxOne.Y.getButtonNumber(), new ManualVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(0.5, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(0, 1, new ManualSpinIntake(-0.5, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.A.getButtonNumber(), new TurnRelative(90), false));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.X.getButtonNumber(), new TurnRelative(180), false));
-		ButtonManager.addButton(new ActionButton(1, XboxOne.B.getButtonNumber(), new TurnRelative(270), false));*/
 	}
 }
 
