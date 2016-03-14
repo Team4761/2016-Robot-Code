@@ -30,11 +30,11 @@ public class HorizontalAlign extends Command {
 
     protected void execute() {
     	double pixelError = table.getNumber("horiz_offset", 0);
-    	//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0354));
+    	 SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
     	//resolution: 1024 px wide
     	//fov:
     	//double factor = 0.0305;
-    	double factor = 0.05;
+    	double factor = SmartDashboard.getNumber("factorz", 0.0305);
     	
     	//if (holdUp){
     		//if (Robot.shooter.turnTableOnTarget()) { holdUp = false; }
@@ -44,12 +44,14 @@ public class HorizontalAlign extends Command {
     			//if (Math.abs(output) > 270) {
     			//	holdUp = true; // We need to spin back around to not twist the wires.
     			//}
+    			SmartDashboard.putNumber("output for turntable", output);
+    			SmartDashboard.putNumber("pid error", Robot.shooter.getTurnTableSetpoint()-Robot.shooter.turnTableSource.pidGet());
     			Robot.shooter.setTurnTableAngle(output);
     			//table.putNumber("heartbeat", 1);
     		//}
     	//}
     			
-    	if (!continuous && Robot.shooter.turnTableOnTarget()) {
+    	if (!continuous && Math.abs(pixelError) < 20) {
     		if (!onTargetForReal) {
     			setTimeout(1);
     		}
@@ -57,11 +59,13 @@ public class HorizontalAlign extends Command {
     		onTargetForReal = true;
     	} else {
     		onTargetForReal = false;
-    	}
+    	}    	
    }
     
-    protected boolean isFinished() {
-    	if (continuous == false) return Robot.shooter.turnTableOnTarget() && isTimedOut() && onTargetForReal;
+    protected boolean isFinished() {    	
+    	if (continuous == false) {
+    		return isTimedOut() && onTargetForReal;
+    	}
     	return false;
     }
 

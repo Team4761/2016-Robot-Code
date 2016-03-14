@@ -32,9 +32,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     protected void initialize() {
     	/*SmartDashboard.putData("Horizontal Align", new HorizontalAlign(true));
     	SmartDashboard.putData("Vertical Align", new VerticalAlign(true));
-    	SmartDashboard.putData("Spin Turn Table Left", new MoveTurnTable(-30, 0));
-    	SmartDashboard.putData("Spin Turn Table Right", new MoveTurnTable(30, 0));
-    	SmartDashboard.putData("Free fire", new FreeFire());
+    	*///SmartDashboard.putData("Spin Turn Table Left", new MoveTurnTable(-30, 0));
+    	//SmartDashboard.putData("Spin Turn Table Right", new MoveTurnTable(30, 0));
+    	/*SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putData("Zero hood", new MoveHood(0));
     	SmartDashboard.putData("Reset Intake Back", new ResetPID(RobotMap.intakeEncoderBack, Robot.intakeBack.encoderPID));
     	SmartDashboard.putData("Reset Turntable", new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController));
@@ -49,6 +49,10 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Fire Shooter", new FireShooter());
     	SmartDashboard.putData("Move Hood 0", new MoveHood(0));
     	SmartDashboard.putData("Stop Wheels", new MoveShootingWheel(0));*/
+    	//SmartDashboard.putData("Track Button", new Track());
+    	//SmartDashboard.putData("Flip flipper", new FireShooter());
+    	SmartDashboard.putData("Move Servo", new FireShooter());
+    	SmartDashboard.putNumber("pid error", 0);
     }
 
     protected void execute() {
@@ -68,6 +72,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	table = NetworkTable.getTable("vision");
     	
     	SmartDashboard.putNumber("Lock", table.getNumber("can_see_target", 0));*/
+    	
     }
 
     protected boolean isFinished() {

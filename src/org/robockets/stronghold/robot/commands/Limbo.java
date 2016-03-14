@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Limbo extends CommandGroup {
     
     public  Limbo() {
-        addSequential(new MoveHood(-80));
+    	addParallel(new MoveHood(-80));
         addParallel(new SetVerticalIntake(95, IntakeSide.FRONT));
         addParallel(new SetVerticalIntake(95, IntakeSide.BACK));
-        addSequential(new MoveTurnTable(0));
+        addParallel(new MoveTurnTable(180));
     }
 }

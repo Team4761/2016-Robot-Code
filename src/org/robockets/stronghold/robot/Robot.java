@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final HighGoalShooter shooter = new HighGoalShooter();
 	//public static final AutoCommands autoCommand = new AutoCommands();
 	
-	public VisionDataSocket visionDataSocket = new VisionDataSocket();
+	//public VisionDataSocket visionDataSocket = new VisionDataSocket();
 	
 	Command teleop;
 	Command autonomousCommand;
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
     	
 	    oi = new OI();
 	    teleop = new Teleop();
-	    autonomousCommand = new Autonomous();
+	    autonomousCommand = new Autonomous(0);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
 	    
@@ -62,6 +62,10 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
+    	// 0 = nothing, 1 = lowbar/portcullis, 2 = drive straight, 3 = lowbar + shoot, 4 = shovel
+    	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
+    	SmartDashboard.putNumber("pid error", 0);
+    	SmartDashboard.putBoolean("On target!", false);
     }
 	
 	public void disabledPeriodic() {
@@ -84,6 +88,8 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
+    	
+    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
 	}
 
 	/**

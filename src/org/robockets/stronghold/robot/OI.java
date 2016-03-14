@@ -45,7 +45,7 @@ public class OI {
 		ButtonManager.addJoystick(buttonBoard2);
 		
 		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(1, 20, new AutoFire(), true));
+		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
 		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));

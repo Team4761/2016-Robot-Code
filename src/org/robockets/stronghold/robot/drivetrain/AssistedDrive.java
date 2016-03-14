@@ -11,22 +11,38 @@ public class AssistedDrive extends Command {
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
 	double speed;
+	double inchesPerSecond;
+	double distance;
+	double relativeAngle;
 	
 	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
-		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0); // Got to go fast!
+		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0);
 	}
 	
-    public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double speed) {
+    public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double inchesPerSecond) {
         requires(Robot.driveTrain);
         
         this.translatePidType = translatePidType;
         this.rotationPidType = rotationPidType;
         
-        if (translatePidType == AssistedTranslateType.ENCODER) {
-        	Robot.driveTrain.enableDistancePID();
-        	Robot.driveTrain.setDistanceInInches(distance);
-        }
+        this.distance = distance;
+        this.relativeAngle = relativeAngle;
         
+        this.inchesPerSecond = inchesPerSecond;
+        
+        this.speed = 1;
+    }
+    
+    public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
+    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	if (translatePidType == AssistedTranslateType.ENCODER) {
+        	Robot.driveTrain.enableDistancePID();
+    	}
+    	
         if (rotationPidType == AssistedRotateType.COMPASS) {
     		Robot.driveTrain.enableCompassPID();
     		Robot.driveTrain.setAngle(relativeAngle, true);
@@ -37,20 +53,16 @@ public class AssistedDrive extends Command {
     		Robot.driveTrain.enableEncodersPID();
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     	}
-        
-        this.speed = speed;
-    }
-    
-    public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
-    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        if (translatePidType == AssistedTranslateType.ENCODER) {
+        	if (Math.abs(Robot.driveTrain.getDistanceSetpointInInches() + (inchesPerSecond * 0.02)) < Math.abs(distance)) {
+        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getDistanceSetpointInInches() + (inchesPerSecond * 0.02));
+        	}
+        }
+    	
     	boolean compassAssist = false;
     	boolean encooder = false;
     	if (rotationPidType == AssistedRotateType.COMPASS) {
@@ -71,19 +83,24 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		encoderOnTarget = Robot.driveTrain.distancePID.onTarget();
+    		System.out.println("Distance " + Math.abs(Robot.driveTrain.getDistanceInInches()));
+    		System.out.println("Want " + Math.abs(distance));
+    		encoderOnTarget = Math.abs(Robot.driveTrain.getDistanceInInches()) >= Math.abs(distance) - 10;
     	}
     	
     	if (rotationPidType == AssistedRotateType.COMPASS) {
     		return Robot.driveTrain.compassPID.onTarget() && encoderOnTarget;
-    	} else { // Default to gyro
+    	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		return Robot.driveTrain.gyroPID.onTarget() && encoderOnTarget;
+    	} else {
+    		return encoderOnTarget;
     	}
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.driveTrain.stop();
+    	Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getDistanceInInches());
     }
 
     // Called when another command which requires one or more of the same

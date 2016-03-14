@@ -29,7 +29,7 @@ public class HighGoalShooter extends Subsystem {
 		turnTableSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 360.0 / 2174.375, PIDSourceType.kDisplacement);
 		EncoderPIDSource hoodSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 		
-		turnTablePidController = new PIDController(0.05, 0.000025, 0, turnTableSource, RobotMap.turnTableMotor);
+		turnTablePidController = new PIDController(0.08, 0.0015, 0, turnTableSource, RobotMap.turnTableMotor);
 		//hoodPidController = new PIDController(0.02, 0.0001, 0, new HoodPIDSource(), RobotMap.hoodMotor); Used to be correct but for some reason it changed
 		hoodPidController = new PIDController(0.075, 0.0001, 0, hoodSource, RobotMap.hoodMotor);
 		shootingWheelPidController = new PIDController(0.0001, 0.00001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
@@ -39,7 +39,7 @@ public class HighGoalShooter extends Subsystem {
 		shootingWheelPidController.disable();
 		
 		turnTablePidController.setSetpoint(0);
-		turnTablePidController.setPercentTolerance(0.05);
+		//turnTablePidController.setPercentTolerance(0.05);
 		turnTablePidController.setContinuous(true);
 		
 		hoodPidController.setSetpoint(0);
@@ -66,13 +66,13 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	if (angle > 270) {
-    		System.out.println(angle % 270 + 90);
-    	} else if (angle < 270) {
-    		System.out.println(angle % -270 - 90);
-    	} else {
-    		System.out.println(angle);
-    	}
+    	//if (angle > 270) {
+    	//	System.out.println(angle % 270 + 90);
+    	//} else if (angle < 270) {
+    	//	System.out.println(angle % -270 - 90);
+    	//} else {
+    	//	System.out.println(angle);
+    	//}
     	turnTablePidController.setSetpoint(angle);
     }
     

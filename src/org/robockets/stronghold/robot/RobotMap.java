@@ -21,7 +21,7 @@ public class RobotMap {
 	private static SerialPort navXSerialPort = new SerialPort(57600, SerialPort.Port.kMXP);
 	private static byte updateRateHz = 50;
 	public static IMUAdvanced navX = new IMUAdvanced(navXSerialPort, updateRateHz);
-	public static Victor intakeMotorFront = new Victor(1);
+	public static Victor intakeMotorFront = new Victor(1); //1,3,0,2,6,7
 	public static Victor intakeMotorBack = new Victor(3);
 	public static Encoder intakeEncoderBack = new Encoder(11, 12);
 	public static Encoder intakeEncoderFront = new Encoder(4, 5);
@@ -35,9 +35,9 @@ public class RobotMap {
 	public static Encoder driveEncoder = new Encoder(0, 1);
 	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
-	public static Servo shootingFlipper = new Servo(5);
 	public static DigitalInput frontBB = new DigitalInput(10);
 	public static DigitalInput backBB = new DigitalInput(13);
+	public static Servo shootingFlipper = new Servo(5);
 	
 	public RobotMap () {
 		navX.zeroYaw();

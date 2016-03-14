@@ -42,11 +42,11 @@ public class VerticalAlign extends Command {
     protected void execute() {
     	double distanceToTarget;
     	//if(table.getNumber("heartbeat", 0) == 1){
-    		//if (distance == null) {
-    		//	distanceToTarget = table.getNumber("distance_guess", 6);
-    		//} else {
+    		if (distance == null) {
+    			distanceToTarget = table.getNumber("distance_guess", 6);
+    		} else {
     			distanceToTarget = distance;
-    		//}
+    		}
     		
     		SmartDashboard.putNumber("distance", distanceToTarget);
 
@@ -64,6 +64,11 @@ public class VerticalAlign extends Command {
 
     protected boolean isFinished() {
     	if(continuous == false) {
+    		//if (Robot.shooter.hoodOnTarget()) {
+    		//	SmartDashboard.putBoolean("Vertically aligned", true);
+    		//} else {
+    		//	SmartDashboard.putBoolean("Vertically aligned", false);
+    		//}
     		return Robot.shooter.hoodOnTarget();
     	} else { return false; }
     }
