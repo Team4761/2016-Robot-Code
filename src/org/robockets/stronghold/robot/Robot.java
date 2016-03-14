@@ -52,8 +52,6 @@ public class Robot extends IterativeRobot {
 	    autonomousCommand = new Autonomous(0);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
-	    
-	    //visionDataSocket.start(); // Start the vision data
     }
 	
 	/**
