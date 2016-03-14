@@ -3,13 +3,13 @@ package org.robockets.stronghold.robot;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

@@ -1,20 +1,5 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
-import org.robockets.stronghold.robot.ResetPID;
-import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
-import org.robockets.stronghold.robot.commands.DrivePosition;
-import org.robockets.stronghold.robot.commands.Limbo;
-import org.robockets.stronghold.robot.drivetrain.TurnRelative;
-import org.robockets.stronghold.robot.intake.GiveBallToShooter;
-import org.robockets.stronghold.robot.intake.Intake;
-import org.robockets.stronghold.robot.intake.IntakeBall;
-import org.robockets.stronghold.robot.intake.ChevalDeFrise;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.SetVerticalIntake;
-import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
-
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

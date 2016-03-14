@@ -4,7 +4,6 @@ import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A Command to spin the intake motor forward or backward

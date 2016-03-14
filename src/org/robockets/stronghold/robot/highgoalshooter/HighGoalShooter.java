@@ -7,7 +7,6 @@ import org.robockets.stronghold.robot.pidsources.TalonPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the high goal shooter mechanism including the turn table, the rollers, the shooting rollers, and the hood.

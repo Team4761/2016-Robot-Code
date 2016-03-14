@@ -1,9 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.robockets.stronghold.robot.Robot;
-import org.robockets.stronghold.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * 
