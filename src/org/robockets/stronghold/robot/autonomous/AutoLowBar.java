@@ -4,24 +4,19 @@ import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
-import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LowBar extends CommandGroup {
+public class AutoLowBar extends CommandGroup {
 	
-    public LowBar(Direction direction) {
+    public AutoLowBar(Direction direction) {
     	//addSequential(new Limbo());
     	// This is a copy pasta of limbo, please fix
-    	addParallel(new MoveHood(-80));
-        addParallel(new SetVerticalIntake(95, IntakeSide.FRONT));
-        addParallel(new SetVerticalIntake(95, IntakeSide.BACK));
+    	addSequential(new AutoLimbo());
         addSequential(new MoveTurnTable(180));
     	
         if (direction == Direction.FORWARD) {
