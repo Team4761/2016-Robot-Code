@@ -10,13 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AssistedDrive extends Command {
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
-	double speed;
 	double inchesPerSecond;
 	double distance;
 	double relativeAngle;
 	
 	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
-		this(translatePidType, rotationPidType, distance, relativeAngle, 1.0);
+		this(translatePidType, rotationPidType, distance, relativeAngle, 0);
 	}
 	
     public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double inchesPerSecond) {
@@ -29,8 +28,6 @@ public class AssistedDrive extends Command {
         this.relativeAngle = relativeAngle;
         
         this.inchesPerSecond = inchesPerSecond;
-        
-        this.speed = 1;
     }
     
     public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
@@ -72,10 +69,11 @@ public class AssistedDrive extends Command {
     	} else if (rotationPidType == AssistedRotateType.ENCODER) {
     		encooder = true;
     	}
+    	
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		Robot.driveTrain.driveAssisted(compassAssist, encooder, speed);
+    		Robot.driveTrain.driveAssisted(compassAssist, encooder, 1);
     	} else {
-    		Robot.driveTrain.driveAssisted(0, compassAssist, encooder, speed);
+    		Robot.driveTrain.driveAssisted(0, compassAssist, encooder, 1);
     	}
     }
 
