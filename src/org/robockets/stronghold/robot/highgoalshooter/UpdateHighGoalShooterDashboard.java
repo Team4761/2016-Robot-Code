@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class UpdateHighGoalShooterDashboard extends Command {
 
-	NetworkTable table;
+	NetworkTable visionTable;
 	
     public UpdateHighGoalShooterDashboard() {
     }
 
     protected void initialize() {
+    	visionTable = NetworkTable.getTable("vision");
+    	
     	SmartDashboard.putData("Move Servo", new FireShooter());
     	SmartDashboard.putNumber("pid error", 0);
     }
@@ -36,9 +38,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	
-    	table = NetworkTable.getTable("vision");
-    	
-    	SmartDashboard.putNumber("Lock", table.getNumber("can_see_target", 0));
+    	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));
     	
     }
 
