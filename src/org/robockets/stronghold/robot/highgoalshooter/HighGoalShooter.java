@@ -65,13 +65,13 @@ public class HighGoalShooter extends Subsystem {
     }
     
     public void setTurnTableAngle(double angle) {
-    	//if (angle > 270) {
-    	//	System.out.println(angle % 270 + 90);
-    	//} else if (angle < 270) {
-    	//	System.out.println(angle % -270 - 90);
-    	//} else {
-    	//	System.out.println(angle);
-    	//}
+    	/*if (angle > 270) {
+    		System.out.println(angle % 270 + 90);
+    	} else if (angle < 270) {
+    		System.out.println(angle % -270 - 90);
+    	} else {
+    		System.out.println(angle);
+    	}*/
     	turnTablePidController.setSetpoint(angle);
     }
     
