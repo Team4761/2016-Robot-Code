@@ -7,13 +7,17 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Set one intake to zero
  */
 public class ResetIntake extends Command {
 
 	Intake intake;
 	Encoder intakeEncoder;
 	
+	/**
+	 * Initialize the intake
+	 * @param intakeSide Front or Back intake
+	 */
     public ResetIntake(IntakeSide intakeSide) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
