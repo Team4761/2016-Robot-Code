@@ -22,6 +22,6 @@ public class PortcullisDefense extends CommandGroup {
     	IntakeSide side = (forward) ? IntakeSide.FRONT : IntakeSide.BACK;
     	addSequential(new Limbo());
     	addSequential(new LiftPortcullis(side));
-    	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, (forward) ? 1 : -1, 0)); // 1 is dumb.
+    	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, (forward) ? 1 : -1, 0, 12)); // 1 is dumb.
     }
 }
