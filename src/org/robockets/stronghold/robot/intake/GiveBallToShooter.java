@@ -13,15 +13,14 @@ public class GiveBallToShooter extends CommandGroup {
     
     public  GiveBallToShooter(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {
-    		addParallel(new MoveTurnTable(180));
+    		addSequential(new MoveTurnTable(180));
     	} else {
-    		addParallel(new MoveTurnTable(0));
+    		addSequential(new MoveTurnTable(0));
     	}
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
-    	addParallel(new MoveHood(0));
-    	addSequential(new SetVerticalIntake(10, intakeSide));
+    	addSequential(new MoveHood(0));
     	addSequential(new CheckIntakeBreakBeam(intakeSide, true, true, 0));
     	addSequential(new WaitCommand(1));
-    	addSequential(new MoveHood((intakeSide == IntakeSide.FRONT) ? -80 : 80)); // Forward would be positive degrees. This command traps the ball
+    	addSequential(new MoveHood((intakeSide == IntakeSide.FRONT) ? -75 : 75)); // Forward would be positive degrees. This command traps the ball
     }
 }

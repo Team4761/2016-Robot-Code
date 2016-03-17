@@ -18,7 +18,7 @@ public class MoveTurnTable extends Command {
 	 * @param angle		The angle to set the hood at.
 	 */
     public MoveTurnTable(double angle) {
-    	//requires(Robot.shooter);
+    	requires(Robot.shooter);
     	this.angle = angle;
     }
     
@@ -28,7 +28,7 @@ public class MoveTurnTable extends Command {
      * @param time		The time to spin the motor for. Set at 0 for continuous.
      */
     public MoveTurnTable(double rate, double time) {
-    	//requires(Robot.shooter);
+    	requires(Robot.shooter);
     	speed = rate * 0.02; // Speed is applied every 20 milliseconds and therefore should be divided by 50.
     	if (time != 0) { this.time = time; }
     }

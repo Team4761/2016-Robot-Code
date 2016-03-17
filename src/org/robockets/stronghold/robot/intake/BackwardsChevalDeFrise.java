@@ -19,7 +19,7 @@ public class BackwardsChevalDeFrise extends CommandGroup {
     		addSequential(new SetVerticalIntake(0, intakeSide));
     	}
     	
-        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.GYRO, -1, 0, 12)); // Dummy inputs for distance and relativeAngle
+        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.GYRO, -1, 0)); // Dummy inputs for distance and relativeAngle
     	addParallel(new SetVerticalIntake(90, intakeSide)); // Slowly lift arm as robot moves across
     }
 }

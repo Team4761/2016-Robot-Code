@@ -1,8 +1,7 @@
 package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
 
 /**
  * Update all the dashboards.

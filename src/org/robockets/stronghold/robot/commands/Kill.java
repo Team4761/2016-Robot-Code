@@ -32,7 +32,7 @@ public class Kill extends Command {
     	Robot.intakeFront.setIntakeAngle(Robot.intakeFront.getIntakeAngle());
     	
     	Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle());
-    	Robot.shooter.setShootingWheelSpeed(0);
+    	Robot.shooter.setShootingWheelSpeed(Robot.shooter.getShootingWheelSpeed());
     	Robot.shooter.setTurnTableAngle(Robot.shooter.getTurnTableAngle());
     }
 
