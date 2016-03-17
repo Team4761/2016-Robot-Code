@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
-	    autonomousCommand = new Autonomous(0);
+	    autonomousCommand = new Autonomous(0, 1);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
     }
@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
 		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
     	
-    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
+    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0), 1); // Default to 1
 	}
 
 	/**
