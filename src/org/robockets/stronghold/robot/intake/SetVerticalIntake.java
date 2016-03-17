@@ -69,7 +69,7 @@ public class SetVerticalIntake extends Command {
 		if (time != null) {
 			setTimeout(time);
 		} else {
-			setTimeout(7); // Set backup timeout
+			setTimeout(3); // Set backup timeout
 		}
 	}
 
