@@ -14,9 +14,9 @@ public class DrawBridge extends CommandGroup {
     
     public DrawBridge(Direction direction) {
     	if (direction == Direction.BACKWARD) {
-    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -1, 0)); // Dummy inputs for distance and relativeAngle
+    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -1, 0, 12)); // Dummy inputs for distance and relativeAngle
     	} else {
-    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 1, 0)); // Dummy inputs for distance and relativeAngle)
+    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 1, 0, 12)); // Dummy inputs for distance and relativeAngle)
     	}
     }
 }
