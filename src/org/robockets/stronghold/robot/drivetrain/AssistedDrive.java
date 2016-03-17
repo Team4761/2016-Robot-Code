@@ -14,10 +14,6 @@ public class AssistedDrive extends Command {
 	double distance;
 	double relativeAngle;
 	
-	public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle) {
-		this(translatePidType, rotationPidType, distance, relativeAngle, 0);
-	}
-	
     public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double inchesPerSecond) {
         requires(Robot.driveTrain);
         
@@ -31,7 +27,7 @@ public class AssistedDrive extends Command {
     }
     
     public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
-    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle);
+    	this(AssistedTranslateType.NONE, rotatePidType, 0.0, relativeAngle, 0.0);
     }
 
     // Called just before this Command runs the first time
