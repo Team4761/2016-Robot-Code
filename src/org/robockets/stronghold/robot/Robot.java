@@ -62,7 +62,6 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
-    	// 0 = nothing, 1 = lowbar/portcullis, 2 = drive straight, 3 = lowbar + shoot, 4 = shovel
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);

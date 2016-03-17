@@ -23,25 +23,27 @@ public class Autonomous extends CommandGroup {
     public  Autonomous(double autoNumber) {
     	addParallel(new SetShooterFlipper(0.1));
 
-    	if (autoNumber == 1) {
+    	if (autoNumber == 1) { // Lowbar + Porticullis, no shoot
         	addSequential(new AutoLowBar(Direction.FORWARD));
-    	} else if (autoNumber == 2) {
+    	} else if (autoNumber == 2) { // Other defense (no door ones), no shoot
         	addSequential(new AutoLimbo());
             addParallel(new MoveTurnTable(180));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 220, 0, 48)); //pos moves backwards
-    	} else if (autoNumber == 3) {
+    	} else if (autoNumber == 3) { // Shove the fries, no shoot
+    		addSequential(new AutoFrise(IntakeSide.FRONT));
+    	} else if (autoNumber == 4) { // Lowbar + Porticullis, and shoot
     		addSequential(new AutoLowBar(Direction.FORWARD));
             addParallel(new SetVerticalIntake(0, IntakeSide.FRONT));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -130, 0, -24));
         	addSequential(new MoveTurnTable(90));
         	addSequential(new FreeFire());
-    	} else if (autoNumber == 4) {
-    		addSequential(new AutoFrise(IntakeSide.FRONT));
-    	} else if (autoNumber == 5) {
+    	} else if (autoNumber == 5) { // Other defense (no door ones, no shovel), and shoot
     		addSequential(new AutoLimbo());
             addParallel(new MoveTurnTable(180));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 180, 0, 48));
         	addSequential(new FreeFire());
+    	} else if (autoNumber == 3) { // Shove the fries, no shoot
+    		addSequential(new AutoFrise(IntakeSide.FRONT));
     	}
     }
 }
