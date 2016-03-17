@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FireCleatShot extends CommandGroup {
     
     public  FireCleatShot() {
-        addParallel(new RPMAlign(false, 5.0));
-        addSequential(new VerticalAlign(false, 5.0));
+        addSequential(new MoveShootingWheel(1160));
         addSequential(new FireShooter());
     }
 }

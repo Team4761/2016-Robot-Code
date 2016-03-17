@@ -2,8 +2,7 @@ package org.robockets.stronghold.robot.commands;
 
 import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.intake.SetVerticalIntake;
+import org.robockets.stronghold.robot.intake.IntakesUp;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -13,9 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DrivePosition extends CommandGroup {
     
     public  DrivePosition() {
-        addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
-        addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
-        addParallel(new MoveHood(-80));
-        addParallel(new MoveTurnTable(180));
+        addSequential(new MoveHood(-75));
+        addSequential(new IntakesUp());
+        addSequential(new MoveTurnTable(0));
     }
 }

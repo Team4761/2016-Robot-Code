@@ -10,10 +10,9 @@ import org.robockets.stronghold.robot.pidsources.GyroPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Drivetrain substystem.
  */
 public class Drivetrain extends Subsystem {
 	public final PIDController compassPID;
@@ -28,7 +27,8 @@ public class Drivetrain extends Subsystem {
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
 		//distancePID = new PIDController(0.0018, 0.000024, 0.0005, RobotMap.driveEncoder, new DummyPIDOutput());
 		distancePID = new PIDController(0.0018, 0.000024, 0.0005, distanceSource, new DummyPIDOutput());
-		encodersPID = new PIDController(0.005, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
+		//encodersPID = new PIDController(0.0019, 0.0003, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
+		encodersPID = new PIDController(0.0019, 0.001, 0, new DualEncoderPIDSource(), new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -66,13 +66,11 @@ public class Drivetrain extends Subsystem {
      * @param scalar	The maximum speed the robot should be traveling (0-1).
      */
     public void driveAssisted(double moveValue, boolean compassAssist, boolean encoder, double scalar) {
-    	//moveValue = moveValue * -1;
     	if (compassAssist) { // Use compass for PID
     		driveArcade(moveValue * scalar, compassPID.get());
-    	} else if (!compassAssist && !encoder) {
+    	} else if (!compassAssist && !encoder){
     		driveArcade(moveValue * scalar, -gyroPID.get());
     	} else {
-    		SmartDashboard.putNumber("PID", -encodersPID.get());
     		driveArcade(moveValue * scalar, -encodersPID.get());
     	}
     }
@@ -110,19 +108,20 @@ public class Drivetrain extends Subsystem {
     	distancePID.setSetpoint(distance * 14);
     }
     
-    public double getDistanceInInches() {
-    	return RobotMap.driveEncoder.get() / 14;
-    }
-    
-    public double getDistanceSetpointInInches() {
-    	return distancePID.getSetpoint() / 14;
-    }
-    
+    /**
+     * Use this method to calculate offset.
+     * @return Returns the difference between the encoders.
+     */
     public double getEncodersOffset() {
-    	return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
-    	//return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
+    	//return -RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get();
+    	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
     }
     
+    /**
+     * Used for seeing if encoders are on target, for rotation.
+     * Instead of using pidcontroller.ontarget, use this as the one stated is buggy.
+     * @return Compares the setpoint and offset with error margin of 20.
+     */
     public boolean encodersOnTarget() {
     	return Math.abs(encodersPID.getSetpoint() - getEncodersOffset()) < 20;
     }
@@ -139,7 +138,7 @@ public class Drivetrain extends Subsystem {
     	compassPID.setSetpoint(RobotMap.navX.getCompassHeading()); // Make sure setpoint starts as current position
     }
     
-    public void enableGyroPID() {
+    public void enableGyroPID(){
     	compassPID.disable();
     	
     	gyroPID.enable();
@@ -155,8 +154,8 @@ public class Drivetrain extends Subsystem {
     
     public void enableEncodersPID() {
     	encodersPID.enable();
-    	//encodersPID.reset();
-    	//encodersPID.setSetpoint(getEncodersOffset());
+    	encodersPID.reset();
+    	encodersPID.setSetpoint(getEncodersOffset());
     }
 }
 

@@ -7,7 +7,7 @@ import org.robockets.stronghold.robot.Rotation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command for direct manual driving. No PID. No nonsense.
  */
 public class ManualDrive extends Command {
 	Rotation rotation;
@@ -16,6 +16,13 @@ public class ManualDrive extends Command {
 	double rotateSpeed;
 	Double time;
 
+	/**
+	 * @param direction Choose from the Enums: BACKWARD and FORWARD to set the direction.
+	 * @param rotation CLOCKWISE or COUNTERCLOCKWISE dictates rotation direction.
+	 * @param translateSpeed Speed to move.
+	 * @param rotateSpeed Speed for rotating.
+	 * @param time Time command will run, leave the parameter out for continuous.
+	 */
     public ManualDrive(Direction direction, Rotation rotation, double translateSpeed, double rotateSpeed, double time) {
         requires(Robot.driveTrain);
         this.direction = direction;

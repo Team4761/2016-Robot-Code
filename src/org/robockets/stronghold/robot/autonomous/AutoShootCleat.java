@@ -14,8 +14,8 @@ public class AutoShootCleat extends CommandGroup {
     
     public  AutoShootCleat(int defense) {
         addSequential(new MoveToMiddleGoal(defense));
-        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 24, 0, 12));
+        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 24, 0));
         addSequential(new FreeFire());
-        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -24, 0, 12));
+        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -24, 0));
     }
 }

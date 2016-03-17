@@ -1,7 +1,9 @@
 package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.autonomous.AutoLimbo;
+import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
 import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
+import org.robockets.stronghold.robot.intake.IntakeSide;
+import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,7 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Limbo extends CommandGroup {
     
     public  Limbo() {
-    	addSequential(new AutoLimbo());
-    	addSequential(new MoveTurnTable(180));
+        addSequential(new MoveHood(-75));
+        addParallel(new SetVerticalIntake(65, IntakeSide.FRONT));
+        addParallel(new SetVerticalIntake(65, IntakeSide.BACK));
+        addSequential(new MoveTurnTable(0));
     }
 }

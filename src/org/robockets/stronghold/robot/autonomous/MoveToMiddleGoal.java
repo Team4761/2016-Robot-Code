@@ -26,27 +26,27 @@ public class MoveToMiddleGoal extends CommandGroup {
 	        case 1:
 	        	angle = 45;
 		        turnCommand = new AssistedDrive(AssistedRotateType.GYRO, angle);
-		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 5, Robot.driveTrain.getEncodersOffset(), 12);
+		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 5, Robot.driveTrain.getEncodersOffset());
 		        break;
 	        case 2:
 	        	angle = 30;
 		        turnCommand = new AssistedDrive(AssistedRotateType.GYRO, angle);
-		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 3, Robot.driveTrain.getEncodersOffset(), 12);
+		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 3, Robot.driveTrain.getEncodersOffset());
 		        break;
 	        case 3:
 	        	angle = 0;
 		        turnCommand = new AssistedDrive(AssistedRotateType.GYRO, angle);
-		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 1, Robot.driveTrain.getEncodersOffset(), 12);
+		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 1, Robot.driveTrain.getEncodersOffset());
 		        break;
 	        case 4:
 	        	angle = -30;
 		        turnCommand = new AssistedDrive(AssistedRotateType.GYRO, angle);
-		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 3, Robot.driveTrain.getEncodersOffset(), 12);
+		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 3, Robot.driveTrain.getEncodersOffset());
 		        break;
 	        case 5:
 	        	angle = -45;
 	        	turnCommand = new AssistedDrive(AssistedRotateType.GYRO, angle);
-		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 5, Robot.driveTrain.getEncodersOffset(), 12);
+		        translateCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 5, Robot.driveTrain.getEncodersOffset());
 	        	break;
         }
         

@@ -55,7 +55,7 @@ public class CheckIntakeBreakBeam extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {    	
+    protected boolean isFinished() {
     	if (haveBall) {
     		return !breakBeam.get() && isTimedOut();
     	} else {
