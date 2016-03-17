@@ -21,9 +21,16 @@ public class RPMAlign extends Command {
 	boolean continuous;
 	boolean hitSpeedTarget = false;
 	
+	Double distance;
+	
     public RPMAlign(boolean continuous) {
         // No requires so RPM can be run while horizontal align
     	this.continuous = continuous;
+    }
+    
+    public RPMAlign(boolean continuous, Double distance) {
+    	this.continuous = continuous;
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
@@ -34,38 +41,61 @@ public class RPMAlign extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double distanceToTarget = table.getNumber("distance_guess", 6);
+    	double distanceToTarget;
+    	if (distance == null) {
+    		distanceToTarget = table.getNumber("distance_guess", 6);
+    	} else {
+    		distanceToTarget = distance;
+    	}
     	
     	double velocity = Math.sqrt( (4 * Math.pow(floorToTargetHeight - robotShooterToTargetHeight / 12 , 2) + Math.pow(distanceToTarget, 2) ) * gravAcc / ( 2 * (floorToTargetHeight - robotShooterToTargetHeight / 12 ) ));
         
     	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
-    	shaftRPM += (18.929 * distanceToTarget) + 92.5;
+    	
+    	if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
+    		shaftRPM += 200;
+    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
+    		shaftRPM += 200;
+    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
+    		shaftRPM += 200;
+    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
+    		shaftRPM += 200;
+    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
+    		shaftRPM += 210;
+    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
+    		shaftRPM += 230;
+    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
+    		shaftRPM += 250;
+    	} else {
+    		shaftRPM += (18.929 * distanceToTarget) + 82.5;
+    	}
+    	
     	SmartDashboard.putNumber("shaftRPM", shaftRPM);
     	
     	Robot.shooter.setShootingWheelSpeed(shaftRPM);
     	
-    	if (continuous && Robot.shooter.shootingWheelOnTarget()) {
-    		if (!hitSpeedTarget) {
-    			setTimeout(3);
-    		}
-    		
-    		hitSpeedTarget = true;
-    	} else {
-    		hitSpeedTarget = false;
+    	if (!continuous) {
+	    	if (Robot.shooter.shootingWheelOnTarget()) {
+	    		if (!hitSpeedTarget) {
+	    			setTimeout(1);
+	    		}
+	    		
+	    		hitSpeedTarget = true;
+	    	} else {
+	    		hitSpeedTarget = false;
+	    	}
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(continuous == false) {
-    		return Robot.shooter.shootingWheelOnTarget()
-    				&& isTimedOut() && hitSpeedTarget;
+    		return Robot.shooter.shootingWheelOnTarget() && isTimedOut() && hitSpeedTarget;
     	} else { return false; }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShootingWheelSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

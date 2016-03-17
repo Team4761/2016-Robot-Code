@@ -14,8 +14,8 @@ public class DualEncoderPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		//return (-RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get());
-    	return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
+		return (-RobotMap.driveEncoder.get() - RobotMap.driveEncoder2.get());
+    	//return -RobotMap.driveEncoder.get() - ((RobotMap.driveEncoder2.get() / 360.0) * 250.0);
 	}
 
 	@Override
