@@ -1,14 +1,16 @@
 package org.robockets.stronghold.robot.flipper;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.robockets.stronghold.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * 
  */
 public class FireShooter extends Command {
-
+	
+	boolean goBack = false;
+	
     public FireShooter() {
         requires(Robot.flipper);
     }
@@ -18,7 +20,7 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.flipper.setAngle(0.3);
+    	Robot.flipper.setAngle(0.5);
     }
 
     protected boolean isFinished() {
@@ -26,7 +28,7 @@ public class FireShooter extends Command {
     }
 
     protected void end() {
-    	Robot.flipper.setAngle(1);
+    	Robot.flipper.setAngle(0.1);
     }
 
     protected void interrupted() {

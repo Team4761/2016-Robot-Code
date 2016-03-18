@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
+import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,7 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FireCleatShot extends CommandGroup {
     
     public  FireCleatShot() {
-        addSequential(new MoveShootingWheel(1160));
+        addParallel(new RPMAlign(false, 5.0));
+        addSequential(new VerticalAlign(false, 5.0));
         addSequential(new FireShooter());
     }
 }

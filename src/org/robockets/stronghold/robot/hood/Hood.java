@@ -11,25 +11,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hood extends Subsystem {
 	public final double HOOD_ERROR = 2;
 	
-	public final PIDController hoodPidController;
+	public final PIDController pidController;
 	
 	public Hood(){
-		hoodPidController = new PIDController(0.075, 0.0001, 0, RobotMap.hoodPIDSource, RobotMap.hoodMotor);
-		hoodPidController.disable();
-		hoodPidController.setSetpoint(0);
-		hoodPidController.setContinuous(true);
-		hoodPidController.enable();
+		pidController = new PIDController(0.075, 0.0001, 0, RobotMap.hoodPIDSource, RobotMap.hoodMotor);
+		pidController.disable();
+		pidController.setSetpoint(0);
+		pidController.setContinuous(true);
+		pidController.enable();
 	}
 	
     public void initDefaultCommand() {
     }
     
     public void setAngle(double angle) {
-    	hoodPidController.setSetpoint(angle);
+    	pidController.setSetpoint(angle);
     }
     
     public double getSetpoint() {
-    	return hoodPidController.getSetpoint();
+    	return pidController.getSetpoint();
     }
     
     public double getAngle() {
@@ -37,13 +37,13 @@ public class Hood extends Subsystem {
     }
     
     public boolean onTarget() {
-    	return Math.abs(Math.abs(hoodPidController.getSetpoint()) - Math.abs(getAngle())) < HOOD_ERROR;
+    	return Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(getAngle())) < HOOD_ERROR;
     }
 
     public void enablePID() {
-		hoodPidController.enable();
-		hoodPidController.reset();
-		hoodPidController.setSetpoint(RobotMap.hoodEncoder.get());
+		pidController.enable();
+		pidController.reset();
+		pidController.setSetpoint(RobotMap.hoodEncoder.get());
     }
 }
 

@@ -11,6 +11,7 @@ import org.robockets.stronghold.robot.turntable.Turntable;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
+import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,14 +34,13 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain driveTrain = new Drivetrain();
 	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
 	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
-	//public static final HighGoalShooter shooter = new HighGoalShooter();
-	//public static final AutoCommands autoCommand = new AutoCommands();
 	public static final Flipper flipper = new Flipper();
 	public static final Hood hood = new Hood();
 	public static final Turntable turntable = new Turntable();
 	public static final SpinningWheel shootingWheel = new SpinningWheel();
 	
 	Command teleop;
+	Command uHGSD;
 	Command autonomousCommand;
 
     /**
@@ -51,10 +52,10 @@ public class Robot extends IterativeRobot {
     	
 	    oi = new OI();
 	    teleop = new Teleop();
-	    autonomousCommand = new Autonomous();
+	    uHGSD = new UpdateHighGoalShooterDashboard();
+	    autonomousCommand = new Autonomous(0);
 	    CameraServer server = CameraServer.getInstance();
-	    server.startAutomaticCapture("cam0");
-      
+	    server.startAutomaticCapture("cam0"); 
     }
 	
 	/**
@@ -63,6 +64,12 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
+    	// 0 = nothing, 1 = lowbar/portcullis, 2 = drive straight, 3 = lowbar + shoot, 4 = shovel
+    	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
+    	SmartDashboard.putNumber("pid error", 0);
+    	SmartDashboard.putBoolean("On target!", false);
+		
+		uHGSD.start();
     }
 	
 	public void disabledPeriodic() {
@@ -72,6 +79,8 @@ public class Robot extends IterativeRobot {
 		turntable.setAngle(turntable.getAngle()); 
 		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
 		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
+    	
+    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
 	}
 
 	/**
@@ -84,7 +93,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {        
-    	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -102,7 +110,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        //(new UpdateDashboard()).start();
         teleop.start();
     }
 

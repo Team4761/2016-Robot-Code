@@ -12,18 +12,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Turntable extends Subsystem {
     
-	public final PIDController turntablePidController;
+	public final PIDController pidController;
 	
 	public Turntable(){
-		turntablePidController = new PIDController(0.06, 0.0005, 0, RobotMap.turntablePIDSource, RobotMap.turnTableMotor);
+		pidController = new PIDController(0.06, 0.0005, 0, RobotMap.turntablePIDSource, RobotMap.turnTableMotor);
 		
-		turntablePidController.disable();
+		pidController.disable();
 		
-		turntablePidController.setSetpoint(0);
-		turntablePidController.setPercentTolerance(0.05);
-		turntablePidController.setContinuous(true);
+		pidController.setSetpoint(0);
+		pidController.setPercentTolerance(0.05);
+		pidController.setContinuous(true);
 		
-		turntablePidController.enable();
+		pidController.enable();
 	}
 	
     public void initDefaultCommand() {
@@ -41,23 +41,23 @@ public class Turntable extends Subsystem {
     	} else {
     		System.out.println(angle);
     	}
-    	turntablePidController.setSetpoint(angle);
+    	pidController.setSetpoint(angle);
     }
     
     public double getSetpoint() {
-    	return turntablePidController.getSetpoint();
+    	return pidController.getSetpoint();
     }
     
     public boolean onTarget(){
-    	return Math.abs(turntablePidController.getSetpoint() - RobotMap.turntablePIDSource.pidGet()) < 0.5;
+    	return Math.abs(pidController.getSetpoint() - RobotMap.turntablePIDSource.pidGet()) < 0.5;
     }
     
     public void enablePID() {
-    	turntablePidController.enable();
+    	pidController.enable();
     }
     
     public void disablePID() {
-    	turntablePidController.disable();
+    	pidController.disable();
     }
 }
 

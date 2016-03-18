@@ -33,10 +33,10 @@ public class Kill extends Command {
     	Robot.intakeBack.stopVertical();
     	Robot.intakeBack.setIntakeAngle(Robot.intakeBack.getIntakeAngle());
     	Robot.intakeFront.setIntakeAngle(Robot.intakeFront.getIntakeAngle());
-    	
+
     	Robot.hood.setAngle(Robot.hood.getAngle());
-    	Robot.shootingWheel.setSpeed(Robot.shootingWheel.getSpeed());
-    	Robot.turntable.setAngle(Robot.turntable.getAngle());
+    	Robot.shootingWheel.setSpeed(0);
+    	Robot.hood.setAngle(Robot.hood.getAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()
