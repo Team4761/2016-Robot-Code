@@ -31,13 +31,14 @@ public class Intake extends Subsystem {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
 			intakeMotor = RobotMap.intakeMotorFront;
 			intakeEncoder = RobotMap.intakeEncoderFront;
-			//encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
-			encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+			encoderPID = new PIDController(0.03, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
+			//encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		} else {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorBack;
 			intakeMotor = RobotMap.intakeMotorBack;
 			intakeEncoder = RobotMap.intakeEncoderBack;
-			encoderPID = new PIDController(0.025, 0.000025, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
+			encoderPID = new PIDController(0.03, 0.000025, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
+			//encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		}
 
 		encoderPID.disable();
@@ -109,7 +110,7 @@ public class Intake extends Subsystem {
 	 * @return Boolean if intake is on setpoint
 	 */
 	public boolean intakeOnTarget() {
-		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 5;
+		return Math.abs(getIntakeSetpointAngle() - getIntakeAngle()) < 3;
 	}
 
 	/**
