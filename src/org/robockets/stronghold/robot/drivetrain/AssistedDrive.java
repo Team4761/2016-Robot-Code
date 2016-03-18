@@ -33,7 +33,7 @@ public class AssistedDrive extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-        	Robot.driveTrain.enableDistancePID();
+        	Robot.driveTrain.enableWheelPID();
     	}
     	
         if (rotationPidType == AssistedRotateType.COMPASS) {
@@ -42,17 +42,17 @@ public class AssistedDrive extends Command {
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		Robot.driveTrain.enableGyroPID();
     		Robot.driveTrain.setAngle(relativeAngle, false);
-    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
-    		Robot.driveTrain.enableEncodersPID();
+    	} /*else if (rotationPidType == AssistedRotateType.ENCODER) {
+    		Robot.driveTrain.enableWheelPID();
     		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
-    	}
+    	}*/
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (translatePidType == AssistedTranslateType.ENCODER) {
-        	if (Math.abs(Robot.driveTrain.getDistanceSetpointInInches() + (inchesPerSecond * 0.02)) < Math.abs(distance)) {
-        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getDistanceSetpointInInches() + (inchesPerSecond * 0.02));
+        	if (Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02)) < Math.abs(distance)) {
+        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02));
         	}
         }
     	
@@ -77,9 +77,9 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		System.out.println("Distance " + Math.abs(Robot.driveTrain.getDistanceInInches()));
+    		System.out.println("Distance " + Math.abs(Robot.driveTrain.getLeftDistanceInInches()));
     		System.out.println("Want " + Math.abs(distance));
-    		encoderOnTarget = Math.abs(Robot.driveTrain.getDistanceInInches()) >= Math.abs(distance) - 10;
+    		encoderOnTarget = Math.abs(Robot.driveTrain.getLeftDistanceInInches()) >= Math.abs(distance) - 10;
     	}
     	
     	if (rotationPidType == AssistedRotateType.COMPASS) {
@@ -94,7 +94,7 @@ public class AssistedDrive extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.driveTrain.stop();
-    	Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getDistanceInInches());
+    	Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getLeftDistanceInInches());
     }
 
     // Called when another command which requires one or more of the same

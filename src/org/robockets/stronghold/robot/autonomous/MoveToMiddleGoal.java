@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveToMiddleGoal extends CommandGroup {
     
     public  MoveToMiddleGoal(int defense) {
-        Command turnCommand = null;
+       /* Command turnCommand = null;
         Command translateCommand = null;
         double angle = 0;
         
@@ -52,6 +52,6 @@ public class MoveToMiddleGoal extends CommandGroup {
         
         addSequential(turnCommand);
         addSequential(translateCommand);
-        addSequential(new AssistedDrive(AssistedRotateType.GYRO, -angle)); // Turn back to face the middle goal
+        addSequential(new AssistedDrive(AssistedRotateType.GYRO, -angle)); // Turn back to face the middle goal */
     }
 }
