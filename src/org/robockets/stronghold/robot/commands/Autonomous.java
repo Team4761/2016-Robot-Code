@@ -40,7 +40,7 @@ public class Autonomous extends CommandGroup {
     		addSequential(new AutoLimbo());
             addParallel(new MoveTurnTable(180));
             addSequential(new AutoShootHigh(defense));
-    	} else if (autoNumber == 3) { // Shove the fries, and shoot
+    	} else if (autoNumber == 6) { // Shovel the fries, and shoot
     		addSequential(new AutoFrise(IntakeSide.FRONT));
     		addSequential(new AutoShootHigh(defense));
     	}

@@ -47,7 +47,7 @@ public class AutoShootHigh extends CommandGroup {
     	}
     	
         addSequential(moveCommand);
-        addSequential(aimTurntableCommand);
+        addParallel(aimTurntableCommand);
         addSequential(new FreeFire());
     }
 }
