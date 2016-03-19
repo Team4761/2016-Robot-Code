@@ -1,6 +1,7 @@
 package org.robockets.stronghold.robot.drivetrain;
 
 import org.robockets.stronghold.robot.DummyPIDOutput;
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.pidsources.CompassPIDSource;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
+	private final EncoderPIDSource leftWheelsPIDSource;
+	private final EncoderPIDSource rightWheelsPIDSource;
 	public final PIDController compassPID;
 	public final PIDController gyroPID;
 	public final PIDController leftWheelsPID;
@@ -22,13 +25,14 @@ public class Drivetrain extends Subsystem {
 
 	
 	public Drivetrain() {	
-		EncoderPIDSource leftWheelPIDSource = new EncoderPIDSource(RobotMap.driveEncoderLeft, -14, PIDSourceType.kDisplacement);
-		EncoderPIDSource rightWheelPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, 14, PIDSourceType.kDisplacement);
+		leftWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderLeft, 1.0 / -14.0, PIDSourceType.kDisplacement);
+		//EncoderPIDSource rightWheelPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, 14.0, PIDSourceType.kDisplacement);
+		rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, ((1.0 / 360.0) * 250.0) * (1.0 / 14.0), PIDSourceType.kDisplacement);
 		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		leftWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, leftWheelPIDSource, new DummyPIDOutput());
-		rightWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, rightWheelPIDSource, new DummyPIDOutput());
+		leftWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, leftWheelsPIDSource, new DummyPIDOutput());
+		rightWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, rightWheelsPIDSource, new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -72,9 +76,15 @@ public class Drivetrain extends Subsystem {
     	} else {
     		leftWheelsPID.setPID(SmartDashboard.getNumber("Left P"), SmartDashboard.getNumber("Left I"), SmartDashboard.getNumber("Left D"));
     		rightWheelsPID.setPID(SmartDashboard.getNumber("Right P"), SmartDashboard.getNumber("Right I"), SmartDashboard.getNumber("Right D"));
+    		SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
+        	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
+        	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
+        	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
     		
     		RobotMap.leftDriveMotor.set(leftWheelsPID.get() * scalar);
-    		RobotMap.rightDriveMotor.set(rightWheelsPID.get() * scalar);
+    		//RobotMap.rightDriveMotor.set(rightWheelsPID.get() * scalar);
+    		RobotMap.rightDriveMotor.set(-rightWheelsPID.get() * scalar);
+
     	}
     }
     
@@ -97,24 +107,25 @@ public class Drivetrain extends Subsystem {
     //2.464 degrees per 1 inch of arclength
 
     public void setDistanceInInches(double distance) {
-    	leftWheelsPID.setSetpoint(distance * 14);
-    	rightWheelsPID.setSetpoint(distance * 14);
+    	SmartDashboard.putNumber("distance setpoint", distance);
+    	leftWheelsPID.setSetpoint(distance);
+    	rightWheelsPID.setSetpoint(distance);
     }
     
     public double getLeftDistanceInInches() {
-    	return RobotMap.driveEncoderLeft.get() / 14;
+    	return leftWheelsPIDSource.pidGet();
     }
     
     public double getRightDistanceInInches() {
-    	return RobotMap.driveEncoderRight.get() / 14;
+    	return rightWheelsPIDSource.pidGet();
     }
     
     public double getLeftDistanceSetpointInInches() {
-    	return leftWheelsPID.getSetpoint() / 14;
+    	return leftWheelsPID.getSetpoint();
     }
     
     public double getRightDistanceSetpointInInches() {
-    	return rightWheelsPID.getSetpoint() / 14;
+    	return rightWheelsPID.getSetpoint();
     }
     
     public boolean encodersOnTarget() {

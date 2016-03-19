@@ -32,23 +32,24 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Left PID", Robot.driveTrain.leftWheelsPID.get());
     	
     	SmartDashboard.putNumber("Right P", Robot.driveTrain.rightWheelsPID.getP());
-    	SmartDashboard.putNumber("Right P", Robot.driveTrain.rightWheelsPID.getI());
-    	SmartDashboard.putNumber("Right P", Robot.driveTrain.rightWheelsPID.getD());
+    	SmartDashboard.putNumber("Right I", Robot.driveTrain.rightWheelsPID.getI());
+    	SmartDashboard.putNumber("Right D", Robot.driveTrain.rightWheelsPID.getD());
     	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
     	
-    	SmartDashboard.putData("Drive to 0ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 0, 0, 12));
-    	SmartDashboard.putData("Drive to 6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 72, 0, 12));
+    	SmartDashboard.putData("Drive to -72ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -72, 0, 48));
+    	SmartDashboard.putData("Drive to 6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 72, 0, 48));
     }
 
     protected void execute() {
-    	SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
     	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
-    	SmartDashboard.putNumber("Turn table angle", Robot.shooter.getTurnTableAngle());
-    	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
-    	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
-    	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
-    	SmartDashboard.putNumber("Drive Encoder Left", RobotMap.driveEncoderLeft.get());
-    	SmartDashboard.putNumber("Drive Encoder Right", RobotMap.driveEncoderRight.get());
+    	//SmartDashboard.putNumber("Turn table angle", Robot.shooter.getTurnTableAngle());
+    	//SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
+    	//SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
+    	//SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
+    	SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
+    	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
+    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
+    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	
