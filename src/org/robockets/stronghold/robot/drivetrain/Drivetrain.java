@@ -31,8 +31,8 @@ public class Drivetrain extends Subsystem {
 		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		leftWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, leftWheelsPIDSource, new DummyPIDOutput());
-		rightWheelsPID = new PIDController(0.0018, 0.000024, 0.0005, rightWheelsPIDSource, new DummyPIDOutput());
+		leftWheelsPID = new PIDController(0.003, 0.00003, 0, leftWheelsPIDSource, new DummyPIDOutput());
+		rightWheelsPID = new PIDController(0.003, 0, 0.00004, rightWheelsPIDSource, new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -80,6 +80,8 @@ public class Drivetrain extends Subsystem {
         	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
         	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
         	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
+        	SmartDashboard.putNumber("Left PID", Robot.driveTrain.leftWheelsPID.get());
+        	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
     		
     		RobotMap.leftDriveMotor.set(leftWheelsPID.get() * scalar);
     		//RobotMap.rightDriveMotor.set(rightWheelsPID.get() * scalar);
@@ -154,8 +156,16 @@ public class Drivetrain extends Subsystem {
     }
     
     public void enableWheelPID() {
+    	leftWheelsPID.reset();
+    	rightWheelsPID.reset();
     	leftWheelsPID.enable();
     	rightWheelsPID.enable();
+    }
+    
+    public void disableWheelPID() {
+    	leftWheelsPID.reset();
+    	rightWheelsPID.reset();
+    	setDistanceInInches(getLeftDistanceInInches());
     }
 }
 

@@ -29,14 +29,12 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Left P", Robot.driveTrain.leftWheelsPID.getP());
     	SmartDashboard.putNumber("Left I", Robot.driveTrain.leftWheelsPID.getI());
     	SmartDashboard.putNumber("Left D", Robot.driveTrain.leftWheelsPID.getD());
-    	SmartDashboard.putNumber("Left PID", Robot.driveTrain.leftWheelsPID.get());
     	
     	SmartDashboard.putNumber("Right P", Robot.driveTrain.rightWheelsPID.getP());
     	SmartDashboard.putNumber("Right I", Robot.driveTrain.rightWheelsPID.getI());
     	SmartDashboard.putNumber("Right D", Robot.driveTrain.rightWheelsPID.getD());
-    	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
     	
-    	SmartDashboard.putData("Drive to -6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -0, 0, -24));
+    	SmartDashboard.putData("Drive to 0ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 0, 0, -24));
     	SmartDashboard.putData("Drive to 6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 72, 0, 24));
     }
 
@@ -52,9 +50,10 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
-    	
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));
     	
+    	SmartDashboard.putNumber("Left PID", Robot.driveTrain.leftWheelsPID.get());
+    	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
     }
 
     protected boolean isFinished() {
