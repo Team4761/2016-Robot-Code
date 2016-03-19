@@ -34,7 +34,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
     	SmartDashboard.putNumber("Drive encoder 1", RobotMap.driveEncoder.get());
     	SmartDashboard.putNumber("Drive encoder 2", RobotMap.driveEncoder2.get());
-    	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
+    	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeVerticalFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));

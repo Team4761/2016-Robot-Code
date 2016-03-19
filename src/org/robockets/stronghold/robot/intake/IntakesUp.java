@@ -10,20 +10,20 @@ import edu.wpi.first.wpilibj.command.Command;
 public class IntakesUp extends Command {
 		
     public IntakesUp() {
-    	requires(Robot.intakeFront);
-    	requires(Robot.intakeBack);
+    	requires(Robot.intakeVerticalFront);
+    	requires(Robot.intakeVerticalBack);
     }
 
     protected void initialize() {
-    	Robot.intakeFront.setIntakeAngle(0);
-    	Robot.intakeBack.setIntakeAngle(0);
+    	Robot.intakeVerticalFront.setIntakeAngle(0);
+    	Robot.intakeVerticalBack.setIntakeAngle(0);
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-    	return Robot.intakeBack.intakeOnTarget() && Robot.intakeFront.intakeOnTarget();
+    	return Robot.intakeVerticalBack.intakeOnTarget() && Robot.intakeVerticalFront.intakeOnTarget();
     }
 
     protected void end() {

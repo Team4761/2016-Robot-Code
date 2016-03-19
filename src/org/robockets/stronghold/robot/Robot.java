@@ -6,7 +6,8 @@ import org.robockets.stronghold.robot.commands.Teleop;
 import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
-import org.robockets.stronghold.robot.intake.Intake;
+import org.robockets.stronghold.robot.intake.IntakeSpinners;
+import org.robockets.stronghold.robot.intake.IntakeVertical;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
@@ -30,8 +31,10 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static final Drivetrain driveTrain = new Drivetrain();
-	public static final Intake intakeFront = new Intake(IntakeSide.FRONT);
-	public static final Intake intakeBack = new Intake(IntakeSide.BACK);
+	public static final IntakeVertical intakeVerticalFront = new IntakeVertical(IntakeSide.FRONT);
+	public static final IntakeVertical intakeVerticalBack = new IntakeVertical(IntakeSide.BACK);
+	public static final IntakeSpinners intakeSpinnersFront = new IntakeSpinners(IntakeSide.FRONT);
+	public static final IntakeSpinners intakeSpinnersBack = new IntakeSpinners(IntakeSide.BACK);
 	public static final HighGoalShooter shooter = new HighGoalShooter();
 	//public static final AutoCommands autoCommand = new AutoCommands();
 	
@@ -75,8 +78,8 @@ public class Robot extends IterativeRobot {
 		shooter.setHoodAngle(shooter.getHoodAngle()); 
 		shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed()); 
 		shooter.setTurnTableAngle(shooter.getTurnTableAngle()); 
-		intakeBack.setIntakeAngle(intakeBack.getIntakeAngle()); 
-		intakeFront.setIntakeAngle(intakeFront.getIntakeAngle()); 
+		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
+		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
     	
     	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
 	}

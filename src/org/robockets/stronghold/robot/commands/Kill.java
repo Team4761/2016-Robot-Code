@@ -11,8 +11,10 @@ public class Kill extends Command {
 
     public Kill() {
         requires(Robot.driveTrain);
-        requires(Robot.intakeFront);
-        requires(Robot.intakeBack);
+        requires(Robot.intakeVerticalFront);
+        requires(Robot.intakeVerticalBack);
+        requires(Robot.intakeSpinnersFront);
+        requires(Robot.intakeSpinnersFront);
         requires(Robot.shooter);
     }
 
@@ -24,12 +26,12 @@ public class Kill extends Command {
     protected void execute() {
     	Robot.driveTrain.stop();
     	
-    	Robot.intakeFront.stopIntake();
-    	Robot.intakeFront.stopVertical();
-    	Robot.intakeBack.stopIntake();
-    	Robot.intakeBack.stopVertical();
-    	Robot.intakeBack.setIntakeAngle(Robot.intakeBack.getIntakeAngle());
-    	Robot.intakeFront.setIntakeAngle(Robot.intakeFront.getIntakeAngle());
+    	Robot.intakeVerticalFront.stop();
+    	Robot.intakeSpinnersFront.stop();
+    	Robot.intakeVerticalBack.stop();
+    	Robot.intakeSpinnersBack.stop();
+    	Robot.intakeVerticalBack.setIntakeAngle(Robot.intakeVerticalBack.getIntakeAngle());
+    	Robot.intakeVerticalFront.setIntakeAngle(Robot.intakeVerticalFront.getIntakeAngle());
     	
     	Robot.shooter.setHoodAngle(Robot.shooter.getHoodAngle());
     	Robot.shooter.setShootingWheelSpeed(0);
