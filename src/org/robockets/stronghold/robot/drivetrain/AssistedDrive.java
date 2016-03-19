@@ -79,8 +79,8 @@ public class AssistedDrive extends Command {
     	if (translatePidType == AssistedTranslateType.ENCODER) {
     		System.out.println("Distance " + Math.abs(Robot.driveTrain.getLeftDistanceInInches()));
     		System.out.println("Want " + Math.abs(distance));
-    		encoderOnTarget = Math.abs(Robot.driveTrain.getLeftDistanceInInches()) >= Math.abs(distance) - 2 && 
-    				Math.abs(Robot.driveTrain.getRightDistanceInInches()) >= Math.abs(distance) - 2;
+    		encoderOnTarget = Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceInInches()) >= 2 && 
+    				Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches()) >= 2;
     	}
     	
     	if (rotationPidType == AssistedRotateType.COMPASS) {

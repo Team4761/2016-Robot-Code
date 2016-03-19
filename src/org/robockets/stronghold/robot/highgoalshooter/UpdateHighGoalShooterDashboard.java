@@ -36,8 +36,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Right D", Robot.driveTrain.rightWheelsPID.getD());
     	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
     	
-    	SmartDashboard.putData("Drive to -72ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -72, 0, 48));
-    	SmartDashboard.putData("Drive to 6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 72, 0, 48));
+    	SmartDashboard.putData("Drive to -6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -0, 0, -24));
+    	SmartDashboard.putData("Drive to 6ft", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 72, 0, 24));
     }
 
     protected void execute() {
