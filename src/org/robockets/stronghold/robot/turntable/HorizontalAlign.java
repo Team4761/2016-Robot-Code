@@ -28,6 +28,7 @@ public class HorizontalAlign extends Command {
     	table = NetworkTable.getTable("vision");
     	table.putNumber("heartbeat", 1);
     	onTargetForReal = false;
+    	SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
     }
 
     protected void execute() {
@@ -55,13 +56,17 @@ public class HorizontalAlign extends Command {
     }
     	
     protected boolean isFinished() {    	
-    	if (continuous == false) {
-    		return Robot.turntable.onTarget() && isTimedOut() && onTargetForReal;
+    	if (Robot.turntable.onTarget() && isTimedOut() && onTargetForReal) {
+    		SmartDashboard.putBoolean("Shoot Horizontally Aligned", true);
+    		if (continuous == false) { return true; }
+    	} else {
+    		SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
     	}
     	return false;
     }
 
     protected void end() {
+    	SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
     }
 
     protected void interrupted() {

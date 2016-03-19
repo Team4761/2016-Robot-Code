@@ -37,6 +37,7 @@ public class RPMAlign extends Command {
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
     	hitSpeedTarget = false;
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -89,13 +90,19 @@ public class RPMAlign extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(continuous == false) {
-    		return Robot.shootingWheel.onTarget() && isTimedOut() && hitSpeedTarget;
-    	} else { return false; }
+    	if(Robot.shootingWheel.onTarget() && isTimedOut() && hitSpeedTarget) {
+    		SmartDashboard.putBoolean("Shoot RPM Aligned", true);
+    		if (continuous == false) { return true; }
+    		else { return false; }
+    	} else {
+    		SmartDashboard.putBoolean("Shoot RPM Aligned", false);
+    	}
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     }
 
     // Called when another command which requires one or more of the same

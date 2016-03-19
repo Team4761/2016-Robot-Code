@@ -37,6 +37,7 @@ public class VerticalAlign extends Command {
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
     	hitSpeedTarget = false;
+    	SmartDashboard.putBoolean("Shoot Vertically Aligned", false);
     }
 
     protected void execute() {
@@ -58,12 +59,15 @@ public class VerticalAlign extends Command {
     }
 
     protected boolean isFinished() {
-    	if(continuous == false) {
-    		return Robot.hood.onTarget();
-    	} else { return false; }
+    	if(Robot.hood.onTarget()) {
+    		SmartDashboard.putBoolean("Shoot Vertically Aligned", true);
+    		if (continuous == false) { return true; }
+    	} else { SmartDashboard.putBoolean("Shoot Vertically Aligned", false); }
+    	return false;
     }
 
     protected void end() {
+    	SmartDashboard.putBoolean("Shoot Vertically Aligned", false);
     }
 
     protected void interrupted() {
