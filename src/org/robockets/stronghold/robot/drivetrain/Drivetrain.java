@@ -74,15 +74,6 @@ public class Drivetrain extends Subsystem {
     	} else if (!compassAssist && !encoder) {
     		driveArcade(moveValue * scalar, -gyroPID.get());
     	} else {
-    		leftWheelsPID.setPID(SmartDashboard.getNumber("Left P"), SmartDashboard.getNumber("Left I"), SmartDashboard.getNumber("Left D"));
-    		rightWheelsPID.setPID(SmartDashboard.getNumber("Right P"), SmartDashboard.getNumber("Right I"), SmartDashboard.getNumber("Right D"));
-    		SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
-        	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
-        	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
-        	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
-        	SmartDashboard.putNumber("Left PID", Robot.driveTrain.leftWheelsPID.get());
-        	SmartDashboard.putNumber("Right PID", Robot.driveTrain.rightWheelsPID.get());
-    		
     		RobotMap.leftDriveMotor.set(leftWheelsPID.get() * scalar);
     		//RobotMap.rightDriveMotor.set(rightWheelsPID.get() * scalar);
     		RobotMap.rightDriveMotor.set(-rightWheelsPID.get() * scalar);
