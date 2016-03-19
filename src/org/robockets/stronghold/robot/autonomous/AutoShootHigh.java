@@ -26,27 +26,27 @@ public class AutoShootHigh extends CommandGroup {
     			// Same as below
     		case 2:
     			// Drive to wall and turn turntable right
-    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 220, 0, 48);
+    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -220, 0, -48);
     			aimTurntableCommand = new MoveTurnTable(90);
     			break;
     		case 3:
     			// Drive to goal and turn turntable slightly right
-    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 150, 0, 48);
+    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
     			aimTurntableCommand = new MoveTurnTable(20);
     			break;
     		case 4:
     			// Drive to goal and turn turntable slightly left
-    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 150, 0, 48);
+    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
     			aimTurntableCommand = new MoveTurnTable(-20);
     			break;
     		case 5:
     			// Drive to goal and turn turntable left
-    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 150, 0, 48);
+    			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
     			aimTurntableCommand = new MoveTurnTable(-60);
     			break;
     	}
     	
-        addSequential(moveCommand);
+        //addSequential(moveCommand); Just ignore moving because after we get out of the defense we should be close enough to shoot
         addParallel(aimTurntableCommand);
         addSequential(new FreeFire());
     }
