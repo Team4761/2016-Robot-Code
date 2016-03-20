@@ -89,6 +89,8 @@ public class RPMAlign extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	SmartDashboard.putBoolean("Spin Wheel Speed", Robot.shooter.shootingWheelOnTarget() && isTimedOut() && hitSpeedTarget);
+    	
     	if(continuous == false) {
     		return Robot.shooter.shootingWheelOnTarget() && isTimedOut() && hitSpeedTarget;
     	} else { return false; }

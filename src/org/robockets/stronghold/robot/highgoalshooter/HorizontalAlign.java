@@ -63,10 +63,13 @@ public class HorizontalAlign extends Command {
     	}    	
    }
     
-    protected boolean isFinished() {    	
+    protected boolean isFinished() { 
+    	SmartDashboard.putBoolean("Horizontal Alignment", isTimedOut() && onTargetForReal);
+    	
     	if (continuous == false) {
     		return isTimedOut() && onTargetForReal;
     	}
+    	
     	return false;
     }
 

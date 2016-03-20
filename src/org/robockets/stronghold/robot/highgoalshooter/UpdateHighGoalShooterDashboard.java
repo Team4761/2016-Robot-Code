@@ -19,8 +19,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     protected void initialize() {
     	visionTable = NetworkTable.getTable("vision");
     	
-    	SmartDashboard.putData("Move Servo", new FireShooter());
     	SmartDashboard.putNumber("pid error", 0);
+    	SmartDashboard.putBoolean("Horizontal Alignment", false);
+    	SmartDashboard.putBoolean("Spin Wheel Speed", false);
     }
 
     protected void execute() {
@@ -37,8 +38,11 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	
-    	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));
-    	
+    	if (visionTable.getNumber("can_see_target", 0) == 1.0) {
+    		SmartDashboard.putBoolean("Lock", true);
+    	} else {
+    		SmartDashboard.putBoolean("Lock", false);
+    	}    	
     }
 
     protected boolean isFinished() {
