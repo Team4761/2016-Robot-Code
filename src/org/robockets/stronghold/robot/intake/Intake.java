@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Intake subsystem
+ * Intake subsystem consisting of the rollers and the vertical intake
  */
 public class Intake extends Subsystem {
 
