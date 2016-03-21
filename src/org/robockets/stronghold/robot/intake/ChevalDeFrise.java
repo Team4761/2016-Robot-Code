@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot.intake;
 
-import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
@@ -12,15 +11,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  */
 public class ChevalDeFrise extends CommandGroup {
-	Intake intake;
 
     public ChevalDeFrise(IntakeSide intakeSide) {
-    	if (intakeSide == IntakeSide.FRONT) {
-    		intake = Robot.intakeFront;
-    	} else {
-    		intake = Robot.intakeBack;
-    	}
-    	
     	addSequential(new SetVerticalIntake(80, intakeSide));
         addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 15, 0, 12)); // Dummy inputs for distance and relativeAngle
         addSequential(new WaitCommand(1));

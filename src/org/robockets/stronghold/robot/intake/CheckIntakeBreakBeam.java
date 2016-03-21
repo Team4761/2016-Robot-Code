@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CheckIntakeBreakBeam extends Command {
 
-	Intake intake;
+	IntakeSpinners intake;
 	DigitalInput breakBeam;
 	
 	boolean spinIn = false;
@@ -26,12 +26,12 @@ public class CheckIntakeBreakBeam extends Command {
 	 */
     public CheckIntakeBreakBeam(IntakeSide intakeSide, boolean spinIn, boolean haveBall, double time) {
     	if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeSpinnersFront);
+			intake = Robot.intakeSpinnersFront;
 			breakBeam = RobotMap.frontBB;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeSpinnersBack);
+			intake = Robot.intakeSpinnersBack;
 			breakBeam = RobotMap.backBB;
 		}
     	
@@ -65,7 +65,7 @@ public class CheckIntakeBreakBeam extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	intake.stopIntake();
+    	intake.stop();
     }
 
     // Called when another command which requires one or more of the same

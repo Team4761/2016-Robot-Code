@@ -11,19 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ResetIntake extends Command {
 
-	Intake intake;
+	IntakeVertical intake;
 	Encoder intakeEncoder;
 	
     public ResetIntake(IntakeSide intakeSide) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	if (intakeSide == IntakeSide.FRONT) {
-    		requires(Robot.intakeFront);
-    		intake = Robot.intakeFront;
+    		requires(Robot.intakeVerticalFront);
+    		intake = Robot.intakeVerticalFront;
     		intakeEncoder = RobotMap.intakeEncoderFront;
     	} else {
-    		requires(Robot.intakeBack);
-    		intake = Robot.intakeBack;
+    		requires(Robot.intakeVerticalBack);
+    		intake = Robot.intakeVerticalBack;
     		intakeEncoder = RobotMap.intakeEncoderBack;
     	}
     }

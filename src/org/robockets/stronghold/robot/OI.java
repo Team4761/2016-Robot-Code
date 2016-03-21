@@ -44,7 +44,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
 		ButtonManager.addButton(new ActionButton(1, 15, new ResetPID(RobotMap.hoodEncoder, Robot.shooter.hoodPidController), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.shooter.turnTablePidController), true));
-		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeFront.encoderPID), true));
+		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
 		
 		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 18, new AimCleatShot(Direction.LEFT), true));
