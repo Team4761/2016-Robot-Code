@@ -46,6 +46,5 @@ public class RobotMap {
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);
 		shootingWheelMotor.changeControlMode(TalonControlMode.PercentVbus);		
-		//driveEncoderLeft.setReverseDirection(true);
 	}
 }
