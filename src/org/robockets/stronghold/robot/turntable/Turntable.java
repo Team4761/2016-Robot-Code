@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Turntable extends Subsystem {
     
 	public final PIDController pidController;
+	public final EncoderPIDSource encoder;
 	
 	public Turntable(){
-		pidController = new PIDController(0.06, 0.0005, 0, RobotMap.turntablePIDSource, RobotMap.turnTableMotor);
+		encoder = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
+		pidController = new PIDController(0.06, 0.0005, 0, encoder, RobotMap.turnTableMotor);
 		
 		pidController.disable();
 		
@@ -30,17 +32,10 @@ public class Turntable extends Subsystem {
     }
     
     public double getAngle() {
-    	return RobotMap.turntablePIDSource.pidGet();
+    	return encoder.pidGet();
     }
     
     public void setAngle(double angle) {
-    	if (angle > 270) {
-    		System.out.println(angle % 270 + 90);
-    	} else if (angle < 270) {
-    		System.out.println(angle % -270 - 90);
-    	} else {
-    		System.out.println(angle);
-    	}
     	pidController.setSetpoint(angle);
     }
     
@@ -49,7 +44,7 @@ public class Turntable extends Subsystem {
     }
     
     public boolean onTarget(){
-    	return Math.abs(pidController.getSetpoint() - RobotMap.turntablePIDSource.pidGet()) < 0.5;
+    	return Math.abs(pidController.getSetpoint() - encoder.pidGet()) < 0.5;
     }
     
     public void enablePID() {
