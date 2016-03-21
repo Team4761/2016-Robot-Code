@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
-	    autonomousCommand = new Autonomous(0);
+	    autonomousCommand = new Autonomous(5, 2);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
     }
@@ -65,7 +65,6 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
-    	// 0 = nothing, 1 = lowbar/portcullis, 2 = drive straight, 3 = lowbar + shoot, 4 = shovel
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);
@@ -81,7 +80,7 @@ public class Robot extends IterativeRobot {
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
     	
-    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
+    	//autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0), 1); // Default to 1
 	}
 
 	/**
