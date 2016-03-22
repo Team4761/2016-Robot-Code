@@ -14,7 +14,6 @@ public class HorizontalAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
-	boolean onTargetForReal = false;
 
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -27,14 +26,13 @@ public class HorizontalAlign extends Command {
 	protected void initialize() {
 		table = NetworkTable.getTable("vision");
 		table.putNumber("heartbeat", 1);
-		onTargetForReal = false;
 		SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
 	}
 
 	protected void execute() {
 		double pixelError = table.getNumber("horiz_offset", 0);
 		SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
-		double factor = SmartDashboard.getNumber("factorz", 53/1204);
+		double factor = 1; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
 
 		// In eclipse use Ctrl+I to indent multiple selected lines.
 
@@ -65,14 +63,12 @@ public class HorizontalAlign extends Command {
 	protected boolean isFinished() {
 		if (table.getNumber("heartbeat",0)==1) {
 			table.putNumber("heartbeat",0);
-			if (Robot.turntable.onTarget() && isTimedOut() && onTargetForReal) {
+			if (Robot.turntable.onTarget() && isTimedOut() && Math.abs(table.getNumber("horiz_offset", 3)) == 2) {
 				SmartDashboard.putBoolean("Shoot Horizontally Aligned", true);
 				if (continuous == false) { return true; }
 			} else {
 				SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
 			}
-		} else {
-			
 		}
 		return false;
 	}
