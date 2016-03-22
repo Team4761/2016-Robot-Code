@@ -28,17 +28,19 @@ public class RobotMap {
 	public static Victor intakeMotorBack = new Victor(3);
 	public static Encoder intakeEncoderBack = new Encoder(11, 12);
 	public static Encoder intakeEncoderFront = new Encoder(4, 5);
-	public static RobotDrive robotDrive = new RobotDrive(18, 19);
+	public static Victor leftDriveMotor = new Victor(18);
+	public static Victor rightDriveMotor = new Victor(19);
+	public static RobotDrive robotDrive = new RobotDrive(leftDriveMotor, rightDriveMotor);
 	public static Encoder turnTableEncoder = new Encoder(8, 9);
 	public static Victor intakeVerticalMotorFront = new Victor(0);
 	public static Victor intakeVerticalMotorBack = new Victor(2);
 	public static Victor turnTableMotor = new Victor(6);
 	public static Victor hoodMotor = new Victor(7);
 	public static Encoder hoodEncoder = new Encoder(6, 7);
+	public static Encoder driveEncoderLeft = new Encoder(0, 1);
+	public static Encoder driveEncoderRight = new Encoder(2, 3);
 	public final static double COUNTS_PER_DEGREE_HOOD = 7.3111;
 	public final static EncoderPIDSource hoodPIDSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
-	public static Encoder driveEncoder = new Encoder(0, 1);
-	public static Encoder driveEncoder2 = new Encoder(2, 3);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 	public static DigitalInput frontBB = new DigitalInput(10);
 	public static DigitalInput backBB = new DigitalInput(13);
@@ -49,6 +51,5 @@ public class RobotMap {
 		shootingWheelMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		shootingWheelMotor.configEncoderCodesPerRev(1);
 		shootingWheelMotor.changeControlMode(TalonControlMode.PercentVbus);		
-		driveEncoder.setReverseDirection(true);
 	}
 }

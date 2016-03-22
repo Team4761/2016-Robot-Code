@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetVerticalIntake extends Command {
 
 	Direction direction; // Object for the Direction enum
-	Intake intake;
+	IntakeVertical intake;
 
 	Integer time; // Used to set timeout
 	double speed; // Used to set speed manually
@@ -25,11 +25,11 @@ public class SetVerticalIntake extends Command {
 	 */
 	public SetVerticalIntake(Direction direction, int time, IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeVerticalFront);
+			intake = Robot.intakeVerticalFront;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeVerticalBack);
+			intake = Robot.intakeVerticalBack;
 		}
 		
 		this.direction = direction;
@@ -38,11 +38,11 @@ public class SetVerticalIntake extends Command {
 
 	public SetVerticalIntake(int speed, int time, IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeVerticalFront);
+			intake = Robot.intakeVerticalFront;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeVerticalBack);
+			intake = Robot.intakeVerticalBack;
 		}
 		
 		this.speed = speed;
@@ -54,11 +54,11 @@ public class SetVerticalIntake extends Command {
 	// angle is absolute
 	public SetVerticalIntake(double angle, IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeVerticalFront);
+			intake = Robot.intakeVerticalFront;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeVerticalBack);
+			intake = Robot.intakeVerticalBack;
 		}
 		
 		this.angle = angle;
@@ -99,7 +99,7 @@ public class SetVerticalIntake extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		intake.stopVertical();
+		intake.stop();
 	}
 
 	// Called when another command which requires one or more of the same

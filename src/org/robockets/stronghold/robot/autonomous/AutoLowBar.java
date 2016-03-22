@@ -4,7 +4,6 @@ import org.robockets.stronghold.robot.Direction;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
-import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

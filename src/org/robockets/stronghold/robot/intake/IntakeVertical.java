@@ -10,25 +10,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Intake extends Subsystem {
+public class IntakeVertical extends Subsystem {
 
 	public final double COUNTS_PER_DEGREE = 7.3333333333;
 	
 	public final PIDController encoderPID;
 	private Victor intakeVerticalMotor;
-	private Victor intakeMotor;
 	private Encoder intakeEncoder;
 
-	public Intake(IntakeSide intakeSide) {
+	public IntakeVertical(IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorFront;
-			intakeMotor = RobotMap.intakeMotorFront;
 			intakeEncoder = RobotMap.intakeEncoderFront;
 			encoderPID = new PIDController(0.03, 0.000025, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 			//encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
 		} else {
 			intakeVerticalMotor = RobotMap.intakeVerticalMotorBack;
-			intakeMotor = RobotMap.intakeMotorBack;
 			intakeEncoder = RobotMap.intakeEncoderBack;
 			encoderPID = new PIDController(0.03, 0.000025, 0, RobotMap.intakeEncoderBack, RobotMap.intakeVerticalMotorBack);
 			//encoderPID = new PIDController(0.01, 0.0001, 0, RobotMap.intakeEncoderFront, RobotMap.intakeVerticalMotorFront);
@@ -42,18 +39,6 @@ public class Intake extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-	}
-
-	public void spin(double speed) {
-		intakeMotor.set(speed);
-	}
-
-	public void spinIn() {
-		intakeMotor.set(0.75);
-	}
-
-	public void spinOut() {
-		intakeMotor.set(-0.75);
 	}
 
 	public void move(double speed) {
@@ -77,16 +62,12 @@ public class Intake extends Subsystem {
 	}
 
 	public void enablePID() {
-		encoderPID.enable();
 		encoderPID.reset();
 		encoderPID.setSetpoint(encoderPID.getSetpoint());
+		encoderPID.enable();
 	}
 
-	public void stopIntake() {
-		intakeMotor.set(0);
-	}
-
-	public void stopVertical() {
+	public void stop() {
 		intakeVerticalMotor.set(0);
 	}
 }

@@ -14,6 +14,6 @@ public class VisionHorizontalTest extends CommandGroup {
     	addSequential(new MoveTurnTable(180));
     	addSequential(new MoveTurnTable(0));
     	addSequential(new MoveTurnTable(30));
-    	addSequential(new VisionEquationOutput(55/1024)); // Or something like that.
+    	addSequential(new VisionEquationOutput(1)); // Or something like that.
     }
 }

@@ -2,23 +2,24 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.buttonmanager.buttons.ActionButton;
-import org.robockets.stronghold.robot.flipper.FireShooter;
-import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Kill;
 import org.robockets.stronghold.robot.commands.Limbo;
 import org.robockets.stronghold.robot.commands.LowGoal;
+import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.highgoalshooter.AimCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
-import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
 import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -41,9 +42,9 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
 		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
+		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
 		ButtonManager.addButton(new ActionButton(1, 15, new ResetPID(RobotMap.hoodEncoder, Robot.hood.pidController), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.turntable.pidController), true));
-		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeFront.encoderPID), true));
 		
 		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 18, new AimCleatShot(Direction.LEFT), true));

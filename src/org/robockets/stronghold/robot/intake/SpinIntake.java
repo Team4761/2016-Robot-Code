@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpinIntake extends Command {
 
 	public Direction direction; // Object for the Direction enum
-	Intake intake;
+	IntakeSpinners intake;
 
 	int time; // Used to set timeout
 
@@ -24,11 +24,11 @@ public class SpinIntake extends Command {
 	 */
 	public SpinIntake(Direction directionEnum, int time, IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeSpinnersFront);
+			intake = Robot.intakeSpinnersFront;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeSpinnersBack);
+			intake = Robot.intakeSpinnersBack;
 		}
 		
 		this.direction = directionEnum;
@@ -37,11 +37,11 @@ public class SpinIntake extends Command {
 
 	public SpinIntake(double speed, int time, IntakeSide intakeSide) {
 		if (intakeSide == IntakeSide.FRONT) {
-			requires(Robot.intakeFront);
-			intake = Robot.intakeFront;
+			requires(Robot.intakeSpinnersFront);
+			intake = Robot.intakeSpinnersFront;
 		} else {
-			requires(Robot.intakeBack);
-			intake = Robot.intakeBack;
+			requires(Robot.intakeSpinnersBack);
+			intake = Robot.intakeSpinnersBack;
 		}
 		
 		this.speed = speed;
@@ -64,7 +64,7 @@ public class SpinIntake extends Command {
 		} else if (direction == Direction.MANUAL) {
 			intake.spin(speed);
 		} else {
-			intake.stopIntake();
+			intake.stop();
 		}
 	}
 
@@ -79,7 +79,7 @@ public class SpinIntake extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		intake.stopIntake();
+		intake.stop();
 	}
 
 	// Called when another command which requires one or more of the same
