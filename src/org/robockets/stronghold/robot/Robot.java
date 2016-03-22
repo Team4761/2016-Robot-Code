@@ -1,19 +1,17 @@
 package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
-import org.robockets.stronghold.robot.OI;
-import org.robockets.stronghold.robot.flipper.Flipper;
-import org.robockets.stronghold.robot.hood.Hood;
-import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
-import org.robockets.stronghold.robot.turntable.Turntable;
-import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
+import org.robockets.stronghold.robot.drivetrain.Drivetrain;
+import org.robockets.stronghold.robot.flipper.Flipper;
 import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
+import org.robockets.stronghold.robot.hood.Hood;
+import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.IntakeSpinners;
 import org.robockets.stronghold.robot.intake.IntakeVertical;
-import org.robockets.stronghold.robot.intake.IntakeSide;
-import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
+import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
+import org.robockets.stronghold.robot.turntable.Turntable;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;

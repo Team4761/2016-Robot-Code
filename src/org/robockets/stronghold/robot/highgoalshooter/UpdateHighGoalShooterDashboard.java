@@ -2,9 +2,6 @@ package org.robockets.stronghold.robot.highgoalshooter;
 
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
-import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
-import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
-import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
 import org.robockets.stronghold.robot.flipper.FireShooter;
 
 import edu.wpi.first.wpilibj.command.Command;
