@@ -39,7 +39,7 @@ public class Autonomous extends CommandGroup {
             addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 5) { // Other defense (no door ones, no shovel), and shoot
     		addSequential(new DrivePosition());
-    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -45, 0, -24));
+    		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, true, -45, 0, -24));
     		addSequential(new TimeDrive(-0.65, -0.65, 3));
         addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 6) { // Shovel the fries, and shoot

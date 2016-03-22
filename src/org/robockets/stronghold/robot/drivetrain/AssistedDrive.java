@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AssistedDrive extends Command {
-	final double CONSTANT_DISTANCE_UPDATE = 1 * 0.02;
+	final double CONSTANT_DISTANCE_UPDATE = 10 * 0.02;
 	
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
