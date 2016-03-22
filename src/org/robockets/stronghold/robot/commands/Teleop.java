@@ -1,7 +1,7 @@
 package org.robockets.stronghold.robot.commands;
 
 import org.robockets.stronghold.robot.drivetrain.Joyride;
-import org.robockets.stronghold.robot.highgoalshooter.SetShooterFlipper;
+import org.robockets.stronghold.robot.flipper.SetShooterFlipper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

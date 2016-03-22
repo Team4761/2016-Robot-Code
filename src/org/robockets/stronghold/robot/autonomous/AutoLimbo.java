@@ -1,6 +1,6 @@
 package org.robockets.stronghold.robot.autonomous;
 
-import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 

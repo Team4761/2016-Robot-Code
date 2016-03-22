@@ -10,8 +10,8 @@ import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
 import org.robockets.stronghold.robot.drivetrain.TimeDrive;
 import org.robockets.stronghold.robot.highgoalshooter.FreeFire;
-import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
-import org.robockets.stronghold.robot.highgoalshooter.SetShooterFlipper;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
+import org.robockets.stronghold.robot.flipper.SetShooterFlipper;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 
@@ -29,7 +29,7 @@ public class Autonomous extends CommandGroup {
         	addSequential(new AutoLowBar(Direction.FORWARD));
     	} else if (autoNumber == 2) { // Other defense (no door ones), no shoot
         	addSequential(new AutoLimbo());
-            addParallel(new MoveTurnTable(180));
+            addParallel(new MoveTurnTable(0));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 220, 0, 48)); //pos moves backwards
     	} else if (autoNumber == 3) { // Shovel the fries, no shoot
     		addSequential(new AutoFrise(IntakeSide.FRONT));
@@ -38,13 +38,12 @@ public class Autonomous extends CommandGroup {
             addParallel(new SetVerticalIntake(0, IntakeSide.FRONT));
             addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 5) { // Other defense (no door ones, no shovel), and shoot
-    		//addSequential(new DrivePosition());
+    		addSequential(new DrivePosition());
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -45, 0, -24));
     		addSequential(new TimeDrive(-0.65, -0.65, 3));
-            //addSequential(new AutoShootHigh(defense));
+        addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 6) { // Shovel the fries, and shoot
     		addSequential(new AutoFrise(IntakeSide.FRONT));
-    		addSequential(new AutoShootHigh(defense));
     	}
     }
 }

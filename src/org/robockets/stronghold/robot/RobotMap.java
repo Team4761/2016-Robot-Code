@@ -1,11 +1,14 @@
 package org.robockets.stronghold.robot;
 
+import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
+
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Servo;
@@ -36,6 +39,8 @@ public class RobotMap {
 	public static Encoder hoodEncoder = new Encoder(6, 7);
 	public static Encoder driveEncoderLeft = new Encoder(0, 1);
 	public static Encoder driveEncoderRight = new Encoder(2, 3);
+	public final static double COUNTS_PER_DEGREE_HOOD = 7.3111;
+	public final static EncoderPIDSource hoodPIDSource = new EncoderPIDSource(RobotMap.hoodEncoder, 1.0 / COUNTS_PER_DEGREE_HOOD, PIDSourceType.kDisplacement);
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 	public static DigitalInput frontBB = new DigitalInput(10);
 	public static DigitalInput backBB = new DigitalInput(13);
