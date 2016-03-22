@@ -16,6 +16,6 @@ public class DrivePosition extends CommandGroup {
         addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
         addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
         addParallel(new MoveHood(-80));
-        addParallel(new MoveTurnTable(180));
+        addParallel(new MoveTurnTable(0));
     }
 }

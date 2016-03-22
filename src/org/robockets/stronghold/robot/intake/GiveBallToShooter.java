@@ -13,9 +13,9 @@ public class GiveBallToShooter extends CommandGroup {
     
     public  GiveBallToShooter(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {
-    		addParallel(new MoveTurnTable(180));
-    	} else {
     		addParallel(new MoveTurnTable(0));
+    	} else {
+    		addParallel(new MoveTurnTable(180));
     	}
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
     	addParallel(new MoveHood(0));

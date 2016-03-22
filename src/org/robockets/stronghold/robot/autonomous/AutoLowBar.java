@@ -17,7 +17,6 @@ public class AutoLowBar extends CommandGroup {
     	//addSequential(new Limbo());
     	// This is a copy pasta of limbo, please fix
     	addSequential(new AutoLimbo());
-        addSequential(new MoveTurnTable(180));
     	
         if (direction == Direction.FORWARD) {
         	addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -180, 0, -48)); // Dummy inputs for distance and relativeAngle

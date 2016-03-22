@@ -27,7 +27,7 @@ public class Autonomous extends CommandGroup {
         	addSequential(new AutoLowBar(Direction.FORWARD));
     	} else if (autoNumber == 2) {
         	addSequential(new AutoLimbo());
-            addParallel(new MoveTurnTable(180));
+            addParallel(new MoveTurnTable(0));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 220, 0, 48)); //pos moves backwards
     	} else if (autoNumber == 3) {
     		addSequential(new AutoLowBar(Direction.FORWARD));
@@ -39,7 +39,7 @@ public class Autonomous extends CommandGroup {
     		addSequential(new AutoFrise(IntakeSide.FRONT));
     	} else if (autoNumber == 5) {
     		addSequential(new AutoLimbo());
-            addParallel(new MoveTurnTable(180));
+            addParallel(new MoveTurnTable(0));
     		addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 180, 0, 48));
         	addSequential(new FreeFire());
     	}

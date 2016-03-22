@@ -30,7 +30,6 @@ public class RobotMap {
 	public static Encoder intakeEncoderFront = new Encoder(4, 5);
 	public static RobotDrive robotDrive = new RobotDrive(18, 19);
 	public static Encoder turnTableEncoder = new Encoder(8, 9);
-	public static EncoderPIDSource turntablePIDSource = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);;
 	public static Victor intakeVerticalMotorFront = new Victor(0);
 	public static Victor intakeVerticalMotorBack = new Victor(2);
 	public static Victor turnTableMotor = new Victor(6);

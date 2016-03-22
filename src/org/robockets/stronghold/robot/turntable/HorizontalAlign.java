@@ -42,7 +42,7 @@ public class HorizontalAlign extends Command {
 
 			double output = Robot.turntable.getAngle() + (factor * pixelError);
 			Robot.turntable.setAngle(output);
-			SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - RobotMap.turntablePIDSource.pidGet());
+			SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - Robot.turntable.getAngle());
 			
 			
 			/*if (!continuous && Robot.turntable.onTarget()) {

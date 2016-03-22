@@ -17,13 +17,13 @@ public class AimCleatShot extends CommandGroup {
     	
     	switch (direction) {
         	case LEFT:
-        		turntableCommand = new MoveTurnTable(-90);
+        		turntableCommand = new MoveTurnTable(270);
         		break;
         	case RIGHT:
         		turntableCommand = new MoveTurnTable(90);
         		break;
         	case CENTER:
-        		turntableCommand = new MoveTurnTable(0);
+        		turntableCommand = new MoveTurnTable(180);
         		break;
         	default:
         		// Oh no!
