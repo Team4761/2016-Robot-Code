@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AssistedDrive extends Command {
+	final double CONSTANT_DISTANCE_UPDATE = 1 * 0.02;
+	
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
 	double inchesPerSecond;
 	double distance;
 	double relativeAngle;
+	boolean cutOnHighSpeed;
 	
     public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, double distance, double relativeAngle, double inchesPerSecond) {
         requires(Robot.driveTrain);
@@ -24,6 +27,12 @@ public class AssistedDrive extends Command {
         this.relativeAngle = relativeAngle;
         
         this.inchesPerSecond = inchesPerSecond;
+    }
+    
+    public AssistedDrive(AssistedTranslateType translatePidType, AssistedRotateType rotationPidType, boolean cutOnHighSpeed, double distance, double relativeAngle, double inchesPerSecond) {
+        this(translatePidType, rotationPidType, distance, relativeAngle, inchesPerSecond);
+        
+        this.cutOnHighSpeed = cutOnHighSpeed;
     }
     
     public AssistedDrive(AssistedRotateType rotatePidType, double relativeAngle) {
@@ -51,8 +60,10 @@ public class AssistedDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (translatePidType == AssistedTranslateType.ENCODER) {
-        	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02))) > Math.abs(4 * (inchesPerSecond * 0.02))) {
-        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02));
+        	double extraInches = 0;
+        	extraInches = (cutOnHighSpeed) ? CONSTANT_DISTANCE_UPDATE : 0;
+        	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches)) > Math.abs(4 * (inchesPerSecond * 0.02))) {
+        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches);
         	}
         }
     	
@@ -81,6 +92,16 @@ public class AssistedDrive extends Command {
     				Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches())) <= 2;
     	}
     	
+    	if (!encoderOnTarget && cutOnHighSpeed) {
+    		if (inchesPerSecond > 0) {
+    			encoderOnTarget = Robot.driveTrain.getLeftDistanceInInches() > distance &&
+    				Robot.driveTrain.getRightDistanceInInches() > distance;
+    		} else {
+    			encoderOnTarget = Robot.driveTrain.getLeftDistanceInInches() < distance &&
+    				Robot.driveTrain.getRightDistanceInInches() < distance;
+    		}
+    	}
+    	    	
     	if (rotationPidType == AssistedRotateType.COMPASS) {
     		return Robot.driveTrain.compassPID.onTarget() && encoderOnTarget;
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
