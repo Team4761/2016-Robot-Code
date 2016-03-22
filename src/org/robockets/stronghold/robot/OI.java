@@ -2,23 +2,24 @@ package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
 import org.robockets.buttonmanager.buttons.ActionButton;
-import org.robockets.stronghold.robot.flipper.FireShooter;
-import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Kill;
 import org.robockets.stronghold.robot.commands.Limbo;
 import org.robockets.stronghold.robot.commands.LowGoal;
+import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.highgoalshooter.AimCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
-import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
 import org.robockets.stronghold.robot.intake.IntakeBall;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
