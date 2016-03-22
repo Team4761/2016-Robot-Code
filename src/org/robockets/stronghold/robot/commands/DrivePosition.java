@@ -1,7 +1,7 @@
 package org.robockets.stronghold.robot.commands;
 
-import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
-import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
+import org.robockets.stronghold.robot.hood.MoveHood;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 
@@ -16,6 +16,6 @@ public class DrivePosition extends CommandGroup {
         addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
         addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
         addParallel(new MoveHood(-80));
-        addParallel(new MoveTurnTable(180));
+        addParallel(new MoveTurnTable(0));
     }
 }

@@ -1,7 +1,10 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
+import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
+import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

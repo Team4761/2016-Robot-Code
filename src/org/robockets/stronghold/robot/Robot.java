@@ -1,10 +1,14 @@
 package org.robockets.stronghold.robot;
 
 import org.robockets.buttonmanager.ButtonManager;
+import org.robockets.stronghold.robot.OI;
+import org.robockets.stronghold.robot.flipper.Flipper;
+import org.robockets.stronghold.robot.hood.Hood;
+import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
+import org.robockets.stronghold.robot.turntable.Turntable;
+import org.robockets.stronghold.robot.drivetrain.Drivetrain;
 import org.robockets.stronghold.robot.commands.Autonomous;
 import org.robockets.stronghold.robot.commands.Teleop;
-import org.robockets.stronghold.robot.drivetrain.Drivetrain;
-import org.robockets.stronghold.robot.highgoalshooter.HighGoalShooter;
 import org.robockets.stronghold.robot.highgoalshooter.UpdateHighGoalShooterDashboard;
 import org.robockets.stronghold.robot.intake.IntakeSpinners;
 import org.robockets.stronghold.robot.intake.IntakeVertical;
@@ -13,7 +17,6 @@ import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,10 +38,10 @@ public class Robot extends IterativeRobot {
 	public static final IntakeVertical intakeVerticalBack = new IntakeVertical(IntakeSide.BACK);
 	public static final IntakeSpinners intakeSpinnersFront = new IntakeSpinners(IntakeSide.FRONT);
 	public static final IntakeSpinners intakeSpinnersBack = new IntakeSpinners(IntakeSide.BACK);
-	public static final HighGoalShooter shooter = new HighGoalShooter();
-	//public static final AutoCommands autoCommand = new AutoCommands();
-	
-	//public VisionDataSocket visionDataSocket = new VisionDataSocket();
+	public static final Flipper flipper = new Flipper();
+	public static final Hood hood = new Hood();
+	public static final Turntable turntable = new Turntable();
+	public static final SpinningWheel shootingWheel = new SpinningWheel();
 	
 	Command teleop;
 	Command uHGSD;
@@ -54,7 +57,7 @@ public class Robot extends IterativeRobot {
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
-	    autonomousCommand = new Autonomous(0);
+	    autonomousCommand = new Autonomous(5, 2);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
     }
@@ -65,7 +68,6 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
-    	// 0 = nothing, 1 = lowbar/portcullis, 2 = drive straight, 3 = lowbar + shoot, 4 = shovel
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);
@@ -75,13 +77,13 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		shooter.setHoodAngle(shooter.getHoodAngle()); 
-		shooter.setShootingWheelSpeed(shooter.getShootingWheelSpeed()); 
-		shooter.setTurnTableAngle(shooter.getTurnTableAngle()); 
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
+		hood.setAngle(hood.getAngle()); 
+		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
+		turntable.setAngle(turntable.getAngle()); 
     	
-    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0));
+    	//autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0), 1); // Default to 1
 	}
 
 	/**

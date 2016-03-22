@@ -1,7 +1,7 @@
 package org.robockets.stronghold.robot.intake;
 
-import org.robockets.stronghold.robot.highgoalshooter.MoveHood;
-import org.robockets.stronghold.robot.highgoalshooter.MoveTurnTable;
+import org.robockets.stronghold.robot.hood.MoveHood;
+import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -13,9 +13,9 @@ public class GiveBallToShooter extends CommandGroup {
     
     public  GiveBallToShooter(IntakeSide intakeSide) {
     	if (intakeSide == IntakeSide.FRONT) {
-    		addParallel(new MoveTurnTable(180));
-    	} else {
     		addParallel(new MoveTurnTable(0));
+    	} else {
+    		addParallel(new MoveTurnTable(180));
     	}
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
     	addParallel(new MoveHood(0));

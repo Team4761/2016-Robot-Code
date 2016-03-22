@@ -1,4 +1,4 @@
-package org.robockets.stronghold.robot.highgoalshooter;
+package org.robockets.stronghold.robot.shootingwheel;
 
 import org.robockets.stronghold.robot.Robot;
 
@@ -12,12 +12,12 @@ public class MoveShootingWheel extends Command {
 	double speed;
 	
     public MoveShootingWheel(double speed) {
-    	requires(Robot.shooter);
+    	requires(Robot.shootingWheel);
     	this.speed = speed;
     }
 
     protected void initialize() {
-    	Robot.shooter.setShootingWheelSpeed(speed);
+    	Robot.shootingWheel.setSpeed(speed);
     }
 
     protected void execute() {
@@ -25,7 +25,7 @@ public class MoveShootingWheel extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.shooter.shootingWheelOnTarget();
+    	return Robot.shootingWheel.onTarget();
     }
 
     protected void end() {

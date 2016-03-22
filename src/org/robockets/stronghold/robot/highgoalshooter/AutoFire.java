@@ -1,5 +1,7 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.flipper.FireShooter;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**

@@ -32,7 +32,7 @@ public class Drivetrain extends Subsystem {
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
 		leftWheelsPID = new PIDController(0.003, 0.00003, 0, leftWheelsPIDSource, new DummyPIDOutput());
-		rightWheelsPID = new PIDController(0.003, 0, 0.00004, rightWheelsPIDSource, new DummyPIDOutput());
+		rightWheelsPID = new PIDController(0.003, 0.00003, 0, rightWheelsPIDSource, new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range

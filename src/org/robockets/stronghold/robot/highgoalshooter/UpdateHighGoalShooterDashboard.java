@@ -5,6 +5,7 @@ import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
 import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
+import org.robockets.stronghold.robot.flipper.FireShooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -29,14 +30,14 @@ public class UpdateHighGoalShooterDashboard extends Command {
 
     protected void execute() {
     	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
-    	SmartDashboard.putNumber("Turn table angle", Robot.shooter.getTurnTableAngle());
+    	SmartDashboard.putNumber("Turn table angle", Robot.turntable.getAngle());
     	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
-    	SmartDashboard.putNumber("Hood angle", Robot.shooter.getHoodAngle());
-    	SmartDashboard.putNumber("Spin RPM", Robot.shooter.getShootingWheelSpeed());
     	SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
     	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
     	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
     	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
+    	SmartDashboard.putNumber("Hood angle", Robot.hood.getAngle());
+    	SmartDashboard.putNumber("Spin RPM", Robot.shootingWheel.getSpeed());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeVerticalFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));
