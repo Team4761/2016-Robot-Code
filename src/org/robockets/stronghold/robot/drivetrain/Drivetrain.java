@@ -63,7 +63,7 @@ public class Drivetrain extends Subsystem {
     /**
      * Move the robot with rotation pid
      * @param moveValue the amount to constantly move the robot by (this ignored when using encoders)
-     * @param compassAssist whether the robot should use compass pid or gyro pid
+     * @param compassAssist whether the robot should use compass PID or gyro PID or encoders PID
      * @param scalar	The maximum speed the robot should be traveling (0-1).
      */
     public void driveAssisted(double moveValue, boolean compassAssist, boolean encoder, double scalar) {
@@ -88,11 +88,14 @@ public class Drivetrain extends Subsystem {
     	driveAssisted(0, compassAssist, encoder, scalar);
     }
     
-    public void setAngle(double angle, boolean compassAssist) {
-    	if (compassAssist) {
+    public void setAngle(double angle, AssistedRotateType assistedRotateType) {
+    	if (assistedRotateType == AssistedRotateType.COMPASS) {
     		compassPID.setSetpoint(angle);
-    	} else {
+    	} else if (assistedRotateType == AssistedRotateType.GYRO){
     		gyroPID.setSetpoint(angle);
+    	} else {
+    		leftWheelsPID.setSetpoint(angle * 2.464);
+    		rightWheelsPID.setSetpoint(-angle * 2.464);
     	}
     }
     

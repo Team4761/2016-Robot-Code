@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AssistedDrive extends Command {
 	final double CONSTANT_DISTANCE_UPDATE = 10 * 0.02;
+	boolean cutOnHighSpeed = false;
 	
 	private AssistedTranslateType translatePidType;
 	private AssistedRotateType rotationPidType;
 	double inchesPerSecond;
 	double distance;
 	double relativeAngle;
-	boolean cutOnHighSpeed;
 	
 	/**
 	 * Main constructor to control robot driving with PID.
@@ -63,20 +63,18 @@ public class AssistedDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (translatePidType == AssistedTranslateType.ENCODER) {
-        	Robot.driveTrain.enableWheelPID();
-    	}
+    	if (translatePidType == AssistedTranslateType.ENCODER) { Robot.driveTrain.enableWheelPID(); }
     	
         if (rotationPidType == AssistedRotateType.COMPASS) {
     		Robot.driveTrain.enableCompassPID();
-    		Robot.driveTrain.setAngle(relativeAngle, true);
+    		Robot.driveTrain.setAngle(relativeAngle, rotationPidType);
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		Robot.driveTrain.enableGyroPID();
-    		Robot.driveTrain.setAngle(relativeAngle, false);
-    	} /*else if (rotationPidType == AssistedRotateType.ENCODER) {
+    		Robot.driveTrain.setAngle(relativeAngle, rotationPidType);
+    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
     		Robot.driveTrain.enableWheelPID();
-    		Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
-    	}*/
+    		Robot.driveTrain.setAngle(relativeAngle, rotationPidType);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
