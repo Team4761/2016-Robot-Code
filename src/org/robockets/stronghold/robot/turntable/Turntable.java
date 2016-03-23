@@ -6,6 +6,7 @@ import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The plate on which other shooter components rest. Capable of turning 360 degrees.

@@ -33,7 +33,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Turn table left", new MoveTurnTable(-20, 0));
     	SmartDashboard.putData("Set PID", new SetPID("turntable", Robot.turntable.pidController));
     	SmartDashboard.putData("Measure latency", new MeasureLatency());
-    	
+    	SmartDashboard.putData("Move turn table to 30 degrees", new MoveTurnTable(30));
     }
 
     protected void execute() {
@@ -53,6 +53,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
     	
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));*/
+    	SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - Robot.turntable.getAngle());
+		
     }
 
     protected boolean isFinished() {

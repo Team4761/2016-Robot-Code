@@ -27,7 +27,7 @@ public class SetPID extends Command {
     }
     
     protected void initialize() {
-    	controller.disable();
+    	//controller.disable();
     	
     	SmartDashboard.putNumber(name + " p", SmartDashboard.getNumber(name + " p", controller.getP()));
     	SmartDashboard.putNumber(name + " i", SmartDashboard.getNumber(name + " i", controller.getI()));
@@ -35,8 +35,8 @@ public class SetPID extends Command {
     }
 
     protected void execute() {
-    	p = SmartDashboard.getNumber(name + " d", controller.getP());
-    	i = SmartDashboard.getNumber(name + " d", controller.getI());
+    	p = SmartDashboard.getNumber(name + " p", controller.getP());
+    	i = SmartDashboard.getNumber(name + " i", controller.getI());
     	d = SmartDashboard.getNumber(name + " d", controller.getD());
     	controller.setPID(p, i, d);
     }
@@ -46,7 +46,7 @@ public class SetPID extends Command {
     }
 
     protected void end() {
-    	controller.enable();
+    	//controller.enable();
     }
 
     protected void interrupted() {
