@@ -125,6 +125,8 @@ public class AssistedDrive extends Command {
     		return Robot.driveTrain.compassPID.onTarget() && encoderOnTarget;
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		return Robot.driveTrain.gyroPID.onTarget() && encoderOnTarget;
+    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
+    		return Robot.driveTrain.encodersOnTarget();
     	} else {
     		return encoderOnTarget;
     	}
