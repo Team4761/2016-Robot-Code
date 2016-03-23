@@ -49,7 +49,6 @@ public class AssistedDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    @SuppressWarnings("static-access")
 	protected void execute() {
     	if (Robot.oi.joystick.getRawButton(5)) {
     		inchesPerSecond *= -0.1;
