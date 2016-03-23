@@ -55,7 +55,6 @@ public class Robot extends IterativeRobot {
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
-	    autonomousCommand = new Autonomous(5, 2);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
     }
@@ -66,6 +65,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit() {
+    	table = NetworkTable.getTable("PiTouch");
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);
@@ -73,8 +73,44 @@ public class Robot extends IterativeRobot {
 		uHGSD.start();
     }
 	
+    NetworkTable table;
+    int auto = 0;
+    int defensePosition = 0;
+    String autoDefense = "";
+    
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		switch (table.getString("position", "0")) {
+			case "1": autoDefense = "lowbar";
+				break;
+			case "2": autoDefense = table.getString("defense2", "0");
+				break;
+			case "3": autoDefense = table.getString("defense3", "0");
+				break;
+			case "4": autoDefense = table.getString("defense4", "0");
+				break;
+			case "5": autoDefense = table.getString("defense5", "0");
+				break;
+		}
+		
+		switch (autoDefense) {
+			case "lowbar": auto = 1;
+				break;
+			case "Portcullis": auto = 1;
+				break;
+			case "Frise": auto = 3;
+				break;
+			default: auto = 2;
+				break;
+		}
+		
+		if (table.getString("shoot", "0").equals("true")) {
+			auto += 3;
+		}
+		
+		
+	defensePosition = Integer.parseInt(table.getString("position", "0"));
+	
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
 		hood.setAngle(hood.getAngle()); 
@@ -93,7 +129,8 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {        
+    public void autonomousInit() {
+    	autonomousCommand = new Autonomous(auto, defensePosition);
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
