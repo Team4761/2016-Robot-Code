@@ -25,11 +25,11 @@ public class Joyride extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.joystick.getRawButton(5)) {
-    		inchesPerSecond *= -0.1;
+    		inchesPerSecond *= 0.1;
     	}
     	
     	if (Robot.oi.joystick.getRawButton(6)) {
-    		inchesPerSecond *= 0.1;
+    		inchesPerSecond *= 1.1;
     	}
     	//if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		//Robot.driveTrain.encodersPID.enable();
