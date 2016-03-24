@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoFrise extends CommandGroup {
     
     public  AutoFrise(IntakeSide intakeSide) {
-        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 48, 0, 0.5));
+        addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 48, 0, 24));
         addSequential(new ChevalDeFrise(intakeSide));
     }
 }

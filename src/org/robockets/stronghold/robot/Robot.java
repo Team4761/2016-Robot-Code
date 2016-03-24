@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
-	    autonomousCommand = new Autonomous(5, 2);
+	    autonomousCommand = new Autonomous(3, 2);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
     }
