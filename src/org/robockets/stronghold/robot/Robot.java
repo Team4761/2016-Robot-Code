@@ -81,6 +81,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		switch (table.getString("position", "0")) {
+			//CAN PUT CODE DEPENDENT ON ROBOT POSITION HERE
 			case "1": autoDefense = "lowbar";
 				break;
 			case "2": autoDefense = table.getString("defense2", "0");
