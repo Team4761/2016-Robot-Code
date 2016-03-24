@@ -43,6 +43,7 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 6) { // Shovel the fries, and shoot
     		addSequential(new AutoFrise(IntakeSide.FRONT));
+    		// Implement shooting
     	}
     }
 }
