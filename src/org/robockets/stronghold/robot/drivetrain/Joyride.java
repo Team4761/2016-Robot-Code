@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Joyride extends Command {
+	
+	int inchesPerSecond = 12;
 
     public Joyride() {
         requires(Robot.driveTrain);
@@ -22,6 +24,13 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.oi.joystick.getRawButton(5)) {
+    		inchesPerSecond *= -0.1;
+    	}
+    	
+    	if (Robot.oi.joystick.getRawButton(6)) {
+    		inchesPerSecond *= 0.1;
+    	}
     	//if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
     		//Robot.driveTrain.encodersPID.enable();
     		//Robot.driveTrain.driveArcade(OI.joystick.getRawAxis(1), -Robot.driveTrain.encodersPID.get());

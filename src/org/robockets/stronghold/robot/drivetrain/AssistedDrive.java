@@ -50,13 +50,6 @@ public class AssistedDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-    	if (Robot.oi.joystick.getRawButton(5)) {
-    		inchesPerSecond *= -0.1;
-    	}
-    	
-    	if (Robot.oi.joystick.getRawButton(6)) {
-    		inchesPerSecond *= 0.1;
-    	}
     	
         if (translatePidType == AssistedTranslateType.ENCODER) {
         	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02))) > Math.abs(4 * (inchesPerSecond * 0.02))) {
