@@ -3,6 +3,8 @@ package org.robockets.stronghold.robot.highgoalshooter;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.flipper.FireShooter;
+import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
+import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.commands.MeasureLatency;
 import org.robockets.stronghold.robot.commands.SetPID;
@@ -34,6 +36,11 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Set PID", new SetPID("turntable", Robot.turntable.pidController));
     	SmartDashboard.putData("Measure latency", new MeasureLatency());
     	SmartDashboard.putData("Move turn table to 30 degrees", new MoveTurnTable(30));
+    	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
+    	SmartDashboard.putData("RPM align", new RPMAlign(true));
+    	SmartDashboard.putData("Vertical align", new VerticalAlign(true));
+    	SmartDashboard.putData("Shoot", new FireShooter());
+    	SmartDashboard.putData("Free fire", new FreeFire());
     }
 
     protected void execute() {

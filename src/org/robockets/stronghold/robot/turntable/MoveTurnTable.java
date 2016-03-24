@@ -19,7 +19,8 @@ public class MoveTurnTable extends Command {
 	 */
     public MoveTurnTable(double angle) {
     	requires(Robot.turntable);
-    	this.angle = angle;
+    	//this.angle = angle;
+//    	/this.angle = angle + ;
     }
     
     /**

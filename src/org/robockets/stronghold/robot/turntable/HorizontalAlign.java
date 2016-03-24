@@ -35,24 +35,8 @@ public class HorizontalAlign extends Command {
 
 		// In eclipse use Ctrl+I to indent multiple selected lines.
 
-		if (table.getNumber("heartbeat", 0) == 1) {
-
+		if (table.getNumber("heartbeat", 0) == 1 && Robot.turntable.onTarget()) {
 			double output = Robot.turntable.getAngle() + (factor * pixelError);
-			Robot.turntable.setAngle(output);
-			
-			
-			/*if (!continuous && Robot.turntable.onTarget()) {
-				if (!continuous && Math.abs(pixelError) < 20) {
-					if (!onTargetForReal) {
-						setTimeout(1);
-					}
-
-					onTargetForReal = true;
-				} else {
-					onTargetForReal = false;
-				}
-			}*/
-			
 			Robot.turntable.setAngle(output);
 			SmartDashboard.putNumber("output for turntable", output);
 		}	
