@@ -12,7 +12,7 @@ public class FireShooter extends Command {
 	boolean goBack = false;
 	
     public FireShooter() {
-        requires(Robot.flipper);
+        //requires(Robot.flipper);
     }
 
     protected void initialize() {

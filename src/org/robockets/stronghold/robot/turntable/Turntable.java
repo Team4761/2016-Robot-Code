@@ -18,7 +18,7 @@ public class Turntable extends Subsystem {
 	
 	public Turntable(){
 		encoder = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
-		pidController = new PIDController(0.06, 0.0005, 0, encoder, RobotMap.turnTableMotor);
+		pidController = new PIDController(0.05, 0.002, 0, encoder, RobotMap.turnTableMotor);
 		
 		pidController.disable();
 		
@@ -37,6 +37,7 @@ public class Turntable extends Subsystem {
     }
     
     public void setAngle(double angle) {
+    	//pidController.setPID(SmartDashboard.getNumber("P", 0), SmartDashboard.getNumber("I", 0), SmartDashboard.getNumber("D", 0));
     	pidController.setSetpoint(angle);
     }
     

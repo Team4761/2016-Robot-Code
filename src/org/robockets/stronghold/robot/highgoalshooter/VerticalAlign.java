@@ -14,7 +14,7 @@ public class VerticalAlign extends Command {
 	NetworkTable table;
 	double gravAcc = 32;
 	double floorToTargetHeight = 8;
-	double robotShooterToTargetHeight = 12;
+	double robotShooterToTargetHeight = 14;
 	double wheelDiameter = 6;
 	
 	boolean continuous;
@@ -59,7 +59,7 @@ public class VerticalAlign extends Command {
     }
 
     protected boolean isFinished() {
-    	if(Robot.hood.onTarget()) {
+    	if (Robot.hood.onTarget()) {
     		SmartDashboard.putBoolean("Shoot Vertically Aligned", true);
     		if (continuous == false) { return true; }
     	} else { SmartDashboard.putBoolean("Shoot Vertically Aligned", false); }

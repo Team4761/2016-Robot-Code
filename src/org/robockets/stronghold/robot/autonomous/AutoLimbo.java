@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoLimbo extends CommandGroup {
     
     public  AutoLimbo() {
-    	addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
-        addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
+    	addParallel(new SetVerticalIntake(90, IntakeSide.FRONT));
+        addParallel(new SetVerticalIntake(90, IntakeSide.BACK));
         addSequential(new MoveHood(-80));
     }
 }

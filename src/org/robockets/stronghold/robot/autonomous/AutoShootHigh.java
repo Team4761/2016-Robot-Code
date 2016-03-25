@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoShootHigh extends CommandGroup {
     
-    public  AutoShootHigh(int defense) {
+    public  AutoShootHigh(double defense) {
     	Command moveCommand = null;
     	Command aimTurntableCommand = null;
     	
     	// All distance and angle values are temporary
-    	switch (defense) {
+    	switch ((int) defense) {
     		case 1:
     			// Same as below
     		case 2:
@@ -30,22 +30,25 @@ public class AutoShootHigh extends CommandGroup {
     		case 3:
     			// Drive to goal and turn turntable slightly right
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(20);
+    			aimTurntableCommand = new MoveTurnTable(0);
     			break;
     		case 4:
     			// Drive to goal and turn turntable slightly left
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(-20);
+    			aimTurntableCommand = new MoveTurnTable(0);
     			break;
     		case 5:
     			// Drive to goal and turn turntable left
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(-60);
+    			aimTurntableCommand = new MoveTurnTable(-90);
     			break;
     	}
     	
-        //addSequential(moveCommand); Just ignore moving because after we get out of the defense we should be close enough to shoot
-        addParallel(aimTurntableCommand);
+    	//if (defense == 1) { // Only continue moving when we go under lowbar 
+    	//	addSequential(moveCommand);
+    	//}
+
+    	addSequential(aimTurntableCommand);
         addSequential(new FreeFire());
     }
 }

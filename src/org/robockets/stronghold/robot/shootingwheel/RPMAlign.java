@@ -54,28 +54,30 @@ public class RPMAlign extends Command {
     	shaftRPM = velocity * 60 / (Math.PI * wheelDiameter / 12);
     	
     	if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
-    		shaftRPM += 200;
+    		shaftRPM += 250; // Untuned
     	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
-    		shaftRPM += 200;
+    		shaftRPM += 250; // Untuned
     	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
-    		shaftRPM += 200;
-    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
-    		shaftRPM += 200;
-    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
-    		shaftRPM += 210;
-    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
-    		shaftRPM += 230;
-    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
     		shaftRPM += 250;
+    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
+    		shaftRPM += 250; // Untuned
+    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
+    		shaftRPM += 260; // Untuned
+    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
+    		shaftRPM += 280; // Untuned
+    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
+    		shaftRPM += 300; // Untuned
     	} else {
     		shaftRPM += (18.929 * distanceToTarget) + 82.5;
     	}
+    	
+    	//shaftRPM += SmartDashboard.getNumber("Extra", 300);
     	
     	SmartDashboard.putNumber("shaftRPM", shaftRPM);
     	
     	Robot.shootingWheel.setSpeed(shaftRPM);
     	
-    	if (!continuous) {
+    	//if (!continuous) {
 	    	if (Robot.shootingWheel.onTarget()) {
 	    		if (!hitSpeedTarget) {
 	    			setTimeout(1);
@@ -85,12 +87,14 @@ public class RPMAlign extends Command {
 	    	} else {
 	    		hitSpeedTarget = false;
 	    	}
-    	}
+    	//}
+	    	
+	    System.out.println(Robot.shootingWheel.getSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.shootingWheel.onTarget() && isTimedOut() && hitSpeedTarget) {
+    	if (Robot.shootingWheel.onTarget() && isTimedOut() && hitSpeedTarget) {
     		SmartDashboard.putBoolean("Shoot RPM Aligned", true);
     		if (continuous == false) { return true; }
     		else { return false; }
@@ -102,7 +106,9 @@ public class RPMAlign extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	//Robot.shootingWheel.setSpeed(0);
     	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
+    	
     }
 
     // Called when another command which requires one or more of the same

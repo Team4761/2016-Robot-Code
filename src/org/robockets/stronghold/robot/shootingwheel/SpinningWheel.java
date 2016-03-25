@@ -5,6 +5,7 @@ import org.robockets.stronghold.robot.pidsources.TalonPIDSource;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The spinny janky wanky part of the shooting subsystem.
@@ -14,7 +15,7 @@ public class SpinningWheel extends Subsystem {
 	public final PIDController shootingWheelPIDController;
 	
 	public SpinningWheel(){
-		shootingWheelPIDController = new PIDController(0.0001, 0.00001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
+		shootingWheelPIDController = new PIDController(0.0075, 0.001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		shootingWheelPIDController.disable();
 		
 		shootingWheelPIDController.setSetpoint(0);
@@ -28,6 +29,7 @@ public class SpinningWheel extends Subsystem {
     }
     
     public void setSpeed(double speed) {
+    	//shootingWheelPIDController.setPID(SmartDashboard.getNumber("Spin P"), SmartDashboard.getNumber("Spin I"), SmartDashboard.getNumber("Spin D"));
     	shootingWheelPIDController.setSetpoint(speed);
     }
     

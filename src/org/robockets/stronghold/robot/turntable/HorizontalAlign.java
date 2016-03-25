@@ -13,6 +13,7 @@ public class HorizontalAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
+	boolean firstTime;
 
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -26,26 +27,32 @@ public class HorizontalAlign extends Command {
 		table = NetworkTable.getTable("vision");
 		table.putNumber("heartbeat", 1);
 		SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
+		firstTime = true;
 	}
 
+	final double factor = 0.65; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
+	
 	protected void execute() {
-		double pixelError = table.getNumber("horiz_offset", 0);
-		SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
-		double factor = 1; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
-
+		double pixelError = table.getNumber("horiz_offset", 0); // Camera 2 degrees off
+		//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
+		
+		//SmartDashboard.putBoolean("heartbeat", table.getNumber("heartbeat", 0) == 1);
+		
 		// In eclipse use Ctrl+I to indent multiple selected lines.
 
-		if (table.getNumber("heartbeat", 0) == 1 && Robot.turntable.onTarget()) {
+		if (firstTime || (table.getNumber("heartbeat", 0) == 1)) {
+		//if (Robot.turntable.onTarget()) {
 			double output = Robot.turntable.getAngle() + (factor * pixelError);
-			Robot.turntable.setAngle(output);
+			Robot.turntable.setAngle(output + 2);
 			SmartDashboard.putNumber("output for turntable", output);
+			firstTime = false;
 		}	
 	}
 
 	protected boolean isFinished() {
-		if (table.getNumber("heartbeat",0)==1) {
-			table.putNumber("heartbeat",0);
-			if (Robot.turntable.onTarget() && isTimedOut() && Math.abs(table.getNumber("horiz_offset", 3)) == 2) {
+		if (table.getNumber("heartbeat", 0) == 1) {
+			table.putNumber("heartbeat", 0);
+			if (Math.abs((table.getNumber("horiz_offset", 3)+ 2) * factor) <= 2) { // For some reason this works
 				SmartDashboard.putBoolean("Shoot Horizontally Aligned", true);
 				if (continuous == false) { return true; }
 			} else {
