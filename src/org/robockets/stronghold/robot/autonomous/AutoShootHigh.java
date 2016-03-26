@@ -25,22 +25,22 @@ public class AutoShootHigh extends CommandGroup {
     		case 2:
     			// Drive to wall and turn turntable right
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -220, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(90);
+    			aimTurntableCommand = new MoveTurnTable(30); // 30
     			break;
     		case 3:
     			// Drive to goal and turn turntable slightly right
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(0);
+    			aimTurntableCommand = new MoveTurnTable(10); // 10
     			break;
     		case 4:
     			// Drive to goal and turn turntable slightly left
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(0);
+    			aimTurntableCommand = new MoveTurnTable(-10); // -10
     			break;
     		case 5:
     			// Drive to goal and turn turntable left
     			moveCommand = new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -150, 0, -48);
-    			aimTurntableCommand = new MoveTurnTable(-90);
+    			aimTurntableCommand = new MoveTurnTable(-30); //-30
     			break;
     	}
     	

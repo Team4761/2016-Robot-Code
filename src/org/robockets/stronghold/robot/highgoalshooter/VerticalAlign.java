@@ -14,7 +14,7 @@ public class VerticalAlign extends Command {
 	NetworkTable table;
 	double gravAcc = 32;
 	double floorToTargetHeight = 8;
-	double robotShooterToTargetHeight = 14;
+	double robotShooterToTargetHeight = 16;
 	double wheelDiameter = 6;
 	
 	boolean continuous;
@@ -24,7 +24,7 @@ public class VerticalAlign extends Command {
 	
     public VerticalAlign(boolean continuous) {
     	requires(Robot.hood);
-    	requires(Robot.shootingWheel);
+    	//requires(Robot.shootingWheel);
     	this.continuous = continuous;
     }
     
@@ -36,30 +36,49 @@ public class VerticalAlign extends Command {
 
     protected void initialize() {
     	table = NetworkTable.getTable("vision"); //TODO: Name this stuff.
-    	hitSpeedTarget = false;
     	SmartDashboard.putBoolean("Shoot Vertically Aligned", false);
     }
 
     protected void execute() {
-    	double distanceToTarget;
-    	if (distance == null) {
-    		distanceToTarget = table.getNumber("distance_guess", 6);
-    	} else {
-    		distanceToTarget = distance;
-    	}
-    		
-    	SmartDashboard.putNumber("distance", distanceToTarget);
+    	if (table.getNumber("can_see_target", 0) == 1) {
+    		double distanceToTarget;
+    		if (distance == null) {
+    			distanceToTarget = table.getNumber("distance_guess", 6);
+    		} else {
+    			distanceToTarget = distance;
+    		}
 
-    	double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
-    	SmartDashboard.putNumber("angle", angle);
-    	
-    	SmartDashboard.putNumber("distance", distanceToTarget);
-    	
-    	Robot.hood.setAngle(angle);
+    		double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
+
+    		/*if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
+    		angle += 10; // Untuned
+    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
+    		angle += 10; // Untuned
+    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
+    		angle += 10;
+    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
+    		angle += 10; // Untuned
+    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
+    		angle += 1; // Untuned
+    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
+    		angle += 1; // Untuned
+    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
+    		angle += 1; // Untuned
+    	}*/
+
+    		angle += 5;
+
+    		SmartDashboard.putNumber("angle", angle);
+
+    		SmartDashboard.putNumber("distance", distanceToTarget);
+
+    		Robot.hood.setAngle(angle);
+    	}
     }
 
     protected boolean isFinished() {
     	if (Robot.hood.onTarget()) {
+    		System.out.println("Vertically aligned");
     		SmartDashboard.putBoolean("Shoot Vertically Aligned", true);
     		if (continuous == false) { return true; }
     	} else { SmartDashboard.putBoolean("Shoot Vertically Aligned", false); }

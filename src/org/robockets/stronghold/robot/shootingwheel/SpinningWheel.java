@@ -15,7 +15,7 @@ public class SpinningWheel extends Subsystem {
 	public final PIDController shootingWheelPIDController;
 	
 	public SpinningWheel(){
-		shootingWheelPIDController = new PIDController(0.0075, 0.001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);
+		shootingWheelPIDController = new PIDController(0.0001, 0.00005, 0, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		shootingWheelPIDController.disable();
 		
 		shootingWheelPIDController.setSetpoint(0);

@@ -76,6 +76,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Spin P", 0.01);
     	SmartDashboard.putNumber("Spin I", 0.001);
     	SmartDashboard.putNumber("Spin D", 0.001);
+    	SmartDashboard.putNumber("distance", 0);
 		
 		uHGSD.start();
     }

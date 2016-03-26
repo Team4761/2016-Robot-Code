@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousTrack extends CommandGroup {
     
     public  AutonomousTrack() {
-    	addParallel(new RPMAlign(false));
     	addParallel(new HorizontalAlign(false));
+    	addSequential(new RPMAlign(false));
     }
 }

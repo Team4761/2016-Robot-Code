@@ -25,7 +25,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     }
 
     protected void initialize() {
-    	//visionTable = NetworkTable.getTable("vision");
+    	visionTable = NetworkTable.getTable("vision");
     	
     	/*SmartDashboard.putData("Move Servo", new FireShooter());
     	SmartDashboard.putNumber("pid error", 0);*/
@@ -42,6 +42,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Shoot", new FireShooter());
     	SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putNumber("Extra", 200);
+    	SmartDashboard.putNumber("Bonus Angle", 1);
     	SmartDashboard.putNumber("P", Robot.turntable.pidController.getP());
     	SmartDashboard.putNumber("I", Robot.turntable.pidController.getI());
     	SmartDashboard.putNumber("D", Robot.turntable.pidController.getD());
@@ -66,6 +67,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));*/
     	SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - Robot.turntable.getAngle());
 		//SmartDashboard.putNumber("intake angle", Robot.intakeVerticalFront.getIntakeAngle());
+    	SmartDashboard.putNumber("distance", visionTable.getNumber("distance_guess", 0));
+    	SmartDashboard.putBoolean("Can see target", visionTable.getNumber("can_see_target", 0) == 1);
     }
 
     protected boolean isFinished() {
