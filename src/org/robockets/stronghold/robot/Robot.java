@@ -41,6 +41,8 @@ public class Robot extends IterativeRobot {
 	public static final Turntable turntable = new Turntable();
 	public static final SpinningWheel shootingWheel = new SpinningWheel();
 	
+	NetworkTable modAutoTable;
+	
 	Command teleop;
 	Command uHGSD;
 	Command autonomousCommand;
@@ -58,6 +60,7 @@ public class Robot extends IterativeRobot {
 	    autonomousCommand = new Autonomous(2, 2);
 	    CameraServer server = CameraServer.getInstance();
 	    server.startAutomaticCapture("cam0"); 
+	    modAutoTable = NetworkTable.getTable("pitouch");
     }
 	
 	/**
@@ -88,8 +91,46 @@ public class Robot extends IterativeRobot {
 		hood.setAngle(hood.getAngle()); 
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
 		turntable.setAngle(turntable.getAngle()); 
-    	
-    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 2), SmartDashboard.getNumber("Robot in front of defense", 2)); // Default to 1
+		
+		if (modAutoTable.containsKey("position") && modAutoTable.containsKey("shoot") && modAutoTable.containsKey("defense")) {
+			int position = Integer.valueOf(modAutoTable.getString("position", "1"));
+			boolean shoot = Boolean.valueOf(modAutoTable.getString("shoot", "false"));
+			
+			String defense = "Lowbar";
+			if (position != 1) {
+				defense = modAutoTable.getString("defense" + position, "Moat");
+			}
+			
+			int autoMode;
+			
+			switch (defense) {
+				case "Ramparts":
+				case "Moat":
+				case "RockWall":
+				case "RoughTerrian":
+					autoMode = 2;
+					break;
+				case "Frise":
+					autoMode = 3;
+					break;
+				case "Portcullis":
+					autoMode = 1;
+					break;
+				case "Lowbar":
+					autoMode = 1;
+					break;
+				default: // Sally port and drawbridge
+					autoMode = 2;
+					break;
+			}
+			
+			if (shoot) {
+				autoMode += 3;
+			}
+			
+	    	autonomousCommand = new Autonomous(autoMode, position);
+		}
+    	//autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 2), SmartDashboard.getNumber("Robot in front of defense", 2)); // Default to 1
 	}
 
 	/**
