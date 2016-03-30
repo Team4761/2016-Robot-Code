@@ -30,7 +30,6 @@ public class FireShooter extends Command {
 
     protected void end() {
     	Robot.flipper.setAngle(0.5);
-    	System.out.println("Fire!");
     	//Robot.flipper.setAngle(0.1);
     }
 

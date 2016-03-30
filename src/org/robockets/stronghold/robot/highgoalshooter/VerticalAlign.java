@@ -78,7 +78,6 @@ public class VerticalAlign extends Command {
 
     protected boolean isFinished() {
     	if (Robot.hood.onTarget()) {
-    		System.out.println("Vertically aligned");
     		SmartDashboard.putBoolean("Shoot Vertically Aligned", true);
     		if (continuous == false) { return true; }
     	} else { SmartDashboard.putBoolean("Shoot Vertically Aligned", false); }
