@@ -21,7 +21,7 @@ public class MeasureLatency extends Command {
     }
 
     protected void execute() {
-    	if(table.getNumber("heartbeat", 0)==1){
+    	if (table.getNumber("heartbeat", 0) == 1) {
     		System.out.println("i," + (System.nanoTime() - starttime));
     		starttime = System.nanoTime();
     		table.putNumber("heartbeat", 0);
