@@ -6,9 +6,7 @@ import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
-import org.robockets.stronghold.robot.commands.MeasureLatency;
 import org.robockets.stronghold.robot.commands.SetPID;
-import org.robockets.stronghold.robot.commands.VisionHorizontalTest;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -29,12 +27,10 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	
     	/*SmartDashboard.putData("Move Servo", new FireShooter());
     	SmartDashboard.putNumber("pid error", 0);*/
-    	SmartDashboard.putData("Vision test case", new VisionHorizontalTest());
     	SmartDashboard.putData("Reset Turn Table", new MoveTurnTable(0));
     	SmartDashboard.putData("Turn table right", new MoveTurnTable(20, 0));
     	SmartDashboard.putData("Turn table left", new MoveTurnTable(-20, 0));
     	SmartDashboard.putData("Set PID", new SetPID("turntable", Robot.turntable.pidController));
-    	SmartDashboard.putData("Measure latency", new MeasureLatency());
     	SmartDashboard.putData("Move turn table to 30 degrees", new MoveTurnTable(30));
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
     	SmartDashboard.putData("RPM align", new RPMAlign(true));

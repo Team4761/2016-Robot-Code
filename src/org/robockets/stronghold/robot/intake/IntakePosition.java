@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class IntakePosition extends CommandGroup {
     
-    public  IntakePosition(IntakeSide intakeSide) {
+    public  IntakePosition(IntakeSide intakeSide, double angle) {
     	if (intakeSide == IntakeSide.FRONT) {
     		addParallel(new MoveTurnTable(0));
     	} else {
@@ -17,6 +17,6 @@ public class IntakePosition extends CommandGroup {
     	}
     	
     	//addSequential(new SetVerticalIntake(5, intakeSide)); // Ideal position for ball intake.
-        addSequential(new SetVerticalIntake(80, intakeSide)); // Ideal position for ball intake.
+        addSequential(new SetVerticalIntake(angle, intakeSide)); // Ideal position for ball intake.
     }
 }
