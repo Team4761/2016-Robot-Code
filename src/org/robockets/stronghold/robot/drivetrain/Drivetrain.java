@@ -30,8 +30,8 @@ public class Drivetrain extends Subsystem {
 		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		leftWheelsPID = new PIDController(0.01, 0.0001, 0, leftWheelsPIDSource, new DummyPIDOutput());
-		rightWheelsPID = new PIDController(0.01, 0.0001, 0, rightWheelsPIDSource, new DummyPIDOutput());
+		leftWheelsPID = new PIDController(0.006, 0.00003, 0, leftWheelsPIDSource, new DummyPIDOutput());
+		rightWheelsPID = new PIDController(0.006, 0.00003, 0, rightWheelsPIDSource, new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
@@ -63,7 +63,7 @@ public class Drivetrain extends Subsystem {
     /**
      * Move the robot with rotation pid
      * @param moveValue the amount to constantly move the robot by (this ignored when using encoders)
-     * @param compassAssist whether the robot should use compass pid or gyro pid
+     * @param compassAssist whether the robot should use compass PID or gyro PID or encoders PID
      * @param scalar	The maximum speed the robot should be traveling (0-1).
      */
     public void driveAssisted(double moveValue, boolean compassAssist, boolean encoder, double scalar) {
@@ -89,15 +89,19 @@ public class Drivetrain extends Subsystem {
     	driveAssisted(0, compassAssist, encoder, scalar);
     }
     
-    public void setAngle(double angle, boolean compassAssist) {
-    	if (compassAssist) {
+    //2.464 degrees per 1 inch of arclength
+    public void setAngle(double angle, AssistedRotateType assistedRotateType) {
+    	if (assistedRotateType == AssistedRotateType.COMPASS) {
     		compassPID.setSetpoint(angle);
-    	} else {
+    	} else if (assistedRotateType == AssistedRotateType.GYRO){
     		gyroPID.setSetpoint(angle);
+    	} else {
+    		leftWheelsPID.setSetpoint(angle / 2.464 / 2);
+    		rightWheelsPID.setSetpoint(-angle / 2.464 / 2);
     	}
     }
     
-    //2.464 degrees per 1 inch of arclength
+    
 
     public void setDistanceInInches(double distance) {
     	SmartDashboard.putNumber("distance setpoint", distance);
@@ -122,8 +126,8 @@ public class Drivetrain extends Subsystem {
     }
     
     public boolean encodersOnTarget() {
-    	return Math.abs(leftWheelsPID.getSetpoint() - RobotMap.driveEncoderLeft.get()) < 84 && 
-    			Math.abs(rightWheelsPID.getSetpoint() - RobotMap.driveEncoderRight.get()) < 84; //84 is about 6 inches of error.
+    	return Math.abs(leftWheelsPID.getSetpoint() - leftWheelsPIDSource.pidGet()) < 3 && 
+    			Math.abs(rightWheelsPID.getSetpoint() - rightWheelsPIDSource.pidGet()) < 3;
     }
     
     public void stop() {
