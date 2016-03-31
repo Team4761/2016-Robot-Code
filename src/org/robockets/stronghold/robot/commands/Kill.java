@@ -10,12 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Kill extends Command {
 
     public Kill() {
-        requires(Robot.driveTrain);
         requires(Robot.intakeVerticalFront);
         requires(Robot.intakeVerticalBack);
         requires(Robot.intakeSpinnersFront);
         requires(Robot.intakeSpinnersFront);
-        requires(Robot.flipper);
+        //requires(Robot.flipper);
         requires(Robot.turntable);
         requires(Robot.hood);
         requires(Robot.shootingWheel);
@@ -23,12 +22,11 @@ public class Kill extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	setTimeout(0.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.driveTrain.stop();
-    	
+    protected void execute() {    	
     	Robot.intakeVerticalFront.stop();
     	Robot.intakeSpinnersFront.stop();
     	Robot.intakeVerticalBack.stop();
@@ -43,7 +41,7 @@ public class Kill extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

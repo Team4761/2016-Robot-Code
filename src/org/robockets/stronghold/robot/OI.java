@@ -11,10 +11,13 @@ import org.robockets.stronghold.robot.highgoalshooter.AimCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
+import org.robockets.stronghold.robot.highgoalshooter.ShootOnAligned;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
 import org.robockets.stronghold.robot.hood.MoveHood;
+import org.robockets.stronghold.robot.intake.ClampIntake;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
 import org.robockets.stronghold.robot.intake.IntakeBall;
+import org.robockets.stronghold.robot.intake.IntakeBallMinimal;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
@@ -37,22 +40,28 @@ public class OI {
 		ButtonManager.addJoystick(buttonBoard2);
 		
 		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
-		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 80), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 70), true));
+		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 90), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
+		
 		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
+		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
+		
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
 		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
 		ButtonManager.addButton(new ActionButton(1, 15, new ResetPID(RobotMap.hoodEncoder, Robot.hood.pidController), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.turntable.pidController), true));
 		
-		ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
+		//ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 19, new ClampIntake(), true));		
 		ButtonManager.addButton(new ActionButton(2, 18, new AimCleatShot(Direction.LEFT), true));
 		ButtonManager.addButton(new ActionButton(2, 17, new AimCleatShot(Direction.CENTER), true));
-		ButtonManager.addButton(new ActionButton(2, 16, new AimCleatShot(Direction.RIGHT), true));
+		ButtonManager.addButton(new ActionButton(2, 16, new IntakeBallMinimal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 3, new FireSpyShot(), true));
 		ButtonManager.addButton(new ActionButton(2, 4, new FireCleatShot(), true));
-		ButtonManager.addButton(new ActionButton(2, 7, new DrivePosition(), true));
+		ButtonManager.addButton(new ActionButton(2, 7, new DrivePosition(true), true));
 		ButtonManager.addButton(new ActionButton(2, 6, new Limbo(), true));
 		ButtonManager.addButton(new ActionButton(2, 15, new MoveHood(25, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 14, new MoveHood(-25, 0), true));

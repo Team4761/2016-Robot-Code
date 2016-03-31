@@ -12,6 +12,6 @@ public class Limbo extends CommandGroup {
     
     public  Limbo() {
     	addSequential(new AutoLimbo());
-    	addSequential(new MoveTurnTable(0));
+    	addSequential(new MoveTurnTable(180));
     }
 }
