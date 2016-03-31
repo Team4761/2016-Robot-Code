@@ -43,9 +43,6 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putNumber("Extra", 200);
     	SmartDashboard.putNumber("Bonus Angle", 1);
-    	SmartDashboard.putNumber("P", Robot.turntable.pidController.getP());
-    	SmartDashboard.putNumber("I", Robot.turntable.pidController.getI());
-    	SmartDashboard.putNumber("D", Robot.turntable.pidController.getD());
     }
 
     protected void execute() {
