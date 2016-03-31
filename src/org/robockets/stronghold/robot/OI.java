@@ -21,6 +21,7 @@ import org.robockets.stronghold.robot.intake.IntakeBallMinimal;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
+import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -60,7 +61,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 17, new AimCleatShot(Direction.CENTER), true));
 		ButtonManager.addButton(new ActionButton(2, 16, new IntakeBallMinimal(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 3, new FireSpyShot(), true));
-		ButtonManager.addButton(new ActionButton(2, 4, new FireCleatShot(), true));
+		//ButtonManager.addButton(new ActionButton(2, 4, new FireCleatShot(), true));
+		ButtonManager.addButton(new ActionButton(2, 4, new MoveShootingWheel(1200), true));
 		ButtonManager.addButton(new ActionButton(2, 7, new DrivePosition(true), true));
 		ButtonManager.addButton(new ActionButton(2, 6, new Limbo(), true));
 		ButtonManager.addButton(new ActionButton(2, 15, new MoveHood(25, 0), true));
