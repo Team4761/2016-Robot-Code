@@ -20,6 +20,7 @@ public class MoveTurnTable extends Command {
     public MoveTurnTable(double angle) {
     	requires(Robot.turntable);
     	this.angle = angle;
+//    	/this.angle = angle + ;
     }
     
     /**
@@ -42,6 +43,8 @@ public class MoveTurnTable extends Command {
     	if (speed != null) {
     		Robot.turntable.setAngle(Robot.turntable.getSetpoint() + speed);
     	}
+    	
+    	System.out.println(Robot.turntable.pidController.get());
     }
 
     protected boolean isFinished() {

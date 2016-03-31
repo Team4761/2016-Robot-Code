@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Joyride extends Command {
 
     public Joyride() {
-        requires(Robot.driveTrain);
+        //requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -44,7 +44,7 @@ public class Joyride extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.stop();
+    	//Robot.driveTrain.stop();
     	//Robot.driveTrain.encodersPID.disable();
     }
 

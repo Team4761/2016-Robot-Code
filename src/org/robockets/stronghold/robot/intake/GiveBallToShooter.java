@@ -19,7 +19,7 @@ public class GiveBallToShooter extends CommandGroup {
     	}
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
     	addParallel(new MoveHood(0));
-    	addSequential(new SetVerticalIntake(10, intakeSide));
+    	addSequential(new SetVerticalIntake(20, intakeSide));
     	addSequential(new CheckIntakeBreakBeam(intakeSide, true, true, 0));
     	addSequential(new WaitCommand(1));
     	addSequential(new MoveHood((intakeSide == IntakeSide.FRONT) ? -80 : 80)); // Forward would be positive degrees. This command traps the ball
