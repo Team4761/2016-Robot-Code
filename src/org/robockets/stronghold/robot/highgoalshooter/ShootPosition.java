@@ -13,5 +13,6 @@ public class ShootPosition extends CommandGroup {
     public  ShootPosition() {
     	addSequential(new MoveHood(-70));
     	addSequential(new FireShooter()); // Unstick ball
+    	addSequential(new MoveHood(-80));
     }
 }
