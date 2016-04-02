@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class SpinningWheel extends Subsystem {
 	public final double WHEEL_ERROR = 50;
 	public final PIDController shootingWheelPIDController;
+	public final double CONSTANT_SPEED = 1500; 
 	
 	public SpinningWheel(){
 		shootingWheelPIDController = new PIDController(0.0001, 0.00001, 0.001, new TalonPIDSource(), RobotMap.shootingWheelMotor);

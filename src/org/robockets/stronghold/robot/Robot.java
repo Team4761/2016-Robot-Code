@@ -68,7 +68,6 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 0));
     	SmartDashboard.putNumber("pid error", 0);
-    	SmartDashboard.putBoolean("On target!", false);
 		
 		uHGSD.start();
     }
