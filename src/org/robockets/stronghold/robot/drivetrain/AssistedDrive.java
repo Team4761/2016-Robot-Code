@@ -78,7 +78,8 @@ public class AssistedDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+	protected void execute() {
+    	
         if (translatePidType == AssistedTranslateType.ENCODER) {
         	double extraInches = (cutOnHighSpeed) ? CONSTANT_DISTANCE_UPDATE : 0;
         	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches)) > Math.abs(4 * (inchesPerSecond * 0.02))) {
