@@ -10,6 +10,7 @@ import org.robockets.stronghold.robot.hood.Hood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.IntakeSpinners;
 import org.robockets.stronghold.robot.intake.IntakeVertical;
+import org.robockets.stronghold.robot.catapult.Catapult;
 import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
 import org.robockets.stronghold.robot.turntable.Turntable;
 
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
 	public static final Hood hood = new Hood();
 	public static final Turntable turntable = new Turntable();
 	public static final SpinningWheel shootingWheel = new SpinningWheel();
+	public static final Catapult  catapult = new Catapult();
 	
 	Command teleop;
 	Command uHGSD;

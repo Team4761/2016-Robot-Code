@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -45,6 +46,8 @@ public class RobotMap {
 	public static DigitalInput frontBB = new DigitalInput(10);
 	public static DigitalInput backBB = new DigitalInput(13);
 	public static Servo shootingFlipper = new Servo(5);
+	
+	public static Solenoid catapultSolenoid = new Solenoid(0); // TODO: Get real port
 	
 	public RobotMap () {
 		navX.zeroYaw();
