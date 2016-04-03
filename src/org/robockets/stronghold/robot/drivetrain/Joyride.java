@@ -28,12 +28,12 @@ public class Joyride extends Command {
     	translate = OI.joystick.getRawAxis(1);
     	rotate = OI.joystick.getRawAxis(4);
     	
-    	if (Robot.oi.joystick.getRawButton(5)) {
+    	if (OI.joystick.getRawButton(5)) {
 			translate *= 0.5;
 			rotate *= 0.5;
 		}
     	
-		if (Robot.oi.joystick.getRawButton(6)) {
+		if (OI.joystick.getRawButton(6)) {
     		translate *= 0.8;
     		rotate *= 0.8;
     	}
