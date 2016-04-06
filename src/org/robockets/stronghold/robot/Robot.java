@@ -118,6 +118,8 @@ public class Robot extends IterativeRobot {
 		hood.setAngle(hood.getAngle()); 
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
 		turntable.setAngle(turntable.getAngle()); 
+		
+		autonomousCommand = new Autonomous(auto, position);
     	
     	//autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 0), 1); // Default to 1
 	}
@@ -132,7 +134,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	autonomousCommand = new Autonomous(auto, position);
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
