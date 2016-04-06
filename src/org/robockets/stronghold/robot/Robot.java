@@ -75,21 +75,25 @@ public class Robot extends IterativeRobot {
 	
     NetworkTable table;
     int auto = 0;
-    int defensePosition = 0;
     String autoDefense = "";
     
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		switch (table.getString("position", "0")) {
-			case "1": autoDefense = "lowbar";
+		
+		int position = Integer.parseInt(table.getString("position", "2"));
+		boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
+		
+		
+		switch (position) {
+			case 1: autoDefense = "lowbar"; // This is just to keep things consistant
 				break;
-			case "2": autoDefense = table.getString("defense2", "0");
+			case 2: autoDefense = table.getString("defense2", "0");
 				break;
-			case "3": autoDefense = table.getString("defense3", "0");
+			case 3: autoDefense = table.getString("defense3", "0");
 				break;
-			case "4": autoDefense = table.getString("defense4", "0");
+			case 4: autoDefense = table.getString("defense4", "0");
 				break;
-			case "5": autoDefense = table.getString("defense5", "0");
+			case 5: autoDefense = table.getString("defense5", "0");
 				break;
 		}
 		
@@ -104,12 +108,9 @@ public class Robot extends IterativeRobot {
 				break;
 		}
 		
-		if (table.getString("shoot", "0").equals("true")) {
+		if (shoot) {
 			auto += 3;
 		}
-		
-		
-	defensePosition = Integer.parseInt(table.getString("position", "0"));
 	
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
@@ -130,7 +131,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	autonomousCommand = new Autonomous(auto, defensePosition);
+    	autonomousCommand = new Autonomous(auto, position);
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
