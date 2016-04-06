@@ -44,6 +44,7 @@ public class RobotMap {
 	public static CANTalon shootingWheelMotor = new CANTalon(2);
 	public static DigitalInput frontBB = new DigitalInput(10);
 	public static DigitalInput backBB = new DigitalInput(13);
+	public static DigitalInput frontLS = new DigitalInput(20); //TEMP PORT
 	public static Servo shootingFlipper = new Servo(5);
 	
 	public RobotMap () {
