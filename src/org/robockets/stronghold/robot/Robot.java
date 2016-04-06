@@ -75,12 +75,13 @@ public class Robot extends IterativeRobot {
 	
     NetworkTable table;
     int auto = 0;
+    int position = 0;
     String autoDefense = "";
     
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		
-		int position = Integer.parseInt(table.getString("position", "2"));
+		position = Integer.parseInt(table.getString("position", "2"));
 		boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
 		
 		
