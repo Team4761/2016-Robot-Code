@@ -13,9 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SpinningWheel extends Subsystem {
 	public final double WHEEL_ERROR = 50;
 	public final PIDController shootingWheelPIDController;
+	public final TalonPIDSource source = new TalonPIDSource(1 / 1024.0 * 60.0);
 	
 	public SpinningWheel(){
-		shootingWheelPIDController = new PIDController(0.0001, 0.00005, 0, new TalonPIDSource(), RobotMap.shootingWheelMotor);
+		shootingWheelPIDController = new PIDController(0.0001, 0.00005, 0, source, RobotMap.shootingWheelMotor);
 		shootingWheelPIDController.disable();
 		
 		shootingWheelPIDController.setSetpoint(0);
@@ -38,7 +39,7 @@ public class SpinningWheel extends Subsystem {
     }
     
     public double getSpeed() {
-    	return RobotMap.shootingWheelMotor.getEncVelocity() / 1024.0 * 60.0;
+    	return source.pidGet();
     }
     
     public boolean onTarget() {

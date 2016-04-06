@@ -21,11 +21,11 @@ public class Drivetrain extends Subsystem {
 	public final PIDController gyroPID;
 	public final PIDController leftWheelsPID;
 	public final PIDController rightWheelsPID;
-
+	public final double DRIVETRAIN_GEAR = 14.0;
 	
-	public Drivetrain() {	
-		leftWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderLeft, 1.0 / 14.0, PIDSourceType.kDisplacement);
-		rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, -1.0 / 14.0, PIDSourceType.kDisplacement);
+	public Drivetrain() {
+		leftWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderLeft, 1.0 / DRIVETRAIN_GEAR, PIDSourceType.kDisplacement);
+		rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, -1.0 / DRIVETRAIN_GEAR, PIDSourceType.kDisplacement);
 		//rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, ((1.0 / 360.0) * 250.0) * (1.0 / 14.0), PIDSourceType.kDisplacement);
 		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
@@ -89,6 +89,8 @@ public class Drivetrain extends Subsystem {
     	driveAssisted(0, compassAssist, encoder, scalar);
     }
     
+    public final double ARCLENGTH = 2.464;
+    
     //2.464 degrees per 1 inch of arclength
     public void setAngle(double angle, AssistedRotateType assistedRotateType) {
     	if (assistedRotateType == AssistedRotateType.COMPASS) {
@@ -96,8 +98,8 @@ public class Drivetrain extends Subsystem {
     	} else if (assistedRotateType == AssistedRotateType.GYRO){
     		gyroPID.setSetpoint(angle);
     	} else {
-    		leftWheelsPID.setSetpoint(angle / 2.464 / 2);
-    		rightWheelsPID.setSetpoint(-angle / 2.464 / 2);
+    		leftWheelsPID.setSetpoint(angle / ARCLENGTH / 2);
+    		rightWheelsPID.setSetpoint(-angle / ARCLENGTH / 2);
     	}
     }
     
