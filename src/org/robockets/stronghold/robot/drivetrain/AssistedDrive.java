@@ -78,7 +78,8 @@ public class AssistedDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+	protected void execute() {
+    	
         if (translatePidType == AssistedTranslateType.ENCODER) {
         	double extraInches = (cutOnHighSpeed) ? CONSTANT_DISTANCE_UPDATE : 0;
         	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches)) > Math.abs(4 * (inchesPerSecond * 0.02))) {
@@ -107,8 +108,8 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		encoderOnTarget = Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceInInches())) <= 2 && 
-    				Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches())) <= 2;
+    		encoderOnTarget = Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceInInches())) <= 1 && 
+    				Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches())) <= 1;
     	}
     	
     	if (!encoderOnTarget && cutOnHighSpeed) {
@@ -125,8 +126,6 @@ public class AssistedDrive extends Command {
     		return Robot.driveTrain.compassPID.onTarget() && encoderOnTarget;
     	} else if (rotationPidType == AssistedRotateType.GYRO) {
     		return Robot.driveTrain.gyroPID.onTarget() && encoderOnTarget;
-    	} else if (rotationPidType == AssistedRotateType.ENCODER) {
-    		return Robot.driveTrain.encodersOnTarget();
     	} else {
     		return encoderOnTarget;
     	}

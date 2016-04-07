@@ -25,13 +25,13 @@ public class Drivetrain extends Subsystem {
 	
 	public Drivetrain() {	
 		leftWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderLeft, 1.0 / 14.0, PIDSourceType.kDisplacement);
-		rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, -1.0 / 14.0, PIDSourceType.kDisplacement);
-		//rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, ((1.0 / 360.0) * 250.0) * (1.0 / 14.0), PIDSourceType.kDisplacement);
+		//rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, -1.0 / 14.0, PIDSourceType.kDisplacement);
+		rightWheelsPIDSource = new EncoderPIDSource(RobotMap.driveEncoderRight, ((-1.0 / 360.0) * 250.0) * (1.0 / 14.0), PIDSourceType.kDisplacement);
 		
 		compassPID = new PIDController(0.1, 0, 0, new CompassPIDSource(), new DummyPIDOutput());
 		gyroPID = new PIDController(0.01, 0.0001, 0.00001, new GyroPIDSource(), new DummyPIDOutput());
-		leftWheelsPID = new PIDController(0.006, 0.00003, 0, leftWheelsPIDSource, new DummyPIDOutput());
-		rightWheelsPID = new PIDController(0.006, 0.00003, 0, rightWheelsPIDSource, new DummyPIDOutput());
+		leftWheelsPID = new PIDController(0.02, 0.0004, 0, leftWheelsPIDSource, new DummyPIDOutput());
+		rightWheelsPID = new PIDController(0.02, 0.0004, 0, rightWheelsPIDSource, new DummyPIDOutput());
 
 		compassPID.disable();
 		compassPID.setOutputRange(-1.0, 1.0); // Set turning speed range
