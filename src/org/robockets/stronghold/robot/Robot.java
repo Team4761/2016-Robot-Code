@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot {
 			case "RockWall":
 			case "RoughTerrain": auto = 2;
 				break;
-			default: auto = 0; // Door ones
+			default: auto = 0; // Door ones. This is temporary
 				break;
 		}
 		
