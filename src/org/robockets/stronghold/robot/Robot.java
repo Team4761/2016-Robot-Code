@@ -88,16 +88,20 @@ public class Robot extends IterativeRobot {
 		
 		switch (autoDefense) {
 			case "Lowbar":
-			case "Portcullis": auto = 1;
+			case "Portcullis": 
+				auto = 1;
 				break;
-			case "Frise": auto = 3;
+			case "Frise": 
+				auto = 3;
 				break;
 			case "Ramparts":
 			case "Moat":
 			case "RockWall":
-			case "RoughTerrain": auto = 2;
+			case "RoughTerrain": 
+				auto = 2;
 				break;
-			default: auto = 0; // Door ones. This is temporary
+			default: 
+				auto = 0; // Door ones. This is temporary
 				break;
 		}
 		
