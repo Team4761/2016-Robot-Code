@@ -83,29 +83,21 @@ public class Robot extends IterativeRobot {
 		
 		position = Integer.parseInt(table.getString("position", "2"));
 		boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
+		autoDefense = "defense" + position;
 		
-		
-		switch (position) {
-			case 1: autoDefense = "lowbar"; // This is just to keep things consistant
-				break;
-			case 2: autoDefense = table.getString("defense2", "0");
-				break;
-			case 3: autoDefense = table.getString("defense3", "0");
-				break;
-			case 4: autoDefense = table.getString("defense4", "0");
-				break;
-			case 5: autoDefense = table.getString("defense5", "0");
-				break;
-		}
 		
 		switch (autoDefense) {
-			case "lowbar": auto = 1;
-				break;
+			case "Lowbar":
 			case "Portcullis": auto = 1;
 				break;
 			case "Frise": auto = 3;
 				break;
-			default: auto = 2;
+			case "Ramparts":
+			case "Moat":
+			case "RockWall":
+			case "RoughTerrain": auto = 2;
+				break;
+			default: auto = 0; // Door ones
 				break;
 		}
 		
