@@ -41,22 +41,19 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Bonus Angle", 1);
     }
 
-    protected void execute() {
-    	/*SmartDashboard.putNumber("Encoders Setpoint", Robot.driveTrain.encodersPID.getSetpoint());
-    	SmartDashboard.putNumber("Encoders Offset", Robot.driveTrain.getEncodersOffset());
-
-    	SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
+    protected void execute() {    	
+    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
+    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
+    	
+    	/*SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
     	SmartDashboard.putNumber("Turn table angle", Robot.turntable.getAngle());
     	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
     	SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
     	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
-    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
-    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
     	SmartDashboard.putNumber("Hood angle", Robot.hood.getAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shootingWheel.getSpeed());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeVerticalFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
-    	
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));*/
     	SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - Robot.turntable.getAngle());
 		//SmartDashboard.putNumber("intake angle", Robot.intakeVerticalFront.getIntakeAngle());
