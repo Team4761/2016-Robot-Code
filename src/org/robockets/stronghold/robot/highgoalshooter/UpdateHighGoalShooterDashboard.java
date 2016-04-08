@@ -1,6 +1,5 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
-import org.robockets.stronghold.robot.ResetPID;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.flipper.FireShooter;
@@ -8,10 +7,6 @@ import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.commands.SetPID;
-import org.robockets.stronghold.robot.drivetrain.AssistedDrive;
-import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
-import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
-import org.robockets.stronghold.robot.drivetrain.DirectDrive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -44,20 +39,6 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putNumber("Extra", 200);
     	SmartDashboard.putNumber("Bonus Angle", 1);
-    	
-    	SmartDashboard.putNumber("Setpoint Forward", 0);
-    	SmartDashboard.putNumber("Setpoint Backward", 0);
-
-       	SmartDashboard.putData("Set Left Drivetrain PID", new SetPID("Left Drivetrain", Robot.driveTrain.leftWheelsPID));
-    	SmartDashboard.putData("Set Right Drivetrain PID", new SetPID("Right Drivetrain", Robot.driveTrain.rightWheelsPID));
-    	SmartDashboard.putData("Move Forwards", new DirectDrive(24));
-    	SmartDashboard.putData("Move Backwards", new DirectDrive(-24));
-    	SmartDashboard.putData("Left Side Reset", new ResetPID(RobotMap.driveEncoderLeft, Robot.driveTrain.leftWheelsPID));
-    	SmartDashboard.putData("Right Side Reset", new ResetPID(RobotMap.driveEncoderRight, Robot.driveTrain.rightWheelsPID));
-    	
-    	SmartDashboard.putData("Assisted Move Forwards", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 144, 0, 36));
-    	SmartDashboard.putData("Assisted Move Backwards", new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -144, 0, -36));
-
     }
 
     protected void execute() {    	
@@ -69,12 +50,10 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
     	SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
     	SmartDashboard.putNumber("Right Side Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
-
     	SmartDashboard.putNumber("Hood angle", Robot.hood.getAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shootingWheel.getSpeed());
     	SmartDashboard.putNumber("Front Intake angle", RobotMap.intakeEncoderFront.get() / Robot.intakeVerticalFront.COUNTS_PER_DEGREE);
     	SmartDashboard.putNumber("Yaw", RobotMap.navX.getYaw());
-    	
     	SmartDashboard.putNumber("Lock", visionTable.getNumber("can_see_target", 0));*/
     	SmartDashboard.putNumber("pid error", Robot.turntable.getSetpoint() - Robot.turntable.getAngle());
 		//SmartDashboard.putNumber("intake angle", Robot.intakeVerticalFront.getIntakeAngle());
