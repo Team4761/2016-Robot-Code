@@ -40,11 +40,12 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
 		
 		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
-		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 80), true));
-		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 70), true));
-		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 90), true));
+		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 83), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 73), true));
+		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 93), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
+		ButtonManager.addButton(new ActionButton(1, 10, new IntakeBallMinimal(IntakeSide.FRONT), true));
 		
 		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
