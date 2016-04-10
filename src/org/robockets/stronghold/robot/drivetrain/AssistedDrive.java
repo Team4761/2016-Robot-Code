@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot.drivetrain;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Command used for self-driving with PID control.
@@ -79,11 +80,16 @@ public class AssistedDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-    	
         if (translatePidType == AssistedTranslateType.ENCODER) {
         	double extraInches = (cutOnHighSpeed) ? CONSTANT_DISTANCE_UPDATE : 0;
         	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches)) > Math.abs(4 * (inchesPerSecond * 0.02))) {
-        		Robot.driveTrain.setDistanceInInches(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches);
+        		Robot.driveTrain.setLeftDistanceInInches(Robot.driveTrain.getLeftDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches);
+        		SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
+        	}
+        	
+        	if (Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches)) > Math.abs(4 * (inchesPerSecond * 0.02))) {
+        		Robot.driveTrain.setRightDistanceInInches(Robot.driveTrain.getRightDistanceSetpointInInches() + (inchesPerSecond * 0.02) + extraInches);
+        		SmartDashboard.putNumber("Right Setpoint", Robot.driveTrain.getRightDistanceSetpointInInches());
         	}
         }
     	
@@ -108,8 +114,8 @@ public class AssistedDrive extends Command {
     protected boolean isFinished() {
     	boolean encoderOnTarget = true;
     	if (translatePidType == AssistedTranslateType.ENCODER) {
-    		encoderOnTarget = Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceInInches())) <= 1 && 
-    				Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches())) <= 1;
+    		encoderOnTarget = Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getLeftDistanceInInches())) <= 2 && 
+    				Math.abs(Math.abs(distance) - Math.abs(Robot.driveTrain.getRightDistanceInInches())) <= 2;
     	}
     	
     	if (!encoderOnTarget && cutOnHighSpeed) {

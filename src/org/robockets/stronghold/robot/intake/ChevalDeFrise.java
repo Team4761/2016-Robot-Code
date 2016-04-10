@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class ChevalDeFrise extends CommandGroup {
 
     public ChevalDeFrise(IntakeSide intakeSide) {
-    	addSequential(new SetVerticalIntake(80, intakeSide));
-        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 24, 0, 12));
-        addSequential(new WaitCommand(1));
-        addParallel(new SetVerticalIntake(20, intakeSide)); // Slowly lift arm as robot moves across
-        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 12, 0, 12)); 
+    	addSequential(new SetVerticalIntake(95, intakeSide));
+        addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -48, 0, -24));
+        addSequential(new WaitCommand(1.5));
+        addSequential(new SetVerticalIntake(20, intakeSide)); // Slowly lift arm as robot moves across
+        //addParallel(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -12, 0, -12)); 
     }
 }

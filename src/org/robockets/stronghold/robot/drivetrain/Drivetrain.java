@@ -101,8 +101,14 @@ public class Drivetrain extends Subsystem {
     	}
     }
     
+    public void setRightDistanceInInches(double distance) {
+    	rightWheelsPID.setSetpoint(distance);
+    }
     
-
+    public void setLeftDistanceInInches(double distance) {
+    	leftWheelsPID.setSetpoint(distance);
+    }
+    
     public void setDistanceInInches(double distance) {
     	SmartDashboard.putNumber("distance setpoint", distance);
     	leftWheelsPID.setSetpoint(distance);
@@ -155,6 +161,8 @@ public class Drivetrain extends Subsystem {
     	rightWheelsPID.reset();
     	leftWheelsPID.enable();
     	rightWheelsPID.enable();
+    	leftWheelsPID.setSetpoint(getLeftDistanceInInches());
+    	rightWheelsPID.setSetpoint(getRightDistanceInInches());
     }
     
     public void disableWheelPID() {
