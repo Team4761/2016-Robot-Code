@@ -5,13 +5,11 @@ import org.robockets.buttonmanager.buttons.ActionButton;
 import org.robockets.stronghold.robot.commands.DrivePosition;
 import org.robockets.stronghold.robot.commands.Kill;
 import org.robockets.stronghold.robot.commands.Limbo;
-import org.robockets.stronghold.robot.commands.LowGoal;
 import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.highgoalshooter.AimCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
-import org.robockets.stronghold.robot.highgoalshooter.ShootOnAligned;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
 import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.ClampIntake;
@@ -39,10 +37,12 @@ public class OI {
 		ButtonManager.addJoystick(buttonBoard1);
 		ButtonManager.addJoystick(buttonBoard2);
 		
+		ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
+		
 		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
-		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 80), true));
-		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 70), true));
-		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 90), true));
+		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 83), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 73), true));
+		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 93), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
 		
