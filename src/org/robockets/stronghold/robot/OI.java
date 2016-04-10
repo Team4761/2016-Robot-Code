@@ -45,6 +45,7 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 93), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
+		ButtonManager.addButton(new ActionButton(1, 10, new IntakeBallMinimal(IntakeSide.FRONT), true));
 		
 		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
