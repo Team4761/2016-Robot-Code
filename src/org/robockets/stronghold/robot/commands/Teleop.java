@@ -2,6 +2,7 @@ package org.robockets.stronghold.robot.commands;
 
 import org.robockets.stronghold.robot.drivetrain.Joyride;
 import org.robockets.stronghold.robot.flipper.SetShooterFlipper;
+import org.robockets.stronghold.robot.intake.ResetWhenUp;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,5 +16,6 @@ public class Teleop extends CommandGroup {
     	addParallel(new SetShooterFlipper(0.5));
     	addParallel(new UpdateDashboard());
     	addParallel(new Joyride());
+    	addParallel(new ResetWhenUp());
     }
 }

@@ -66,6 +66,7 @@ public class IntakeVertical extends Subsystem {
 		encoderPID.setSetpoint(encoderPID.getSetpoint());
 		encoderPID.enable();
 	}
+	
 
 	public void stop() {
 		intakeVerticalMotor.set(0);
