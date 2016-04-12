@@ -4,6 +4,7 @@ import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The part of the shooter subsystem that aims the cannonballs at a specified angle.
@@ -13,7 +14,7 @@ public class Hood extends Subsystem {
 	
 	public final PIDController pidController;
 	
-	public Hood(){
+	public Hood() {
 		pidController = new PIDController(0.075, 0.0001, 0, RobotMap.hoodPIDSource, RobotMap.hoodMotor);
 		pidController.disable();
 		pidController.setSetpoint(0);
@@ -25,7 +26,8 @@ public class Hood extends Subsystem {
     }
     
     public void setAngle(double angle) {
-    	pidController.setSetpoint(angle);
+    	pidController.setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
+    	//pidController.setSetpoint(angle);
     }
     
     public double getSetpoint() {

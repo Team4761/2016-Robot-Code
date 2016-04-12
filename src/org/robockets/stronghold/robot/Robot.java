@@ -75,6 +75,8 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     	
     	SmartDashboard.putNumber("distance", 0);
+    	
+    	SmartDashboard.putNumber("New flipper angle", 0);
 		
 		uHGSD.start();
     }

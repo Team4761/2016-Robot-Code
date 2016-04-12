@@ -37,8 +37,8 @@ public class Turntable extends Subsystem {
     }
     
     public void setAngle(double angle) {
-    	//pidController.setPID(SmartDashboard.getNumber("P", 0), SmartDashboard.getNumber("I", 0), SmartDashboard.getNumber("D", 0));
-    	pidController.setSetpoint(angle);
+    	//pidController.setSetpoint(angle);
+    	pidController.setSetpoint(SmartDashboard.getNumber("New Turntable"));
     }
     
     public double getSetpoint() {

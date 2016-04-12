@@ -30,8 +30,8 @@ public class SpinningWheel extends Subsystem {
     }
     
     public void setSpeed(double speed) {
-    	//shootingWheelPIDController.setPID(SmartDashboard.getNumber("Spin P"), SmartDashboard.getNumber("Spin I"), SmartDashboard.getNumber("Spin D"));
-    	shootingWheelPIDController.setSetpoint(speed);
+    	//shootingWheelPIDController.setSetpoint(speed);
+    	shootingWheelPIDController.setSetpoint(SmartDashboard.getNumber("New RPM"));
     }
     
     public void setVoltage(double voltage) {
