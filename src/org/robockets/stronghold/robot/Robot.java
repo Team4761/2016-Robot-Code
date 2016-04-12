@@ -68,6 +68,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
     	SmartDashboard.putNumber("Auto mode", SmartDashboard.getNumber("Auto mode", 2));
     	SmartDashboard.putNumber("Robot in front of defense", SmartDashboard.getNumber("Robot in front of defense", 2));
+    	table = NetworkTable.getTable("PiTouch");
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);
     	SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
@@ -78,15 +79,50 @@ public class Robot extends IterativeRobot {
 		uHGSD.start();
     }
 	
+    NetworkTable table;
+    int auto = 0;
+    int position = 0;
+    String autoDefense = "";
+    
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+		position = Integer.parseInt(table.getString("position", "2"));
+		boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
+		autoDefense = "defense" + position;
+		String defense = table.getString(autoDefense, "Moat");
+		
+		
+		switch (defense) {
+			case "Lowbar":
+			case "Portcullis": 
+				auto = 1;
+				break;
+			case "Frise": 
+				auto = 3;
+				break;
+			case "Ramparts":
+			case "Moat":
+			case "RockWall":
+			case "RoughTerrain": 
+				auto = 2;
+				break;
+			default: 
+				auto = 0; // Door ones. This is temporary
+				break;
+		}
+		
+		if (shoot) {
+			auto += 3;
+		}
+	
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
 		hood.setAngle(hood.getAngle()); 
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
 		turntable.setAngle(turntable.getAngle()); 
-    	
-    	autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode", 2), SmartDashboard.getNumber("Robot in front of defense", 2)); // Default to 1
+		
+		autonomousCommand = new Autonomous(auto, position);    	
 	}
 
 	/**
@@ -98,7 +134,7 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {        
+    public void autonomousInit() {
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
