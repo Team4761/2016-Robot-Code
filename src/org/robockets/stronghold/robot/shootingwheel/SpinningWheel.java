@@ -16,12 +16,12 @@ public class SpinningWheel extends Subsystem {
 	public final double CONSTANT_SPEED = 1500; 
 	
 	public SpinningWheel(){
-		shootingWheelPIDController = new PIDController(0.0001, 0.00005, 0, new TalonPIDSource(), RobotMap.shootingWheelMotor);
+		shootingWheelPIDController = new PIDController(0.00045, 0.00000005, 0.0011, new TalonPIDSource(), RobotMap.shootingWheelMotor);
 		shootingWheelPIDController.disable();
 		
 		shootingWheelPIDController.setSetpoint(0);
 		shootingWheelPIDController.setContinuous(true);
-		shootingWheelPIDController.setOutputRange(0, 1);
+		shootingWheelPIDController.setOutputRange(-0.1, 1);
 		
 		shootingWheelPIDController.enable();
 	}
@@ -30,8 +30,12 @@ public class SpinningWheel extends Subsystem {
     }
     
     public void setSpeed(double speed) {
-    	//shootingWheelPIDController.setSetpoint(speed);
-    	shootingWheelPIDController.setSetpoint(SmartDashboard.getNumber("New RPM"));
+    	shootingWheelPIDController.setSetpoint(speed);
+    	/*if (speed != 0) {
+    		shootingWheelPIDController.setSetpoint(SmartDashboard.getNumber("New RPM"));
+    	} else {
+    		shootingWheelPIDController.setSetpoint(0);
+    	}*/
     }
     
     public void setVoltage(double voltage) {

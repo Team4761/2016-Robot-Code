@@ -20,8 +20,8 @@ public class FireShooter extends Command {
     }
 
     protected void execute() {
-    	Robot.flipper.setAngle(0.1);
-    	//Robot.flipper.setAngle(0.5);
+    	//Robot.flipper.setAngle(0.1);
+    	Robot.flipper.setAngle(0.5);
     }
 
     protected boolean isFinished() {
@@ -29,8 +29,8 @@ public class FireShooter extends Command {
     }
 
     protected void end() {
-    	Robot.flipper.setAngle(0.5);
-    	//Robot.flipper.setAngle(0.1);
+    	//Robot.flipper.setAngle(0.5);
+    	Robot.flipper.setAngle(0.1);
     }
 
     protected void interrupted() {

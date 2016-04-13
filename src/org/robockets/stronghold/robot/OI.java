@@ -12,6 +12,7 @@ import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
 import org.robockets.stronghold.robot.hood.MoveHood;
+import org.robockets.stronghold.robot.hood.ResetHood;
 import org.robockets.stronghold.robot.intake.ClampIntake;
 import org.robockets.stronghold.robot.intake.GiveBallToShooter;
 import org.robockets.stronghold.robot.intake.IntakeBall;
@@ -52,7 +53,7 @@ public class OI {
 		
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
 		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
-		ButtonManager.addButton(new ActionButton(1, 15, new ResetPID(RobotMap.hoodEncoder, Robot.hood.pidController), true));
+		ButtonManager.addButton(new ActionButton(1, 15, new ResetHood(), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.turntable.pidController), true));
 		
 		//ButtonManager.addButton(new ActionButton(2, 19, new LowGoal(IntakeSide.FRONT), true));
@@ -64,8 +65,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 4, new FireCleatShot(), true));
 		ButtonManager.addButton(new ActionButton(2, 7, new DrivePosition(true), true));
 		ButtonManager.addButton(new ActionButton(2, 6, new Limbo(), true));
-		ButtonManager.addButton(new ActionButton(2, 15, new MoveHood(25, 0), true));
-		ButtonManager.addButton(new ActionButton(2, 14, new MoveHood(-25, 0), true));
+		ButtonManager.addButton(new ActionButton(2, 15, new MoveHood(50, 0), true));
+		ButtonManager.addButton(new ActionButton(2, 14, new MoveHood(-50, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 12, new MoveTurnTable(-40, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 13, new MoveTurnTable(40, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 10, new SetVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));

@@ -15,7 +15,7 @@ public class HorizontalAlign extends Command {
 	NetworkTable table;
 	boolean continuous;
 	boolean firstTime;
-	final double factor = 0.6; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
+	final double factor = 1; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
 	boolean aligned = false;
 	double targetTime;
 

@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class Autonomous extends CommandGroup {
     
     public  Autonomous(double autoNumber, double defense) {
-    	//addParallel(new SetShooterFlipper(0.1));
-    	addParallel(new SetShooterFlipper(0.5));
+    	addParallel(new SetShooterFlipper(0.1));
+    	//addParallel(new SetShooterFlipper(0.5));
 
     	if (autoNumber == 1) { // Lowbar + Porticullis, no shoot
     		addSequential(new WaitCommand(3));

@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Hood extends Subsystem {
 	public final double HOOD_ERROR = 2;
+	public final double HOOD_START = -78;
 	
 	public final PIDController pidController;
+	
+	public double encoderOffset = 0;
 	
 	public Hood() {
 		pidController = new PIDController(0.075, 0.0001, 0, RobotMap.hoodPIDSource, RobotMap.hoodMotor);
@@ -26,26 +29,37 @@ public class Hood extends Subsystem {
     }
     
     public void setAngle(double angle) {
-    	pidController.setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
-    	//pidController.setSetpoint(angle);
+    	//setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
+    	setSetpoint(angle);
+    }
+    
+    public void setSetpoint(double angle) {
+    	pidController.setSetpoint(angle - encoderOffset);
     }
     
     public double getSetpoint() {
-    	return pidController.getSetpoint();
+    	return pidController.getSetpoint() + encoderOffset;
     }
     
     public double getAngle() {
-    	return RobotMap.hoodPIDSource.pidGet();
+    	return RobotMap.hoodPIDSource.pidGet() + encoderOffset;
     }
     
+    public void resetEncoder(double newAngle) {
+    	RobotMap.hoodEncoder.reset();
+    	encoderOffset = newAngle;
+    	pidController.setSetpoint(0);
+    	SmartDashboard.putNumber("New Hood Angle", encoderOffset);
+    }
+        
     public boolean onTarget() {
-    	return Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(getAngle())) < HOOD_ERROR;
+    	return Math.abs(Math.abs(getSetpoint()) - Math.abs(getAngle())) < HOOD_ERROR;
     }
 
     public void enablePID() {
 		pidController.enable();
 		pidController.reset();
-		pidController.setSetpoint(RobotMap.hoodEncoder.get());
+		pidController.setSetpoint(getAngle());
     }
 }
 

@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Flipper extends Subsystem {
     
 	public void setAngle(double speed) {
-    	//RobotMap.shootingFlipper.set(speed);
-		RobotMap.shootingFlipper.set(SmartDashboard.getNumber("New flipper Angle"));
+    	RobotMap.shootingFlipper.set(speed);
+		//RobotMap.shootingFlipper.set(SmartDashboard.getNumber("New flipper angle"));
 	}
     	
     public void initDefaultCommand() {

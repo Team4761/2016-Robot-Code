@@ -29,15 +29,15 @@ public class SetPID extends Command {
     protected void initialize() {
     	//controller.disable();
     	
-    	SmartDashboard.putNumber(name + " p", SmartDashboard.getNumber(name + " p", controller.getP()));
-    	SmartDashboard.putNumber(name + " i", SmartDashboard.getNumber(name + " i", controller.getI()));
-    	SmartDashboard.putNumber(name + " d", SmartDashboard.getNumber(name + " d", controller.getD()));
+    	SmartDashboard.putNumber(name + " p", SmartDashboard.getNumber(name + " p", controller.getP() * 1000));
+    	SmartDashboard.putNumber(name + " i", SmartDashboard.getNumber(name + " i", controller.getI() * 1000));
+    	SmartDashboard.putNumber(name + " d", SmartDashboard.getNumber(name + " d", controller.getD() * 1000));
     }
 
     protected void execute() {
-    	p = SmartDashboard.getNumber(name + " p", controller.getP());
-    	i = SmartDashboard.getNumber(name + " i", controller.getI());
-    	d = SmartDashboard.getNumber(name + " d", controller.getD());
+    	p = SmartDashboard.getNumber(name + " p", controller.getP()) / 1000.0;
+    	i = SmartDashboard.getNumber(name + " i", controller.getI()) / 1000.0;
+    	d = SmartDashboard.getNumber(name + " d", controller.getD()) / 1000.0;
     	controller.setPID(p, i, d);
     }
 

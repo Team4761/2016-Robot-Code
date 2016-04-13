@@ -3,6 +3,8 @@ package org.robockets.stronghold.robot.highgoalshooter;
 import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.flipper.FireShooter;
+import org.robockets.stronghold.robot.hood.MoveHood;
+import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
@@ -34,28 +36,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
     	SmartDashboard.putData("RPM align", new RPMAlign(true));
     	SmartDashboard.putData("Vertical align", new VerticalAlign(true));
-    	SmartDashboard.putData("Shoot", new FireShooter());
     	SmartDashboard.putData("Free fire", new FreeFire());
     	SmartDashboard.putNumber("Extra", 200);
     	SmartDashboard.putNumber("Bonus Angle", 1);
-    	
-    	SmartDashboard.putNumber("Hood P", 0);
-    	SmartDashboard.putNumber("Hood I", 0);
-    	SmartDashboard.putNumber("Hood D", 0);
-    	SmartDashboard.putNumber("New Hood Angle", 0);
-    	SmartDashboard.putData("Set Hood PID", new SetPID("hood", Robot.hood.pidController));
-    	
-    	SmartDashboard.putNumber("RPM P", 0);
-    	SmartDashboard.putNumber("RPM I", 0);
-    	SmartDashboard.putNumber("RPM D", 0);
-    	SmartDashboard.putNumber("New RPM", 0);
-    	SmartDashboard.putData("Set RPM PID", new SetPID("rpm", Robot.shootingWheel.shootingWheelPIDController));
-    	
-    	SmartDashboard.putNumber("Turntable P", 0);
-    	SmartDashboard.putNumber("Turntable I", 0);
-    	SmartDashboard.putNumber("Turntable D", 0);
-    	SmartDashboard.putNumber("New Turntable", 0);
-    	SmartDashboard.putData("Set Turntable PID", new SetPID("turntable", Robot.turntable.pidController));
     }
 
     protected void execute() {    	
