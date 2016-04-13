@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.commands;
 
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
@@ -14,8 +15,8 @@ public class DrivePosition extends CommandGroup {
     
     public  DrivePosition(boolean moveTurntable) {
         addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
-        addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
-        addParallel(new MoveHood(-80));
+        //addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
+        addParallel(new MoveHood(Robot.hood.HOOD_START));
         
         if (moveTurntable) {
         	addParallel(new MoveTurnTable(0));

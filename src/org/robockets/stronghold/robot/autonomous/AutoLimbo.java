@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.autonomous;
 
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
@@ -15,7 +16,7 @@ public class AutoLimbo extends CommandGroup {
     
     public  AutoLimbo() {
     	addParallel(new SetVerticalIntake(90, IntakeSide.FRONT));
-        addParallel(new SetVerticalIntake(90, IntakeSide.BACK));
-        addSequential(new MoveHood(-80));
+        //addParallel(new SetVerticalIntake(90, IntakeSide.BACK));
+        addSequential(new MoveHood(Robot.hood.HOOD_START));
     }
 }
