@@ -3,6 +3,7 @@ package org.robockets.stronghold.robot.shootingwheel;
 import org.robockets.stronghold.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Set the shooting wheel at a desired speed.
@@ -17,6 +18,7 @@ public class MoveShootingWheel extends Command {
     }
 
     protected void initialize() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     	Robot.shootingWheel.setSpeed(speed);
     }
 
@@ -29,6 +31,7 @@ public class MoveShootingWheel extends Command {
     }
 
     protected void end() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", true);
     }
 
     protected void interrupted() {

@@ -16,8 +16,9 @@ public class Track extends CommandGroup {
     
     public  Track() {
     	addSequential(new SetVerticalIntake(50, IntakeSide.FRONT));
-    	addSequential(new MoveHood(-80));
+    	addSequential(new MoveHood(Robot.hood.HOOD_START + 10)); // Bit further up
     	addParallel(new HorizontalAlign(true));
-      addParallel(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
+    	addParallel(new UnstickBall());
+    	addSequential(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
     }
 }

@@ -20,6 +20,7 @@ import org.robockets.stronghold.robot.intake.IntakeBallMinimal;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
+import org.robockets.stronghold.robot.intake.SuperIntakeReset;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -52,7 +53,8 @@ public class OI {
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
 		
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
-		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
+		//ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
+		ButtonManager.addButton(new ActionButton(1, 17, new SuperIntakeReset(), true));
 		ButtonManager.addButton(new ActionButton(1, 15, new ResetHood(), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.turntable.pidController), true));
 		

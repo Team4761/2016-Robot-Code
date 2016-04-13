@@ -30,7 +30,7 @@ public class Autonomous extends CommandGroup {
     		addSequential(new WaitCommand(3));
     		addSequential(new AutoLowBar(Direction.FORWARD));
     	} else if (autoNumber == 2) { // Other defense (no door ones), no shoot
-    		addSequential(new DrivePosition(false));
+    		//addSequential(new DrivePosition(false));
     		addSequential(new WaitCommand(6));
     		//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, true, -40, 0, -36));
     		addSequential(new TimeDrive(0.85, 0.85, 2.75));
@@ -41,7 +41,7 @@ public class Autonomous extends CommandGroup {
             addParallel(new SetVerticalIntake(0, IntakeSide.FRONT));
             addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 5) { // Other defense (no door ones, no shovel), and shoot
-    		addSequential(new DrivePosition(false));
+    		//addSequential(new DrivePosition(false));
     		addSequential(new WaitCommand(3));
     		//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, true, -40, 0, -36));
     		addSequential(new TimeDrive(0.85, 0.85, 2.75)); // 0.85 0.85 2.75

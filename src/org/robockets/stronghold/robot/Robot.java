@@ -118,34 +118,36 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Hood angle", hood.getAngle());
 		SmartDashboard.putNumber("Hood setpoint", hood.getSetpoint());
 		
-		/*position = Integer.parseInt(table.getString("position", "2"));
-		boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
-		autoDefense = "defense" + position;
-		String defense = table.getString(autoDefense, "Moat");
-		
-		
-		switch (defense) {
-			case "Lowbar":
-			case "Portcullis": 
-				auto = 1;
-				break;
-			case "Frise": 
-				auto = 3;
-				break;
-			case "Ramparts":
-			case "Moat":
-			case "RockWall":
-			case "RoughTerrain": 
-				auto = 2;
-				break;
-			default: 
-				auto = 0; // Door ones. This is temporary
-				break;
+		if (!table.getString("position", "-1").equals("-1") && !table.getString("shoot", "-1").equals("-1") && !table.getString(autoDefense, "-1").equals("-1")) {
+			position = Integer.parseInt(table.getString("position", "2"));
+			boolean shoot = Boolean.parseBoolean(table.getString("shoot", "false"));
+			autoDefense = "defense" + position;
+			String defense = table.getString(autoDefense, "Moat");
+			
+			
+			switch (defense) {
+				case "Lowbar":
+				case "Portcullis": 
+					auto = 1;
+					break;
+				case "Frise": 
+					auto = 3;
+					break;
+				case "Ramparts":
+				case "Moat":
+				case "RockWall":
+				case "RoughTerrain": 
+					auto = 2;
+					break;
+				default: 
+					auto = 0; // Door ones. This is temporary
+					break;
+			}
+			
+			if (shoot) {
+				auto += 3;
+			}
 		}
-		
-		if (shoot) {
-			auto += 3;
-		}*/
 	
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
