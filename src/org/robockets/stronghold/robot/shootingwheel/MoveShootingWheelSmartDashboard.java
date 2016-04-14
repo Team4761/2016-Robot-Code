@@ -20,6 +20,7 @@ public class MoveShootingWheelSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     	Robot.shootingWheel.setSpeed(SmartDashboard.getNumber("New RPM"));
     }
 
@@ -30,6 +31,7 @@ public class MoveShootingWheelSmartDashboard extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", true);
     }
 
     // Called when another command which requires one or more of the same

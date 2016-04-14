@@ -16,7 +16,7 @@ public class DrivePosition extends CommandGroup {
     public  DrivePosition(boolean moveTurntable) {
         addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
         //addParallel(new SetVerticalIntake(20, IntakeSide.BACK));
-        addParallel(new MoveHood(Robot.hood.HOOD_START));
+        addParallel(new MoveHood(Robot.hood.HOOD_MIN));
         
         if (moveTurntable) {
         	addParallel(new MoveTurnTable(0));

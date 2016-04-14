@@ -10,8 +10,11 @@ import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
 import org.robockets.stronghold.robot.drivetrain.TimeDrive;
 import org.robockets.stronghold.robot.flipper.SetShooterFlipper;
+import org.robockets.stronghold.robot.highgoalshooter.UnstickBall;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
+import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -31,7 +34,6 @@ public class Autonomous extends CommandGroup {
     		addSequential(new AutoLowBar(Direction.FORWARD));
     	} else if (autoNumber == 2) { // Other defense (no door ones), no shoot
     		//addSequential(new DrivePosition(false));
-    		addSequential(new WaitCommand(6));
     		//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, true, -40, 0, -36));
     		addSequential(new TimeDrive(0.85, 0.85, 2.75));
     	} else if (autoNumber == 3) { // Shovel the fries, no shoot
@@ -42,7 +44,6 @@ public class Autonomous extends CommandGroup {
             addSequential(new AutoShootHigh(defense));
     	} else if (autoNumber == 5) { // Other defense (no door ones, no shovel), and shoot
     		//addSequential(new DrivePosition(false));
-    		addSequential(new WaitCommand(3));
     		//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, true, -40, 0, -36));
     		addSequential(new TimeDrive(0.85, 0.85, 2.75)); // 0.85 0.85 2.75
     		addSequential(new AutoShootHigh(defense));
@@ -53,5 +54,8 @@ public class Autonomous extends CommandGroup {
     	} else if (autoNumber == 7) { // Just shoot
     		addSequential(new AutoShootHigh(defense));
     	}
+    	
+    	addSequential(new MoveHood(-45));
+    	addSequential(new UnstickBall());
     }
 }

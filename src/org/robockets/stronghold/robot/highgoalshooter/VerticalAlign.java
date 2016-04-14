@@ -48,31 +48,31 @@ public class VerticalAlign extends Command {
     			distanceToTarget = distance;
     		}
 
-    		double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
-
+    		double angle = 0;
     		/*if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
-    		angle += 10; // Untuned
-    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
-    		angle += 10; // Untuned
-    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
-    		angle += 10;
-    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
-    		angle += 10; // Untuned
-    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
-    		angle += 1; // Untuned
-    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
-    		angle += 1; // Untuned
-    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
-    		angle += 1; // Untuned
-    	}*/
+    			angle = 10; // Untuned
+	    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
+	    		angle = 10; // Untuned
+	    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
+	    		angle = 10;
+	    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
+	    		angle = 10; // Untuned
+	    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
+	    		angle = 10; // Untuned
+	    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
+	    		angle = 10; // Untuned
+	    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
+	    		angle = 10; // Untuned
+	    	}*/
+    		
+    		angle = SmartDashboard.getNumber("Bonus Angle");
+    		
+    		//double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
+    		//angle += 5;
 
-    		angle += 5;
+    		SmartDashboard.putNumber("angle", -angle);
 
-    		SmartDashboard.putNumber("angle", angle);
-
-    		SmartDashboard.putNumber("distance", distanceToTarget);
-
-    		Robot.hood.setAngle(angle);
+    		Robot.hood.setAngle(-angle);
     	}
     }
 

@@ -19,6 +19,7 @@ import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheelSmartDashboard;
 import org.robockets.stronghold.robot.shootingwheel.SpinningWheel;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
+import org.robockets.stronghold.robot.turntable.MoveTurnTableSmartDashboard;
 import org.robockets.stronghold.robot.turntable.Turntable;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -89,17 +90,19 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("New flipper angle", 0);
     	
     	SmartDashboard.putNumber("New Hood Angle", hood.HOOD_START);
-    	SmartDashboard.putData("Set Hood PID", new SetPID("hood", Robot.hood.pidController));
+    	//SmartDashboard.putData("Set Hood PID", new SetPID("hood", Robot.hood.pidController));
     	SmartDashboard.putData("Move Hood", new MoveHoodSmartDashboard());
     	
     	SmartDashboard.putNumber("New RPM", 0);
-    	SmartDashboard.putData("Set RPM PID", new SetPID("rpm", Robot.shootingWheel.shootingWheelPIDController));
+    	//SmartDashboard.putData("Set RPM PID", new SetPID("rpm", Robot.shootingWheel.shootingWheelPIDController));
     	SmartDashboard.putData("Set RPM", new MoveShootingWheelSmartDashboard());
     	SmartDashboard.putData("Stop RPM", new MoveShootingWheel(0));
     	
-    	SmartDashboard.putNumber("New Turntable", 0);
+    	SmartDashboard.putNumber("New Turntable 1", 0);
+    	SmartDashboard.putNumber("New Turntable 2", 0);
     	SmartDashboard.putData("Set Turntable PID", new SetPID("turntable", Robot.turntable.pidController));
-    	SmartDashboard.putData("Set Turntable", new MoveTurnTable(10));
+    	SmartDashboard.putData("Set Turntable 1", new MoveTurnTableSmartDashboard("New Turntable 1"));
+    	SmartDashboard.putData("Set Turntable 2", new MoveTurnTableSmartDashboard("New Turntable 2"));
     	
     	SmartDashboard.putData("Shoot", new FireShooter());
     	SmartDashboard.putData("Set Flipper", new SetShooterFlipper(1));
@@ -117,6 +120,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putNumber("Hood angle", hood.getAngle());
 		SmartDashboard.putNumber("Hood setpoint", hood.getSetpoint());
+    	SmartDashboard.putBoolean("Front BB", RobotMap.frontBB.get());
 		
 		if (!table.getString("position", "-1").equals("-1") && !table.getString("shoot", "-1").equals("-1") && !table.getString(autoDefense, "-1").equals("-1")) {
 			position = Integer.parseInt(table.getString("position", "2"));
@@ -155,7 +159,8 @@ public class Robot extends IterativeRobot {
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
 		turntable.setAngle(turntable.getAngle()); 
 		
-		//autonomousCommand = new Autonomous(auto, position);    	
+		//autonomousCommand = new Autonomous(auto, position);
+		autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode"), SmartDashboard.getNumber("Robot in front of defense"));
 	}
 
 	/**

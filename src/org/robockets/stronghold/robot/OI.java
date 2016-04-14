@@ -11,6 +11,7 @@ import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
+import org.robockets.stronghold.robot.highgoalshooter.UnstickBall;
 import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.hood.ResetHood;
 import org.robockets.stronghold.robot.intake.ClampIntake;
@@ -51,6 +52,7 @@ public class OI {
 		
 		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
+		ButtonManager.addButton(new ActionButton(1, 11, new UnstickBall(), true));
 		
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
 		//ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));

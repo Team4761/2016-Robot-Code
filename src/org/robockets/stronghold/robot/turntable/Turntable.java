@@ -18,7 +18,7 @@ public class Turntable extends Subsystem {
 	
 	public Turntable(){
 		encoder = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
-		pidController = new PIDController(0.05, 0.002, 0, encoder, RobotMap.turnTableMotor);
+		pidController = new PIDController(75.0 / 1000.0, 4.0 / 1000.0, 30.0 / 1000.0, encoder, RobotMap.turnTableMotor);
 		
 		pidController.disable();
 		
@@ -40,10 +40,10 @@ public class Turntable extends Subsystem {
     	//pidController.setSetpoint(SmartDashboard.getNumber("New Turntable"));
     	
     	// Limit the turntable turning to -45 to 45
-    	if (angle > 45) {
-    		angle = 45;
-    	} else if (angle < -45) {
-    		angle = -45;
+    	if (angle > 15) {
+    		angle = 15;
+    	} else if (angle < -15) {
+    		angle = -15;
     	}
     	
     	pidController.setSetpoint(angle);

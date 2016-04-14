@@ -27,18 +27,12 @@ public class UpdateHighGoalShooterDashboard extends Command {
     protected void initialize() {
     	visionTable = NetworkTable.getTable("vision");
     	
-    	/*SmartDashboard.putData("Move Servo", new FireShooter());
-    	SmartDashboard.putNumber("pid error", 0);*/
-    	SmartDashboard.putData("Reset Turn Table", new MoveTurnTable(0));
-    	SmartDashboard.putData("Turn table right", new MoveTurnTable(20, 0));
-    	SmartDashboard.putData("Turn table left", new MoveTurnTable(-20, 0));
-    	SmartDashboard.putData("Move turn table to 30 degrees", new MoveTurnTable(30));
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
-    	SmartDashboard.putData("RPM align", new RPMAlign(true));
     	SmartDashboard.putData("Vertical align", new VerticalAlign(true));
     	SmartDashboard.putData("Free fire", new FreeFire());
-    	SmartDashboard.putNumber("Extra", 200);
-    	SmartDashboard.putNumber("Bonus Angle", 1);
+    	SmartDashboard.putNumber("Bonus Angle", 0);
+    	
+    	SmartDashboard.putData("Unstick Ball", new UnstickBall());
     }
 
     protected void execute() {    	
@@ -48,6 +42,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Hood angle", Robot.hood.getAngle());
     	SmartDashboard.putNumber("Turn table angle", Robot.turntable.getAngle());
     	SmartDashboard.putNumber("Spin RPM", Robot.shootingWheel.getSpeed());
+    	
+    	SmartDashboard.putBoolean("Intake Limit Switch", RobotMap.intakeFrontUp.get());
     	
     	/*SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
     	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());

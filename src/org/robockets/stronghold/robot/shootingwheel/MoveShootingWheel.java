@@ -18,11 +18,11 @@ public class MoveShootingWheel extends Command {
     }
 
     protected void initialize() {
-    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     	Robot.shootingWheel.setSpeed(speed);
     }
 
     protected void execute() {
+    	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

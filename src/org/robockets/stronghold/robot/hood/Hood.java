@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Hood extends Subsystem {
 	public final double HOOD_ERROR = 2;
-	public final double HOOD_START = -78;
+	public final double HOOD_START = -75;
+	public final double HOOD_MIN = -45;
 	
 	public final PIDController pidController;
 	
