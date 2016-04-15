@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoFire extends CommandGroup {
     
-    public  AutoFire() {
-        addSequential(new VerticalAlign(false));
-    	addSequential(new WaitCommand(0.5));
+    public  AutoFire(double bonusAngle) {
+        addSequential(new VerticalAlign(false, bonusAngle));
+    	//addSequential(new WaitCommand(0.5));
         addSequential(new FireShooter());
+        //addSequential(new MoveShootingWheel(0));
     }
 }

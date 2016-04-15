@@ -18,7 +18,7 @@ public class VerticalAlign extends Command {
 	double wheelDiameter = 6;
 	
 	boolean continuous;
-	Double distance = null;
+	double bonusAngle = 0;
 	
 	boolean hitSpeedTarget = false;
 	
@@ -28,10 +28,10 @@ public class VerticalAlign extends Command {
     	this.continuous = continuous;
     }
     
-    public VerticalAlign(boolean continuous, double distance) {
+    public VerticalAlign(boolean continuous, double bonusAngle) {
     	//requires(Robot.shooter);
     	this.continuous = continuous;
-    	this.distance = distance;
+    	this.bonusAngle = bonusAngle;
     }
 
     protected void initialize() {
@@ -42,37 +42,37 @@ public class VerticalAlign extends Command {
     protected void execute() {
     	if (table.getNumber("can_see_target", 0) == 1) {
     		double distanceToTarget;
-    		if (distance == null) {
-    			distanceToTarget = table.getNumber("distance_guess", 6);
-    		} else {
-    			distanceToTarget = distance;
-    		}
+    		distanceToTarget = table.getNumber("distance_guess", 6);
 
     		double angle = 0;
-    		/*if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
-    			angle = 10; // Untuned
+    		if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
+    			angle = -52;
 	    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
-	    		angle = 10; // Untuned
+	    		angle = -44.5;
 	    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
-	    		angle = 10;
+	    		angle = -43;
 	    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
-	    		angle = 10; // Untuned
+	    		angle = -40.5;
 	    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
-	    		angle = 10; // Untuned
+	    		angle = -39;
 	    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
-	    		angle = 10; // Untuned
+	    		angle = -40;
 	    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
-	    		angle = 10; // Untuned
-	    	}*/
+	    		angle = -41;
+	    	}
     		
-    		angle = SmartDashboard.getNumber("Bonus Angle");
+    		angle += bonusAngle;
+    		
+    		if (SmartDashboard.getNumber("Bonus Angle") != 0) {
+    			angle = SmartDashboard.getNumber("Bonus Angle");
+    		}
     		
     		//double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
     		//angle += 5;
 
-    		SmartDashboard.putNumber("angle", -angle);
+    		SmartDashboard.putNumber("angle", angle);
 
-    		Robot.hood.setAngle(-angle);
+    		Robot.hood.setAngle(angle);
     	}
     }
 

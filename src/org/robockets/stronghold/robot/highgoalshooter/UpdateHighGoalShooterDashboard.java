@@ -24,7 +24,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     public UpdateHighGoalShooterDashboard() {
     }
 
-    protected void initialize() {
+    protected void initialize() {    	
     	visionTable = NetworkTable.getTable("vision");
     	
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
@@ -56,6 +56,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
 		//SmartDashboard.putNumber("intake angle", Robot.intakeVerticalFront.getIntakeAngle());
     	SmartDashboard.putNumber("distance", visionTable.getNumber("distance_guess", 0));
     	SmartDashboard.putBoolean("Can see target", visionTable.getNumber("can_see_target", 0) == 1);
+    	
+    	SmartDashboard.putBoolean("Not at limit", !(Robot.hood.atLimit || Robot.turntable.atLimit));
     }
 
     protected boolean isFinished() {

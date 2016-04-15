@@ -19,7 +19,7 @@ public class GiveBallToShooter extends CommandGroup {
     		addParallel(new MoveTurnTable(180));
     	}
     	//addParallel(new MoveTurnTable((intakeSide == IntakeSide.FRONT) ? 180 : 0));
-    	addParallel(new MoveHood(20));
+    	addSequential(new MoveHood(25));
     	addSequential(new SetVerticalIntake(20, intakeSide));
     	addSequential(new CheckIntakeBreakBeam(intakeSide, true, true, 0));
     	addSequential(new WaitCommand(1));

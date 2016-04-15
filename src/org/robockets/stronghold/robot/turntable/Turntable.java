@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.turntable;
 
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 import org.robockets.stronghold.robot.pidsources.EncoderPIDSource;
 
@@ -12,6 +13,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * The plate on which other shooter components rest. Capable of turning 360 degrees.
  */
 public class Turntable extends Subsystem {
+	
+	public final double MIDPOINT = 2;
+	public final double MOTOR_SIDE_LIMIT = -15;
+	public final double OPEN_SIDE_LIMIT = 25;
+	
+	public boolean atLimit = false;
+	
+	public double negativeLimit = MOTOR_SIDE_LIMIT;
+	public double positiveLimit = OPEN_SIDE_LIMIT;
     
 	public final PIDController pidController;
 	public final EncoderPIDSource encoder;
@@ -39,11 +49,20 @@ public class Turntable extends Subsystem {
     public void setAngle(double angle) {
     	//pidController.setSetpoint(SmartDashboard.getNumber("New Turntable"));
     	
+    	atLimit = false;
     	// Limit the turntable turning to -45 to 45
-    	if (angle > 15) {
-    		angle = 15;
-    	} else if (angle < -15) {
-    		angle = -15;
+    	if (angle > positiveLimit) {
+    		angle = positiveLimit;
+    		atLimit = true;
+    	} else if (angle < negativeLimit) {
+    		angle = negativeLimit;
+    		atLimit = true;
+    	}
+    	
+    	if (angle < MIDPOINT) {
+    		Robot.hood.negativeLimit = Robot.hood.HOOD_MIN;
+    	} else {
+    		Robot.hood.negativeLimit = Robot.hood.HOOD_MIN_NO_MOTOR;
     	}
     	
     	pidController.setSetpoint(angle);

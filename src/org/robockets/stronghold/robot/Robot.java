@@ -155,7 +155,8 @@ public class Robot extends IterativeRobot {
 	
 		intakeVerticalBack.setIntakeAngle(intakeVerticalBack.getIntakeAngle()); 
 		intakeVerticalFront.setIntakeAngle(intakeVerticalFront.getIntakeAngle()); 
-		hood.setAngle(hood.getAngle()); 
+		//hood.setAngle(hood.getAngle()); 
+		hood.resetEncoder(hood.getAngle());
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
 		turntable.setAngle(turntable.getAngle()); 
 		

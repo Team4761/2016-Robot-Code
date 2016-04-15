@@ -1,5 +1,6 @@
 package org.robockets.stronghold.robot.hood;
 
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -11,8 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Hood extends Subsystem {
 	public final double HOOD_ERROR = 2;
-	public final double HOOD_START = -75;
-	public final double HOOD_MIN = -45;
+	public final double HOOD_START = -77.5;
+	public final double HOOD_MIN = -36;
+	public final double HOOD_MIN_NO_MOTOR = -77.5;
+	
+	public boolean atLimit = false;
+	
+	public double negativeLimit = HOOD_MIN;
+	public double positiveLimit = 25;
 	
 	public final PIDController pidController;
 	
@@ -29,9 +36,28 @@ public class Hood extends Subsystem {
     public void initDefaultCommand() {
     }
     
+    
     public void setAngle(double angle) {
     	//setSetpoint(SmartDashboard.getNumber("New Hood Angle"));
-    	setSetpoint(angle);
+    	
+    	atLimit = false;
+    	if (angle < negativeLimit) {
+    		angle = negativeLimit;
+    		atLimit = true;
+    	} else if (angle > positiveLimit) {
+    		angle = positiveLimit;
+    		atLimit = true;
+    	}
+    	
+    	if (angle < HOOD_MIN) {
+    		Robot.turntable.positiveLimit = Robot.turntable.OPEN_SIDE_LIMIT;
+    		Robot.turntable.negativeLimit = Robot.turntable.MIDPOINT;
+    	} else {
+    		Robot.turntable.positiveLimit = Robot.turntable.OPEN_SIDE_LIMIT;
+    		Robot.turntable.negativeLimit = Robot.turntable.MOTOR_SIDE_LIMIT;
+    	}
+    	
+		setSetpoint(angle);
     }
     
     public void setSetpoint(double angle) {

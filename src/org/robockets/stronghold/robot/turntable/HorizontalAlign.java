@@ -15,9 +15,11 @@ public class HorizontalAlign extends Command {
 	NetworkTable table;
 	boolean continuous;
 	boolean firstTime;
-	final double factor = 1; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
+	double factor = 0.5; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
 	boolean aligned = false;
 	double targetTime;
+	
+	final double TARGET_OFFSET = 3; // Bigger means <- left
 
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -37,6 +39,8 @@ public class HorizontalAlign extends Command {
 	}
 	
 	protected void execute() {
+		//factor = SmartDashboard.getNumber("Factor");
+		
 		if (table.getNumber("can_see_target", 0) == 1){
 			double pixelError = table.getNumber("horiz_offset", 0); // Camera 2 degrees off
 			//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
@@ -49,20 +53,22 @@ public class HorizontalAlign extends Command {
 				//if (Robot.turntable.onTarget()) {
 				table.putNumber("heartbeat", 0);
 				double output = Robot.turntable.getAngle() + (factor * pixelError);
-				Robot.turntable.setAngle(output + 1);
+				Robot.turntable.setAngle(output + TARGET_OFFSET);
 				SmartDashboard.putNumber("output for turntable", output);
 				firstTime = false;
 			}
 			
-			System.out.println(Math.abs(table.getNumber("horiz_offset", 3) * factor + 1));
-			if (Math.abs(table.getNumber("horiz_offset", 3) * factor + 1) <= 2) {
+			System.out.println(Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET));
+			if (Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET) <= 1.5) {
 				if (!aligned) {
 					aligned = true;
 				}
 			} else {
-				targetTime = Timer.getFPGATimestamp() + 3;
+				targetTime = Timer.getFPGATimestamp() + 0.5;
 				aligned = false;
 			}
+			
+			SmartDashboard.putNumber("Turntable Setpoint", Robot.turntable.getSetpoint());
 		}
 	}
 
@@ -70,7 +76,6 @@ public class HorizontalAlign extends Command {
 		//if (table.getNumber("can_see_target", 0)==1){
 		//if (table.getNumber("heartbeat", 0) == 1) {
 		if (aligned && (Timer.getFPGATimestamp() >= targetTime) && Robot.turntable.onTarget()) {
-			System.out.println("Finished horizontally aligning");
 			SmartDashboard.putBoolean("Shoot Horizontally Aligned", true);
 			if (continuous == false) { return true; }
 		} else {
@@ -83,6 +88,7 @@ public class HorizontalAlign extends Command {
 
 	protected void end() {
 		SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
+		Robot.shootingWheel.setSpeed(0); // Stop the wheel when the button is let go
 	}
 
 	protected void interrupted() {

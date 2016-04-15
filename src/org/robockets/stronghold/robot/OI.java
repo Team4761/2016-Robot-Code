@@ -42,21 +42,24 @@ public class OI {
 		
 		ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
 		
-		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(), true));
-		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, 83), true));
-		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, 73), true));
-		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, 93), true));
+		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(0), true));
+		ButtonManager.addButton(new ActionButton(1, 8, new AutoFire(-5), true));
+		ButtonManager.addButton(new ActionButton(1, 11, new AutoFire(5), true));
+		
+		ButtonManager.addButton(new ActionButton(1, 3, new IntakeBall(IntakeSide.FRONT, Robot.intakeVerticalFront.INTAKE_POSITION), true));
+		ButtonManager.addButton(new ActionButton(1, 5, new IntakeBall(IntakeSide.FRONT, Robot.intakeVerticalFront.INTAKE_POSITION + 10), true));
+		ButtonManager.addButton(new ActionButton(1, 7, new IntakeBall(IntakeSide.FRONT, Robot.intakeVerticalFront.INTAKE_POSITION - 10), true));
 		ButtonManager.addButton(new ActionButton(1, 4, new GiveBallToShooter(IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(1, 2, new Track(), true));
-		ButtonManager.addButton(new ActionButton(1, 10, new IntakeBallMinimal(IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 16, new IntakeBallMinimal(IntakeSide.FRONT), true));
 		
-		ButtonManager.addButton(new ActionButton(1, 8, new FireShooter(), false));
+		ButtonManager.addButton(new ActionButton(1, 9, new FireShooter(), false));
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
-		ButtonManager.addButton(new ActionButton(1, 11, new UnstickBall(), true));
+		ButtonManager.addButton(new ActionButton(1, 12, new UnstickBall(), true));
 		
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
-		//ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
-		ButtonManager.addButton(new ActionButton(1, 17, new SuperIntakeReset(), true));
+		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
+		//ButtonManager.addButton(new ActionButton(1, 17, new SuperIntakeReset(), true));
 		ButtonManager.addButton(new ActionButton(1, 15, new ResetHood(), true));
 		ButtonManager.addButton(new ActionButton(1, 16, new ResetPID(RobotMap.turnTableEncoder, Robot.turntable.pidController), true));
 		

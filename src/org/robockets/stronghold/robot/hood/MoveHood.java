@@ -46,10 +46,6 @@ public class MoveHood extends Command {
     		Robot.hood.setAngle(angle);
     	} else {
     		double newSetpoint = Robot.hood.getSetpoint() + speed;
-    		if (newSetpoint < -Robot.hood.HOOD_MIN) { // Limit hood range of movement
-    			newSetpoint = -Robot.hood.HOOD_MIN;
-    		}
-    		    		
     		Robot.hood.setAngle(newSetpoint);
     	}
     }
