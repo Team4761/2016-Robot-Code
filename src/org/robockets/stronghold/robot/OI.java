@@ -40,7 +40,7 @@ public class OI {
 		ButtonManager.addJoystick(buttonBoard1);
 		ButtonManager.addJoystick(buttonBoard2);
 		
-		ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
+		//ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
 		
 		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(0), true));
 		ButtonManager.addButton(new ActionButton(1, 8, new AutoFire(-5), true));
@@ -78,8 +78,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 13, new MoveTurnTable(40, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 10, new SetVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 11, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(2, 9, new SpinIntake(Direction.FORWARD, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(2, 8, new SpinIntake(Direction.BACKWARD, 0, IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 9, new SpinIntake(0.4, 0, IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 8, new SpinIntake(-0.4, 0, IntakeSide.FRONT), true));
 	}
 }
 

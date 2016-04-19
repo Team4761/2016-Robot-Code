@@ -20,7 +20,7 @@ public class MoveHoodSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.hood.setAngle(SmartDashboard.getNumber("New Hood Angle"));
+    	Robot.hood.setAngle(SmartDashboard.getNumber("New Hood Angle", 0));
     }
 
     // Make this return true when this Command no longer needs to run execute()

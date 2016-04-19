@@ -45,26 +45,30 @@ public class VerticalAlign extends Command {
     		distanceToTarget = table.getNumber("distance_guess", 6);
 
     		double angle = 0;
-    		if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
-    			angle = -52;
+    		if (distanceToTarget < 4) {
+    			angle = -1;
+	    	} else if ((distanceToTarget > 4) && (distanceToTarget < 5)) {
+    			angle = -51;
+	    	} else if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
+    			angle = -41.5;
 	    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
-	    		angle = -44.5;
+	    		angle = -38;
 	    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
-	    		angle = -43;
+	    		angle = -37;
 	    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
-	    		angle = -40.5;
+	    		angle = -41.5;
 	    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
-	    		angle = -39;
+	    		angle = -39.5;
 	    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
-	    		angle = -40;
-	    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
 	    		angle = -41;
+	    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
+	    		angle = -42;
 	    	}
     		
     		angle += bonusAngle;
     		
-    		if (SmartDashboard.getNumber("Bonus Angle") != 0) {
-    			angle = SmartDashboard.getNumber("Bonus Angle");
+    		if (SmartDashboard.getNumber("Bonus Angle", 0) != 0) {
+    			angle = SmartDashboard.getNumber("Bonus Angle", 0);
     		}
     		
     		//double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);

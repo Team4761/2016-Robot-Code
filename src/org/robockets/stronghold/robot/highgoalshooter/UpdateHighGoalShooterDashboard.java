@@ -20,12 +20,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class UpdateHighGoalShooterDashboard extends Command {
 
 	NetworkTable visionTable;
+	NetworkTable controlTable;
 	
     public UpdateHighGoalShooterDashboard() {
     }
 
     protected void initialize() {    	
     	visionTable = NetworkTable.getTable("vision");
+    	controlTable = NetworkTable.getTable("control_daemon");
     	
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
     	SmartDashboard.putData("Vertical align", new VerticalAlign(true));
@@ -35,7 +37,11 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putData("Unstick Ball", new UnstickBall());
     }
 
-    protected void execute() {    	
+    protected void execute() {
+		Robot.liveCounter += 0.001;
+    	SmartDashboard.putNumber("Live Counter", Robot.liveCounter);
+    	SmartDashboard.putNumber("Vision Last Updated", controlTable.getNumber("last_updated", 0));
+    	
     	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.getLeftDistanceInInches());
     	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.getRightDistanceInInches());
     	
@@ -56,6 +62,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
 		//SmartDashboard.putNumber("intake angle", Robot.intakeVerticalFront.getIntakeAngle());
     	SmartDashboard.putNumber("distance", visionTable.getNumber("distance_guess", 0));
     	SmartDashboard.putBoolean("Can see target", visionTable.getNumber("can_see_target", 0) == 1);
+    	SmartDashboard.putBoolean("Vision Conneected", visionTable.isConnected());
     	
     	SmartDashboard.putBoolean("Not at limit", !(Robot.hood.atLimit || Robot.turntable.atLimit));
     }

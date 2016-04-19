@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class IntakeVertical extends Subsystem {
 
 	public final double COUNTS_PER_DEGREE = 7.3333333333;
-	public final double INTAKE_POSITION = 73;
+	public final double INTAKE_POSITION = 80;
 	
 	public final PIDController encoderPID;
 	private Victor intakeVerticalMotor;

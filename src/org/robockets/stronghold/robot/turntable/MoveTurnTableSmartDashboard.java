@@ -23,7 +23,7 @@ public class MoveTurnTableSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.turntable.setAngle(SmartDashboard.getNumber(key));
+    	Robot.turntable.setAngle(SmartDashboard.getNumber(key, 0));
     }
 
     // Make this return true when this Command no longer needs to run execute()

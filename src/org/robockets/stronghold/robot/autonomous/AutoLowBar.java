@@ -19,10 +19,10 @@ public class AutoLowBar extends CommandGroup {
     	addSequential(new AutoLimbo());
     	
         if (direction == Direction.FORWARD) {
-        	addSequential(new TimeDrive(-0.75, -0.75, 4));
+        	addSequential(new TimeDrive(-0.65, -0.65, 3.5));
         	//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, 180, 0, 48)); // Dummy inputs for distance and relativeAngle
         } else {
-        	addSequential(new TimeDrive(0.75, 0.75, 4));
+        	addSequential(new TimeDrive(0.65, 0.65, 3.5));
         	//addSequential(new AssistedDrive(AssistedTranslateType.ENCODER, AssistedRotateType.ENCODER, -180, 0, -48)); // Dummy inputs for distance and relativeAngle
         }        
     }

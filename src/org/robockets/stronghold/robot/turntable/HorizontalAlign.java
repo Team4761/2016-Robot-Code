@@ -19,7 +19,7 @@ public class HorizontalAlign extends Command {
 	boolean aligned = false;
 	double targetTime;
 	
-	final double TARGET_OFFSET = 3; // Bigger means <- left
+	public static final double TARGET_OFFSET = 3; // Bigger means <- left
 
 	/**
 	 * * @param continuous		If it should stop when on target.
@@ -41,6 +41,8 @@ public class HorizontalAlign extends Command {
 	protected void execute() {
 		//factor = SmartDashboard.getNumber("Factor");
 		
+		SmartDashboard.putNumber("Simon's Angle", table.getNumber("horiz_offset", 0));
+		
 		if (table.getNumber("can_see_target", 0) == 1){
 			double pixelError = table.getNumber("horiz_offset", 0); // Camera 2 degrees off
 			//SmartDashboard.putNumber("factorz", SmartDashboard.getNumber("factorz", 0.0305));
@@ -49,7 +51,7 @@ public class HorizontalAlign extends Command {
 
 			// In eclipse use Ctrl+I to indent multiple selected lines.
 
-			if (firstTime || (table.getNumber("heartbeat", 0) == 1)) {
+			if (firstTime || ((table.getNumber("heartbeat", 0) == 1) && (Robot.turntable.onTarget()))) {
 				//if (Robot.turntable.onTarget()) {
 				table.putNumber("heartbeat", 0);
 				double output = Robot.turntable.getAngle() + (factor * pixelError);
@@ -58,7 +60,7 @@ public class HorizontalAlign extends Command {
 				firstTime = false;
 			}
 			
-			System.out.println(Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET));
+			//System.out.println(Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET));
 			if (Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET) <= 1.5) {
 				if (!aligned) {
 					aligned = true;
@@ -88,7 +90,10 @@ public class HorizontalAlign extends Command {
 
 	protected void end() {
 		SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
-		Robot.shootingWheel.setSpeed(0); // Stop the wheel when the button is let go
+		
+		if (continuous) {
+			Robot.shootingWheel.setSpeed(0); // Stop the wheel when the button is let go
+		}
 	}
 
 	protected void interrupted() {
