@@ -50,7 +50,6 @@ public class Turntable extends Subsystem {
     	//pidController.setSetpoint(SmartDashboard.getNumber("New Turntable"));
     	
     	atLimit = false;
-    	// Limit the turntable turning to -45 to 45
     	if (angle > positiveLimit) {
     		angle = positiveLimit;
     		atLimit = true;

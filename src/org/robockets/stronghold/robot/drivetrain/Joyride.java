@@ -12,9 +12,7 @@ public class Joyride extends Command {
 
 	double translate;
 	double rotate;
-	
-	static double counter = 0;
-	
+		
     public Joyride() {
         //requires(Robot.driveTrain);
     }
@@ -27,9 +25,6 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	counter++;
-    	
-    	System.out.println(counter);
     	translate = OI.joystick.getRawAxis(1);
     	rotate = OI.joystick.getRawAxis(4);
     	
