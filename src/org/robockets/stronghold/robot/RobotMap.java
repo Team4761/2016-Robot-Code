@@ -32,8 +32,11 @@ public class RobotMap {
 	public static Victor rightDriveMotor = new Victor(19);
 	public static RobotDrive robotDrive = new RobotDrive(leftDriveMotor, rightDriveMotor);
 	public static Encoder turnTableEncoder = new Encoder(8, 9);
+	
 	public static Victor intakeVerticalMotorFront = new Victor(0);
 	public static Victor intakeVerticalMotorBack = new Victor(2);
+	public static DigitalInput intakeFrontUp = new DigitalInput(14);
+	
 	public static Victor turnTableMotor = new Victor(6);
 	public static Victor hoodMotor = new Victor(7);
 	public static Encoder hoodEncoder = new Encoder(6, 7);

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Limbo extends CommandGroup {
     
     public  Limbo() {
+    	addSequential(new MoveTurnTable(5));
     	addSequential(new AutoLimbo());
-    	addSequential(new MoveTurnTable(180));
     }
 }

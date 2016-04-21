@@ -6,34 +6,36 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Set the shooting wheel at a desired speed.
+ *
  */
-public class MoveShootingWheel extends Command {
+public class MoveShootingWheelSmartDashboard extends Command {
 
-	double speed;
-	
-    public MoveShootingWheel(double speed) {
-    	requires(Robot.shootingWheel);
-    	this.speed = speed;
+    public MoveShootingWheelSmartDashboard() {
+        requires(Robot.shootingWheel);
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shootingWheel.setSpeed(speed);
     }
 
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
+    	Robot.shootingWheel.setSpeed(SmartDashboard.getNumber("New RPM", 0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.shootingWheel.onTarget();
+        return Robot.shootingWheel.onTarget();
     }
 
+    // Called once after isFinished returns true
     protected void end() {
     	SmartDashboard.putBoolean("Shoot RPM Aligned", true);
     }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
     protected void interrupted() {
     	end();
     }

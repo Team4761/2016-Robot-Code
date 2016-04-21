@@ -1,6 +1,8 @@
 package org.robockets.stronghold.robot.highgoalshooter;
 
+import org.robockets.stronghold.robot.Robot;
 import org.robockets.stronghold.robot.flipper.FireShooter;
+import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
@@ -16,10 +18,10 @@ public class FreeFire extends CommandGroup {
     public  FreeFire() {
     	addSequential(new WaitForLock());
     	//addSequential(new AutonomousTrack());
-    	addParallel(new RPMAlign(false));
+    	addParallel(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
     	addSequential(new HorizontalAlign(false));
     	addSequential(new VerticalAlign(false));
-    	addSequential(new WaitCommand(0.5));
+    	addSequential(new WaitCommand(1));
     	addSequential(new FireShooter());
     	addSequential(new MoveShootingWheel(0));
     }

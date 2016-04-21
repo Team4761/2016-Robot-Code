@@ -12,7 +12,7 @@ public class Joyride extends Command {
 
 	double translate;
 	double rotate;
-	
+		
     public Joyride() {
         //requires(Robot.driveTrain);
     }
