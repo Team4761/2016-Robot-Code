@@ -10,6 +10,7 @@ import org.robockets.stronghold.robot.highgoalshooter.AimCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
+import org.robockets.stronghold.robot.highgoalshooter.FreeFire;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
 import org.robockets.stronghold.robot.highgoalshooter.UnstickBall;
 import org.robockets.stronghold.robot.hood.MoveHood;
@@ -42,7 +43,8 @@ public class OI {
 		
 		//ButtonManager.addButton(new ActionButton(0, 1, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true)); // "A" Button on Joystick
 		
-		ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(0), true));
+		ButtonManager.addButton(new ActionButton(1, 6, new FreeFire(true), true));
+		//ButtonManager.addButton(new ActionButton(1, 6, new AutoFire(0), true));
 		ButtonManager.addButton(new ActionButton(1, 8, new AutoFire(-5), true));
 		ButtonManager.addButton(new ActionButton(1, 11, new AutoFire(5), true));
 		

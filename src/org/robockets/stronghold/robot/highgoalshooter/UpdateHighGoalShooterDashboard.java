@@ -31,7 +31,8 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	
     	SmartDashboard.putData("Horizontal align", new HorizontalAlign(true));
     	SmartDashboard.putData("Vertical align", new VerticalAlign(true));
-    	SmartDashboard.putData("Free fire", new FreeFire());
+    	SmartDashboard.putData("Free fire (normal)", new FreeFire(false));
+    	SmartDashboard.putData("Free fire (Menzie)", new FreeFire(true));
     	SmartDashboard.putNumber("Bonus Angle", 0);
     	
     	SmartDashboard.putData("Unstick Ball", new UnstickBall());
