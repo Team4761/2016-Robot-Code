@@ -14,12 +14,9 @@ public class MenzieAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
-	double factor = 0.5; // It's now just an angle. SmartDashboard.getNumber("factorz", 53/1204);
 	boolean aligned = false;
 	double targetTime, startTime;
 	
-	public static final double TARGET_OFFSET = 3; // Bigger means <- left
-
 	/**
 	 * * @param continuous		If it should stop when on target.
 	 */
@@ -48,13 +45,13 @@ public class MenzieAlign extends Command {
 			if ((Timer.getFPGATimestamp() - startTime) >= 0.5 && table.getNumber("heartbeat", 0) == 1) {
 				table.putNumber("heartbeat", 0);	
 				
-				double output = Robot.turntable.getAngle() + (factor * angleError);
-				Robot.turntable.setAngle(output + TARGET_OFFSET);
+				double output = Robot.turntable.getAngle() + (Robot.turntable.factor * angleError);
+				Robot.turntable.setAngle(output + Robot.turntable.TARGET_OFFSET);
 				
 				SmartDashboard.putNumber("output for turntable", output);
 			}
 			
-			if (Math.abs((table.getNumber("horiz_offset", 3) * factor) + TARGET_OFFSET) <= 1.5) {
+			if (Math.abs((table.getNumber("horiz_offset", 3) * Robot.turntable.factor) + Robot.turntable.TARGET_OFFSET) <= 1.5) {
 				if (!aligned) {
 					aligned = true;
 				}

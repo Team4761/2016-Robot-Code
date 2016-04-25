@@ -26,6 +26,9 @@ public class Turntable extends Subsystem {
 	public final PIDController pidController;
 	public final EncoderPIDSource encoder;
 	
+	public final double factor = 0.5;
+	public final double TARGET_OFFSET = 3; // Bigger means <- left
+	
 	public Turntable(){
 		encoder = new EncoderPIDSource(RobotMap.turnTableEncoder, 0.16096579, PIDSourceType.kDisplacement);
 		pidController = new PIDController(75.0 / 1000.0, 4.0 / 1000.0, 30.0 / 1000.0, encoder, RobotMap.turnTableMotor);
