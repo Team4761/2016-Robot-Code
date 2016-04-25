@@ -32,7 +32,7 @@ public class TurnUntilTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return visionTable.getNumber("can_see_target", 0) == 1.0 && Math.abs(visionTable.getNumber("horiz_offset", 10)) + HorizontalAlign.TARGET_OFFSET < 2;    	
+    	return visionTable.getNumber("can_see_target", 0) == 1.0 && Math.abs(visionTable.getNumber("horiz_offset", 10)) + Robot.turntable.TARGET_OFFSET < 2;    	
     }
 
     // Called once after isFinished returns true
