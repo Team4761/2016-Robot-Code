@@ -5,6 +5,7 @@ import org.robockets.stronghold.robot.drivetrain.AssistedRotateType;
 import org.robockets.stronghold.robot.drivetrain.AssistedTranslateType;
 import org.robockets.stronghold.robot.drivetrain.TimeDrive;
 import org.robockets.stronghold.robot.highgoalshooter.FreeFire;
+import org.robockets.stronghold.robot.highgoalshooter.MenzieTargetFinder;
 import org.robockets.stronghold.robot.highgoalshooter.TurnUntilTarget;
 import org.robockets.stronghold.robot.highgoalshooter.UnstickBall;
 import org.robockets.stronghold.robot.hood.MoveHood;
@@ -26,39 +27,40 @@ public class AutoShootHigh extends CommandGroup {
     	addParallel(new SetVerticalIntake(20, IntakeSide.FRONT));
     	addSequential(new MoveTurnTable(6));
     	addSequential(new MoveHood(-45));
-    	addSequential(new UnstickBall());
     	
     	// All distance and angle values are temporary
     	switch ((int) defense) {
     		case 1:
     			// Same as below
     			addSequential(new TimeDrive(-0.85, -0.85, 0.65));
-    	    	addSequential(new TurnUntilTarget(-TURN_SPEED));
+    	    	//addSequential(new TurnUntilTarget(-TURN_SPEED));
     			break;
     		case 2:
     			// Drive to wall and turn turntable right
     			addSequential(new TimeDrive(-0.85, -0.85, 0.5));
-    	    	addSequential(new TurnUntilTarget(-TURN_SPEED));
+    	    	//addSequential(new TurnUntilTarget(-TURN_SPEED));
     			break;
     		case 3:
     			// Drive to goal and turn turntable slightly right
     			addSequential(new TimeDrive(0, 0, 0));
-    	    	addSequential(new TurnUntilTarget(-TURN_SPEED));
+    	    	//addSequential(new TurnUntilTarget(-TURN_SPEED));
     			break;
     		case 4:
     			// Drive to goal and turn turntable slightly left
     			addSequential(new TimeDrive(0, 0, 0));
-    	    	addSequential(new TurnUntilTarget(TURN_SPEED));
+    	    	//addSequential(new TurnUntilTarget(TURN_SPEED));
     			break;
     		case 5:
     			// Drive to goal and turn turntable left
     			addSequential(new TimeDrive(-0.85, -0.85, 0.5));
-    	    	addSequential(new TurnUntilTarget(TURN_SPEED));
+    	    	//addSequential(new TurnUntilTarget(TURN_SPEED));
     			break;
     		default:
     			break;
     	}
 
+    	addSequential(new MenzieTargetFinder());
+    	addSequential(new UnstickBall());
         addSequential(new FreeFire(false));
     }
 }
