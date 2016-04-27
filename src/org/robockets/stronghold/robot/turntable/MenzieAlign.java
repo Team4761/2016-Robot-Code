@@ -45,7 +45,7 @@ public class MenzieAlign extends Command {
 			if ((Timer.getFPGATimestamp() - startTime) >= 0.5 && table.getNumber("heartbeat", 0) == 1) {
 				table.putNumber("heartbeat", 0);	
 				
-				double output = Robot.turntable.getAngle() + (Robot.turntable.factor * angleError);
+				double output = Robot.turntable.getAngle() + (Robot.turntable.convertVisionAngle(Robot.turntable.factor * angleError));
 				Robot.turntable.setAngle(output + Robot.turntable.TARGET_OFFSET);
 				
 				SmartDashboard.putNumber("output for turntable", output);
