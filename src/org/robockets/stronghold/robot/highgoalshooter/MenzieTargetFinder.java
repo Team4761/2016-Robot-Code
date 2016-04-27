@@ -33,7 +33,7 @@ public class MenzieTargetFinder extends Command {
     protected void execute() {
     	if (firstTurn) {
     		if (shouldSetTimeout) {
-    			setTimeout(70.0 / Robot.driveTrain.DEGREES_PER_SECOND);
+    			setTimeout(46.0 / Robot.driveTrain.DEGREES_PER_SECOND);
     			shouldSetTimeout = false;
     		}
     		
@@ -42,7 +42,7 @@ public class MenzieTargetFinder extends Command {
     		}
     	} else {
     		if (shouldSetTimeout) {
-    			setTimeout(70.0 / Robot.driveTrain.DEGREES_PER_SECOND); // Not negative angle because that would be negative time
+    			setTimeout(72.0 / Robot.driveTrain.DEGREES_PER_SECOND); // Not negative angle because that would be negative time
     			shouldSetTimeout = false;
     		}
     		
