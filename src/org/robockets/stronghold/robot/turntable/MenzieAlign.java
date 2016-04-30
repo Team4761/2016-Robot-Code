@@ -14,7 +14,9 @@ public class MenzieAlign extends Command {
 
 	NetworkTable table;
 	boolean continuous;
+	boolean firstTime;
 	boolean aligned = false;
+	boolean turnRobot = false;
 	double targetTime, startTime;
 	
 	/**
@@ -32,47 +34,69 @@ public class MenzieAlign extends Command {
 		aligned = false;
 		targetTime = Timer.getFPGATimestamp();
 		startTime = Timer.getFPGATimestamp();
+		firstTime = true;
+		turnRobot = false;
 	}
 	
 	protected void execute() {
 		//factor = SmartDashboard.getNumber("Factor");
 		
-		SmartDashboard.putNumber("Simon's Angle", table.getNumber("horiz_offset", 0));
-		
-		if (table.getNumber("can_see_target", 0) == 1) {
-			double angleError = table.getNumber("horiz_offset", 0); // Camera 2 degrees off
+		//if (!turnRobot) {
+			SmartDashboard.putNumber("Simon's Angle", table.getNumber("horiz_offset", 0));
 			
-			if ((Timer.getFPGATimestamp() - startTime) >= 0.5 && table.getNumber("heartbeat", 0) == 1) {
-				table.putNumber("heartbeat", 0);	
+			if (table.getNumber("can_see_target", 0) == 1) {
+				double angleError = table.getNumber("horiz_offset", 0); // Camera 2 degrees off
 				
-				//double output = Robot.turntable.getAngle() + (Robot.turntable.convertVisionAngle(Robot.turntable.factor * angleError));
-				double output = Robot.turntable.getAngle() + (Robot.turntable.factor * angleError);
-				Robot.turntable.setAngle(output + Robot.turntable.TARGET_OFFSET);
-				
-				SmartDashboard.putNumber("output for turntable", output);
-			}
-			
-			if (Math.abs((table.getNumber("horiz_offset", 3) * Robot.turntable.factor) + Robot.turntable.TARGET_OFFSET) <= 1.5) {
-				if (!aligned) {
-					aligned = true;
+				if ((Timer.getFPGATimestamp() - startTime) >= 0.5 && table.getNumber("heartbeat", 0) == 1 && firstTime) {
+					table.putNumber("heartbeat", 0);	
+					
+					//double output = Robot.turntable.getAngle() + (Robot.turntable.convertVisionAngle(Robot.turntable.factor * angleError));
+					double output = Robot.turntable.getAngle() + (Robot.turntable.factor * angleError) + Robot.turntable.TARGET_OFFSET;
+					Robot.turntable.setAngle(output);
+									
+					SmartDashboard.putNumber("output for turntable", output);
+					firstTime = false;
 				}
-			} else {
-				targetTime = Timer.getFPGATimestamp() + 0.5;
-				aligned = false;
+				
+				if ((Timer.getFPGATimestamp() - startTime) >= 0.5  && Robot.turntable.onTarget()) {
+					if (!aligned) {
+						aligned = true;
+					}
+				} else {
+					targetTime = Timer.getFPGATimestamp() + 0.5;
+					aligned = false;
+				}
+				
+				SmartDashboard.putNumber("Turntable Setpoint", Robot.turntable.getSetpoint());
 			}
+		/*} else {
+			System.out.println(targetTime);
 			
-			SmartDashboard.putNumber("Turntable Setpoint", Robot.turntable.getSetpoint());
-		}
+			if (Timer.getFPGATimestamp() < targetTime) {
+				Robot.driveTrain.driveArcade(0, -0.5);
+			} else {
+				Robot.driveTrain.driveArcade(0, 0);
+				turnRobot = false;
+			}
+		}*/
 	}
 
 	protected boolean isFinished() {
-		if (aligned && (Timer.getFPGATimestamp() >= targetTime) && Robot.turntable.onTarget()) {
+		//if (aligned && (Timer.getFPGATimestamp() >= targetTime) && Robot.turntable.onTarget()) {
+		if (aligned && Robot.turntable.onTarget() && !(Robot.hood.atLimit || Robot.turntable.atLimit)) {
+		//if (Robot.turntable.onTarget()) {
 			SmartDashboard.putBoolean("Shoot Horizontally Aligned", true);
 			if (continuous == false) { return true; }
 		} else {
 			SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
 		}
-
+		
+		/*if ((Robot.hood.atLimit || Robot.turntable.atLimit) && !turnRobot && !firstTime) {
+			initialize();
+			turnRobot = true;
+			targetTime = Timer.getFPGATimestamp() + 0.5;
+		}*/
+		
 		return false;
 	}
 

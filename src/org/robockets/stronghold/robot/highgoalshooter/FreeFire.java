@@ -19,7 +19,6 @@ public class FreeFire extends CommandGroup {
     public  FreeFire(boolean menzieShot) {
     	//addSequential(new WaitForLock());
     	//addSequential(new AutonomousTrack());
-    	addParallel(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
     	
     	if (menzieShot) {
     		addSequential(new MenzieAlign(false));
@@ -27,8 +26,9 @@ public class FreeFire extends CommandGroup {
     		addSequential(new HorizontalAlign(false));
     	}
     	
+    	addSequential(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
     	addSequential(new VerticalAlign(false));
-    	addSequential(new WaitCommand(1));
+    	addSequential(new WaitCommand(0.25));
     	addSequential(new FireShooter());
     	addSequential(new MoveShootingWheel(0));
     }

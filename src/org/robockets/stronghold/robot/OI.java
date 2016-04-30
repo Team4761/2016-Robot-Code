@@ -11,6 +11,7 @@ import org.robockets.stronghold.robot.highgoalshooter.AutoFire;
 import org.robockets.stronghold.robot.highgoalshooter.FireCleatShot;
 import org.robockets.stronghold.robot.highgoalshooter.FireSpyShot;
 import org.robockets.stronghold.robot.highgoalshooter.FreeFire;
+import org.robockets.stronghold.robot.highgoalshooter.PowerLowGoal;
 import org.robockets.stronghold.robot.highgoalshooter.Track;
 import org.robockets.stronghold.robot.highgoalshooter.UnstickBall;
 import org.robockets.stronghold.robot.hood.MoveHood;
@@ -23,6 +24,7 @@ import org.robockets.stronghold.robot.intake.IntakeSide;
 import org.robockets.stronghold.robot.intake.SetVerticalIntake;
 import org.robockets.stronghold.robot.intake.SpinIntake;
 import org.robockets.stronghold.robot.intake.SuperIntakeReset;
+import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -59,6 +61,7 @@ public class OI {
 		//ButtonManager.addButton(new ActionButton(1, 8, new ShootOnAligned(), true));
 		ButtonManager.addButton(new ActionButton(1, 12, new UnstickBall(), true));
 		
+		ButtonManager.addButton(new ActionButton(1, 13, new PowerLowGoal(), true));
 		ButtonManager.addButton(new ActionButton(1, 14, new Kill(), true));
 		ButtonManager.addButton(new ActionButton(1, 17, new ResetPID(RobotMap.intakeEncoderFront, Robot.intakeVerticalFront.encoderPID), true));
 		//ButtonManager.addButton(new ActionButton(1, 17, new SuperIntakeReset(), true));
@@ -70,7 +73,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 18, new AimCleatShot(Direction.LEFT), true));
 		ButtonManager.addButton(new ActionButton(2, 17, new AimCleatShot(Direction.CENTER), true));
 		ButtonManager.addButton(new ActionButton(2, 16, new IntakeBallMinimal(IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(2, 3, new FireSpyShot(), true));
+		//ButtonManager.addButton(new ActionButton(2, 3, new FireSpyShot(), true));
+		ButtonManager.addButton(new ActionButton(1, 10, new MoveShootingWheel(1600), true));
 		ButtonManager.addButton(new ActionButton(2, 4, new FireCleatShot(), true));
 		ButtonManager.addButton(new ActionButton(2, 7, new DrivePosition(true), true));
 		ButtonManager.addButton(new ActionButton(2, 6, new Limbo(), true));
@@ -80,8 +84,8 @@ public class OI {
 		ButtonManager.addButton(new ActionButton(2, 13, new MoveTurnTable(40, 0), true));
 		ButtonManager.addButton(new ActionButton(2, 10, new SetVerticalIntake(Direction.DOWN, 0, IntakeSide.FRONT), true));
 		ButtonManager.addButton(new ActionButton(2, 11, new SetVerticalIntake(Direction.UP, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(2, 9, new SpinIntake(0.4, 0, IntakeSide.FRONT), true));
-		ButtonManager.addButton(new ActionButton(2, 8, new SpinIntake(-0.4, 0, IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 9, new SpinIntake(0.6, 0, IntakeSide.FRONT), true));
+		ButtonManager.addButton(new ActionButton(2, 8, new SpinIntake(-0.6, 0, IntakeSide.FRONT), true));
 	}
 }
 

@@ -64,6 +64,7 @@ public class Autonomous extends CommandGroup {
     			break;
     	}
     	
+    	addSequential(new SetVerticalIntake(20, IntakeSide.FRONT));
     	addSequential(new MoveHood(-45));
     	addSequential(new UnstickBall());
     }

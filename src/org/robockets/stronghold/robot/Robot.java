@@ -69,8 +69,8 @@ public class Robot extends IterativeRobot {
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
 	    autonomousCommand = new Autonomous(2, 2);
-	    //CameraServer server = CameraServer.getInstance();
-	    //server.startAutomaticCapture("cam0"); 
+	    CameraServer server = CameraServer.getInstance();
+	    server.startAutomaticCapture("cam0"); 
 	    
 	    hood.resetEncoder(hood.HOOD_START);
     }
@@ -131,6 +131,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Hood angle", hood.getAngle());
 		SmartDashboard.putNumber("Hood setpoint", hood.getSetpoint());
     	SmartDashboard.putBoolean("Front BB", RobotMap.frontBB.get());
+    	//SmartDashboard.putNumber("Turn table angle", Robot.turntable.getAngle());
 		
     	boolean useSmartDashboard = true;
     	

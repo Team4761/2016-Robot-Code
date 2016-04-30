@@ -16,6 +16,7 @@ public class CheckIntakeBreakBeam extends Command {
 	
 	boolean spinIn = false;
 	boolean haveBall = false;
+	boolean timeout = false;
 	double time;
 	
 	/**
@@ -38,11 +39,12 @@ public class CheckIntakeBreakBeam extends Command {
     	this.spinIn = spinIn;
     	this.haveBall = haveBall;
     	this.time = time;
+    	this.timeout = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	setTimeout(time);
+    	System.out.println("Check Intake Breakbeam init");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,14 +54,31 @@ public class CheckIntakeBreakBeam extends Command {
     	} else {
     		intake.spinOut();
     	}
+    	
+    	if (!timeout) {
+	    	if (haveBall) {
+		    	if (!breakBeam.get()) {
+		        	setTimeout(time);
+		        	timeout = true;
+		    	}
+	    	} else {
+	    		if (breakBeam.get()) {
+		        	setTimeout(time);
+		        	timeout = true;
+		    	}
+	    	}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {    	
+    protected boolean isFinished() {
+    	System.out.println(breakBeam.get());
+    	System.out.println("isTimedOut: " + isTimedOut());
+    	System.out.println("timeout: " + timeout);
     	if (haveBall) {
-    		return !breakBeam.get() && isTimedOut();
+    		return !breakBeam.get() && isTimedOut() && timeout;
     	} else {
-    		return breakBeam.get() && isTimedOut();
+    		return breakBeam.get() && isTimedOut() && timeout;
     	}
     }
 

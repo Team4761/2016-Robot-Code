@@ -48,7 +48,7 @@ public class Joyride extends Command {
     		//Robot.driveTrain.driveArcade(0, 0);
     	//} else {	
 		
-		if (!OI.buttonBoard1.getRawButton(6)) { // Don't allow Jack to turn the robot while trying to shoot
+		if (OI.buttonBoard1.getRawButton(6)) { // Don't allow Jack to turn the robot while trying to shoot
 			Robot.driveTrain.joystickAllowed = false;
 		} else {
 			Robot.driveTrain.joystickAllowed = true;

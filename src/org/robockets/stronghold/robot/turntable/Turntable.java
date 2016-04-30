@@ -30,7 +30,7 @@ public class Turntable extends Subsystem {
 	public final EncoderPIDSource encoder;
 	
 	public final double factor = 1.0; //0.5;
-	public final double TARGET_OFFSET = 3; // Bigger means <- left
+	public final double TARGET_OFFSET = 4; // Bigger means <- left
 	
 	
     public final double CALIBRATION_START = -20;

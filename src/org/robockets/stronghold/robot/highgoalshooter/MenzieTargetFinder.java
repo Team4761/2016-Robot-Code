@@ -33,7 +33,8 @@ public class MenzieTargetFinder extends Command {
     protected void execute() {
     	if (firstTurn) {
     		if (shouldSetTimeout) {
-    			setTimeout(46.0 / Robot.driveTrain.DEGREES_PER_SECOND);
+    			//setTimeout(46.0 / Robot.driveTrain.DEGREES_PER_SECOND);
+    			setTimeout(1);
     			shouldSetTimeout = false;
     		}
     		
@@ -42,7 +43,8 @@ public class MenzieTargetFinder extends Command {
     		}
     	} else {
     		if (shouldSetTimeout) {
-    			setTimeout(72.0 / Robot.driveTrain.DEGREES_PER_SECOND); // Not negative angle because that would be negative time
+    			//setTimeout(72.0 / Robot.driveTrain.DEGREES_PER_SECOND); // Not negative angle because that would be negative time
+    			setTimeout(2);
     			shouldSetTimeout = false;
     		}
     		
@@ -53,7 +55,7 @@ public class MenzieTargetFinder extends Command {
     	
     	if (isTimedOut() && !waiting) {
     		waiting = true;
-    		setTimeout(0.5); // Wait for vision to catch up
+    		setTimeout(1); // Wait for vision to catch up
     	}
     	
     	if (isTimedOut() && firstTurn && waiting) {

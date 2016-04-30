@@ -19,6 +19,11 @@ public class MoveShootingWheel extends Command {
 
     protected void initialize() {
     	Robot.shootingWheel.setSpeed(speed);
+    	if (speed == 0) { 
+    		SmartDashboard.putBoolean("Wheels Spinning", false);
+    	} else {
+    		SmartDashboard.putBoolean("Wheels Spinning", true);
+    	}
     }
 
     protected void execute() {

@@ -6,6 +6,7 @@ import org.robockets.stronghold.robot.flipper.FireShooter;
 import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
+import org.robockets.stronghold.robot.turntable.CalibrateVisionAngle;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
 import org.robockets.stronghold.robot.turntable.MoveTurnTable;
 import org.robockets.stronghold.robot.commands.SetPID;
@@ -36,6 +37,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Bonus Angle", 0);
     	
     	SmartDashboard.putData("Unstick Ball", new UnstickBall());
+    	SmartDashboard.putData("Calibrate vision", new CalibrateVisionAngle());
     }
 
     protected void execute() {
@@ -51,7 +53,7 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("Spin RPM", Robot.shootingWheel.getSpeed());
     	
     	SmartDashboard.putBoolean("Intake Limit Switch", RobotMap.intakeFrontUp.get());
-    	
+
     	/*SmartDashboard.putBoolean("Front Breakbeam", RobotMap.frontBB.get());
     	SmartDashboard.putNumber("Turn table encoder", RobotMap.turnTableEncoder.get());
     	SmartDashboard.putNumber("Left Setpoint", Robot.driveTrain.getLeftDistanceSetpointInInches());
@@ -64,8 +66,9 @@ public class UpdateHighGoalShooterDashboard extends Command {
     	SmartDashboard.putNumber("distance", visionTable.getNumber("distance_guess", 0));
     	SmartDashboard.putBoolean("Can see target", visionTable.getNumber("can_see_target", 0) == 1);
     	SmartDashboard.putBoolean("Vision Conneected", visionTable.isConnected());
+		SmartDashboard.putNumber("Simon's Angle", visionTable.getNumber("horiz_offset", 0));
     	
-    	SmartDashboard.putBoolean("Not at limit", !(Robot.hood.atLimit || Robot.turntable.atLimit));
+    	SmartDashboard.putBoolean("Not at limit", !(Robot.hood.atLimit || Robot.turntable.atLimit));    	
     }
 
     protected boolean isFinished() {

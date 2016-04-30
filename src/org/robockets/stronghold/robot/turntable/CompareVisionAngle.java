@@ -32,7 +32,7 @@ public class CompareVisionAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Turntable Angle: " + Robot.turntable.getAngle() + ", Vision Angle: " + (Robot.turntable.getAngle() + table.getNumber("horiz_offset", 0)));
+    	System.out.println("Turntable Angle: " + Robot.turntable.getAngle() + ", Vision Angle: " + (table.getNumber("horiz_offset", 0)));
     }
 
     // Called when another command which requires one or more of the same
