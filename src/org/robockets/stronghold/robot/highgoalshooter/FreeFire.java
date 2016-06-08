@@ -6,6 +6,7 @@ import org.robockets.stronghold.robot.hood.MoveHood;
 import org.robockets.stronghold.robot.shootingwheel.MoveShootingWheel;
 import org.robockets.stronghold.robot.shootingwheel.RPMAlign;
 import org.robockets.stronghold.robot.turntable.HorizontalAlign;
+import org.robockets.stronghold.robot.turntable.MenzieAlign;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -15,13 +16,19 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class FreeFire extends CommandGroup {
     
-    public  FreeFire() {
-    	addSequential(new WaitForLock());
+    public  FreeFire(boolean menzieShot) {
+    	//addSequential(new WaitForLock());
     	//addSequential(new AutonomousTrack());
-    	addParallel(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
-    	addSequential(new HorizontalAlign(false));
+    	
+    	if (menzieShot) {
+    		addSequential(new MenzieAlign(false));
+    	} else {
+    		addSequential(new HorizontalAlign(false));
+    	}
+    	
+    	addSequential(new MoveShootingWheel(Robot.shootingWheel.CONSTANT_SPEED));
     	addSequential(new VerticalAlign(false));
-    	addSequential(new WaitCommand(1));
+    	addSequential(new WaitCommand(0.25));
     	addSequential(new FireShooter());
     	addSequential(new MoveShootingWheel(0));
     }

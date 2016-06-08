@@ -17,7 +17,7 @@ public class UnstickBall extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shootingWheel.shootingWheelPIDController.setOutputRange(-0.7, 1);
+    	Robot.shootingWheel.shootingWheelPIDController.setOutputRange(-1, 1);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -44,7 +44,7 @@ public class MoveTurnTable extends Command {
     		Robot.turntable.setAngle(Robot.turntable.getSetpoint() + speed);
     	}
     	
-    	System.out.println(Robot.turntable.pidController.get());
+    	//System.out.println(Robot.turntable.pidController.get());
     }
 
     protected boolean isFinished() {

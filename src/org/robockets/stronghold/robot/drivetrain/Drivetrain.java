@@ -21,6 +21,10 @@ public class Drivetrain extends Subsystem {
 	public final PIDController gyroPID;
 	public final PIDController leftWheelsPID;
 	public final PIDController rightWheelsPID;
+	
+	public final double DEGREES_PER_SECOND = 72;
+	
+	public boolean joystickAllowed = true;
 
 	
 	public Drivetrain() {	

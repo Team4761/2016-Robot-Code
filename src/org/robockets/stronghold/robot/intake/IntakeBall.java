@@ -13,5 +13,7 @@ public class IntakeBall extends CommandGroup {
     	addParallel(new MoveHood(25));
     	addSequential(new IntakePosition(intakeSide, angle));
     	addSequential(new IntakeBallMinimal(intakeSide));
+    	//addSequential(new CheckIntakeBreakBeam(intakeSide, true, false, 0.65)); // Spins until break break sensor is broken
+        //addSequential(new SetVerticalIntake(10, intakeSide)); // Up
     }
 }

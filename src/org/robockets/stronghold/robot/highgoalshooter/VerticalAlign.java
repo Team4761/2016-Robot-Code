@@ -45,31 +45,49 @@ public class VerticalAlign extends Command {
     		distanceToTarget = table.getNumber("distance_guess", 6);
 
     		double angle = 0;
-    		if (distanceToTarget < 4) {
-    			angle = -1;
-	    	} else if ((distanceToTarget > 4) && (distanceToTarget < 5)) {
-    			angle = -51;
+    		/*if ((distanceToTarget > 2) && (distanceToTarget < 2.5)) {
+    			angle = -46;
+    		} else if ((distanceToTarget > 2.5) && (distanceToTarget < 3)) {
+    			angle = -44;
+    		} else if ((distanceToTarget > 3) && (distanceToTarget < 3.5)) {
+    			angle = -42;
+	    	} else if ((distanceToTarget > 3.5) && (distanceToTarget < 4)) {
+    			angle = -40;
+	    	} else if ((distanceToTarget > 4) && (distanceToTarget < 4.5)) {
+    			angle = -38;
+	    	} else if ((distanceToTarget > 4.5) && (distanceToTarget < 5)) {
+    			angle = -36;
 	    	} else if ((distanceToTarget > 5) && (distanceToTarget < 6)) {
-    			angle = -41.5;
+    			angle = -44;
 	    	} else if ((distanceToTarget > 6) && (distanceToTarget < 7)) {
-	    		angle = -38;
-	    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
-	    		angle = -37;
-	    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
 	    		angle = -41.5;
+	    	} else if ((distanceToTarget > 7) && (distanceToTarget < 8)) {
+	    		angle = -40.5;
+	    	} else if ((distanceToTarget > 8) && (distanceToTarget < 9)) {
+	    		angle = -40;
 	    	} else if ((distanceToTarget > 9) && (distanceToTarget < 10)) {
-	    		angle = -39.5;
+	    		angle = -39;
 	    	} else if ((distanceToTarget > 10) && (distanceToTarget < 11)) {
-	    		angle = -41;
+	    		angle = -38;
 	    	} else if ((distanceToTarget > 11) && (distanceToTarget < 12)) {
-	    		angle = -42;
-	    	}
+	    		angle = -37;
+	    	}*/
+    		
+    		angle = (4.0 * distanceToTarget) - 58.0;
+    		
+    		//angle = -39;
     		
     		angle += bonusAngle;
     		
     		if (SmartDashboard.getNumber("Bonus Angle", 0) != 0) {
     			angle = SmartDashboard.getNumber("Bonus Angle", 0);
+    			
+    			if (angle > 0) {
+    				angle = 0;
+    			}
     		}
+    		
+    		System.out.println(angle);
     		
     		//double angle = -(Math.atan(2 * ( floorToTargetHeight - (robotShooterToTargetHeight / 12)) / distanceToTarget) * 180 / Math.PI);
     		//angle += 5;
@@ -81,7 +99,7 @@ public class VerticalAlign extends Command {
     }
 
     protected boolean isFinished() {
-    	if (Robot.hood.onTarget()) {
+    	if (Robot.hood.onTarget() && !(Robot.hood.atLimit || Robot.turntable.atLimit)) {
     		SmartDashboard.putBoolean("Shoot Vertically Aligned", true);
     		if (continuous == false) { return true; }
     	} else { SmartDashboard.putBoolean("Shoot Vertically Aligned", false); }

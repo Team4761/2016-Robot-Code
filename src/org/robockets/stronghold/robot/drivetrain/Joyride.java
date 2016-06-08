@@ -47,7 +47,16 @@ public class Joyride extends Command {
     		//Robot.driveTrain.encodersPID.reset();
     		//Robot.driveTrain.driveArcade(0, 0);
     	//} else {	
-    		Robot.driveTrain.driveArcade(translate, -rotate);
+		
+		if (OI.buttonBoard1.getRawButton(6)) { // Don't allow Jack to turn the robot while trying to shoot
+			Robot.driveTrain.joystickAllowed = false;
+		} else {
+			Robot.driveTrain.joystickAllowed = true;
+		}
+		
+		if (Robot.driveTrain.joystickAllowed) {
+			Robot.driveTrain.driveArcade(translate, -rotate);
+		}
     		//Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		//Robot.driveTrain.encodersPID.reset();
     	//} 
