@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Joyride extends Command {
 
-	double translate;
-	double rotate;
+	double left;
+	double right;
 		
     public Joyride() {
         //requires(Robot.driveTrain);
@@ -25,17 +25,20 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	translate = OI.joystick.getRawAxis(1);
-    	rotate = OI.joystick.getRawAxis(4);
-    	
+    	left = OI.joystick.getRawAxis(1);
+    	right = OI.joystick2.getRawAxis(5);
+
+		/*left *= 0.2;
+		right *= 0.2;
+
     	if (OI.joystick.getRawButton(5)) {
-			translate *= 0.5;
-			rotate *= 0.5;
+			left *= 0.5;
+			right *= 0.5;
 		}
     	
 		if (OI.joystick.getRawButton(6)) {
-    		translate *= 0.8;
-    		rotate *= 0.8;
+    		left *= 0.8;
+    		right *= 0.8;
     	}
 		
     	//if (Math.abs(OI.joystick.getRawAxis(4)) < 0.1 && Math.abs(OI.joystick.getRawAxis(1)) > 0.1) {	
@@ -52,11 +55,11 @@ public class Joyride extends Command {
 			Robot.driveTrain.joystickAllowed = false;
 		} else {
 			Robot.driveTrain.joystickAllowed = true;
-		}
+		}*/
 		
-		if (Robot.driveTrain.joystickAllowed) {
-			Robot.driveTrain.driveArcade(translate, -rotate);
-		}
+		//if (Robot.driveTrain.joystickAllowed) {
+			Robot.driveTrain.driveArcade(left, -right);
+		//}
     		//Robot.driveTrain.encodersPID.setSetpoint(Robot.driveTrain.getEncodersOffset());
     		//Robot.driveTrain.encodersPID.reset();
     	//} 

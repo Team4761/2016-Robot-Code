@@ -35,8 +35,9 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public static Joystick joystick = new Joystick(0);
-	public static Joystick buttonBoard1 = new Joystick(1);
-	public static Joystick buttonBoard2 = new Joystick(2);
+	public static Joystick joystick2 = new Joystick(1);
+	public static Joystick buttonBoard1 = new Joystick(2);
+	public static Joystick buttonBoard2 = new Joystick(3);
 	
 	public OI () {
 		ButtonManager.addJoystick(joystick);

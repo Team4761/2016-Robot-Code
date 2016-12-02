@@ -49,13 +49,13 @@ public class Robot extends IterativeRobot {
 	public static final Hood hood = new Hood();
 	public static final Turntable turntable = new Turntable();
 	public static final SpinningWheel shootingWheel = new SpinningWheel();
-	
+
 	public static double liveCounter = 0;
-	
+
 	Command teleop;
 	Command uHGSD;
 	Command autonomousCommand;
-	
+
 	NetworkTable controlTable;
 
     /**
@@ -64,17 +64,17 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
         NetworkTable.globalDeleteAll();
-    	
+
 	    oi = new OI();
 	    teleop = new Teleop();
 	    uHGSD = new UpdateHighGoalShooterDashboard();
 	    autonomousCommand = new Autonomous(2, 2);
 	    CameraServer server = CameraServer.getInstance();
-	    server.startAutomaticCapture("cam0"); 
-	    
+	    server.startAutomaticCapture("cam0");
+
 	    hood.resetEncoder(hood.HOOD_START);
     }
-	
+
 	/**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
@@ -85,46 +85,46 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Robot in front of defense", SmartDashboard.getNumber("Robot in front of defense", 2));
     	table = NetworkTable.getTable("PiTouch");
     	controlTable = NetworkTable.getTable("control_daemon");
-    	
+
     	SmartDashboard.putNumber("pid error", 0);
     	SmartDashboard.putBoolean("On target!", false);
     	SmartDashboard.putBoolean("Shoot Horizontally Aligned", false);
     	SmartDashboard.putBoolean("Shoot RPM Aligned", false);
-    	
+
     	SmartDashboard.putNumber("distance", 0);
-    	
+
     	SmartDashboard.putNumber("New flipper angle", 0);
-    	
+
     	SmartDashboard.putNumber("New Hood Angle", hood.HOOD_START);
     	//SmartDashboard.putData("Set Hood PID", new SetPID("hood", Robot.hood.pidController));
     	SmartDashboard.putData("Move Hood", new MoveHoodSmartDashboard());
-    	
+
     	SmartDashboard.putNumber("New RPM", 0);
     	//SmartDashboard.putData("Set RPM PID", new SetPID("rpm", Robot.shootingWheel.shootingWheelPIDController));
     	SmartDashboard.putData("Set RPM", new MoveShootingWheelSmartDashboard());
     	SmartDashboard.putData("Stop RPM", new MoveShootingWheel(0));
-    	
+
     	SmartDashboard.putNumber("New Turntable 1", 0);
     	SmartDashboard.putNumber("New Turntable 2", 0);
     	SmartDashboard.putData("Set Turntable PID", new SetPID("turntable", Robot.turntable.pidController));
     	SmartDashboard.putData("Set Turntable 1", new MoveTurnTableSmartDashboard("New Turntable 1"));
     	SmartDashboard.putData("Set Turntable 2", new MoveTurnTableSmartDashboard("New Turntable 2"));
-    	
+
     	SmartDashboard.putData("Shoot", new FireShooter());
     	SmartDashboard.putData("Set Flipper", new SetShooterFlipper(1));
-		
-		uHGSD.start();
+
+		//uHGSD.start();
     }
-	
+
     NetworkTable table;
     int auto = 0;
     int position = 0;
     String autoDefense = "";
-    
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		
-		liveCounter += 0.001;
+		/*liveCounter += 0.001;
 		SmartDashboard.putNumber("Live Counter", liveCounter);
     	SmartDashboard.putNumber("Vision Last Updated", controlTable.getNumber("last_updated", 0));
 		
@@ -172,9 +172,9 @@ public class Robot extends IterativeRobot {
 				}
 				autonomousCommand = new Autonomous(auto, position);
     		}
-    	}
+    	}*/
     	
-    	if (useSmartDashboard) {
+    	/*if (useSmartDashboard) {
     		autonomousCommand = new Autonomous(SmartDashboard.getNumber("Auto mode"), SmartDashboard.getNumber("Robot in front of defense"));
     	}
 	
@@ -183,7 +183,8 @@ public class Robot extends IterativeRobot {
 		//hood.setAngle(hood.getAngle()); 
 		hood.resetEncoder(hood.getAngle());
 		shootingWheel.setSpeed(shootingWheel.getSpeed()); 
-		turntable.setAngle(turntable.getAngle()); 		
+		turntable.setAngle(turntable.getAngle()); */
+
 	}
 
 	/**
@@ -196,7 +197,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        if (autonomousCommand != null) autonomousCommand.start();
+        //if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -212,7 +213,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        //if (autonomousCommand != null) autonomousCommand.cancel();
         teleop.start();
     }
 
